@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'jjv';
+
+  clicked(): void {
+    console.log('Clickされた！');
+  }
+  clicked2(): void {
+    console.log('Click2された！');
+  }
 }
