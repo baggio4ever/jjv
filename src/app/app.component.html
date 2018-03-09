@@ -1,6 +1,6 @@
 <mat-toolbar color="primary" class="header">
   <mat-toolbar-row>
-    <span>Welcome to {{ title }}!</span>
+    <span>{{ title }}!</span>
 <!--
       <span class="example-spacer"></span>
     <nav>
@@ -17,6 +17,18 @@
 </mat-toolbar>
 
 <div id="content">
+
+<div *ngIf="fileLoaded; else elseBlock">
+fileLoaded === true
+</div>
+<ng-template #elseBlock>
+  <div>
+    fileLoaded === false
+    <div>
+      JDF/JMFファイルを選択して下さい
+    </div>
+  </div>
+</ng-template>
 abcdef
 </div>
 
