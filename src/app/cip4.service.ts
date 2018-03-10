@@ -411,7 +411,7 @@ export class JDF {
   pushProcessTag(tag:JdfTag) {
     this.processTags.push( tag );
   }
-  
+
   getComponentTagById( id: string ): ComponentTag {
     let ret: ComponentTag = null;
     for ( let i = 0; i < this.componentTags.length; i++ ) {
@@ -470,6 +470,57 @@ export class JDF {
 
     return null;
   }
+  
+  // 引数で渡すコンポーネント（用紙とか）を作成した工程を返す
+  getPreviousProcesses( component: ComponentTag ): JdfTag[] {
+    let ret: JdfTag[] = [];
+
+    ret = this.processTags.filter( (value,index,array) => {
+      const r = value.outputComponentLinks.filter( (v,i,ary) => {
+        return (v.rRef === component.id);
+      });
+      return (r.length > 0);
+    });
+    return ret;
+  }
+
+  // 引数で渡すコンポーネント（用紙とか）を使用する工程を返す
+  getNextProcesses( component: ComponentTag ): JdfTag[] {
+    let ret: JdfTag[] = [];
+
+    ret = this.processTags.filter( (value,index,array) => {
+      const r = value.inputComponentLinks.filter( (v,i,ary) => {
+        return (v.rRef === component.id);
+      });
+      return (r.length > 0);
+    });
+    return ret;
+  }
+
+  // 引数で渡すデバイスを利用している工程を返す
+  getProcessesUsingThisDevice( component: ComponentTag ): JdfTag[] {
+    let ret: JdfTag[] = [];
+
+    ret = this.processTags.filter( (value,index,array) => {
+      const r = value.deviceLinks.filter( (v,i,ary) => {
+        return (v.rRef === component.id);
+      });
+      return (r.length > 0);
+    });
+    return ret;
+  }
+
+  getProcessesUsingThisParams( component: ComponentTag ): JdfTag[] {
+    let ret: JdfTag[] = [];
+
+    ret = this.processTags.filter( (value,index,array) => {
+      const r = value.paramsLinks.filter( (v,i,ary) => {
+        return (v.rRef === component.id);
+      });
+      return (r.length > 0);
+    });
+    return ret;
+  }
 
 }
 
@@ -490,7 +541,7 @@ class IdHavingTag extends BaseTag {
   }
 }
 
-class JdfTag extends IdHavingTag {
+export class JdfTag extends IdHavingTag {
   type: string;
   body: string;
   descriptiveName: string;
@@ -521,7 +572,7 @@ class JdfTag extends IdHavingTag {
   }
 }
 
-class DeviceTag extends IdHavingTag {
+export class DeviceTag extends IdHavingTag {
   klass: string;
   deviceId: string;
   friendlyName: string;
@@ -538,7 +589,7 @@ class DeviceTag extends IdHavingTag {
   }
 }
 
-class ComponentTag extends IdHavingTag {
+export class ComponentTag extends IdHavingTag {
   componentType: string;
   klass: string;
   dimensions: string;
@@ -569,7 +620,7 @@ class ComponentTag extends IdHavingTag {
   }
 }
 
-class StitchingParamsTag extends IdHavingTag  {
+export class StitchingParamsTag extends IdHavingTag  {
   klass: string;
   numberOfStitches: string;
   stapleShape: string;
@@ -586,7 +637,7 @@ class StitchingParamsTag extends IdHavingTag  {
   }
 }
 
-class TrimmingParamsTag  extends IdHavingTag {
+export class TrimmingParamsTag  extends IdHavingTag {
   klass: string;
   noOp: string;
   trimmingType: string;
@@ -618,7 +669,7 @@ class TrimmingParamsTag  extends IdHavingTag {
   }
 }
 
-class FoldingParamsTag  extends IdHavingTag {
+export class FoldingParamsTag  extends IdHavingTag {
   klass: string;
   descriptionType: string;
   foldCatalog: string;
@@ -637,7 +688,7 @@ class FoldingParamsTag  extends IdHavingTag {
   }
 }
 
-class FoldTag  extends BaseTag {
+export class FoldTag  extends BaseTag {
   to: string;
   from: string;
   travel: string;
@@ -655,7 +706,7 @@ class FoldTag  extends BaseTag {
   }
 }
 
-class CuttingParamsTag  extends IdHavingTag {
+export class CuttingParamsTag  extends IdHavingTag {
   klass: string;
   cutBlocks: CutBlockTag[];
   body: string;
@@ -670,7 +721,7 @@ class CuttingParamsTag  extends IdHavingTag {
   }
 }
 
-class CutBlockTag  extends IdHavingTag {
+export class CutBlockTag  extends IdHavingTag {
   klass: string;
   blockType: string;
   blockName: string;
@@ -691,7 +742,7 @@ class CutBlockTag  extends IdHavingTag {
   }
 }
 
-class CoverApplicationParamsTag  extends IdHavingTag {
+export class CoverApplicationParamsTag  extends IdHavingTag {
   klass: string;
   noOp: string;
   body: string;
@@ -706,7 +757,7 @@ class CoverApplicationParamsTag  extends IdHavingTag {
   }
 }
 
-class SpinePreparationParamsTag  extends IdHavingTag {
+export class SpinePreparationParamsTag  extends IdHavingTag {
   klass: string;
   millingDepth: string;
   body: string;
@@ -721,7 +772,7 @@ class SpinePreparationParamsTag  extends IdHavingTag {
   }
 }
 
-class StackingParamsTag  extends IdHavingTag {
+export class StackingParamsTag  extends IdHavingTag {
   klass: string;
   standardAmount: string;
   layerAmount: string;

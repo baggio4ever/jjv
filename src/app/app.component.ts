@@ -1,5 +1,5 @@
 import { Component,AfterViewInit,AfterViewChecked } from '@angular/core';
-import { Cip4Service,JDF } from './cip4.service';
+import { Cip4Service,JDF,JdfTag } from './cip4.service';
 import * as Cytoscape from 'cytoscape';
 import * as klay from 'cytoscape-klay';
 import { Guid } from "guid-typescript";
@@ -16,9 +16,13 @@ declare var hljs: any;
 export class AppComponent implements AfterViewInit,AfterViewChecked {
   fileLoaded = false;
   fileSelected = false;
+  filename = '';
   cy = null;
   jdf:JDF = null;
   selectedGuid = '';
+
+  displayedColumns2 = ['id', 'class', 'blockType', 'blockName', 'blockSize', 'blockTrf'];
+  displayedColumns3 = ['to', 'from', 'travel', 'travel_mm'];
 
   constructor(private cip4: Cip4Service) {}
 
@@ -31,9 +35,10 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
       }
     
   onChanged(filename) {
+    this.filename = filename;
     console.log('onChanged: '+filename);
 
-    this.fileSelected = (filename !== '');
+    this.fileSelected = (this.filename !== '');
   }
 
   yes(fileVal) {
@@ -56,6 +61,7 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
 //        this.doLayout();
         this.initCytoscape();
         this.makeGraph();
+        this.doHighlight();
       }, 0);
     } else {
       console.log('JDFファイルにしてくださいよ');
@@ -63,8 +69,9 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
   }
 
   clear(): void {
-    this.jdf = null;
     this.fileLoaded = false;
+    this.filename = '';
+    this.jdf = null;
   }
 
   doHighlight(): void {
@@ -415,5 +422,9 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
       }
     });
     l.run();
+  }
+
+  isSelected( guid: string ): boolean {
+    return (this.selectedGuid === guid);
   }
 }

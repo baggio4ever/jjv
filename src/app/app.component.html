@@ -6,8 +6,9 @@
 <!--      <button mat-button>Basic</button>
       <button mat-raised-button color="warn" (click)="clear()">クリア</button>
 -->
+      {{filename}}
       <button mat-icon-button (click)="clear()">
-        <mat-icon aria-label="Example icon-button with a heart icon">clear</mat-icon>
+        <mat-icon aria-label="">clear</mat-icon>
       </button>
     </nav>
   </mat-toolbar-row>
@@ -15,16 +16,929 @@
 
 <div id="content">
   <div *ngIf="fileLoaded; else elseBlock">
-    <div id="cy"></div>
-    <div>
-      <button mat-raised-button color="warn" (click)="relayout()">再レイアウト</button>
+
+    <div id="fmenu">
+      <div id="cy"></div>
+      <button mat-icon-button (click)="relayout()">
+        <mat-icon aria-label="">refresh</mat-icon>
+      </button>
+      <div>
+        <button mat-raised-button color="warn" (click)="relayout()">再レイアウト</button>
+      </div>
     </div>
-  </div>
+
+    <div id="main">
+      <div *ngIf="jdf.jobTag !== null">
+        <h3 id="job_top">Job</h3>
+        <div id="{{jdf.jobTag.id}}">
+          <mat-card class="example-card">
+            <mat-card-header>
+              <mat-card-title>{{jdf.jobTag.id}}</mat-card-title>
+    <!--          <mat-card-subtitle>{{jobTag.jobId}}</mat-card-subtitle>
+    -->
+            </mat-card-header>
+            <mat-card-content>
+              <table>
+                <tr>
+                  <td>ID</td>
+                  <td>{{jdf.jobTag.id}}</td>
+                </tr>
+                <tr>
+                  <td>JobID</td>
+                  <td>{{jdf.jobTag.jobId}}</td>
+                </tr>
+                <tr>
+                  <td>Type</td>
+                  <td>{{jdf.jobTag.type}}</td>
+                </tr>
+                <tr>
+                  <td>DescriptiveName</td>
+                  <td>{{jdf.jobTag.descriptiveName}}</td>
+                </tr>
+              </table>
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title></mat-panel-title>
+                  <mat-panel-description>JDF全部</mat-panel-description>
+                </mat-expansion-panel-header>
+                <pre><code class="html" [textContent]="jdf.jobTag.body" appMyHighlight></code></pre>
+              </mat-expansion-panel>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      <!--
+          <table>
+          <tr>
+            <th>ID</th>
+            <th>JobID</th>
+            <th>Type</th>
+            <th>DescriptiveName</th>
+          </tr>
+          <tr *ngIf="jobTag">
+            <td>{{jobTag.id}}</td>
+            <td>{{jobTag.jobId}}</td>
+            <td>{{jobTag.type}}</td>
+            <td>{{jobTag.descriptiveName}}</td>
+          </tr>
+        </table>
+      -->
+      </div>
+    
+      <div *ngIf="jdf.processTags.length>0">
+        <h3 id="process_top">Processes</h3>
+        <div>
+          <div *ngFor="let t of jdf.processTags" id="{{t.id}}" [class.selected]="isSelected(t.guid)" class="example-card" >
+            <mat-card>
+              <mat-card-header>
+                <mat-card-title>{{t.id}}</mat-card-title>
+    <!--            <mat-card-subtitle>{{t.jobPartId}}</mat-card-subtitle>
+    -->
+              </mat-card-header>
+              <mat-card-content>
+                <table>
+                  <tr>
+                    <td>ID</td>
+                    <td>{{t.id}}</td>
+                  </tr>
+                  <tr>
+                    <td>JobPartID</td>
+                    <td>{{t.jobPartId}}</td>
+                  </tr>
+                  <tr>
+                    <td>Type</td>
+                    <td>{{t.type}}</td>
+                  </tr>
+                  <tr>
+                    <td>DescriptiveName</td>
+                    <td>{{t.descriptiveName}}</td>
+                  </tr>
+                  <tr *ngIf="t.inputComponentLinks.length>0">
+                    <td>入力</td>
+                    <td>
+                      <div *ngFor="let l of t.inputComponentLinks">
+                        <span class="like-link" (click)="scrollTo(l.rRef)">{{l.rRef}}</span>
+                        <span *ngIf="l.amount>0" class="my-smaller">Amount: {{l.amount}}</span>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr *ngIf="t.outputComponentLinks.length>0">
+                    <td>出力</td>
+                    <td>
+                      <div *ngFor="let l of t.outputComponentLinks">
+                        <span class="like-link" (click)="scrollTo(l.rRef)">{{l.rRef}}</span>
+                        <span *ngIf="l.amount>0" class="my-smaller">Amount: {{l.amount}}</span>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr *ngIf="t.paramsLinks.length>0">
+                    <td>加工情報</td>
+                    <td>
+                      <div *ngFor="let l of t.paramsLinks">
+                        <span class="like-link" (click)="scrollTo(l.rRef)">{{l.rRef}}</span>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr *ngIf="t.deviceLinks.length>0">
+                    <td>デバイス情報</td>
+                    <td>
+                      <div *ngFor="let l of t.deviceLinks">
+                        <span class="like-link" (click)="scrollTo(l.rRef)">{{l.rRef}}</span>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+    
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title></mat-panel-title>
+                    <mat-panel-description>JDF該当部分</mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <pre><code class="html" [textContent]="t.body" appMyHighlight></code></pre>
+                </mat-expansion-panel>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      <!--
+        <table>
+          <tr>
+            <th>ID</th>
+            <th>JobPartID</th>
+            <th>Type</th>
+            <th>DescriptiveName</th>
+            <th>body</th>
+          </tr>
+          <tr *ngFor="let t of processTags">
+            <td>{{t.id}}</td>
+            <td>{{t.jobPartId}}</td>
+            <td>{{t.type}}</td>
+            <td>{{t.descriptiveName}}</td>
+            <td>
+              <pre>
+                <code class="html" [textContent]="t.body" appMyHighlight></code>
+              </pre>
+            </td>
+          </tr>
+        </table>
+      -->
+      </div>
+    
+      <div *ngIf="jdf.componentTags.length>0">
+        <h3 id="component_top">Components</h3>
+        <div>
+          <div *ngFor="let t of jdf.componentTags" id="{{t.id}}" [class.selected]="isSelected(t.guid)" class="example-card" >
+            <mat-card>
+              <mat-card-header>
+                <mat-card-title>{{t.id}}</mat-card-title>
+    <!--            <mat-card-subtitle>{{t.componentType}}</mat-card-subtitle>
+    -->
+              </mat-card-header>
+              <mat-card-content>
+                <table>
+                  <tr>
+                    <td>ID</td>
+                    <td>{{t.id}}</td>
+                  </tr>
+                  <tr>
+                    <td>ComponentType</td>
+                    <td>{{t.componentType}}</td>
+                  </tr>
+                  <tr>
+                    <td>Class</td>
+                    <td>{{t.klass}}</td>
+                  </tr>
+                  <tr>
+                    <td>Dimensions</td>
+                    <td>{{t.dimensions}}</td>
+                  </tr>
+                  <tr>
+                    <td>Dimensions [mm]<br><span class="my-smaller">（幅、長さ、厚さ）</span></td>
+                    <td>{{t.getDimensions_mm()}}</td>
+                  </tr>
+                  <tr *ngIf="jdf.getPreviousProcesses(t).length>0">
+                    <td>前工程 <span class="my-smaller">（生成元）</span></td>
+                    <td>
+                      <div *ngFor="let l of jdf.getPreviousProcesses(t)">
+                        <span class="like-link" (click)="scrollTo(l.id)">{{l.id}}</span>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr *ngIf="jdf.getNextProcesses(t).length>0">
+                    <td>次工程</td>
+                    <td>
+                      <div *ngFor="let l of jdf.getNextProcesses(t)">
+                        <span class="like-link" (click)="scrollTo(l.id)">{{l.id}}</span>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title></mat-panel-title>
+                    <mat-panel-description>JDF該当部分</mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <pre><code class="html" [textContent]="t.body" appMyHighlight></code></pre>
+                </mat-expansion-panel>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      <!--
+        <table>
+          <tr>
+            <th>ID</th>
+            <th>ComponentType</th>
+            <th>Class</th>
+            <th>Dimensions</th>
+            <th>body</th>
+          </tr>
+          <tr *ngFor="let t of componentTags">
+            <td>{{t.id}}</td>
+            <td>{{t.componentType}}</td>
+            <td>{{t.klass}}</td>
+            <td>{{t.dimensions}}</td>
+            <td>
+              <pre>
+                <code class="html" [textContent]="t.body" appMyHighlight></code>
+              </pre>
+            </td>
+          </tr>
+        </table>
+      -->
+      </div>
+    
+      <div *ngIf="jdf.deviceTags.length>0">
+        <h3 id="device_top">Devices</h3>
+        <div>
+          <div *ngFor="let t of jdf.deviceTags" id="{{t.id}}" [class.selected]="isSelected(t.guid)" class="example-card" >
+            <mat-card>
+              <mat-card-header>
+                <mat-card-title>{{t.id}}</mat-card-title>
+    <!--            <mat-card-subtitle>{{t.friendlyName}}</mat-card-subtitle>
+    -->
+              </mat-card-header>
+              <mat-card-content>
+                <table>
+                  <tr>
+                    <td>ID</td>
+                    <td>{{t.id}}</td>
+                  </tr>
+                  <tr>
+                    <td>Class</td>
+                    <td>{{t.klass}}</td>
+                  </tr>
+                  <tr>
+                    <td>DeviceID</td>
+                    <td>{{t.deviceId}}</td>
+                  </tr>
+                  <tr>
+                    <td>FriendlyName</td>
+                    <td>{{t.friendlyName}}</td>
+                  </tr>
+                  <tr *ngIf="jdf.getProcessesUsingThisDevice(t).length>0">
+                    <td>利用工程</td>
+                    <td>
+                      <div *ngFor="let l of jdf.getProcessesUsingThisDevice(t)">
+                        <span class="like-link" (click)="scrollTo(l.id)">{{l.id}}</span>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title></mat-panel-title>
+                    <mat-panel-description>JDF該当部分</mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <pre><code class="html" [textContent]="t.body" appMyHighlight></code></pre>
+                </mat-expansion-panel>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      <!--
+          <table>
+          <tr>
+            <th>ID</th>
+            <th>Class</th>
+            <th>DeviceID</th>
+            <th>FriendlyName</th>
+            <th>body</th>
+          </tr>
+          <tr *ngFor="let t of deviceTags">
+            <td>{{t.id}}</td>
+            <td>{{t.klass}}</td>
+            <td>{{t.deviceId}}</td>
+            <td>{{t.friendlyName}}</td>
+            <td>
+              <pre>
+                <code class="html" [textContent]="t.body" appMyHighlight></code>
+              </pre>
+            </td>
+          </tr>
+        </table>
+      -->
+      </div>
+    
+      <div *ngIf="jdf.stitchingParamsTags.length>0">
+        <h3 id="stitchingParams_top">StitchingParams</h3>
+        <div>
+          <div *ngFor="let t of jdf.stitchingParamsTags" id="{{t.id}}" [class.selected]="isSelected(t.guid)" class="example-card" >
+            <mat-card>
+              <mat-card-header>
+                <mat-card-title>{{t.id}}</mat-card-title>
+    <!--            <mat-card-subtitle>{{t.klass}}</mat-card-subtitle>
+    -->
+              </mat-card-header>
+              <mat-card-content>
+                <table>
+                  <tr>
+                    <td>ID</td>
+                    <td>{{t.id}}</td>
+                  </tr>
+                  <tr>
+                    <td>Class</td>
+                    <td>{{t.klass}}</td>
+                  </tr>
+                  <tr>
+                    <td>NumberOfStitches</td>
+                    <td>{{t.numberOfStitches}}</td>
+                  </tr>
+                  <tr>
+                    <td>StapleShape</td>
+                    <td>{{t.stapleShape}}</td>
+                  </tr>
+                  <tr *ngIf="jdf.getProcessesUsingThisParams(t).length>0">
+                    <td>利用工程</td>
+                    <td>
+                      <div *ngFor="let l of jdf.getProcessesUsingThisParams(t)">
+                        <span class="like-link" (click)="scrollTo(l.id)">{{l.id}}</span>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title></mat-panel-title>
+                    <mat-panel-description>JDF該当部分</mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <pre><code class="html" [textContent]="t.body" appMyHighlight></code></pre>
+                </mat-expansion-panel>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      <!--
+        <table>
+          <tr>
+            <th>ID</th>
+            <th>Class</th>
+            <th>NumberOfStitches</th>
+            <th>StapleShape</th>
+            <th>body</th>
+          </tr>
+          <tr *ngFor="let t of stitchingParamsTags">
+            <td>{{t.id}}</td>
+            <td>{{t.klass}}</td>
+            <td>{{t.numberOfStitches}}</td>
+            <td>{{t.stapleShape}}</td>
+            <td>
+              <pre>
+                <code class="html" [textContent]="t.body" appMyHighlight></code>
+              </pre>
+            </td>
+          </tr>
+        </table>
+      -->
+      </div>
+    
+      <div *ngIf="jdf.trimmingParamsTags.length>0">
+        <h3 id="trimmingParams_top">TrimmingParams</h3>
+        <div>
+          <div *ngFor="let t of jdf.trimmingParamsTags" id="{{t.id}}" [class.selected]="isSelected(t.guid)" class="example-card" >
+            <mat-card>
+              <mat-card-header>
+                <mat-card-title>{{t.id}}</mat-card-title>
+    <!--            <mat-card-subtitle>{{t.klass}}</mat-card-subtitle>
+    -->
+              </mat-card-header>
+              <mat-card-content>
+                <table>
+                  <tr>
+                    <td>ID</td>
+                    <td>{{t.id}}</td>
+                  </tr>
+                  <tr>
+                    <td>Class</td>
+                    <td>{{t.klass}}</td>
+                  </tr>
+                  <tr>
+                    <td>NoOp</td>
+                    <td>{{t.noOp}}</td>
+                  </tr>
+                  <tr>
+                    <td>TrimmingType</td>
+                    <td>{{t.trimmingType}}</td>
+                  </tr>
+                  <tr>
+                    <td>Width <span class="my-smaller">[pt]</span></td>
+                    <td>{{t.width}}</td>
+                  </tr>
+                  <tr>
+                    <td>Height <span class="my-smaller">[pt]</span></td>
+                    <td>{{t.height}}</td>
+                  </tr>
+                  <tr>
+                    <td>Width <span class="my-smaller">[mm]</span></td>
+                    <td>{{t.getWidth_mm()}}</td>
+                  </tr>
+                  <tr>
+                    <td>Height <span class="my-smaller">[mm]</span></td>
+                    <td>{{t.getHeight_mm()}}</td>
+                  </tr>
+                  <tr *ngIf="jdf.getProcessesUsingThisParams(t).length>0">
+                    <td>利用工程</td>
+                    <td>
+                      <div *ngFor="let l of jdf.getProcessesUsingThisParams(t)">
+                        <span class="like-link" (click)="scrollTo(l.id)">{{l.id}}</span>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title></mat-panel-title>
+                    <mat-panel-description>JDF該当部分</mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <pre><code class="html" [textContent]="t.body" appMyHighlight></code></pre>
+                </mat-expansion-panel>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      <!--
+        <table>
+          <tr>
+            <th>ID</th>
+            <th>Class</th>
+            <th>NoOp</th>
+            <th>TrimmingType</th>
+            <th>Width</th>
+            <th>Height</th>
+            <th>TrimmingOffset</th>
+            <th>body</th>
+          </tr>
+          <tr *ngFor="let t of trimmingParamsTags">
+            <td>{{t.id}}</td>
+            <td>{{t.klass}}</td>
+            <td>{{t.noOp}}</td>
+            <td>{{t.trimmingType}}</td>
+            <td>{{t.width}}</td>
+            <td>{{t.height}}</td>
+            <td>{{t.trimmingOffset}}</td>
+            <td>
+              <pre>
+                <code class="html" [textContent]="t.body" appMyHighlight></code>
+              </pre>
+            </td>
+          </tr>
+        </table>
+      -->
+      </div>
+    
+      <div *ngIf="jdf.foldingParamsTags.length>0">
+        <h3 id="foldingParams_top">FoldingParams</h3>
+        <div>
+          <div *ngFor="let t of jdf.foldingParamsTags" id="{{t.id}}" [class.selected]="isSelected(t.guid)" class="example-card" >
+            <mat-card>
+              <mat-card-header>
+                <mat-card-title>{{t.id}}</mat-card-title>
+    <!--            <mat-card-subtitle>{{t.klass}}</mat-card-subtitle>
+    -->
+              </mat-card-header>
+              <mat-card-content>
+                <table>
+                  <tr>
+                    <td>ID</td>
+                    <td>{{t.id}}</td>
+                  </tr>
+                  <tr>
+                    <td>Class</td>
+                    <td>{{t.klass}}</td>
+                  </tr>
+                  <tr>
+                    <td>DescriptionType</td>
+                    <td>{{t.descriptionType}}</td>
+                  </tr>
+                  <tr>
+                    <td>FoldCatalog</td>
+                    <td>{{t.foldCatalog}}</td>
+                  </tr>
+                  <tr *ngIf="jdf.getProcessesUsingThisParams(t).length>0">
+                    <td>利用工程</td>
+                    <td>
+                      <div *ngFor="let l of jdf.getProcessesUsingThisParams(t)">
+                        <span class="like-link" (click)="scrollTo(l.id)">{{l.id}}</span>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+                <mat-expansion-panel *ngIf="t.folds.length>0">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title></mat-panel-title>
+                    <mat-panel-description>Fold</mat-panel-description>
+                  </mat-expansion-panel-header>
+    
+                  <div class="example-container mat-elevation-z8">
+                    <mat-table #table3 [dataSource]="t.folds">
+                  
+                      <!--- Note that these columns can be defined in any order.
+                            The actual rendered columns are set as a property on the row definition" -->
+                  
+                      <!-- To Column -->
+                      <ng-container matColumnDef="to">
+                        <mat-header-cell *matHeaderCellDef> To </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.to}} </mat-cell>
+                      </ng-container>
+                  
+                      <!-- From Column -->
+                      <ng-container matColumnDef="from">
+                        <mat-header-cell *matHeaderCellDef> From </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.from}} </mat-cell>
+                      </ng-container>
+                  
+                      <!-- Travel Column -->
+                      <ng-container matColumnDef="travel">
+                        <mat-header-cell *matHeaderCellDef> Travel </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.travel}} </mat-cell>
+                      </ng-container>
+    
+                      <!-- Travel[mm] Column -->
+                      <ng-container matColumnDef="travel_mm">
+                        <mat-header-cell *matHeaderCellDef> Travel [mm] </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.getTravel_mm()}} </mat-cell>
+                      </ng-container>
+    
+                      <mat-header-row *matHeaderRowDef="displayedColumns3"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: displayedColumns3;"></mat-row>
+                    </mat-table>
+                  </div>
+        <!--
+                  <table>
+                    <tr>
+                      <th>To</th>
+                      <th>From</th>
+                      <th>Travel</th>
+                    </tr>
+                    <tr *ngFor="let f of t.folds">
+                      <td>{{f.to}}</td>
+                      <td>{{f.from}}</td>
+                      <td>{{f.travel}}</td>
+                    </tr>
+                  </table>
+        -->
+                </mat-expansion-panel>
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title></mat-panel-title>
+                    <mat-panel-description>JDF該当部分</mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <pre><code class="html" [textContent]="t.body" appMyHighlight></code></pre>
+                </mat-expansion-panel>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      <!--
+        <table>
+          <tr>
+            <th>ID</th>
+            <th>Class</th>
+            <th>DescriptionType</th>
+            <th>FoldCatalog</th>
+            <th>body</th>
+          </tr>
+          <tr *ngFor="let t of foldingParamsTags">
+            <td>{{t.id}}</td>
+            <td>{{t.klass}}</td>
+            <td>{{t.descriptionType}}</td>
+            <td>{{t.foldCatalog}}</td>
+            <td>
+              <pre>
+                <code class="html" [textContent]="t.body" appMyHighlight></code>
+              </pre>
+            </td>
+          </tr>
+        </table>
+      -->
+      </div>
+    
+      <div *ngIf="jdf.cuttingParamsTags.length>0">
+        <h3 id="cuttingParams_top">CuttingParams</h3>
+        <div>
+          <div *ngFor="let t of jdf.cuttingParamsTags" id="{{t.id}}" [class.selected]="isSelected(t.guid)" class="example-card" >
+            <mat-card>
+              <mat-card-header>
+                <mat-card-title>{{t.id}}</mat-card-title>
+    <!--            <mat-card-subtitle>{{t.klass}}</mat-card-subtitle>
+    -->
+              </mat-card-header>
+              <mat-card-content>
+                <table>
+                  <tr>
+                    <td>ID</td>
+                    <td>{{t.id}}</td>
+                  </tr>
+                  <tr>
+                    <td>Class</td>
+                    <td>{{t.klass}}</td>
+                  </tr>
+                  <tr>
+                    <td>利用工程</td>
+                    <td>
+                      <div *ngFor="let l of jdf.getProcessesUsingThisParams(t)">
+                        <span class="like-link" (click)="scrollTo(l.id)">{{l.id}}</span>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+                <mat-expansion-panel *ngIf="t.cutBlocks.length>0">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title></mat-panel-title>
+                    <mat-panel-description>CutBlock</mat-panel-description>
+                  </mat-expansion-panel-header>
+
+                  <div class="example-container mat-elevation-z8">
+                    <mat-table #table2 [dataSource]="t.cutBlocks">
+                  
+                      <!--- Note that these columns can be defined in any order.
+                            The actual rendered columns are set as a property on the row definition" -->
+                  
+                      <!-- ID Column -->
+                      <ng-container matColumnDef="id">
+                        <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+                      </ng-container>
+                  
+                      <!-- Class Column -->
+                      <ng-container matColumnDef="class">
+                        <mat-header-cell *matHeaderCellDef> Class </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.klass}} </mat-cell>
+                      </ng-container>
+                  
+                      <!-- BlockType Column -->
+                      <ng-container matColumnDef="blockType">
+                        <mat-header-cell *matHeaderCellDef> BlockType </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.blockType}} </mat-cell>
+                      </ng-container>
+                  
+                      <!-- BlockName Column -->
+                      <ng-container matColumnDef="blockName">
+                        <mat-header-cell *matHeaderCellDef> BlockName </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.blockName}} </mat-cell>
+                      </ng-container>
+    
+                      <!-- BlockSize Column -->
+                      <ng-container matColumnDef="blockSize">
+                        <mat-header-cell *matHeaderCellDef> BlockSize </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.blockSize}} </mat-cell>
+                      </ng-container>
+    
+                      <!-- BlockTrf Column -->
+                      <ng-container matColumnDef="blockTrf">
+                        <mat-header-cell *matHeaderCellDef> BlockTrf </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.blockTrf}} </mat-cell>
+                      </ng-container>
+    
+                      <mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: displayedColumns2;"></mat-row>
+                    </mat-table>
+                  </div>
+        <!--
+                  <table>
+                    <tr>
+                      <th>ID</th>
+                      <th>Class</th>
+                      <th>BlockType</th>
+                      <th>BlockName</th>
+                      <th>BlockSize</th>
+                      <th>BlockTrf</th>
+                    </tr>
+                    <tr *ngFor="let f of t.cutBlocks">
+                      <td>{{f.id}}</td>
+                      <td>{{f.klass}}</td>
+                      <td>{{f.blockType}}</td>
+                      <td>{{f.blockName}}</td>
+                      <td>{{f.blockSize}}</td>
+                      <td>{{f.blockTrf}}</td>
+                    </tr>
+                  </table>
+        -->
+                  </mat-expansion-panel>
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title></mat-panel-title>
+                    <mat-panel-description>JDF該当部分</mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <pre><code class="html" [textContent]="t.body" appMyHighlight></code></pre>
+                </mat-expansion-panel>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      <!--
+        <table>
+          <tr>
+            <th>ID</th>
+            <th>Class</th>
+            <th>body</th>
+          </tr>
+          <tr *ngFor="let t of cuttingParamsTags">
+            <td>{{t.id}}</td>
+            <td>{{t.klass}}</td>
+            <td>
+              <pre>
+                <code class="html" [textContent]="t.body" appMyHighlight></code>
+              </pre>
+            </td>
+          </tr>
+        </table>
+      -->
+      </div>
+    
+      <div *ngIf="jdf.coverApplicationParamsTags.length>0">
+        <h3 id="coverApplicationParams_top">CoverApplicationParams</h3>
+        <div>
+          <div *ngFor="let t of jdf.coverApplicationParamsTags" id="{{t.id}}" [class.selected]="isSelected(t.guid)" class="example-card" >
+            <mat-card>
+              <mat-card-header>
+                <mat-card-title>{{t.id}}</mat-card-title>
+    <!--            <mat-card-subtitle>{{t.klass}}</mat-card-subtitle>
+    -->
+              </mat-card-header>
+              <mat-card-content>
+                <table>
+                  <tr>
+                    <td>ID</td>
+                    <td>{{t.id}}</td>
+                  </tr>
+                  <tr>
+                    <td>Class</td>
+                    <td>{{t.klass}}</td>
+                  </tr>
+                  <tr>
+                    <td>NoOp</td>
+                    <td>{{t.noOp}}</td>
+                  </tr>
+                  <tr *ngIf="jdf.getProcessesUsingThisParams(t).length>0">
+                    <td>利用工程</td>
+                    <td>
+                      <div *ngFor="let l of jdf.getProcessesUsingThisParams(t)">
+                        <span class="like-link" (click)="scrollTo(l.id)">{{l.id}}</span>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title></mat-panel-title>
+                    <mat-panel-description>JDF該当部分</mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <pre><code class="html" [textContent]="t.body" appMyHighlight></code></pre>
+                </mat-expansion-panel>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      <!--
+        <table>
+          <tr>
+            <th>ID</th>
+            <th>Class</th>
+            <th>NoOp</th>
+            <th>body</th>
+          </tr>
+          <tr *ngFor="let t of coverApplicationParamsTags">
+            <td>{{t.id}}</td>
+            <td>{{t.klass}}</td>
+            <td>{{t.noOp}}</td>
+            <td>
+              <pre>
+                <code class="html" [textContent]="t.body" appMyHighlight></code>
+              </pre>
+            </td>
+          </tr>
+        </table>
+      -->
+      </div>
+    
+      <div *ngIf="jdf.spinePreparationParamsTags.length>0">
+        <h3 id="spinePreparationParams_top">SpinePreparationParams</h3>
+        <div>
+          <div *ngFor="let t of jdf.spinePreparationParamsTags" id="{{t.id}}" [class.selected]="isSelected(t.guid)" class="example-card" >
+            <mat-card>
+              <mat-card-header>
+                <mat-card-title>{{t.id}}</mat-card-title>
+    <!--            <mat-card-subtitle>{{t.klass}}</mat-card-subtitle>
+    -->
+              </mat-card-header>
+              <mat-card-content>
+                <table>
+                  <tr>
+                    <td>ID</td>
+                    <td>{{t.id}}</td>
+                  </tr>
+                  <tr>
+                    <td>Class</td>
+                    <td>{{t.klass}}</td>
+                  </tr>
+                  <tr>
+                    <td>MillingDepth</td>
+                    <td>{{t.millingDepth}}</td>
+                  </tr>
+                  <tr *ngIf="jdf.getProcessesUsingThisParams(t).length>0">
+                    <td>利用工程</td>
+                    <td>
+                      <div *ngFor="let l of jdf.getProcessesUsingThisParams(t)">
+                        <span class="like-link" (click)="scrollTo(l.id)">{{l.id}}</span>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title></mat-panel-title>
+                    <mat-panel-description>JDF該当部分</mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <pre><code class="html" [textContent]="t.body" appMyHighlight></code></pre>
+                </mat-expansion-panel>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+    
+      <div *ngIf="jdf.stackingParamsTags.length>0">
+        <h3 id="stackingParams_top">StackingParams</h3>
+        <div>
+          <div *ngFor="let t of jdf.stackingParamsTags" id="{{t.id}}" [class.selected]="isSelected(t.guid)" class="example-card" >
+            <mat-card>
+              <mat-card-header>
+                <mat-card-title>{{t.id}}</mat-card-title>
+    <!--            <mat-card-subtitle>{{t.klass}}</mat-card-subtitle>
+    -->
+              </mat-card-header>
+              <mat-card-content>
+                <table>
+                  <tr>
+                    <td>ID</td>
+                    <td>{{t.id}}</td>
+                  </tr>
+                  <tr>
+                    <td>Class</td>
+                    <td>{{t.klass}}</td>
+                  </tr>
+                  <tr>
+                    <td>StandardAmount</td>
+                    <td>{{t.standardAmount}}</td>
+                  </tr>
+                  <tr>
+                    <td>LayerAmount</td>
+                    <td>{{t.layerAmount}}</td>
+                  </tr>
+                  <tr *ngIf="jdf.getProcessesUsingThisParams(t).length>0">
+                    <td>利用工程</td>
+                    <td>
+                      <div *ngFor="let l of jdf.getProcessesUsingThisParams(t)">
+                        <span class="like-link" (click)="scrollTo(l.id)">{{l.id}}</span>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title></mat-panel-title>
+                    <mat-panel-description>JDF該当部分</mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <pre><code class="html" [textContent]="t.body" appMyHighlight></code></pre>
+                </mat-expansion-panel>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+    </div>
+      </div>
   <ng-template #elseBlock>
     <div>
       <div>
-        JDF/JMFファイルを選択して下さい
-        <input id="input-file-id" type="file" #fileInput (change)="onChanged(fileInput.value)" accept=".xml,.jdf,.jmf">
+        {{filename}}
+<!--        <label for="input-file-id" class="mat-raised-button mat-primary">
+-->
+        <label for="input-file-id" class="selectFile">
+          ＋JDF/JMFを選択
+            <input id="input-file-id" type="file" #fileInput (change)="onChanged(fileInput.value)" accept=".xml,.jdf,.jmf" style="display: none;">
+        </label>
+
         <!--
             <label for="input-file-id" class="mat-raised-button mat-primary">Choose JDF/JMF</label>
         -->
