@@ -325,7 +325,7 @@ export class Cip4Service {
         return jdf;
   }
 
-  parseJDF(file) {
+  parseJDF(file):Promise<JDF> {
     return new Promise( resolve => {
       const fileName: string = file.name;
       const reader = new FileReader();
@@ -344,7 +344,7 @@ export class Cip4Service {
   }
 }
 
-class JDF {
+export class JDF {
   jobTag: JdfTag = null;
   processTags: JdfTag[] = [];
   componentTags: ComponentTag[] = [];
@@ -411,6 +411,66 @@ class JDF {
   pushProcessTag(tag:JdfTag) {
     this.processTags.push( tag );
   }
+  
+  getComponentTagById( id: string ): ComponentTag {
+    let ret: ComponentTag = null;
+    for ( let i = 0; i < this.componentTags.length; i++ ) {
+      const componentTag = this.componentTags[i];
+      if (componentTag.id === id) {
+        ret = componentTag;
+        break;
+      }
+    }
+    return ret;
+  }
+
+  getDeviceTagById( id: string ): DeviceTag {
+    let ret: DeviceTag = null;
+    for ( let i = 0; i < this.deviceTags.length; i++ ) {
+      const deviceTag = this.deviceTags[i];
+      if (deviceTag.id === id) {
+        ret = deviceTag;
+        break;
+      }
+    }
+    return ret;
+  }
+
+  // うーん。いまいち。
+  getParamsTagById( id: string ): IdHavingTag {
+    let r;
+
+    if ( r = this.coverApplicationParamsTags.find((v,i,a) => {return v.id===id;})) {
+      return r;
+    }
+
+    if ( r = this.cuttingParamsTags.find((v,i,a) => {return v.id===id;})) {
+      return r;
+    }
+
+    if ( r = this.foldingParamsTags.find((v,i,a) => {return v.id===id;})) {
+      return r;
+    }
+
+    if ( r = this.stitchingParamsTags.find((v,i,a) => {return v.id===id;})) {
+      return r;
+    }
+
+    if ( r = this.spinePreparationParamsTags.find((v,i,a) => {return v.id===id;})) {
+      return r;
+    }
+
+    if ( r = this.trimmingParamsTags.find((v,i,a) => {return v.id===id;})) {
+      return r;
+    }
+
+    if ( r = this.stackingParamsTags.find((v,i,a) => {return v.id===id;})) {
+      return r;
+    }
+
+    return null;
+  }
+
 }
 
 class BaseTag {
