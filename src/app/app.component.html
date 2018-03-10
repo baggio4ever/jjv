@@ -3,9 +3,6 @@
     <span>jjv</span>
     <span class="example-spacer"></span>
     <nav *ngIf="fileLoaded">
-<!--      <button mat-button>Basic</button>
-      <button mat-raised-button color="warn" (click)="clear()">クリア</button>
--->
       {{filename}}
       <button mat-icon-button (click)="clear()">
         <mat-icon aria-label="">clear</mat-icon>
@@ -19,11 +16,13 @@
 
     <div id="fmenu">
       <div id="cy"></div>
-      <button mat-icon-button (click)="relayout()">
-        <mat-icon aria-label="">refresh</mat-icon>
-      </button>
       <div>
-        <button mat-raised-button color="warn" (click)="relayout()">再レイアウト</button>
+        <button mat-icon-button (click)="relayout()">
+          <mat-icon aria-label="">refresh</mat-icon>
+        </button>
+<!--
+          <button mat-raised-button color="warn" (click)="relayout()">再レイアウト</button>
+-->
       </div>
     </div>
 
@@ -34,8 +33,6 @@
           <mat-card class="example-card">
             <mat-card-header>
               <mat-card-title>{{jdf.jobTag.id}}</mat-card-title>
-    <!--          <mat-card-subtitle>{{jobTag.jobId}}</mat-card-subtitle>
-    -->
             </mat-card-header>
             <mat-card-content>
               <table>
@@ -66,22 +63,6 @@
             </mat-card-content>
           </mat-card>
         </div>
-      <!--
-          <table>
-          <tr>
-            <th>ID</th>
-            <th>JobID</th>
-            <th>Type</th>
-            <th>DescriptiveName</th>
-          </tr>
-          <tr *ngIf="jobTag">
-            <td>{{jobTag.id}}</td>
-            <td>{{jobTag.jobId}}</td>
-            <td>{{jobTag.type}}</td>
-            <td>{{jobTag.descriptiveName}}</td>
-          </tr>
-        </table>
-      -->
       </div>
     
       <div *ngIf="jdf.processTags.length>0">
@@ -91,8 +72,6 @@
             <mat-card>
               <mat-card-header>
                 <mat-card-title>{{t.id}}</mat-card-title>
-    <!--            <mat-card-subtitle>{{t.jobPartId}}</mat-card-subtitle>
-    -->
               </mat-card-header>
               <mat-card-content>
                 <table>
@@ -159,28 +138,6 @@
             </mat-card>
           </div>
         </div>
-      <!--
-        <table>
-          <tr>
-            <th>ID</th>
-            <th>JobPartID</th>
-            <th>Type</th>
-            <th>DescriptiveName</th>
-            <th>body</th>
-          </tr>
-          <tr *ngFor="let t of processTags">
-            <td>{{t.id}}</td>
-            <td>{{t.jobPartId}}</td>
-            <td>{{t.type}}</td>
-            <td>{{t.descriptiveName}}</td>
-            <td>
-              <pre>
-                <code class="html" [textContent]="t.body" appMyHighlight></code>
-              </pre>
-            </td>
-          </tr>
-        </table>
-      -->
       </div>
     
       <div *ngIf="jdf.componentTags.length>0">
@@ -190,8 +147,6 @@
             <mat-card>
               <mat-card-header>
                 <mat-card-title>{{t.id}}</mat-card-title>
-    <!--            <mat-card-subtitle>{{t.componentType}}</mat-card-subtitle>
-    -->
               </mat-card-header>
               <mat-card-content>
                 <table>
@@ -243,28 +198,6 @@
             </mat-card>
           </div>
         </div>
-      <!--
-        <table>
-          <tr>
-            <th>ID</th>
-            <th>ComponentType</th>
-            <th>Class</th>
-            <th>Dimensions</th>
-            <th>body</th>
-          </tr>
-          <tr *ngFor="let t of componentTags">
-            <td>{{t.id}}</td>
-            <td>{{t.componentType}}</td>
-            <td>{{t.klass}}</td>
-            <td>{{t.dimensions}}</td>
-            <td>
-              <pre>
-                <code class="html" [textContent]="t.body" appMyHighlight></code>
-              </pre>
-            </td>
-          </tr>
-        </table>
-      -->
       </div>
     
       <div *ngIf="jdf.deviceTags.length>0">
@@ -274,8 +207,6 @@
             <mat-card>
               <mat-card-header>
                 <mat-card-title>{{t.id}}</mat-card-title>
-    <!--            <mat-card-subtitle>{{t.friendlyName}}</mat-card-subtitle>
-    -->
               </mat-card-header>
               <mat-card-content>
                 <table>
@@ -315,28 +246,6 @@
             </mat-card>
           </div>
         </div>
-      <!--
-          <table>
-          <tr>
-            <th>ID</th>
-            <th>Class</th>
-            <th>DeviceID</th>
-            <th>FriendlyName</th>
-            <th>body</th>
-          </tr>
-          <tr *ngFor="let t of deviceTags">
-            <td>{{t.id}}</td>
-            <td>{{t.klass}}</td>
-            <td>{{t.deviceId}}</td>
-            <td>{{t.friendlyName}}</td>
-            <td>
-              <pre>
-                <code class="html" [textContent]="t.body" appMyHighlight></code>
-              </pre>
-            </td>
-          </tr>
-        </table>
-      -->
       </div>
     
       <div *ngIf="jdf.stitchingParamsTags.length>0">
@@ -346,8 +255,6 @@
             <mat-card>
               <mat-card-header>
                 <mat-card-title>{{t.id}}</mat-card-title>
-    <!--            <mat-card-subtitle>{{t.klass}}</mat-card-subtitle>
-    -->
               </mat-card-header>
               <mat-card-content>
                 <table>
@@ -387,28 +294,6 @@
             </mat-card>
           </div>
         </div>
-      <!--
-        <table>
-          <tr>
-            <th>ID</th>
-            <th>Class</th>
-            <th>NumberOfStitches</th>
-            <th>StapleShape</th>
-            <th>body</th>
-          </tr>
-          <tr *ngFor="let t of stitchingParamsTags">
-            <td>{{t.id}}</td>
-            <td>{{t.klass}}</td>
-            <td>{{t.numberOfStitches}}</td>
-            <td>{{t.stapleShape}}</td>
-            <td>
-              <pre>
-                <code class="html" [textContent]="t.body" appMyHighlight></code>
-              </pre>
-            </td>
-          </tr>
-        </table>
-      -->
       </div>
     
       <div *ngIf="jdf.trimmingParamsTags.length>0">
@@ -418,8 +303,6 @@
             <mat-card>
               <mat-card-header>
                 <mat-card-title>{{t.id}}</mat-card-title>
-    <!--            <mat-card-subtitle>{{t.klass}}</mat-card-subtitle>
-    -->
               </mat-card-header>
               <mat-card-content>
                 <table>
@@ -475,34 +358,6 @@
             </mat-card>
           </div>
         </div>
-      <!--
-        <table>
-          <tr>
-            <th>ID</th>
-            <th>Class</th>
-            <th>NoOp</th>
-            <th>TrimmingType</th>
-            <th>Width</th>
-            <th>Height</th>
-            <th>TrimmingOffset</th>
-            <th>body</th>
-          </tr>
-          <tr *ngFor="let t of trimmingParamsTags">
-            <td>{{t.id}}</td>
-            <td>{{t.klass}}</td>
-            <td>{{t.noOp}}</td>
-            <td>{{t.trimmingType}}</td>
-            <td>{{t.width}}</td>
-            <td>{{t.height}}</td>
-            <td>{{t.trimmingOffset}}</td>
-            <td>
-              <pre>
-                <code class="html" [textContent]="t.body" appMyHighlight></code>
-              </pre>
-            </td>
-          </tr>
-        </table>
-      -->
       </div>
     
       <div *ngIf="jdf.foldingParamsTags.length>0">
@@ -512,8 +367,6 @@
             <mat-card>
               <mat-card-header>
                 <mat-card-title>{{t.id}}</mat-card-title>
-    <!--            <mat-card-subtitle>{{t.klass}}</mat-card-subtitle>
-    -->
               </mat-card-header>
               <mat-card-content>
                 <table>
@@ -582,21 +435,8 @@
                       <mat-row *matRowDef="let row; columns: displayedColumns3;"></mat-row>
                     </mat-table>
                   </div>
-        <!--
-                  <table>
-                    <tr>
-                      <th>To</th>
-                      <th>From</th>
-                      <th>Travel</th>
-                    </tr>
-                    <tr *ngFor="let f of t.folds">
-                      <td>{{f.to}}</td>
-                      <td>{{f.from}}</td>
-                      <td>{{f.travel}}</td>
-                    </tr>
-                  </table>
-        -->
                 </mat-expansion-panel>
+
                 <mat-expansion-panel>
                   <mat-expansion-panel-header>
                     <mat-panel-title></mat-panel-title>
@@ -604,32 +444,11 @@
                   </mat-expansion-panel-header>
                   <pre><code class="html" [textContent]="t.body" appMyHighlight></code></pre>
                 </mat-expansion-panel>
+
               </mat-card-content>
             </mat-card>
           </div>
         </div>
-      <!--
-        <table>
-          <tr>
-            <th>ID</th>
-            <th>Class</th>
-            <th>DescriptionType</th>
-            <th>FoldCatalog</th>
-            <th>body</th>
-          </tr>
-          <tr *ngFor="let t of foldingParamsTags">
-            <td>{{t.id}}</td>
-            <td>{{t.klass}}</td>
-            <td>{{t.descriptionType}}</td>
-            <td>{{t.foldCatalog}}</td>
-            <td>
-              <pre>
-                <code class="html" [textContent]="t.body" appMyHighlight></code>
-              </pre>
-            </td>
-          </tr>
-        </table>
-      -->
       </div>
     
       <div *ngIf="jdf.cuttingParamsTags.length>0">
@@ -639,8 +458,6 @@
             <mat-card>
               <mat-card-header>
                 <mat-card-title>{{t.id}}</mat-card-title>
-    <!--            <mat-card-subtitle>{{t.klass}}</mat-card-subtitle>
-    -->
               </mat-card-header>
               <mat-card-content>
                 <table>
@@ -713,26 +530,6 @@
                       <mat-row *matRowDef="let row; columns: displayedColumns2;"></mat-row>
                     </mat-table>
                   </div>
-        <!--
-                  <table>
-                    <tr>
-                      <th>ID</th>
-                      <th>Class</th>
-                      <th>BlockType</th>
-                      <th>BlockName</th>
-                      <th>BlockSize</th>
-                      <th>BlockTrf</th>
-                    </tr>
-                    <tr *ngFor="let f of t.cutBlocks">
-                      <td>{{f.id}}</td>
-                      <td>{{f.klass}}</td>
-                      <td>{{f.blockType}}</td>
-                      <td>{{f.blockName}}</td>
-                      <td>{{f.blockSize}}</td>
-                      <td>{{f.blockTrf}}</td>
-                    </tr>
-                  </table>
-        -->
                   </mat-expansion-panel>
                 <mat-expansion-panel>
                   <mat-expansion-panel-header>
@@ -745,24 +542,6 @@
             </mat-card>
           </div>
         </div>
-      <!--
-        <table>
-          <tr>
-            <th>ID</th>
-            <th>Class</th>
-            <th>body</th>
-          </tr>
-          <tr *ngFor="let t of cuttingParamsTags">
-            <td>{{t.id}}</td>
-            <td>{{t.klass}}</td>
-            <td>
-              <pre>
-                <code class="html" [textContent]="t.body" appMyHighlight></code>
-              </pre>
-            </td>
-          </tr>
-        </table>
-      -->
       </div>
     
       <div *ngIf="jdf.coverApplicationParamsTags.length>0">
@@ -772,8 +551,6 @@
             <mat-card>
               <mat-card-header>
                 <mat-card-title>{{t.id}}</mat-card-title>
-    <!--            <mat-card-subtitle>{{t.klass}}</mat-card-subtitle>
-    -->
               </mat-card-header>
               <mat-card-content>
                 <table>
@@ -809,26 +586,6 @@
             </mat-card>
           </div>
         </div>
-      <!--
-        <table>
-          <tr>
-            <th>ID</th>
-            <th>Class</th>
-            <th>NoOp</th>
-            <th>body</th>
-          </tr>
-          <tr *ngFor="let t of coverApplicationParamsTags">
-            <td>{{t.id}}</td>
-            <td>{{t.klass}}</td>
-            <td>{{t.noOp}}</td>
-            <td>
-              <pre>
-                <code class="html" [textContent]="t.body" appMyHighlight></code>
-              </pre>
-            </td>
-          </tr>
-        </table>
-      -->
       </div>
     
       <div *ngIf="jdf.spinePreparationParamsTags.length>0">
@@ -838,8 +595,6 @@
             <mat-card>
               <mat-card-header>
                 <mat-card-title>{{t.id}}</mat-card-title>
-    <!--            <mat-card-subtitle>{{t.klass}}</mat-card-subtitle>
-    -->
               </mat-card-header>
               <mat-card-content>
                 <table>
@@ -934,8 +689,8 @@
         {{filename}}
 <!--        <label for="input-file-id" class="mat-raised-button mat-primary">
 -->
-        <label for="input-file-id" class="selectFile">
-          ＋JDF/JMFを選択
+        <label for="input-file-id" class="selectFile iconX">
+            ＋JDF/JMFを選択
             <input id="input-file-id" type="file" #fileInput (change)="onChanged(fileInput.value)" accept=".xml,.jdf,.jmf" style="display: none;">
         </label>
 

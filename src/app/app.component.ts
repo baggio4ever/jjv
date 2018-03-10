@@ -418,7 +418,8 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
     const l = this.cy.layout({
       name: 'klay',
       klay: {
-        spacing: 40 /* オブジェクト間の最小間隔 */
+        spacing: 40, /* オブジェクト間の最小間隔 */
+        direction: 'DOWN'
       }
     });
     l.run();
