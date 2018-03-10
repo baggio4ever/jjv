@@ -1,28 +1,27 @@
 <mat-toolbar color="primary" class="header">
   <mat-toolbar-row>
     <span>jjv</span>
-<!--
-      <span class="example-spacer"></span>
-    <nav>
-        <a routerLink="/simple-send" routerLinkActive="active">Simple Send</a>
-        <a routerLink="/file-send" routerLinkActive="active">File Send</a>
-        <a routerLink="/cards" routerLinkActive="active">Cards</a>
-        <a routerLink="/history" routerLinkActive="active">History</a>
-        <a routerLink="/xml" routerLinkActive="active">XML</a>
-        <a routerLink="/scroll" routerLinkActive="active">Scroll</a>
-        <a routerLink="/logo" routerLinkActive="active">Logo</a>
+    <span class="example-spacer"></span>
+    <nav *ngIf="fileLoaded">
+<!--      <button mat-button>Basic</button>
+      <button mat-raised-button color="warn" (click)="clear()">クリア</button>
+-->
+      <button mat-icon-button (click)="clear()">
+        <mat-icon aria-label="Example icon-button with a heart icon">clear</mat-icon>
+      </button>
     </nav>
-  -->
   </mat-toolbar-row>
 </mat-toolbar>
 
 <div id="content">
   <div *ngIf="fileLoaded; else elseBlock">
-    fileLoaded === true
+    <div id="cy"></div>
+    <div>
+      <button mat-raised-button color="warn" (click)="relayout()">再レイアウト</button>
+    </div>
   </div>
   <ng-template #elseBlock>
     <div>
-      fileLoaded === false
       <div>
         JDF/JMFファイルを選択して下さい
         <input id="input-file-id" type="file" #fileInput (change)="onChanged(fileInput.value)" accept=".xml,.jdf,.jmf">
@@ -33,7 +32,5 @@
             </div>
     </div>
   </ng-template>
-  abcdef
-  <div id="cy"></div>
 </div>
 

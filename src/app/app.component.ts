@@ -24,109 +24,6 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
 
   ngAfterViewInit() {
     //    console.log('AfterViewInit');
-        this.cy = Cytoscape({
-          container: document.getElementById('cy'), // container to render in
-    
-          elements: [ // list of graph elements to start with
-            { // node a
-              data: { id: 'a' }
-            },
-            { // node b
-              data: { id: 'b' }
-            },
-            { // edge ab
-              data: { id: 'ab', source: 'a', target: 'b' }
-            }
-          ],
-    
-          style: [ // the stylesheet for the graph
-            {
-              selector: 'node',
-              style: {
-                'background-color': '#666',
-                'label': 'data(id)',
-                'font-size': 13
-              }
-            },
-            {
-              selector: '.process',
-              style: {
-                'background-color': '#666',
-                'label': 'data(tag_id)'
-              }
-            },
-            {
-              selector: '.component',
-              style: {
-                'background-color': '#666',
-                'label': 'data(tag_id)',
-                'shape': 'rectangle'
-              }
-            },
-            {
-              selector: '.params',
-              style: {
-                'background-color': '#666',
-                'label': 'data(tag_id)',
-                'shape': 'tag',
-    /*            'background-opacity': 0,
-                'background-image': '../../assets/images/ic_sd_card_black_24dp_2x.png',
-                'background-clip': 'none',
-                'background-fit': 'contain'
-              */
-              }
-            },
-            {
-              selector: '.device',
-              style: {
-                'background-color': '#666',
-                'label': 'data(tag_id)',
-                'shape': 'roundrectangle'
-              }
-            },
-            {
-              selector: ':selected',
-              style: {
-                'border-width': '2',
-                'border-color': 'black',
-                'background-color': '#b22',
-              }
-            },
-            {
-              selector: 'edge',
-              style: {
-                'width': 3,
-                'line-color': '#ccc',
-                'target-arrow-color': '#ccc',
-                'target-arrow-shape': 'triangle'
-              }
-            },
-            {
-              selector: '.uni-arrow',
-              style: {
-                'curve-style': 'bezier',
-                'width': 2,
-                'line-color': '#999',
-    //            'arrow-scale': 3,
-                'target-arrow-color': '#999',
-                'target-arrow-shape': 'triangle',
-    //            'target-endpoint': 'outside-to-node',
-    //            'source-arrow-color': '#088',
-    //            'source-arrow-shape': 'triangle',
-                'source-label': 'data(amount)',
-                'source-text-offset': 15,
-                'source-text-margin-y': -10,
-                'font-size': 11
-              }
-            }
-          ],
-    
-          layout: {
-            name: 'grid',
-            rows: 1
-          }
-    
-        });
       }
     
       ngAfterViewChecked() {
@@ -140,12 +37,12 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
   }
 
   yes(fileVal) {
-    const file = fileVal;
-    const fileName: string = fileVal.name;
+//    const file = fileVal;
+//    const fileName: string = fileVal.name;
 
-    console.log('fileName: '+fileName);
+//    console.log('fileName: '+fileName);
 
-    this.letsLoad(file);
+    this.letsLoad(fileVal);
 //    this.cip4.parseJDF(file);
   }
 
@@ -153,10 +50,21 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
     if (this.cip4.isJDF(f.name)) {
       this.jdf = await this.cip4.parseJDF(f);
       console.log(this.jdf);
-      this.makeGraph();
+      
+      this.fileLoaded = true;
+      setTimeout(() => { // チョイ待たせてCytoscape
+//        this.doLayout();
+        this.initCytoscape();
+        this.makeGraph();
+      }, 0);
     } else {
       console.log('JDFファイルにしてくださいよ');
     }
+  }
+
+  clear(): void {
+    this.jdf = null;
+    this.fileLoaded = false;
   }
 
   doHighlight(): void {
@@ -175,6 +83,104 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
     } catch (e) {
       console.log('error!:' + e);
     }
+  }
+
+  initCytoscape(): void {
+    this.cy = Cytoscape({
+      container: document.getElementById('cy'), // container to render in
+
+      elements: [
+        ],
+
+      style: [ // the stylesheet for the graph
+        {
+          selector: 'node',
+          style: {
+            'background-color': '#666',
+            'label': 'data(id)',
+            'font-size': 13
+          }
+        },
+        {
+          selector: '.process',
+          style: {
+            'background-color': '#666',
+            'label': 'data(tag_id)'
+          }
+        },
+        {
+          selector: '.component',
+          style: {
+            'background-color': '#666',
+            'label': 'data(tag_id)',
+            'shape': 'rectangle'
+          }
+        },
+        {
+          selector: '.params',
+          style: {
+            'background-color': '#666',
+            'label': 'data(tag_id)',
+            'shape': 'tag',
+/*            'background-opacity': 0,
+            'background-image': '../../assets/images/ic_sd_card_black_24dp_2x.png',
+            'background-clip': 'none',
+            'background-fit': 'contain'
+          */
+          }
+        },
+        {
+          selector: '.device',
+          style: {
+            'background-color': '#666',
+            'label': 'data(tag_id)',
+            'shape': 'roundrectangle'
+          }
+        },
+        {
+          selector: ':selected',
+          style: {
+            'border-width': '2',
+            'border-color': 'black',
+            'background-color': '#b22',
+          }
+        },
+        {
+          selector: 'edge',
+          style: {
+            'width': 3,
+            'line-color': '#ccc',
+            'target-arrow-color': '#ccc',
+            'target-arrow-shape': 'triangle'
+          }
+        },
+        {
+          selector: '.uni-arrow',
+          style: {
+            'curve-style': 'bezier',
+            'width': 2,
+            'line-color': '#999',
+//            'arrow-scale': 3,
+            'target-arrow-color': '#999',
+            'target-arrow-shape': 'triangle',
+//            'target-endpoint': 'outside-to-node',
+//            'source-arrow-color': '#088',
+//            'source-arrow-shape': 'triangle',
+            'source-label': 'data(amount)',
+            'source-text-offset': 15,
+            'source-text-margin-y': -10,
+            'font-size': 11
+          }
+        }
+      ],
+
+      layout: {
+        name: 'grid',
+        rows: 1
+      }
+
+    });
+
   }
 
   makeGraph(): void {
@@ -393,6 +399,14 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
       });
     });
 
+    this.doLayout();
+  }
+
+  relayout(): void {
+    this.doLayout();
+  }
+
+  doLayout(): void {
     // レイアウト
     const l = this.cy.layout({
       name: 'klay',
@@ -401,8 +415,5 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
       }
     });
     l.run();
-//    this.cy.fit();
   }
-
-  
 }
