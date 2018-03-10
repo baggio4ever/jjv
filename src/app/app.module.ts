@@ -6,6 +6,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 
 import { AppComponent } from './app.component';
 
+import { Cip4Service } from './cip4.service';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,9 @@ import { AppComponent } from './app.component';
     MatCheckboxModule,
     MatToolbarModule
   ],
-  providers: [],
+  providers: [
+    Cip4Service
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

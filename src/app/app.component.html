@@ -26,7 +26,12 @@ fileLoaded === true
     fileLoaded === false
     <div>
       JDF/JMFファイルを選択して下さい
-    </div>
+      <input id="input-file-id" type="file" #fileInput (change)="onChanged(fileInput.value)" accept=".xml,.jdf,.jmf">
+      <!--
+          <label for="input-file-id" class="mat-raised-button mat-primary">Choose JDF/JMF</label>
+      -->
+        <button mat-raised-button color="warn" (click)="yes(fileInput.files[0])" [disabled]="!fileSelected">選択したファイルを読みん込んで表示</button>
+          </div>
   </div>
 </ng-template>
 abcdef
