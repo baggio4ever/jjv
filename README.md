@@ -25,3 +25,10 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+
+#### labelにアイコン表示
+[Add sprite icon to a label . Is there a way to set width / height just for the sprite and a second w/h to the label?](https://stackoverflow.com/questions/9497060/add-sprite-icon-to-a-label-is-there-a-way-to-set-width-height-just-for-the-s)
+
+#### HTML Input file
+[[HTML5] input type="file"のデザインをもっと簡単に変更](https://qiita.com/yasumodev/items/c9f8e8f588ded6b179c9)

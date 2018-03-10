@@ -208,16 +208,20 @@ export class Cip4Service {
           console.log('stackingParamsTags.length: ' + stackingParamsTags.length);
           for (let i = 0; i < stackingParamsTags.length; ++i ) {
             const j = stackingParamsTags[i];
-            const id = j.getAttribute('ID');
-            const klass = j.getAttribute('Class');
-            const standardAmount = j.getAttribute('StandardAmount');
-            const layerAmount = j.getAttribute('LayerAmount');
-            const body = vkbeautify.xml( j.outerHTML.toString() );
-  
-            const stackingParamsTag = new StackingParamsTag( id, klass, standardAmount, layerAmount, body );
-            jdf.pushStackingParamsTag( stackingParamsTag );
+            // ResourcePool 直下か
+            if( j.parentElement === resourcePool ) {
+              const id = j.getAttribute('ID');
+              const klass = j.getAttribute('Class');
+              const standardAmount = j.getAttribute('StandardAmount');
+              const layerAmount = j.getAttribute('LayerAmount');
+              const body = vkbeautify.xml( j.outerHTML.toString() );
+    
+              const stackingParamsTag = new StackingParamsTag( id, klass, standardAmount, layerAmount, body );
+              jdf.pushStackingParamsTag( stackingParamsTag );
+            }
 /*            this.stackingParamsTags.push( stackingParamsTag );
-          */        }
+          */        
+         }
   
           // JDFタグ  最後が良い、多分。参照したいデータが揃っているはずなので
           const jdfTags = dom.getElementsByTagName('JDF');
@@ -592,8 +596,12 @@ export class DeviceTag extends IdHavingTag {
 export class ComponentTag extends IdHavingTag {
   componentType: string;
   klass: string;
-  dimensions: string;
+  dimensions: string; // 幅、長さ、厚さ
   body: string;
+
+  dimensions_width:number;
+  dimensions_length:number;
+  dimensions_thickness:number;
 
   constructor(id: string, componentType: string, klass: string, dimensions: string, body: string) {
     super(id);
@@ -602,11 +610,47 @@ export class ComponentTag extends IdHavingTag {
     this.klass = klass;
     this.dimensions = dimensions;
 
+    if( this.dimensions ) {
+      const d = this.dimensions.split(' ');
+      this.dimensions_width = JDFUtils.parseNumber(d[0]);
+      this.dimensions_length = JDFUtils.parseNumber(d[1]);
+      this.dimensions_thickness = JDFUtils.parseNumber(d[2]);
+    }
+
     this.body = body;
   }
 
+  getDimensionsWidth():number {
+    return this.dimensions_width;
+  }
+
+  getDimensionsLength():number {
+    return this.dimensions_length;
+  }
+
+  getDimensionsThickness():number {
+    return this.dimensions_thickness;
+  }
+
+  getDimensionsWidth_mm():number {
+    return JDFUtils.pt2mm( this.dimensions_width );
+  }
+
+  getDimensionsLength_mm():number {
+    return JDFUtils.pt2mm( this.dimensions_length );
+  }
+
+  getDimensionsThickness_mm():number {
+    return JDFUtils.pt2mm( this.dimensions_thickness );
+  }
+  
   getDimensions_mm(): string {
-//    return this.dimensions;
+    return [this.dimensions_width,this.dimensions_length,this.dimensions_thickness]
+          .map( (v,i,a) => {
+            return JDFUtils.pt2mm( v );
+          })
+          .join(' ');
+/*
     if (this.dimensions) {
     return this.dimensions
       .split(' ')
@@ -617,6 +661,7 @@ export class ComponentTag extends IdHavingTag {
     } else {
       return '記述なし';
     }
+*/
   }
 }
 

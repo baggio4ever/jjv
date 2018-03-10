@@ -76,8 +76,8 @@ nav a.active {
 
 
 #cy {
-    width: 400px;
-    height: 300px;
+    width: 300px;
+    height: 450px;
     display: block;
 /*    background: #ddddff;*/
     border-radius: 4px;
@@ -87,6 +87,27 @@ nav a.active {
     ,0px 0px 4px 2px rgba(0, 0, 0, 0.2) inset;
 /*border:1px solid #000;*/
 }
+
+#fmenu {
+    float: left;
+    width: 306px;
+    position: fixed;
+    margin: 8px;
+    padding: 8px;
+/*
+    border: lightgray;
+    box-shadow: 2px 2px 6px gray;
+    border-radius: 4px;
+*/
+/*    -webkit-border-radius: 4px;/* for Safari and Chrome 対応*/
+/*    -moz-border-radius: 4px;/* for Firefox 対応*/
+}
+
+#main {
+/*    position: absolute;*/ /* うーん。どうすればヘッダーに隠れずに済ませられるのか。ScrollToするとヘッダーの下にジャンプすることがあるのよ */
+    padding-left: 340px;
+}
+
 
 label.selectFile {
     color: white;  

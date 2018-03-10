@@ -164,11 +164,24 @@
                   </tr>
                   <tr>
                     <td>Dimensions</td>
-                    <td>{{t.dimensions}}</td>
+<!--
+                      <td>{{t.dimensions}}</td>
+-->
+                      <td>
+                        幅  :{{t.getDimensionsWidth()}}<br>
+                        長さ:{{t.getDimensionsLength()}}<br>
+                        厚さ:{{t.getDimensionsThickness()}}
+                      </td>
                   </tr>
                   <tr>
-                    <td>Dimensions [mm]<br><span class="my-smaller">（幅、長さ、厚さ）</span></td>
-                    <td>{{t.getDimensions_mm()}}</td>
+                    <td>Dimensions [mm]</td>
+<!--                    <td>{{t.getDimensions_mm()}}</td>
+-->
+                      <td>
+                        幅  :{{t.getDimensionsWidth_mm()}}<br>
+                        長さ:{{t.getDimensionsLength_mm()}}<br>
+                        厚さ:{{t.getDimensionsThickness_mm()}}
+                      </td>
                   </tr>
                   <tr *ngIf="jdf.getPreviousProcesses(t).length>0">
                     <td>前工程 <span class="my-smaller">（生成元）</span></td>
@@ -497,11 +510,12 @@
                       </ng-container>
                   
                       <!-- Class Column -->
+                      <!--
                       <ng-container matColumnDef="class">
                         <mat-header-cell *matHeaderCellDef> Class </mat-header-cell>
                         <mat-cell *matCellDef="let element"> {{element.klass}} </mat-cell>
                       </ng-container>
-                  
+                    -->                  
                       <!-- BlockType Column -->
                       <ng-container matColumnDef="blockType">
                         <mat-header-cell *matHeaderCellDef> BlockType </mat-header-cell>
@@ -516,7 +530,7 @@
     
                       <!-- BlockSize Column -->
                       <ng-container matColumnDef="blockSize">
-                        <mat-header-cell *matHeaderCellDef> BlockSize </mat-header-cell>
+                        <mat-header-cell *matHeaderCellDef> BlockSize<br>幅<br>高さ </mat-header-cell>
                         <mat-cell *matCellDef="let element"> {{element.blockSize}} </mat-cell>
                       </ng-container>
     

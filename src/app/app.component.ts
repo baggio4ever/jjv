@@ -21,7 +21,7 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
   jdf:JDF = null;
   selectedGuid = '';
 
-  displayedColumns2 = ['id', 'class', 'blockType', 'blockName', 'blockSize', 'blockTrf'];
+  displayedColumns2 = ['id', /*'class',*/ 'blockType', 'blockName', 'blockSize', 'blockTrf'];
   displayedColumns3 = ['to', 'from', 'travel', 'travel_mm'];
 
   constructor(private cip4: Cip4Service) {}
