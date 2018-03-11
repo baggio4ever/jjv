@@ -29,39 +29,39 @@ export class Cip4Service {
 
     const xml = vkbeautify.xml( c );
   
-    if ( true ) {
-      const parser = new DOMParser();
-      const dom = parser.parseFromString( c, 'text/xml');
+/*    if ( true ) {*/
+    const parser = new DOMParser();
+    const dom = parser.parseFromString( c, 'text/xml');
 
-      // 初期化
-      jdf.clear();
+    // 初期化
+    jdf.clear();
   
-      // ResourcePool
-      const resourcePoolTags = dom.getElementsByTagName('ResourcePool');
-      if ( resourcePoolTags.length !== 1 ) {
-        console.log('げ！ resourcePoolTag.length:'+resourcePoolTags.length);
+    // ResourcePool
+    const resourcePoolTags = dom.getElementsByTagName('ResourcePool');
+    if ( resourcePoolTags.length !== 1 ) {
+      console.log('げ！ resourcePoolTag.length:'+resourcePoolTags.length);
+    }
+    const resourcePool = resourcePoolTags[0];
+  
+    // Componentタグ
+    const componentTags = resourcePool.getElementsByTagName('Component');
+    console.log('componentTags.length: ' + componentTags.length);
+    for (let i = 0; i < componentTags.length; ++i ) {
+      const j = componentTags[i];
+      // ResourcePool 直下か
+      if( j.parentElement === resourcePool ) {
+        const id = j.getAttribute('ID');
+        const componentType = j.getAttribute('ComponentType');
+        const klass = j.getAttribute('Class');
+        const dimensions = j.getAttribute('Dimensions');
+        const body = vkbeautify.xml( j.outerHTML.toString() );
+  
+        const componentTag = new ComponentTag( id, componentType, klass, dimensions, body );
+        jdf.pushComponentTag( componentTag );
+      } else {
+        console.log('はずれ！');
       }
-      const resourcePool = resourcePoolTags[0];
-  
-      // Componentタグ
-      const componentTags = resourcePool.getElementsByTagName('Component');
-      console.log('componentTags.length: ' + componentTags.length);
-      for (let i = 0; i < componentTags.length; ++i ) {
-        const j = componentTags[i];
-        // ResourcePool 直下か
-        if( j.parentElement === resourcePool ) {
-          const id = j.getAttribute('ID');
-          const componentType = j.getAttribute('ComponentType');
-          const klass = j.getAttribute('Class');
-          const dimensions = j.getAttribute('Dimensions');
-          const body = vkbeautify.xml( j.outerHTML.toString() );
-  
-          const componentTag = new ComponentTag( id, componentType, klass, dimensions, body );
-          jdf.pushComponentTag( componentTag );
-        } else {
-          console.log('はずれ！');
-        }
-      }
+    }
   
       // Deviceタグ
       const deviceTags = dom.getElementsByTagName('Device');
@@ -317,7 +317,7 @@ export class Cip4Service {
 /*              this.processTags.push( jdfTag );
             */          }
           }
-        }
+/*        }*/
         return jdf;
   }
 
@@ -1012,16 +1012,6 @@ export class JDFUtils {
 
   static parseNumber( s: string ): number {
     return parseFloat(s);
-  }
-
-  static getWidth( dimensions: string ): string {
-    return '';
-  }
-  static getLength( dimensions: string ): string {
-    return '';
-  }
-  static getThickness( dimensions: string ): string {
-    return '';
   }
 
   static pt2mm( v: number ): number {

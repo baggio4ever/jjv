@@ -20,9 +20,19 @@
         <button mat-icon-button (click)="relayout()">
           <mat-icon aria-label="">refresh</mat-icon>
         </button>
-<!--
-          <button mat-raised-button color="warn" (click)="relayout()">再レイアウト</button>
--->
+      </div>
+      <div>
+        <div *ngIf="jdf.jobTag !== null" class="like-link" (click)="scrollTo('job_top')">Job</div>
+        <div *ngIf="jdf.processTags.length>0" class="like-link" (click)="scrollTo('process_top')">Processes</div>
+        <div *ngIf="jdf.componentTags.length>0" class="like-link" (click)="scrollTo('component_top')">Components</div>
+        <div *ngIf="jdf.deviceTags.length>0" class="like-link" (click)="scrollTo('device_top')">Devices</div>
+        <div *ngIf="jdf.stitchingParamsTags.length>0" class="like-link" (click)="scrollTo('stitchingParams_top')">StitchingParams</div>
+        <div *ngIf="jdf.trimmingParamsTags.length>0" class="like-link" (click)="scrollTo('trimmingParams_top')">TrimmingParams</div>
+        <div *ngIf="jdf.cuttingParamsTags.length>0" class="like-link" (click)="scrollTo('cuttingParams_top')">CuttingParams</div>
+        <div *ngIf="jdf.foldingParamsTags.length>0" class="like-link" (click)="scrollTo('foldingParams_top')">FoldingParams</div>
+        <div *ngIf="jdf.spinePreparationParamsTags.length>0" class="like-link" (click)="scrollTo('spinePreparationParams_top')">SpinePreparationParams</div>
+        <div *ngIf="jdf.coverApplicationParamsTags.length>0" class="like-link" (click)="scrollTo('coverApplicationParams_top')">CoverApplicationParams</div>
+        <div *ngIf="jdf.stackingParamsTags.length>0" class="like-link" (click)="scrollTo('stackingParams_top')">StackingParams</div>
       </div>
     </div>
 
@@ -701,18 +711,13 @@
     <div>
       <div>
         {{filename}}
-<!--        <label for="input-file-id" class="mat-raised-button mat-primary">
--->
         <label for="input-file-id" class="selectFile iconX">
             ＋JDF/JMFを選択
             <input id="input-file-id" type="file" #fileInput (change)="onChanged(fileInput.value)" accept=".xml,.jdf,.jmf" style="display: none;">
         </label>
 
-        <!--
-            <label for="input-file-id" class="mat-raised-button mat-primary">Choose JDF/JMF</label>
-        -->
-          <button mat-raised-button color="warn" (click)="yes(fileInput.files[0])" [disabled]="!fileSelected">選択したファイルを読みん込んで表示</button>
-            </div>
+        <button mat-raised-button color="warn" (click)="yes(fileInput.files[0])" [disabled]="!fileSelected">選択したファイルを読みん込んで表示</button>
+      </div>
     </div>
   </ng-template>
 </div>
