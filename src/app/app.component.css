@@ -122,3 +122,11 @@ label.selectFile {
     padding-left: 30px;
     background: url("../assets/ic_folder_open_white_24px.svg") no-repeat scroll 0 0 transparent;
   }
+
+table {
+    border-color: #dddddd;
+}
+
+td,th {
+    padding: 8px;
+}
