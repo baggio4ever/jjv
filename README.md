@@ -32,3 +32,6 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 #### HTML Input file
 [[HTML5] input type="file"のデザインをもっと簡単に変更](https://qiita.com/yasumodev/items/c9f8e8f588ded6b179c9)
+
+#### 非同期処理
+[TypeScriptのasync/await (PromiseとかVisual Studio Codeとか…)](https://qiita.com/takao_mofumofu/items/f7063445c2020d6c8af0)

@@ -8,7 +8,7 @@ export class Cip4Service {
 
   constructor() { }
 
-  isJDF(filename: string):boolean {
+  isJDF(filename: string): boolean {
     if ( filename.toLowerCase().endsWith('.jdf') ) {
       return true;
     } else {
@@ -16,106 +16,100 @@ export class Cip4Service {
     }
   }
 
-  buildJDF( c:string ):JDF {
+  isJMF(filename: string): boolean {
+    if ( filename.toLowerCase().endsWith('.jmf') ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  buildJDF( c: string ): JDF {
     let jdf = new JDF();
 
-    // エスケープ。angularにも備わっているみたいだけど。これやらないと表示されない。
-      //      this.xml = this.escapeHTML( c );
-      const xml = vkbeautify.xml( c );  // お、innerHTMLにバインドしようとするとエスケープが必要だったが、textContentだとエスケープ不要みたい
+    const xml = vkbeautify.xml( c );
   
-        if ( true ) {
-          const parser = new DOMParser();
-          const dom = parser.parseFromString( c, 'text/xml');
-/*  
-          setTimeout(() => { // チョイ待たせて整形。
-            this.doLayout();
-          }, 0);
-*/  
-          // 初期化
-          jdf.clear();
+    if ( true ) {
+      const parser = new DOMParser();
+      const dom = parser.parseFromString( c, 'text/xml');
+
+      // 初期化
+      jdf.clear();
   
-          // ResourcePool
-          const resourcePoolTags = dom.getElementsByTagName('ResourcePool');
-          if ( resourcePoolTags.length !== 1 ) {
-            console.log('げ！ resourcePoolTag.length:'+resourcePoolTags.length);
-          }
-          const resourcePool = resourcePoolTags[0];
+      // ResourcePool
+      const resourcePoolTags = dom.getElementsByTagName('ResourcePool');
+      if ( resourcePoolTags.length !== 1 ) {
+        console.log('げ！ resourcePoolTag.length:'+resourcePoolTags.length);
+      }
+      const resourcePool = resourcePoolTags[0];
   
-          // Componentタグ
-          const componentTags = resourcePool.getElementsByTagName('Component');
-          console.log('componentTags.length: ' + componentTags.length);
-          for (let i = 0; i < componentTags.length; ++i ) {
-            const j = componentTags[i];
-            // ResourcePool 直下か
-            if( j.parentElement === resourcePool ) {
-              const id = j.getAttribute('ID');
-              const componentType = j.getAttribute('ComponentType');
-              const klass = j.getAttribute('Class');
-              const dimensions = j.getAttribute('Dimensions');
-              const body = vkbeautify.xml( j.outerHTML.toString() );
-    //          const body = j.outerHTML.toString();
+      // Componentタグ
+      const componentTags = resourcePool.getElementsByTagName('Component');
+      console.log('componentTags.length: ' + componentTags.length);
+      for (let i = 0; i < componentTags.length; ++i ) {
+        const j = componentTags[i];
+        // ResourcePool 直下か
+        if( j.parentElement === resourcePool ) {
+          const id = j.getAttribute('ID');
+          const componentType = j.getAttribute('ComponentType');
+          const klass = j.getAttribute('Class');
+          const dimensions = j.getAttribute('Dimensions');
+          const body = vkbeautify.xml( j.outerHTML.toString() );
   
-              const componentTag = new ComponentTag( id, componentType, klass, dimensions, body );
-              jdf.pushComponentTag( componentTag );
-//              this.componentTags.push( componentTag );
-            } else {
-              console.log('はずれ！');
-            }
-          }
+          const componentTag = new ComponentTag( id, componentType, klass, dimensions, body );
+          jdf.pushComponentTag( componentTag );
+        } else {
+          console.log('はずれ！');
+        }
+      }
   
-          // Deviceタグ
-          const deviceTags = dom.getElementsByTagName('Device');
-          console.log('deviceTags.length: ' + deviceTags.length);
-          for (let i = 0; i < deviceTags.length; ++i ) {
-            const j = deviceTags[i];
-            const id = j.getAttribute('ID');
-            const klass = j.getAttribute('Class');
-            const deviceId = j.getAttribute('DeviceID');
-            const friendlyName = j.getAttribute('FriendlyName');
-  //          const body = j.outerHTML.toString();
-            const body = vkbeautify.xml( j.outerHTML.toString() );
+      // Deviceタグ
+      const deviceTags = dom.getElementsByTagName('Device');
+      console.log('deviceTags.length: ' + deviceTags.length);
+      for (let i = 0; i < deviceTags.length; ++i ) {
+        const j = deviceTags[i];
+        const id = j.getAttribute('ID');
+        const klass = j.getAttribute('Class');
+        const deviceId = j.getAttribute('DeviceID');
+        const friendlyName = j.getAttribute('FriendlyName');
+        const body = vkbeautify.xml( j.outerHTML.toString() );
   
-            const deviceTag = new DeviceTag( id, klass, deviceId, friendlyName, body );
-            jdf.pushDeviceTag( deviceTag );
-//            this.deviceTags.push( deviceTag );
-          }
+        const deviceTag = new DeviceTag( id, klass, deviceId, friendlyName, body );
+        jdf.pushDeviceTag( deviceTag );
+      }
   
-          // StitchingParamsタグ
-          const stitchingParamsTags = dom.getElementsByTagName('StitchingParams');
-          console.log('stitchingParamsTags.length: ' + stitchingParamsTags.length);
-          for (let i = 0; i < stitchingParamsTags.length; ++i ) {
-            const j = stitchingParamsTags[i];
-            const id = j.getAttribute('ID');
-            const klass = j.getAttribute('Class');
-            const numberOfStitches = j.getAttribute('NumberOfStitches');
-            const stapleShape = j.getAttribute('StapleShape');
-  //          const body = j.outerHTML.toString();
-            const body = vkbeautify.xml( j.outerHTML.toString() );
+      // StitchingParamsタグ
+      const stitchingParamsTags = dom.getElementsByTagName('StitchingParams');
+      console.log('stitchingParamsTags.length: ' + stitchingParamsTags.length);
+      for (let i = 0; i < stitchingParamsTags.length; ++i ) {
+        const j = stitchingParamsTags[i];
+        const id = j.getAttribute('ID');
+        const klass = j.getAttribute('Class');
+        const numberOfStitches = j.getAttribute('NumberOfStitches');
+        const stapleShape = j.getAttribute('StapleShape');
+        const body = vkbeautify.xml( j.outerHTML.toString() );
   
-            const stitchingParamsTag = new StitchingParamsTag( id, klass, numberOfStitches, stapleShape, body );
-            jdf.pushStitchingParamsTag( stitchingParamsTag );
-/*            this.stitchingParamsTags.push( stitchingParamsTag );
-*/          }
+        const stitchingParamsTag = new StitchingParamsTag( id, klass, numberOfStitches, stapleShape, body );
+        jdf.pushStitchingParamsTag( stitchingParamsTag );
+      }
   
-          // TrimmingParamsタグ
-          const trimmingParamsTags = dom.getElementsByTagName('TrimmingParams');
-          console.log('trimmingParamsTags.length: ' + trimmingParamsTags.length);
-          for (let i = 0; i < trimmingParamsTags.length; ++i ) {
-            const j = trimmingParamsTags[i];
-            const id = j.getAttribute('ID');
-            const klass = j.getAttribute('Class');
-            const noOp = j.getAttribute('NoOp');
-            const trimmingType = j.getAttribute('TrimmingType');
-            const height = j.getAttribute('Height');
-            const width = j.getAttribute('Width');
-            const trimmingOffset = j.getAttribute('TrimmingOffset');
-  //          const body = j.outerHTML.toString();
-            const body = vkbeautify.xml( j.outerHTML.toString() );
+      // TrimmingParamsタグ
+      const trimmingParamsTags = dom.getElementsByTagName('TrimmingParams');
+      console.log('trimmingParamsTags.length: ' + trimmingParamsTags.length);
+      for (let i = 0; i < trimmingParamsTags.length; ++i ) {
+        const j = trimmingParamsTags[i];
+        const id = j.getAttribute('ID');
+        const klass = j.getAttribute('Class');
+        const noOp = j.getAttribute('NoOp');
+        const trimmingType = j.getAttribute('TrimmingType');
+        const height = j.getAttribute('Height');
+        const width = j.getAttribute('Width');
+        const trimmingOffset = j.getAttribute('TrimmingOffset');
+        const body = vkbeautify.xml( j.outerHTML.toString() );
   
-            const trimmingParamsTag = new TrimmingParamsTag( id, klass, noOp, trimmingType, width, height, trimmingOffset, body );
-            jdf.pushTrimmingParamsTag( trimmingParamsTag );
-/*            this.trimmingParamsTags.push( trimmingParamsTag );
-*/        }
+        const trimmingParamsTag = new TrimmingParamsTag( id, klass, noOp, trimmingType, width, height, trimmingOffset, body );
+        jdf.pushTrimmingParamsTag( trimmingParamsTag );
+      }
   
           // FoldingParamsタグ
           const foldingParamsTags = dom.getElementsByTagName('FoldingParams');
@@ -323,13 +317,11 @@ export class Cip4Service {
 /*              this.processTags.push( jdfTag );
             */          }
           }
-  
-//          this.makeGraph();
         }
         return jdf;
   }
 
-  parseJDF(file):Promise<JDF> {
+  parseJDF(file): Promise<JDF> {
     return new Promise( resolve => {
       const fileName: string = file.name;
       const reader = new FileReader();
@@ -340,8 +332,6 @@ export class Cip4Service {
       reader.onload = (e) => {
         const c = reader.result;
         resolve( this.buildJDF(c) );
-    
-  //        return Promise.resolve(jdf);
       };
       reader.readAsText(file);
     });
@@ -362,57 +352,59 @@ export class JDF {
   stackingParamsTags: StackingParamsTag[] = [];
 
   clear(): void {
-          this.jobTag = null;
-          this.processTags = [];
-          this.componentTags = [];
-          this.componentTags = [];
-          this.deviceTags = [];
-          this.stitchingParamsTags = [];
-          this.trimmingParamsTags = [];
-          this.foldingParamsTags = [];
-          this.cuttingParamsTags = [];
-          this.coverApplicationParamsTags = [];
-          this.spinePreparationParamsTags = [];
-          this.stackingParamsTags = [];
+    this.jobTag = null;
+    this.processTags = [];
+
+    this.componentTags = [];
+
+    this.deviceTags = [];
+
+    this.stitchingParamsTags = [];
+    this.trimmingParamsTags = [];
+    this.foldingParamsTags = [];
+    this.cuttingParamsTags = [];
+    this.coverApplicationParamsTags = [];
+    this.spinePreparationParamsTags = [];
+    this.stackingParamsTags = [];
   }
 
-  pushComponentTag( tag:ComponentTag ) {
+  pushComponentTag( tag: ComponentTag ) {
     this.componentTags.push( tag );
   }
 
-  pushDeviceTag( tag:DeviceTag ) {
+  pushDeviceTag( tag: DeviceTag ) {
     this.deviceTags.push( tag );
   }
 
-  pushStitchingParamsTag( tag:StitchingParamsTag ) {
+  pushStitchingParamsTag( tag: StitchingParamsTag ) {
     this.stitchingParamsTags.push( tag );
   }
 
-  pushTrimmingParamsTag( tag:TrimmingParamsTag ) {
+  pushTrimmingParamsTag( tag: TrimmingParamsTag ) {
     this.trimmingParamsTags.push( tag );
   }
 
-  pushFoldingParamsTag( tag:FoldingParamsTag ) {
+  pushFoldingParamsTag( tag: FoldingParamsTag ) {
     this.foldingParamsTags.push( tag );
   }
 
-  pushCuttingParamsTag( tag:CuttingParamsTag ) {
+  pushCuttingParamsTag( tag: CuttingParamsTag ) {
     this.cuttingParamsTags.push( tag );
   }
 
-  pushCoverApplicationParamsTag( tag:CoverApplicationParamsTag ) {
+  pushCoverApplicationParamsTag( tag: CoverApplicationParamsTag ) {
     this.coverApplicationParamsTags.push( tag );
   }
 
-  pushSpinePreparationParamsTag(tag:SpinePreparationParamsTag) {
+  pushSpinePreparationParamsTag( tag: SpinePreparationParamsTag ) {
     this.spinePreparationParamsTags.push( tag );
   }
 
-  pushStackingParamsTag( tag:StackingParamsTag ) {
+  pushStackingParamsTag( tag: StackingParamsTag ) {
     this.stackingParamsTags.push( tag );
   }
 
-  pushProcessTag(tag:JdfTag) {
+  pushProcessTag( tag: JdfTag ) {
     this.processTags.push( tag );
   }
 
