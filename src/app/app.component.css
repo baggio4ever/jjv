@@ -116,12 +116,15 @@ label.selectFile {
     border-radius: 12px;
 }
 
+/*
+意図した位置に綺麗に表示されない。むむむ
 .iconX {
     display: inline-block;
     line-height: 30px;
     padding-left: 30px;
     background: url("../assets/ic_folder_open_white_24px.svg") no-repeat scroll 0 0 transparent;
   }
+*/
 
 table {
     border-color: #dddddd;

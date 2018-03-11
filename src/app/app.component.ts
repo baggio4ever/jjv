@@ -428,4 +428,15 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
   isSelected( guid: string ): boolean {
     return (this.selectedGuid === guid);
   }
+
+  cardClicked(guid: string):void {
+    console.log('cardClicked : '+guid);
+    this.cy.$('node').unselect();
+    const el = this.cy.getElementById(guid)
+    if(el) {
+      el.select();
+    } else {
+      console.log('見当たらねぇ : ' + guid);
+    }
+  }
 }
