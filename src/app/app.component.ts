@@ -111,22 +111,43 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
         {
           selector: '.process',
           style: {
-            'background-color': '#666',
-            'label': 'data(tag_id)'
+            'background-color': '#722',
+            'label': 'data(tag_id)',
+            'shape': 'ellipse'
+          }
+        },
+        {
+          selector: ':selected.process',
+          style: {
+            'background-color': '#c22',
+            'label': 'data(tag_id)',
+            'shape': 'ellipse',
+            'border-width': '2',
+            'border-color': 'black',
           }
         },
         {
           selector: '.component',
           style: {
-            'background-color': '#666',
+            'background-color': '#777',
             'label': 'data(tag_id)',
             'shape': 'rectangle'
           }
         },
         {
+          selector: ':selected.component',
+          style: {
+            'background-color': '#eee',
+            'label': 'data(tag_id)',
+            'shape': 'rectangle',
+            'border-width': '2',
+            'border-color': 'black',
+          }
+        },
+        {
           selector: '.params',
           style: {
-            'background-color': '#666',
+            'background-color': '#850',
             'label': 'data(tag_id)',
             'shape': 'tag',
 /*            'background-opacity': 0,
@@ -137,27 +158,37 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
           }
         },
         {
-          selector: '.device',
+          selector: ':selected.params',
           style: {
-            'background-color': '#666',
+            'background-color': '#ea0',
             'label': 'data(tag_id)',
-            'shape': 'roundrectangle'
+            'shape': 'tag',
+            'border-width': '2',
+            'border-color': 'black',
           }
         },
         {
-          selector: ':selected',
+          selector: '.device',
           style: {
-            'border-width': '2',
+            'background-color': '#262',
+            'label': 'data(tag_id)',
+            'shape': 'hexagon'
+          }
+        },
+        {
+          selector: ':selected.device',
+          style: {
+            'background-color': '#2c2',
+            'border-width': '1',
             'border-color': 'black',
-            'background-color': '#b22',
           }
         },
         {
           selector: 'edge',
           style: {
-            'width': 3,
-            'line-color': '#ccc',
-            'target-arrow-color': '#ccc',
+            'width': 2,
+            'line-color': '#999',
+            'target-arrow-color': '#999',
             'target-arrow-shape': 'triangle'
           }
         },
@@ -166,9 +197,9 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
           style: {
             'curve-style': 'bezier',
             'width': 2,
-            'line-color': '#999',
-//            'arrow-scale': 3,
-            'target-arrow-color': '#999',
+            'line-color': '#555',
+            'arrow-scale': 1,
+            'target-arrow-color': '#555',
             'target-arrow-shape': 'triangle',
 //            'target-endpoint': 'outside-to-node',
 //            'source-arrow-color': '#088',
