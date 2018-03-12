@@ -177,21 +177,54 @@
 <!--
                       <td>{{t.dimensions}}</td>
 -->
-                      <td>
+<!--                      <td>
                         幅  :{{t.getDimensionsWidth()}}<br>
                         長さ:{{t.getDimensionsLength()}}<br>
                         厚さ:{{t.getDimensionsThickness()}}
                       </td>
+                    -->
+                      <td>
+                        <table rules="rows">
+                          <tr>
+                            <td>幅</td>
+                            <td>{{t.getDimensionsWidth()}}</td>
+                          </tr>
+                          <tr>
+                            <td>長さ</td>
+                            <td>{{t.getDimensionsLength()}}</td>
+                          </tr>
+                          <tr>
+                            <td>厚さ</td>
+                            <td>{{t.getDimensionsThickness()}}</td>
+                          </tr>
+                        </table>
+                      </td>
                   </tr>
                   <tr>
-                    <td>Dimensions [mm]</td>
-<!--                    <td>{{t.getDimensions_mm()}}</td>
--->
+                    <td>Dimensions <span class="my-smaller">[mm]</span></td>
+                    <td>
+                        <table rules="rows">
+                          <tr>
+                            <td>幅</td>
+                            <td>{{t.getDimensionsWidth_mm()}}</td>
+                          </tr>
+                          <tr>
+                            <td>長さ</td>
+                            <td>{{t.getDimensionsLength_mm()}}</td>
+                          </tr>
+                          <tr>
+                            <td>厚さ</td>
+                            <td>{{t.getDimensionsThickness_mm()}}</td>
+                          </tr>
+                        </table>
+                    </td>
+<!--
                       <td>
                         幅  :{{t.getDimensionsWidth_mm()}}<br>
                         長さ:{{t.getDimensionsLength_mm()}}<br>
                         厚さ:{{t.getDimensionsThickness_mm()}}
                       </td>
+                    -->
                   </tr>
                   <tr *ngIf="jdf.getPreviousProcesses(t).length>0">
                     <td>前工程 <span class="my-smaller">（生成元）</span></td>

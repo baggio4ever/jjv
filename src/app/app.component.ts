@@ -162,7 +162,6 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
           style: {
             'background-color': '#ea0',
             'label': 'data(tag_id)',
-            'shape': 'tag',
             'border-width': '2',
             'border-color': 'black',
           }
@@ -179,7 +178,7 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
           selector: ':selected.device',
           style: {
             'background-color': '#2c2',
-            'border-width': '1',
+            'border-width': '2',
             'border-color': 'black',
           }
         },
@@ -187,8 +186,8 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
           selector: 'edge',
           style: {
             'width': 2,
-            'line-color': '#999',
-            'target-arrow-color': '#999',
+            'line-color': '#555',
+            'target-arrow-color': '#555',
             'target-arrow-shape': 'triangle'
           }
         },
@@ -196,10 +195,10 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
           selector: '.uni-arrow',
           style: {
             'curve-style': 'bezier',
-            'width': 2,
-            'line-color': '#555',
+            'width': 3,
+            'line-color': '#222',
             'arrow-scale': 1,
-            'target-arrow-color': '#555',
+            'target-arrow-color': '#222',
             'target-arrow-shape': 'triangle',
 //            'target-endpoint': 'outside-to-node',
 //            'source-arrow-color': '#088',
