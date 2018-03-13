@@ -1,8 +1,8 @@
-import { Component,AfterViewInit,AfterViewChecked } from '@angular/core';
-import { Cip4Service,JDF,JdfTag } from './cip4.service';
+import { Component, AfterViewInit, AfterViewChecked } from '@angular/core';
+import { Cip4Service, JDF, JdfTag } from './cip4.service';
 import * as Cytoscape from 'cytoscape';
 import * as klay from 'cytoscape-klay';
-import { Guid } from "guid-typescript";
+import { Guid } from 'guid-typescript';
 
 Cytoscape.use(klay);
 
@@ -240,7 +240,7 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
     this.cy.remove('node');
 
     // イベント
-    this.cy.on('tap','node',(evt) => {
+    this.cy.on('tap', 'node', (evt) => {
       const target = evt.target;
       const tag_id = target.data('tag_id');
       console.log('tapped: ' + tag_id);
@@ -249,7 +249,7 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
         this.scrollTo(tag_id);
       }
     });
-    this.cy.on('select','node',(evt) => {
+    this.cy.on('select', 'node', (evt) => {
       const target = evt.target;
       const id = target.id();
       console.log('select: ' + id);
@@ -259,7 +259,7 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
 //        this.scrollTo(tag_id);
       }
     });
-    this.cy.on('unselect','node',(evt) => {
+    this.cy.on('unselect', 'node', (evt) => {
       const target = evt.target;
       const id = target.id();
       console.log('unselect: ' + id);
@@ -277,7 +277,7 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
     });
 */
     // componentノード作成
-    this.jdf.componentTags.forEach( (v,i,a) => {
+    this.jdf.componentTags.forEach( (v, i, a) => {
       this.cy.add([
         {
           data: {
@@ -289,7 +289,7 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
     });
 
     // processノード作成
-    this.jdf.processTags.forEach( (v,i,a) => {
+    this.jdf.processTags.forEach( (v, i, a) => {
       this.cy.add([
         {
           data: {
@@ -301,7 +301,7 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
     });
 
     // deviceノード作成
-    this.jdf.deviceTags.forEach( (v,i,a) => {
+    this.jdf.deviceTags.forEach( (v, i, a) => {
       this.cy.add([
         {
           data: {
@@ -313,7 +313,7 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
     });
 
     // StitchingParamsノード作成
-    this.jdf.stitchingParamsTags.forEach( (v,i,a) => {
+    this.jdf.stitchingParamsTags.forEach( (v, i, a) => {
       this.cy.add([
         {
           data: {
@@ -325,7 +325,7 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
     });
 
     // TrimmingParamsノード作成
-    this.jdf.trimmingParamsTags.forEach( (v,i,a) => {
+    this.jdf.trimmingParamsTags.forEach( (v, i, a) => {
       this.cy.add([
         {
           data: {
@@ -337,7 +337,7 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
     });
 
     // FoldingParamsノード作成
-    this.jdf.foldingParamsTags.forEach( (v,i,a) => {
+    this.jdf.foldingParamsTags.forEach( (v, i, a) => {
       this.cy.add([
         {
           data: {
@@ -349,7 +349,7 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
     });
 
     // CuttingParamsノード作成
-    this.jdf.cuttingParamsTags.forEach( (v,i,a) => {
+    this.jdf.cuttingParamsTags.forEach( (v, i, a) => {
       this.cy.add([
         {
           data: {
@@ -361,7 +361,7 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
     });
 
     // CoverApplicationParamsノード作成
-    this.jdf.coverApplicationParamsTags.forEach( (v,i,a) => {
+    this.jdf.coverApplicationParamsTags.forEach( (v, i, a) => {
       this.cy.add([
         {
           data: {
@@ -373,7 +373,7 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
     });
 
     // SpinePreparationParamsノード作成
-    this.jdf.spinePreparationParamsTags.forEach( (v,i,a) => {
+    this.jdf.spinePreparationParamsTags.forEach( (v, i, a) => {
       this.cy.add([
         {
           data: {
@@ -385,7 +385,7 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
     });
 
     // StackingParamsノード作成
-    this.jdf.stackingParamsTags.forEach( (v,i,a) => {
+    this.jdf.stackingParamsTags.forEach( (v, i, a) => {
       this.cy.add([
         {
           data: {
@@ -396,9 +396,9 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
       ]).addClass('params');
     });
 
-    this.jdf.processTags.forEach((v,i,a) => {
+    this.jdf.processTags.forEach((v, i, a) => {
       // process - component（入力）エッジ
-      v.inputComponentLinks.forEach((d,idx,ar) => {
+      v.inputComponentLinks.forEach((d, idx, ar) => {
         const aGuid = Guid.create().toString();
         const component = this.jdf.getComponentTagById(d.rRef);
         if( component ) {
@@ -410,12 +410,12 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
         }
       });
       // process - component（出力）エッジ
-      v.outputComponentLinks.forEach((d,idx,ar) => {
+      v.outputComponentLinks.forEach((d, idx, ar) => {
         const aGuid = Guid.create().toString();
         const component = this.jdf.getComponentTagById(d.rRef);
         if( component ) {
           this.cy.add([
-            { // edge 
+            { // edge
               data: { id: aGuid, source: v.guid, target: component.guid, amount: d.amount  }
             },
           ]).addClass('uni-arrow');
@@ -423,12 +423,12 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
       });
 
       // process - deviceエッジ
-      v.deviceLinks.forEach((d,idx,ar) => {
+      v.deviceLinks.forEach((d, idx, ar) => {
         const aGuid = Guid.create().toString();
         const device = this.jdf.getDeviceTagById(d.rRef);
         if( device ) {
           this.cy.add([
-            { // edge 
+            { // edge
               data: { id: aGuid, source: v.guid, target: device.guid  }
             },
           ]);
@@ -436,7 +436,7 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
       });
 
       // process - paramsエッジ
-      v.paramsLinks.forEach((d,idx,ar) => {
+      v.paramsLinks.forEach((d, idx, ar) => {
         const aGuid = Guid.create().toString();
         const params = this.jdf.getParamsTagById(d.rRef);
         if( params ) {
@@ -474,10 +474,10 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
     return (this.selectedGuid === guid);
   }
 
-  cardClicked(guid: string):void {
-    console.log('cardClicked : '+guid);
+  cardClicked(guid: string): void {
+    console.log('cardClicked : ' + guid);
     this.cy.$('node').unselect();
-    const el = this.cy.getElementById(guid)
+    const el = this.cy.getElementById(guid);
     if(el) {
       el.select();
     } else {
