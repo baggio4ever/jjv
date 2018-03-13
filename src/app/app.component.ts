@@ -13,12 +13,12 @@ declare var hljs: any;
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements AfterViewInit,AfterViewChecked {
+export class AppComponent implements AfterViewInit, AfterViewChecked {
   fileLoaded = false;
   fileSelected = false;
   filename = '';
   cy = null;
-  jdf:JDF = null;
+  jdf: JDF = null;
   selectedGuid = '';
 
   displayedColumns2 = ['id', /*'class',*/ 'blockType', 'blockName', 'blockSize', 'blockTrf'];
@@ -401,9 +401,9 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
       v.inputComponentLinks.forEach((d, idx, ar) => {
         const aGuid = Guid.create().toString();
         const component = this.jdf.getComponentTagById(d.rRef);
-        if( component ) {
+        if ( component ) {
           this.cy.add([
-            { // edge 
+            { // edge
               data: { id: aGuid, source: component.guid, target: v.guid, amount: d.amount  }
             },
           ]).addClass('uni-arrow');
@@ -413,7 +413,7 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
       v.outputComponentLinks.forEach((d, idx, ar) => {
         const aGuid = Guid.create().toString();
         const component = this.jdf.getComponentTagById(d.rRef);
-        if( component ) {
+        if ( component ) {
           this.cy.add([
             { // edge
               data: { id: aGuid, source: v.guid, target: component.guid, amount: d.amount  }
@@ -426,7 +426,7 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
       v.deviceLinks.forEach((d, idx, ar) => {
         const aGuid = Guid.create().toString();
         const device = this.jdf.getDeviceTagById(d.rRef);
-        if( device ) {
+        if ( device ) {
           this.cy.add([
             { // edge
               data: { id: aGuid, source: v.guid, target: device.guid  }
@@ -439,7 +439,7 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
       v.paramsLinks.forEach((d, idx, ar) => {
         const aGuid = Guid.create().toString();
         const params = this.jdf.getParamsTagById(d.rRef);
-        if( params ) {
+        if ( params ) {
           this.cy.add([
             { // edge
               data: { id: aGuid, source: v.guid, target: params.guid  }
@@ -478,7 +478,7 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
     console.log('cardClicked : ' + guid);
     this.cy.$('node').unselect();
     const el = this.cy.getElementById(guid);
-    if(el) {
+    if (el) {
       el.select();
     } else {
       console.log('見当たらねぇ : ' + guid);

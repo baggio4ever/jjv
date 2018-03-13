@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as vkbeautify from 'vkbeautify';
-import { Guid } from "guid-typescript";
+import { Guid } from 'guid-typescript';
 
 
 @Injectable()
@@ -25,24 +25,24 @@ export class Cip4Service {
   }
 
   buildJDF( c: string ): JDF {
-    let jdf = new JDF();
+    const jdf = new JDF();
 
     const xml = vkbeautify.xml( c );
-  
+
 /*    if ( true ) {*/
     const parser = new DOMParser();
     const dom = parser.parseFromString( c, 'text/xml');
 
     // 初期化
     jdf.clear();
-  
+
     // ResourcePool
     const resourcePoolTags = dom.getElementsByTagName('ResourcePool');
     if ( resourcePoolTags.length !== 1 ) {
       console.log('げ！ resourcePoolTag.length:'+resourcePoolTags.length);
     }
     const resourcePool = resourcePoolTags[0];
-  
+
     // Componentタグ
     const componentTags = resourcePool.getElementsByTagName('Component');
     console.log('componentTags.length: ' + componentTags.length);
@@ -55,89 +55,90 @@ export class Cip4Service {
         const klass = j.getAttribute('Class');
         const dimensions = j.getAttribute('Dimensions');
         const body = vkbeautify.xml( j.outerHTML.toString() );
-  
+
         const componentTag = new ComponentTag( id, componentType, klass, dimensions, body );
         jdf.pushComponentTag( componentTag );
       } else {
         console.log('はずれ！');
       }
     }
-  
-      // Deviceタグ
-      const deviceTags = dom.getElementsByTagName('Device');
-      console.log('deviceTags.length: ' + deviceTags.length);
-      for (let i = 0; i < deviceTags.length; ++i ) {
-        const j = deviceTags[i];
-        const id = j.getAttribute('ID');
-        const klass = j.getAttribute('Class');
-        const deviceId = j.getAttribute('DeviceID');
-        const friendlyName = j.getAttribute('FriendlyName');
-        const body = vkbeautify.xml( j.outerHTML.toString() );
-  
-        const deviceTag = new DeviceTag( id, klass, deviceId, friendlyName, body );
-        jdf.pushDeviceTag( deviceTag );
-      }
-  
-      // StitchingParamsタグ
-      const stitchingParamsTags = dom.getElementsByTagName('StitchingParams');
-      console.log('stitchingParamsTags.length: ' + stitchingParamsTags.length);
-      for (let i = 0; i < stitchingParamsTags.length; ++i ) {
-        const j = stitchingParamsTags[i];
-        const id = j.getAttribute('ID');
-        const klass = j.getAttribute('Class');
-        const numberOfStitches = j.getAttribute('NumberOfStitches');
-        const stapleShape = j.getAttribute('StapleShape');
-        const body = vkbeautify.xml( j.outerHTML.toString() );
-  
-        const stitchingParamsTag = new StitchingParamsTag( id, klass, numberOfStitches, stapleShape, body );
-        jdf.pushStitchingParamsTag( stitchingParamsTag );
-      }
-  
-      // TrimmingParamsタグ
-      const trimmingParamsTags = dom.getElementsByTagName('TrimmingParams');
-      console.log('trimmingParamsTags.length: ' + trimmingParamsTags.length);
-      for (let i = 0; i < trimmingParamsTags.length; ++i ) {
-        const j = trimmingParamsTags[i];
-        const id = j.getAttribute('ID');
-        const klass = j.getAttribute('Class');
-        const noOp = j.getAttribute('NoOp');
-        const trimmingType = j.getAttribute('TrimmingType');
-        const height = j.getAttribute('Height');
-        const width = j.getAttribute('Width');
-        const trimmingOffset = j.getAttribute('TrimmingOffset');
-        const body = vkbeautify.xml( j.outerHTML.toString() );
-  
-        const trimmingParamsTag = new TrimmingParamsTag( id, klass, noOp, trimmingType, width, height, trimmingOffset, body );
-        jdf.pushTrimmingParamsTag( trimmingParamsTag );
-      }
-  
-          // FoldingParamsタグ
-          const foldingParamsTags = dom.getElementsByTagName('FoldingParams');
-          console.log('foldingParamsTags.length: ' + foldingParamsTags.length);
-          for (let i = 0; i < foldingParamsTags.length; ++i ) {
-            const j = foldingParamsTags[i];
-            const id = j.getAttribute('ID');
-            const klass = j.getAttribute('Class');
-            const descriptionType = j.getAttribute('DescriptionType');
-            const foldCatalog = j.getAttribute('FoldCatalog');
-            const folds: FoldTag[] = [];
+
+    // Deviceタグ
+    const deviceTags = dom.getElementsByTagName('Device');
+    console.log('deviceTags.length: ' + deviceTags.length);
+    for (let i = 0; i < deviceTags.length; ++i ) {
+      const j = deviceTags[i];
+      const id = j.getAttribute('ID');
+      const klass = j.getAttribute('Class');
+      const deviceId = j.getAttribute('DeviceID');
+      const friendlyName = j.getAttribute('FriendlyName');
+      const body = vkbeautify.xml( j.outerHTML.toString() );
+
+      const deviceTag = new DeviceTag( id, klass, deviceId, friendlyName, body );
+      jdf.pushDeviceTag( deviceTag );
+    }
+
+    // StitchingParamsタグ
+    const stitchingParamsTags = dom.getElementsByTagName('StitchingParams');
+    console.log('stitchingParamsTags.length: ' + stitchingParamsTags.length);
+    for (let i = 0; i < stitchingParamsTags.length; ++i ) {
+      const j = stitchingParamsTags[i];
+      const id = j.getAttribute('ID');
+      const klass = j.getAttribute('Class');
+      const numberOfStitches = j.getAttribute('NumberOfStitches');
+      const stapleShape = j.getAttribute('StapleShape');
+      const body = vkbeautify.xml( j.outerHTML.toString() );
+
+      const stitchingParamsTag = new StitchingParamsTag( id, klass, numberOfStitches, stapleShape, body );
+      jdf.pushStitchingParamsTag( stitchingParamsTag );
+    }
+
+    // TrimmingParamsタグ
+    const trimmingParamsTags = dom.getElementsByTagName('TrimmingParams');
+    console.log('trimmingParamsTags.length: ' + trimmingParamsTags.length);
+    for (let i = 0; i < trimmingParamsTags.length; ++i ) {
+      const j = trimmingParamsTags[i];
+      const id = j.getAttribute('ID');
+      const klass = j.getAttribute('Class');
+      const noOp = j.getAttribute('NoOp');
+      const trimmingType = j.getAttribute('TrimmingType');
+      const height = j.getAttribute('Height');
+      const width = j.getAttribute('Width');
+      const trimmingOffset = j.getAttribute('TrimmingOffset');
+      const body = vkbeautify.xml( j.outerHTML.toString() );
+
+      const trimmingParamsTag = new TrimmingParamsTag( id, klass, noOp, trimmingType, width, height, trimmingOffset, body );
+      jdf.pushTrimmingParamsTag( trimmingParamsTag );
+    }
+
+    // FoldingParamsタグ
+    const foldingParamsTags = dom.getElementsByTagName('FoldingParams');
+    console.log('foldingParamsTags.length: ' + foldingParamsTags.length);
+    for (let i = 0; i < foldingParamsTags.length; ++i ) {
+      const j = foldingParamsTags[i];
+      const id = j.getAttribute('ID');
+      const klass = j.getAttribute('Class');
+      const descriptionType = j.getAttribute('DescriptionType');
+      const foldCatalog = j.getAttribute('FoldCatalog');
+      const folds: FoldTag[] = [];
   //          const body = j.outerHTML.toString();
-            const body = vkbeautify.xml( j.outerHTML.toString() );
-  
-            const fBlocks = j.getElementsByTagName('Fold');
-            for ( let ff = 0; ff < fBlocks.length; ++ ff ) {
-              const x = fBlocks[ff];
-              const x_to = x.getAttribute('To');
-              const x_from = x.getAttribute('From');
-              const x_travel = x.getAttribute('Travel');
-              const ft = new FoldTag(x_to, x_from, x_travel);
-              folds.push( ft );
-            }
-            const foldingParamsTag = new FoldingParamsTag( id, klass, descriptionType, foldCatalog, folds, body );
-            jdf.pushFoldingParamsTag( foldingParamsTag );
+      const body = vkbeautify.xml( j.outerHTML.toString() );
+
+      const fBlocks = j.getElementsByTagName('Fold');
+      for ( let ff = 0; ff < fBlocks.length; ++ ff ) {
+        const x = fBlocks[ff];
+        const x_to = x.getAttribute('To');
+        const x_from = x.getAttribute('From');
+        const x_travel = x.getAttribute('Travel');
+        const ft = new FoldTag(x_to, x_from, x_travel);
+        folds.push( ft );
+      }
+      const foldingParamsTag = new FoldingParamsTag( id, klass, descriptionType, foldCatalog, folds, body );
+      jdf.pushFoldingParamsTag( foldingParamsTag );
 /*            this.foldingParamsTags.push( foldingParamsTag );
-          */          }
-  
+          */
+    }
+
           // CuttingParamsタグ
           const cuttingParamsTags = dom.getElementsByTagName('CuttingParams');
           console.log('cuttingParamsTags.length: ' + cuttingParamsTags.length);
@@ -147,7 +148,7 @@ export class Cip4Service {
             const klass = j.getAttribute('Class');
             const cutBlocks: CutBlockTag[] = [];
             const body = vkbeautify.xml( j.outerHTML.toString() );
-  
+
             const cBlocks = j.getElementsByTagName('CutBlock');
             for ( let cc = 0; cc < cBlocks.length; ++ cc ) {
               const x = cBlocks[cc];
@@ -161,12 +162,12 @@ export class Cip4Service {
                    vkbeautify.xml(x.outerHTML.toString()));
               cutBlocks.push(cbt);
             }
-  
+
             const cuttingParamsTag = new CuttingParamsTag( id, klass, cutBlocks, body );
             jdf.pushCuttingParamsTag(cuttingParamsTag);
 /*            this.cuttingParamsTags.push( cuttingParamsTag );
           */        }
-  
+
           // CoverApplicationParamsタグ
           const coverApplicationParamsTags = dom.getElementsByTagName('CoverApplicationParams');
           console.log('coverApplicationParamsTags.length: ' + coverApplicationParamsTags.length);
@@ -176,12 +177,12 @@ export class Cip4Service {
             const klass = j.getAttribute('Class');
             const noOp = j.getAttribute('NoOp');
             const body = vkbeautify.xml( j.outerHTML.toString() );
-  
+
             const coverApplicationParamsTag = new CoverApplicationParamsTag( id, klass, noOp, body );
             jdf.pushCoverApplicationParamsTag(coverApplicationParamsTag);
 /*            this.coverApplicationParamsTags.push( coverApplicationParamsTag );
           */        }
-  
+
           // SpinePreparationParamsタグ
           const spinePreparationParamsTags = dom.getElementsByTagName('SpinePreparationParams');
           console.log('spinePreparationParamsTags.length: ' + spinePreparationParamsTags.length);
@@ -214,9 +215,9 @@ export class Cip4Service {
               jdf.pushStackingParamsTag( stackingParamsTag );
             }
 /*            this.stackingParamsTags.push( stackingParamsTag );
-          */        
+          */
          }
-  
+
           // JDFタグ  最後が良い、多分。参照したいデータが揃っているはずなので
           const jdfTags = dom.getElementsByTagName('JDF');
           console.log('jdfTags.length: ' + jdfTags.length);
@@ -612,33 +613,33 @@ export class ComponentTag extends IdHavingTag {
     this.body = body;
   }
 
-  getDimensionsWidth():number {
+  getDimensionsWidth(): number {
     return this.dimensions_width;
   }
 
-  getDimensionsLength():number {
+  getDimensionsLength(): number {
     return this.dimensions_length;
   }
 
-  getDimensionsThickness():number {
+  getDimensionsThickness(): number {
     return this.dimensions_thickness;
   }
 
-  getDimensionsWidth_mm():number {
+  getDimensionsWidth_mm(): number {
     return JDFUtils.pt2mm( this.dimensions_width );
   }
 
-  getDimensionsLength_mm():number {
+  getDimensionsLength_mm(): number {
     return JDFUtils.pt2mm( this.dimensions_length );
   }
 
-  getDimensionsThickness_mm():number {
+  getDimensionsThickness_mm(): number {
     return JDFUtils.pt2mm( this.dimensions_thickness );
   }
-  
+
   getDimensions_mm(): string {
-    return [this.dimensions_width,this.dimensions_length,this.dimensions_thickness]
-          .map( (v,i,a) => {
+    return [this.dimensions_width, this.dimensions_length, this.dimensions_thickness]
+          .map( (v, i, a) => {
             return JDFUtils.pt2mm( v );
           })
           .join(' ');
@@ -815,7 +816,7 @@ export class StackingParamsTag  extends IdHavingTag {
   layerAmount: string;
   body: string;
 
-  constructor( id: string, klass: string, standardAmount: string,layerAmount: string, body: string ) {
+  constructor( id: string, klass: string, standardAmount: string, layerAmount: string, body: string ) {
     super(id);
 
     this.klass = klass;
