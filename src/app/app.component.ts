@@ -27,18 +27,33 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
   constructor(private cip4: Cip4Service) {}
 
   ngAfterViewInit() {
-    //    console.log('AfterViewInit');
-      }
-    
-      ngAfterViewChecked() {
+//    console.log('AfterViewInit');
+/*
+どうしたらFileドロップ許可領域以外をFileドロップ禁止にできるのか。
+    document.addEventListener('ondrop',(ev)=>{
+      console.log('XXXX');
+      ev.stopPropagation();
+      ev.preventDefault();
+    });
+    document.addEventListener('ondragover',(ev)=>{
+      console.log('YYYY');
+      ev.stopPropagation();
+      ev.preventDefault();
+    });
+*/
+   }
+
+  ngAfterViewChecked() {
     //    console.log('AfterViewChecked');
-      }
-    
-  onChanged(filename) {
-    this.filename = filename;
-    console.log('onChanged: '+filename);
+  }
+
+  onChanged(fileVal) {
+    this.filename = fileVal.name;
+    console.log('onChanged: ' + this.filename);
 
     this.fileSelected = (this.filename !== '');
+
+    this.yes(fileVal);
   }
 
   yes(fileVal) {
@@ -55,7 +70,7 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
     if (this.cip4.isJDF(f.name)) {
       this.jdf = await this.cip4.parseJDF(f);
       console.log(this.jdf);
-      
+
       this.fileLoaded = true;
       setTimeout(() => { // チョイ待たせてCytoscape
 //        this.doLayout();
@@ -501,6 +516,7 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
 
     if (droppedFile) {
       if (this.cip4.isJDF(droppedFile.name)) {
+        this.filename = droppedFile.name;
         this.yes(droppedFile);
       }
     }
