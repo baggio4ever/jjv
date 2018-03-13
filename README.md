@@ -44,3 +44,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 #### File Drag & Drop
 [File drag and drop](https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API/File_drag_and_drop) ☆☆
 
+[DOMイベントのキャプチャ/バブリングを整理する 〜 JSおくのほそ道 #017](https://qiita.com/hosomichi/items/49500fea5fdf43f59c58)
