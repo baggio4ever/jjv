@@ -39,4 +39,8 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 #### Table
 [テーブル(表)](http://www5f.biglobe.ne.jp/~keiko/html/ref/ref_table.htm)  HTMLとスタイルシート対応表
 
-[表（table）の作り方と装飾の変え方【HTML＆CSS】](https://saruwakakun.com/html-css/basic/table)
+[表（table）の作り方と装飾の変え方【HTML＆CSS】](https://saruwakakun.com/html-css/basic/table)
+
+#### File Drag & Drop
+[File drag and drop](https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API/File_drag_and_drop) ☆☆
+
