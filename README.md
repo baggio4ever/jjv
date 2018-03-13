@@ -50,3 +50,6 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 #### DOM
 [要素の属性を全部取得する](http://hokaccha.hatenablog.com/entry/20130819/1376895914)
+
+#### カッコいいスクロール
+[スクロールしたらヘッダーの一部だけ固定する](http://chibinowa.net/note/js/fixedheader.html) これかっこいいわぁ。理解したい
