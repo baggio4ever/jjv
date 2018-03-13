@@ -476,6 +476,8 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
     // Prevent default behavior (Prevent file from being opened)
     ev.preventDefault();
 
+    let droppedFile = null;
+
     if (ev.dataTransfer.items) {
       // Use DataTransferItemList interface to access the file(s)
       for (let i = 0; i < ev.dataTransfer.items.length; i++) {
@@ -483,17 +485,25 @@ export class AppComponent implements AfterViewInit,AfterViewChecked {
         if (ev.dataTransfer.items[i].kind === 'file') {
           const file = ev.dataTransfer.items[i].getAsFile();
           console.log('... file[' + i + '].name = ' + file.name);
+          droppedFile = file;
         }
       }
     } else {
       // Use DataTransfer interface to access the file(s)
       for (let i = 0; i < ev.dataTransfer.files.length; i++) {
         console.log('... file[' + i + '].name = ' + ev.dataTransfer.files[i].name);
+        droppedFile = ev.dataTransfer.files[i];
       }
     }
 
     // Pass event to removeDragData for cleanup
     this.removeDragData(ev);
+
+    if (droppedFile) {
+      if (this.cip4.isJDF(droppedFile.name)) {
+        this.yes(droppedFile);
+      }
+    }
   }
 
   dragOverHandler(ev: any) {
