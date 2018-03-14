@@ -607,8 +607,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
 
 @Component({
   selector: 'app-settings-dialog',
-  templateUrl: './app-settings-dialog.html',
-  styleUrls: ['./app.settings.dialog.component.css']
+  templateUrl: './app-settings-dialog.component.html',
+  styleUrls: ['./app-settings-dialog.component.css']
 })
 export class AppSettingsDialogComponent {
 
