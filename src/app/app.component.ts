@@ -142,17 +142,19 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         {
           selector: '.process',
           style: {
-            'background-color': '#722',
             'label': 'data(tag_id)',
-            'shape': 'ellipse'
+            'shape': 'ellipse',
+            'background-color': '#800',
+            'border-width': '1',
+            'border-color': 'black',
           }
         },
         {
           selector: ':selected.process',
           style: {
-            'background-color': '#c22',
             'label': 'data(tag_id)',
             'shape': 'ellipse',
+            'background-color': '#f00',
             'border-width': '2',
             'border-color': 'black',
           }
@@ -160,17 +162,19 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         {
           selector: '.component',
           style: {
-            'background-color': '#777',
             'label': 'data(tag_id)',
-            'shape': 'rectangle'
+            'shape': 'rectangle',
+            'background-color': '#888',
+            'border-width': '1',
+            'border-color': 'black',
           }
         },
         {
           selector: ':selected.component',
           style: {
-            'background-color': '#eee',
             'label': 'data(tag_id)',
             'shape': 'rectangle',
+            'background-color': '#ffffef',
             'border-width': '2',
             'border-color': 'black',
           }
@@ -178,9 +182,11 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         {
           selector: '.params',
           style: {
-            'background-color': '#850',
             'label': 'data(tag_id)',
             'shape': 'tag',
+            'background-color': '#850',
+            'border-width': '1',
+            'border-color': 'black',
 /*            'background-opacity': 0,
             'background-image': '../../assets/images/ic_sd_card_black_24dp_2x.png',
             'background-clip': 'none',
@@ -191,8 +197,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         {
           selector: ':selected.params',
           style: {
-            'background-color': '#ea0',
             'label': 'data(tag_id)',
+            'background-color': '#fb0',
             'border-width': '2',
             'border-color': 'black',
           }
@@ -200,15 +206,17 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         {
           selector: '.device',
           style: {
-            'background-color': '#262',
             'label': 'data(tag_id)',
-            'shape': 'hexagon'
+            'shape': 'hexagon',
+            'background-color': '#383',
+            'border-width': '1',
+            'border-color': 'black',
           }
         },
         {
           selector: ':selected.device',
           style: {
-            'background-color': '#2c2',
+            'background-color': '#3f3',
             'border-width': '2',
             'border-color': 'black',
           }
@@ -261,7 +269,6 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
       const tag_id = target.data('tag_id');
       console.log('tapped: ' + tag_id);
       if (tag_id) {
-//        target.select();
         this.scrollTo(tag_id);
       }
     });
@@ -271,8 +278,6 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
       console.log('select: ' + id);
       if (id) {
         this.selectedGuid = id;
-//        target.select();
-//        this.scrollTo(tag_id);
       }
     });
     this.cy.on('unselect', 'node', (evt) => {
