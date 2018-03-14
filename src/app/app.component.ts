@@ -11,6 +11,8 @@ Cytoscape.use(klay);
 
 declare var hljs: any;
 
+const KEY_BASE_URL = 'KEY_BASE_URL';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -32,9 +34,13 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
 
   ret_from_post = '';
 
-  constructor(private cip4: Cip4Service, private httpService: MyHttpService, public dialog: MatDialog) {}
+  constructor(private cip4: Cip4Service, private httpService: MyHttpService, public dialog: MatDialog) {
+  }
 
   ngAfterViewInit() {
+    const base_url = localStorage.getItem(KEY_BASE_URL);
+    this.httpService.setBaseURL(base_url);
+
 //    console.log('AfterViewInit');
 /*
 どうしたらFileドロップ許可領域以外をFileドロップ禁止にできるのか。
@@ -551,6 +557,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
 
   sayHello(): void {
     this.ret_from_http = '';
+    this.ret_from_http_input = '';
     this.httpService.getMessage( (msg, input) => {
       this.ret_from_http = msg;
       this.ret_from_http_input = input;
@@ -575,13 +582,19 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
     console.log('openSettings()');
 
     const dialogRef = this.dialog.open(AppSettingsDialogComponent, {
-      width: '250px',
-      data: { name: 'saburo', animal: 'fox' }
+      width: '400px',
+      data: { name: 'saburo', animal: this.httpService.getBaseURL() }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-//      this.animal = result;
+      if (result) {
+        console.log('The dialog was closed: ' + result);
+        localStorage.setItem(KEY_BASE_URL, result);
+        this.httpService.setBaseURL(result);
+        //      this.animal = result;
+      } else {
+        console.log('キャンセルされました？');
+      }
     });
   }
 
@@ -595,6 +608,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
 @Component({
   selector: 'app-settings-dialog',
   templateUrl: './app-settings-dialog.html',
+  styleUrls: ['./app.settings.dialog.component.css']
 })
 export class AppSettingsDialogComponent {
 

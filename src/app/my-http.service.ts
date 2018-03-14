@@ -2,16 +2,24 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 
-const BASE_URL = 'https://yqc7o2rjld.execute-api.us-east-1.amazonaws.com/dev/';
-
 @Injectable()
 export class MyHttpService {
 
+  base_url = '';
+
   constructor(private http: HttpClient) { }
+
+  setBaseURL(url: string): void {
+    this.base_url = url;
+  }
+
+  getBaseURL(): string {
+    return this.base_url;
+  }
 
   getMessage( callback: (msg: string, input: string ) => void ): void {
     // API GatewayとHTTP通信して、取得成功時にコールバックを行う
-    this.http.get( BASE_URL + 'users/create').subscribe(data => {
+    this.http.get( this.base_url + 'users/create').subscribe(data => {
         callback(data['message'], data['input']);
     });
   }
@@ -25,7 +33,7 @@ export class MyHttpService {
 
     console.log(params.toString());
 
-    this.http.get( BASE_URL + 'logs', { params: params }).subscribe(data => {
+    this.http.get( this.base_url + 'logs', { params: params }).subscribe(data => {
         callback(data['logs']);
     });
   }
@@ -38,7 +46,7 @@ export class MyHttpService {
 
     console.log(params.toString());
 
-    this.http.get( BASE_URL + 'logs', { params: params }).subscribe(data => {
+    this.http.get( this.base_url + 'logs', { params: params }).subscribe(data => {
         callback(data['logs']);
     });
   }
@@ -50,14 +58,14 @@ export class MyHttpService {
 
     console.log(params.toString());
 
-    this.http.get( BASE_URL + 'logs', { params: params }).subscribe(data => {
+    this.http.get( this.base_url + 'logs', { params: params }).subscribe(data => {
         callback(data['logs']);
     });
   }
 
   postMessage( body, callback: (msg: string) => void ): void {
     // API GatewayとHTTP通信して、取得成功時にコールバックを行う
-    this.http.post( BASE_URL + 'log', body).subscribe(data => {
+    this.http.post( this.base_url + 'log', body).subscribe(data => {
         callback(data['message']);
     });
   }
