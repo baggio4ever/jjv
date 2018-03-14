@@ -6,14 +6,15 @@
       <!-- ファイル開いている時 -->
       {{filename}}
       <button mat-icon-button (click)="clear()">
-        <mat-icon aria-label="">clear</mat-icon>
+        <mat-icon aria-label="close file">clear</mat-icon>
       </button>
     </nav>
     <ng-template #elseBlock2>
       <!-- ファイル開いていない時 -->
       <nav>
         <div>
-          {{filename}}
+<!--          {{filename}}
+-->
 <!--
           <label for="input-file-id" class="selectFile iconX">
             ＋JDFを選択
@@ -22,7 +23,7 @@
         -->
           <input id="input-file-id" type="file" #fileInput (change)="onChanged(fileInput.files[0])" accept=".xml,.jdf" style="display: none;">
           <button mat-icon-button (click)="openFileDialog()">
-            <mat-icon aria-label="Open ...">folder_open</mat-icon>
+            <mat-icon aria-label="Open file">folder_open</mat-icon>
           </button>
 <!--
         <button mat-raised-button color="warn" (click)="yes(fileInput.files[0])" [disabled]="!fileSelected">選択したファイルを読みん込んで表示</button>
@@ -39,12 +40,12 @@
 
 <div id="content">
   <div *ngIf="fileLoaded; else elseBlock">
-
+    <!-- ファイル開いている時 -->
     <div id="fmenu">
       <div id="cy"></div>
       <div>
         <button mat-icon-button (click)="relayout()">
-          <mat-icon aria-label="">refresh</mat-icon>
+          <mat-icon aria-label="update">refresh</mat-icon>
         </button>
       </div>
       <div>
@@ -200,15 +201,6 @@
                   </tr>
                   <tr>
                     <td>Dimensions</td>
-<!--
-                      <td>{{t.dimensions}}</td>
--->
-<!--                      <td>
-                        幅  :{{t.getDimensionsWidth()}}<br>
-                        長さ:{{t.getDimensionsLength()}}<br>
-                        厚さ:{{t.getDimensionsThickness()}}
-                      </td>
-                    -->
                       <td>
                         <table rules="rows">
                           <tr>
@@ -244,13 +236,6 @@
                           </tr>
                         </table>
                     </td>
-<!--
-                      <td>
-                        幅  :{{t.getDimensionsWidth_mm()}}<br>
-                        長さ:{{t.getDimensionsLength_mm()}}<br>
-                        厚さ:{{t.getDimensionsThickness_mm()}}
-                      </td>
-                    -->
                   </tr>
                   <tr *ngIf="jdf.getPreviousProcesses(t).length>0">
                     <td>前工程 <span class="my-smaller">（生成元）</span></td>
@@ -767,25 +752,14 @@
     </div>
       </div>
   <ng-template #elseBlock>
-<!--
-    <div>
-      <div>
-        {{filename}}
-        <label for="input-file-id" class="selectFile iconX">
-            ＋JDFを選択
-            <input id="input-file-id" type="file" #fileInput (change)="onChanged(fileInput.value)" accept=".xml,.jdf" style="display: none;">
-        </label>
-
-        <button mat-raised-button color="warn" (click)="yes(fileInput.files[0])" [disabled]="!fileSelected">選択したファイルを読みん込んで表示</button>
-      </div>
-    </div>
--->
-
+    <!-- ファイル開いていない時 -->
     <div id="drop_zone" (drop)="dropHandler($event)" (dragover)="dragOverHandler($event)">
       <p>JDFファイルをドロップしてけれ</p>
     </div>
+
   </ng-template>
 
+  <!-- 共通 -->
   <button (click)="sayHello()">jjv-serverとテスト通信</button><br>
   <strong>message:</strong><br>
   {{ret_from_http}}<br>
