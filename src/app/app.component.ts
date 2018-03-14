@@ -584,7 +584,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
 
     const dialogRef = this.dialog.open(AppSettingsDialogComponent, {
       width: '400px',
-      data: { name: 'saburo', animal: this.httpService.getBaseURL() }
+      data: { url: this.httpService.getBaseURL() }
     });
 
     dialogRef.afterClosed().subscribe(result => {
