@@ -1,5 +1,5 @@
 import { Component, AfterViewInit, AfterViewChecked, Inject } from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar} from '@angular/material';
 
 import { Cip4Service, JDF, JdfTag } from './cip4.service';
 import * as Cytoscape from 'cytoscape';
@@ -36,7 +36,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
 
   ret_from_post = '';
 
-  constructor(private cip4: Cip4Service, private httpService: MyHttpService, public dialog: MatDialog) {
+  constructor(private cip4: Cip4Service, private httpService: MyHttpService, public dialog: MatDialog, public snackBar: MatSnackBar) {
   }
 
   ngAfterViewInit() {
@@ -568,6 +568,10 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
     this.httpService.getMessage( (msg, input) => {
       this.ret_from_http = msg;
       this.ret_from_http_input = input;
+
+      this.snackBar.open('sayHello', '成功', {
+        duration: 2000,
+      });
     });
   }
 

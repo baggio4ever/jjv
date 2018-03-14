@@ -54,11 +54,13 @@
   <div *ngIf="fileLoaded; else elseBlock">
     <!-- ファイル開いている時 -->
     <div id="fmenu">
-      <div id="cy"></div>
-      <div>
-        <button mat-icon-button (click)="relayout()">
-          <mat-icon aria-label="update">refresh</mat-icon>
-        </button>
+      <div class="light-frame">
+        <div id="cy"></div>
+        <div>
+          <button mat-icon-button (click)="relayout()" matTooltip="再整列" matTooltipPosition="above">
+            <mat-icon aria-label="update">refresh</mat-icon>
+          </button>
+        </div>
       </div>
       <div>
         <div *ngIf="jdf.jobTag !== null" class="like-link" (click)="scrollTo('job_top')">Job</div>
@@ -143,19 +145,43 @@
                   <tr *ngIf="t.inputComponentLinks.length>0">
                     <td>入力</td>
                     <td>
+                        <table rules="rows">
+                          <tr>
+                            <td></td>
+                            <td>Amount</td>
+                          </tr>
+                          <tr *ngFor="let l of t.inputComponentLinks">
+                            <td><span class="like-link" (click)="scrollTo(l.rRef)">{{l.rRef}}</span></td>
+                            <td><span *ngIf="l.amount>0">{{l.amount|number}}</span></td>
+                          </tr>
+                        </table>
+                        <!--
                       <div *ngFor="let l of t.inputComponentLinks">
                         <span class="like-link" (click)="scrollTo(l.rRef)">{{l.rRef}}</span>
                         <span *ngIf="l.amount>0" class="my-smaller">Amount: {{l.amount}}</span>
                       </div>
+                    -->
                     </td>
                   </tr>
                   <tr *ngIf="t.outputComponentLinks.length>0">
                     <td>出力</td>
                     <td>
+                        <table rules="rows">
+                          <tr>
+                            <td></td>
+                            <td>Amount</td>
+                          </tr>
+                          <tr *ngFor="let l of t.outputComponentLinks">
+                            <td><span class="like-link" (click)="scrollTo(l.rRef)">{{l.rRef}}</span></td>
+                            <td><span *ngIf="l.amount>0">{{l.amount|number}}</span></td>
+                          </tr>
+                        </table>
+                      <!--
                       <div *ngFor="let l of t.outputComponentLinks">
                         <span class="like-link" (click)="scrollTo(l.rRef)">{{l.rRef}}</span>
                         <span *ngIf="l.amount>0" class="my-smaller">Amount: {{l.amount}}</span>
                       </div>
+                    -->
                     </td>
                   </tr>
                   <tr *ngIf="t.paramsLinks.length>0">
