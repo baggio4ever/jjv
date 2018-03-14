@@ -14,7 +14,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 
-import { AppComponent, AppSettingsDialogComponent } from './app.component';
+import { AppComponent } from './app.component';
+import { AppSettingsDialogComponent } from './app-settings-dialog.component';
 
 import { Cip4Service } from './cip4.service';
 import { MyHttpService } from './my-http.service';

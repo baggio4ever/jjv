@@ -6,6 +6,7 @@ import * as Cytoscape from 'cytoscape';
 import * as klay from 'cytoscape-klay';
 import { Guid } from 'guid-typescript';
 import { MyHttpService } from './my-http.service';
+import { AppSettingsDialogComponent } from './app-settings-dialog.component';
 
 Cytoscape.use(klay);
 
@@ -604,7 +605,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
 }
 
 
-
+/*
 @Component({
   selector: 'app-settings-dialog',
   templateUrl: './app-settings-dialog.component.html',
@@ -619,5 +620,5 @@ export class AppSettingsDialogComponent {
   onNoClick(): void {
     this.dialogRef.close();
   }
-
 }
+*/
