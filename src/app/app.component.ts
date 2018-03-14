@@ -7,6 +7,7 @@ import * as klay from 'cytoscape-klay';
 import { Guid } from 'guid-typescript';
 import { MyHttpService } from './my-http.service';
 import { AppSettingsDialogComponent } from './app-settings-dialog.component';
+import { AboutDialogComponent } from './about-dialog/about-dialog.component';
 
 Cytoscape.use(klay);
 
@@ -612,7 +613,25 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
   }
 
   saveToFile(): void {
-    
+
+  }
+
+  openAbout(): void {
+    console.log('openAbout()');
+
+    const dialogRef = this.dialog.open(AboutDialogComponent, {
+      width: '400px',
+      data: { url: 'dummy' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('The dialog was closed: ' + result);
+        //      this.animal = result;
+      } else {
+        console.log('キャンセルされました？');
+      }
+    });
   }
 }
 
