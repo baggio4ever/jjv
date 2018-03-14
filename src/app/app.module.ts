@@ -13,6 +13,8 @@ import {MatTableModule} from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 import { AppComponent } from './app.component';
 import { AppSettingsDialogComponent } from './app-settings-dialog.component';
@@ -42,7 +44,9 @@ import { MyHttpService } from './my-http.service';
     MatTableModule,
     MatDialogModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatSnackBarModule,
+    MatTooltipModule
   ],
   providers: [
     Cip4Service,

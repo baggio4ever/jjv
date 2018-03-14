@@ -602,6 +602,18 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
   openFileDialog(): void {
     document.getElementById('input-file-id').click();
   }
+
+  uploadToCloud(): void {
+
+  }
+
+  downloadFromCloud(): void {
+    
+  }
+
+  saveToFile(): void {
+    
+  }
 }
 
 

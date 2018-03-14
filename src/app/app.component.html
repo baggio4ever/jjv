@@ -5,8 +5,14 @@
     <nav *ngIf="fileLoaded; else elseBlock2">
       <!-- ファイル開いている時 -->
       {{filename}}
-      <button mat-icon-button (click)="clear()">
+      <button mat-icon-button (click)="clear()" matTooltip="閉じる" matTooltipPosition="above">
         <mat-icon aria-label="close file">clear</mat-icon>
+      </button>
+      <button mat-icon-button (click)="uploadToCloud()" matTooltip="クラウドに保存" matTooltipPosition="above">
+        <mat-icon aria-label="upload">cloud_upload</mat-icon>
+      </button>
+      <button mat-icon-button (click)="saveToFile()" matTooltip="ファイルに保存" matTooltipPosition="above">
+        <mat-icon aria-label="save">save</mat-icon>
       </button>
     </nav>
     <ng-template #elseBlock2>
@@ -22,8 +28,11 @@
           </label>
         -->
           <input id="input-file-id" type="file" #fileInput (change)="onChanged(fileInput.files[0])" accept=".xml,.jdf" style="display: none;">
-          <button mat-icon-button (click)="openFileDialog()">
+          <button mat-icon-button (click)="openFileDialog()" matTooltip="ファイルを開く" matTooltipPosition="above">
             <mat-icon aria-label="Open file">folder_open</mat-icon>
+          </button>
+          <button mat-icon-button (click)="downloadFromCloud()" matTooltip="クラウドから開く" matTooltipPosition="above">
+            <mat-icon aria-label="download">cloud_download</mat-icon>
           </button>
 <!--
         <button mat-raised-button color="warn" (click)="yes(fileInput.files[0])" [disabled]="!fileSelected">選択したファイルを読みん込んで表示</button>
@@ -32,7 +41,7 @@
       </nav>
     </ng-template>
     <!-- 共通 -->
-    <button mat-icon-button (click)="openSettings()">
+    <button mat-icon-button (click)="openSettings()" matTooltip="設定" matTooltipPosition="above">
       <mat-icon aria-label="Settings ...">settings</mat-icon>
     </button>
   </mat-toolbar-row>
