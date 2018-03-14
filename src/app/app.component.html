@@ -768,8 +768,15 @@
       </div>
     </div>
 -->
+
     <div id="drop_zone" (drop)="dropHandler($event)" (dragover)="dragOverHandler($event)">
       <p>JDFファイルをドロップしてけれ</p>
     </div>
   </ng-template>
+
+  <button (click)="sayHello()">jjv-serverとテスト通信</button><br>
+  <strong>message:</strong><br>
+  {{ret_from_http}}<br>
+  <strong>input:</strong><br>
+  {{ret_from_http_input|json}}<br>
 </div>

@@ -39,7 +39,7 @@ export class Cip4Service {
     // ResourcePool
     const resourcePoolTags = dom.getElementsByTagName('ResourcePool');
     if ( resourcePoolTags.length !== 1 ) {
-      console.log('げ！ resourcePoolTag.length:'+resourcePoolTags.length);
+      console.log('げ！ resourcePoolTag.length:' + resourcePoolTags.length);
     }
     const resourcePool = resourcePoolTags[0];
 
@@ -49,7 +49,7 @@ export class Cip4Service {
     for (let i = 0; i < componentTags.length; ++i ) {
       const j = componentTags[i];
       // ResourcePool 直下か
-      if( j.parentElement === resourcePool ) {
+      if ( j.parentElement === resourcePool ) {
         const id = j.getAttribute('ID');
         const componentType = j.getAttribute('ComponentType');
         const klass = j.getAttribute('Class');
@@ -192,25 +192,25 @@ export class Cip4Service {
             const klass = j.getAttribute('Class');
             const millingDepth = j.getAttribute('MillingDepth');
             const body = vkbeautify.xml( j.outerHTML.toString() );
-  
+
             const spinePreparationParamsTag = new SpinePreparationParamsTag( id, klass, millingDepth, body );
             jdf.pushSpinePreparationParamsTag( spinePreparationParamsTag);
 /*            this.spinePreparationParamsTags.push( spinePreparationParamsTag );
           */        }
-  
+
           // StackingParamsタグ
           const stackingParamsTags = dom.getElementsByTagName('StackingParams');
           console.log('stackingParamsTags.length: ' + stackingParamsTags.length);
           for (let i = 0; i < stackingParamsTags.length; ++i ) {
             const j = stackingParamsTags[i];
             // ResourcePool 直下か
-            if( j.parentElement === resourcePool ) {
+            if ( j.parentElement === resourcePool ) {
               const id = j.getAttribute('ID');
               const klass = j.getAttribute('Class');
               const standardAmount = j.getAttribute('StandardAmount');
               const layerAmount = j.getAttribute('LayerAmount');
               const body = vkbeautify.xml( j.outerHTML.toString() );
-    
+
               const stackingParamsTag = new StackingParamsTag( id, klass, standardAmount, layerAmount, body );
               jdf.pushStackingParamsTag( stackingParamsTag );
             }
@@ -230,7 +230,7 @@ export class Cip4Service {
             const jobPartId = j.getAttribute('JobPartID');
             const body = vkbeautify.xml( j.outerHTML.toString() );
   //          const body = j.outerHTML.toString();
-  
+
             const inputComponentLinks: ComponentLinkTag[] = [];
             const outputComponentLinks: ComponentLinkTag[] = [];
             const paramsLinks: LinkTag[] = [];
@@ -251,7 +251,7 @@ export class Cip4Service {
                     if ( usage.toLowerCase() === 'input' ) {
                       inputComponentLinks.push(cl);
                     } else {
-                      outputComponentLinks.push(cl)
+                      outputComponentLinks.push(cl);
                     }
                     break;
                   case 'SpinePreparationParamsLink':
@@ -437,43 +437,43 @@ export class JDF {
   getParamsTagById( id: string ): IdHavingTag {
     let r;
 
-    if ( r = this.coverApplicationParamsTags.find((v,i,a) => {return v.id===id;})) {
+    if ( r = this.coverApplicationParamsTags.find((v, i, a) => {return v.id===id;})) {
       return r;
     }
 
-    if ( r = this.cuttingParamsTags.find((v,i,a) => {return v.id===id;})) {
+    if ( r = this.cuttingParamsTags.find((v, i, a) => {return v.id===id;})) {
       return r;
     }
 
-    if ( r = this.foldingParamsTags.find((v,i,a) => {return v.id===id;})) {
+    if ( r = this.foldingParamsTags.find((v, i, a) => {return v.id===id;})) {
       return r;
     }
 
-    if ( r = this.stitchingParamsTags.find((v,i,a) => {return v.id===id;})) {
+    if ( r = this.stitchingParamsTags.find((v, i, a) => {return v.id===id;})) {
       return r;
     }
 
-    if ( r = this.spinePreparationParamsTags.find((v,i,a) => {return v.id===id;})) {
+    if ( r = this.spinePreparationParamsTags.find((v, i, a) => {return v.id===id;})) {
       return r;
     }
 
-    if ( r = this.trimmingParamsTags.find((v,i,a) => {return v.id===id;})) {
+    if ( r = this.trimmingParamsTags.find((v, i, a) => {return v.id===id;})) {
       return r;
     }
 
-    if ( r = this.stackingParamsTags.find((v,i,a) => {return v.id===id;})) {
+    if ( r = this.stackingParamsTags.find((v, i, a) => {return v.id===id;})) {
       return r;
     }
 
     return null;
   }
-  
+
   // 引数で渡すコンポーネント（用紙とか）を作成した工程を返す
   getPreviousProcesses( component: ComponentTag ): JdfTag[] {
     let ret: JdfTag[] = [];
 
-    ret = this.processTags.filter( (value,index,array) => {
-      const r = value.outputComponentLinks.filter( (v,i,ary) => {
+    ret = this.processTags.filter( (value, index, array) => {
+      const r = value.outputComponentLinks.filter( (v, i, ary) => {
         return (v.rRef === component.id);
       });
       return (r.length > 0);
@@ -485,8 +485,8 @@ export class JDF {
   getNextProcesses( component: ComponentTag ): JdfTag[] {
     let ret: JdfTag[] = [];
 
-    ret = this.processTags.filter( (value,index,array) => {
-      const r = value.inputComponentLinks.filter( (v,i,ary) => {
+    ret = this.processTags.filter( (value, index, array) => {
+      const r = value.inputComponentLinks.filter( (v, i, ary) => {
         return (v.rRef === component.id);
       });
       return (r.length > 0);
@@ -498,8 +498,8 @@ export class JDF {
   getProcessesUsingThisDevice( component: ComponentTag ): JdfTag[] {
     let ret: JdfTag[] = [];
 
-    ret = this.processTags.filter( (value,index,array) => {
-      const r = value.deviceLinks.filter( (v,i,ary) => {
+    ret = this.processTags.filter( (value, index, array) => {
+      const r = value.deviceLinks.filter( (v, i, ary) => {
         return (v.rRef === component.id);
       });
       return (r.length > 0);
@@ -510,8 +510,8 @@ export class JDF {
   getProcessesUsingThisParams( component: ComponentTag ): JdfTag[] {
     let ret: JdfTag[] = [];
 
-    ret = this.processTags.filter( (value,index,array) => {
-      const r = value.paramsLinks.filter( (v,i,ary) => {
+    ret = this.processTags.filter( (value, index, array) => {
+      const r = value.paramsLinks.filter( (v, i, ary) => {
         return (v.rRef === component.id);
       });
       return (r.length > 0);
@@ -531,7 +531,7 @@ class BaseTag {
 
 class IdHavingTag extends BaseTag {
   id: string;
-  constructor(id: string){
+  constructor(id: string) {
     super();
 
     this.id = id;
@@ -592,9 +592,9 @@ export class ComponentTag extends IdHavingTag {
   dimensions: string; // 幅、長さ、厚さ
   body: string;
 
-  dimensions_width:number;
-  dimensions_length:number;
-  dimensions_thickness:number;
+  dimensions_width: number;
+  dimensions_length: number;
+  dimensions_thickness: number;
 
   constructor(id: string, componentType: string, klass: string, dimensions: string, body: string) {
     super(id);
@@ -603,7 +603,7 @@ export class ComponentTag extends IdHavingTag {
     this.klass = klass;
     this.dimensions = dimensions;
 
-    if( this.dimensions ) {
+    if ( this.dimensions ) {
       const d = this.dimensions.split(' ');
       this.dimensions_width = JDFUtils.parseNumber(d[0]);
       this.dimensions_length = JDFUtils.parseNumber(d[1]);

@@ -3,6 +3,7 @@ import { Cip4Service, JDF, JdfTag } from './cip4.service';
 import * as Cytoscape from 'cytoscape';
 import * as klay from 'cytoscape-klay';
 import { Guid } from 'guid-typescript';
+import { MyHttpService } from './my-http.service';
 
 Cytoscape.use(klay);
 
@@ -24,7 +25,10 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
   displayedColumns2 = ['id', /*'class',*/ 'blockType', 'blockName', 'blockSize', 'blockTrf'];
   displayedColumns3 = ['to', 'from', 'travel', 'travel_mm'];
 
-  constructor(private cip4: Cip4Service) {}
+  ret_from_http = '';
+  ret_from_http_input = '';
+
+  constructor(private cip4: Cip4Service, private httpService: MyHttpService) {}
 
   ngAfterViewInit() {
 //    console.log('AfterViewInit');
@@ -539,5 +543,13 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
       // Use DataTransfer interface to remove the drag data
       ev.dataTransfer.clearData();
     }
+  }
+
+  sayHello(): void {
+    this.ret_from_http = '';
+    this.httpService.getMessage( (msg, input) => {
+      this.ret_from_http = msg;
+      this.ret_from_http_input = input;
+    });
   }
 }
