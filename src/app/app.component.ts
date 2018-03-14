@@ -1,4 +1,6 @@
-import { Component, AfterViewInit, AfterViewChecked } from '@angular/core';
+import { Component, AfterViewInit, AfterViewChecked, Inject } from '@angular/core';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+
 import { Cip4Service, JDF, JdfTag } from './cip4.service';
 import * as Cytoscape from 'cytoscape';
 import * as klay from 'cytoscape-klay';
@@ -30,7 +32,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
 
   ret_from_post = '';
 
-  constructor(private cip4: Cip4Service, private httpService: MyHttpService) {}
+  constructor(private cip4: Cip4Service, private httpService: MyHttpService, public dialog: MatDialog) {}
 
   ngAfterViewInit() {
 //    console.log('AfterViewInit');
@@ -571,9 +573,37 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
 
   openSettings(): void {
     console.log('openSettings()');
+
+    const dialogRef = this.dialog.open(AppSettingsDialogComponent, {
+      width: '250px',
+      data: { name: 'saburo', animal: 'fox' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+//      this.animal = result;
+    });
   }
 
   openFileDialog(): void {
     document.getElementById('input-file-id').click();
   }
+}
+
+
+
+@Component({
+  selector: 'app-settings-dialog',
+  templateUrl: './app-settings-dialog.html',
+})
+export class AppSettingsDialogComponent {
+
+  constructor(
+    public dialogRef: MatDialogRef<AppSettingsDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
 }
