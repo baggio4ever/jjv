@@ -3,25 +3,37 @@
     <span>jjv</span>
     <span class="example-spacer"></span>
     <nav *ngIf="fileLoaded; else elseBlock2">
+      <!-- ファイル開いている時 -->
       {{filename}}
       <button mat-icon-button (click)="clear()">
         <mat-icon aria-label="">clear</mat-icon>
       </button>
     </nav>
-  <ng-template #elseBlock2>
-    <nav>
-      <div>
-        {{filename}}
-        <label for="input-file-id" class="selectFile iconX">
+    <ng-template #elseBlock2>
+      <!-- ファイル開いていない時 -->
+      <nav>
+        <div>
+          {{filename}}
+<!--
+          <label for="input-file-id" class="selectFile iconX">
             ＋JDFを選択
-            <input id="input-file-id" type="file" #fileInput (change)="onChanged(fileInput.files[0])" accept=".xml,.jdf" style="display: none;">
-        </label>
+              <input id="input-file-id" type="file" #fileInput (change)="onChanged(fileInput.files[0])" accept=".xml,.jdf" style="display: none;">
+          </label>
+        -->
+          <input id="input-file-id" type="file" #fileInput (change)="onChanged(fileInput.files[0])" accept=".xml,.jdf" style="display: none;">
+          <button mat-icon-button (click)="openFileDialog()">
+            <mat-icon aria-label="Open ...">folder_open</mat-icon>
+          </button>
 <!--
         <button mat-raised-button color="warn" (click)="yes(fileInput.files[0])" [disabled]="!fileSelected">選択したファイルを読みん込んで表示</button>
 -->
-      </div>
-    </nav>
-  </ng-template>
+        </div>
+      </nav>
+    </ng-template>
+    <!-- 共通 -->
+    <button mat-icon-button (click)="openSettings()">
+      <mat-icon aria-label="Settings ...">settings</mat-icon>
+    </button>
   </mat-toolbar-row>
 </mat-toolbar>
 

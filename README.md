@@ -46,7 +46,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 [DOMイベントのキャプチャ/バブリングを整理する 〜 JSおくのほそ道 #017](https://qiita.com/hosomichi/items/49500fea5fdf43f59c58)
 
-[How open select file dialog via js?](https://stackoverflow.com/questions/16215771/how-open-select-file-dialog-via-js) これ試してみたい
+[How open select file dialog via js?](https://stackoverflow.com/questions/16215771/how-open-select-file-dialog-via-js) これ試してみたい → イイ感じ！ ☆☆☆
 
 #### DOM
 [要素の属性を全部取得する](http://hokaccha.hatenablog.com/entry/20130819/1376895914)

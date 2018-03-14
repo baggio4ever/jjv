@@ -568,4 +568,12 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
       this.ret_from_post = msg;
     });
   }
+
+  openSettings(): void {
+    console.log('openSettings()');
+  }
+
+  openFileDialog(): void {
+    document.getElementById('input-file-id').click();
+  }
 }

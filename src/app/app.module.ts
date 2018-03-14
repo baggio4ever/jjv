@@ -9,6 +9,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatCardModule} from '@angular/material/card';
 import {MatTableModule} from '@angular/material/table';
+import {MatDialogModule} from '@angular/material/dialog';
 
 import { AppComponent } from './app.component';
 
@@ -29,7 +30,8 @@ import { MyHttpService } from './my-http.service';
     MatIconModule,
     MatExpansionModule,
     MatCardModule,
-    MatTableModule
+    MatTableModule,
+    MatDialogModule
   ],
   providers: [
     Cip4Service,
