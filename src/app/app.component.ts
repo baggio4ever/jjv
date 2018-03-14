@@ -28,6 +28,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
   ret_from_http = '';
   ret_from_http_input = '';
 
+  ret_from_post = '';
+
   constructor(private cip4: Cip4Service, private httpService: MyHttpService) {}
 
   ngAfterViewInit() {
@@ -550,6 +552,20 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
     this.httpService.getMessage( (msg, input) => {
       this.ret_from_http = msg;
       this.ret_from_http_input = input;
+    });
+  }
+
+  saveMessage(): void {
+    const body = {
+      user_id: 'jiro',
+      message: '負けるな',
+      comment: 'よいんじゃない？'
+    };
+
+    console.log('ログ書き込めぇ！');
+
+    this.httpService.postMessage(body, msg => {
+      this.ret_from_post = msg;
     });
   }
 }

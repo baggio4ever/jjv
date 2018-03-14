@@ -58,7 +58,7 @@ export class MyHttpService {
   postMessage( body, callback: (msg: string) => void ): void {
     // API GatewayとHTTP通信して、取得成功時にコールバックを行う
     this.http.post( BASE_URL + 'log', body).subscribe(data => {
-        callback(data['message']['message']);
+        callback(data['message']);
     });
   }
 }
