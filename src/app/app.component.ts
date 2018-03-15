@@ -620,12 +620,19 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
 
     const dialogRef = this.dialog.open(UploadDialogComponent, {
       width: '400px',
-      data: { url: 'テスト' }
+      data: {
+        user_id: 'テスト',
+        filename: this.filename,
+        comment: 'あー、マイクのテスト中'
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         console.log('The dialog was closed: ' + result);
+        console.log('      ' + result.user_id);
+        console.log('      ' + result.filename);
+        console.log('      ' + result.comment);
 //        localStorage.setItem(KEY_BASE_URL, result);
 //        this.httpService.setBaseURL(result);
         //      this.animal = result;

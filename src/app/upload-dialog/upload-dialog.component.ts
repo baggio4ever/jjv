@@ -18,4 +18,12 @@ export class UploadDialogComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
+
+  getResult() {
+    return {
+      user_id: this.data.user_id,
+      comment: this.data.comment,
+      filename: this.data.filename
+    };
+  }
 }
