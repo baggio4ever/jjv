@@ -4,7 +4,7 @@
     <span class="example-spacer"></span>
     <nav *ngIf="fileLoaded; else elseBlock2">
       <!-- ファイル開いている時 -->
-      {{filename}}
+      <span class="toolbar-fn">{{filename}}</span>
       <button mat-icon-button (click)="clear()" matTooltip="閉じる" matTooltipPosition="above">
         <mat-icon aria-label="close file">clear</mat-icon>
       </button>

@@ -61,3 +61,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 #### CSSで遊ぶ
 [CSSで円を描く方法：文字を中央配置するには？枠線のつけ方は？](https://saruwakakun.com/html-css/basic/circle)
+
+[Flexboxレイアウトまとめ](https://qiita.com/takanorip/items/a51989312160530d89a1) 理解しておきたい
+
+[【CSS】max-widthとmin-widthの使い方まとめ](https://saruwakakun.com/html-css/basic/max-min-width)

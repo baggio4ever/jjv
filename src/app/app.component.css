@@ -142,3 +142,14 @@ td,th {
     height: 300px;
     border: 1px solid lightgray;
 }
+
+.toolbar-fn {
+    font-size: small;
+/*
+spanじゃ効かない？かといって p とか display:inline-block 試したらレイアウト崩れた。難しいね。
+    border-width: 1;
+    border-color: black;
+    width: 60%;
+    max-width: 300px;
+*/
+}
