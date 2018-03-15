@@ -257,7 +257,7 @@ export class Cip4Service {
     return jdfTag;
   }
 
-    buildJDF( c: string ): JDF {
+  buildJDF( c: string ): JDF {
     const jdf = new JDF();
 
     const xml = vkbeautify.xml( c );
@@ -268,6 +268,7 @@ export class Cip4Service {
 
     // 初期化
     jdf.clear();
+    jdf.beautifiedXml = xml;
 
     // ResourcePool
     const resourcePoolTags = dom.getElementsByTagName('ResourcePool');
@@ -613,6 +614,8 @@ export class JDF {
   coverApplicationParamsTags: CoverApplicationParamsTag[] = [];
   spinePreparationParamsTags: SpinePreparationParamsTag[] = [];
   stackingParamsTags: StackingParamsTag[] = [];
+
+  beautifiedXml = '';
 
   clear(): void {
     this.jobTag = null;

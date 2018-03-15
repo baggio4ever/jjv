@@ -622,7 +622,19 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
   }
 
   saveToFile(): void {
+    const content = this.jdf.beautifiedXml; // '春はあけぼの';
+    const blob = new Blob([content],{'type':'text/xml'});
 
+    if (window.navigator.msSaveBlob) {
+      window.navigator.msSaveBlob(blob, 'test.jdf');
+
+      // msSaveOrOpenBlobの場合はファイルを保存せずに開ける
+      window.navigator.msSaveOrOpenBlob(blob, 'test.jdf');
+    } else {
+      document.getElementById('save-to-file').setAttribute('href', window.URL.createObjectURL(blob));
+      document.getElementById('save-to-file').setAttribute('download', this.filename);
+      document.getElementById('save-to-file').click();
+    }
   }
 
   openAbout(): void {
