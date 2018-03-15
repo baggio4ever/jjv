@@ -22,16 +22,22 @@ import { AppSettingsDialogComponent } from './app-settings-dialog.component';
 import { Cip4Service } from './cip4.service';
 import { MyHttpService } from './my-http.service';
 import { AboutDialogComponent } from './about-dialog/about-dialog.component';
+import { UploadDialogComponent } from './upload-dialog/upload-dialog.component';
+import { DownloadDialogComponent } from './download-dialog/download-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AppSettingsDialogComponent,
-    AboutDialogComponent
+    AboutDialogComponent,
+    UploadDialogComponent,
+    DownloadDialogComponent
   ],
   entryComponents: [
     AppSettingsDialogComponent,
-    AboutDialogComponent
+    AboutDialogComponent,
+    UploadDialogComponent,
+    DownloadDialogComponent
   ],
   imports: [
     BrowserModule,

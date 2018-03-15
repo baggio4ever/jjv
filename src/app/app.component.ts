@@ -8,6 +8,8 @@ import { Guid } from 'guid-typescript';
 import { MyHttpService } from './my-http.service';
 import { AppSettingsDialogComponent } from './app-settings-dialog.component';
 import { AboutDialogComponent } from './about-dialog/about-dialog.component';
+import { UploadDialogComponent } from './upload-dialog/upload-dialog.component';
+import { DownloadDialogComponent } from './download-dialog/download-dialog.component';
 
 Cytoscape.use(klay);
 
@@ -614,6 +616,24 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
   }
 
   uploadToCloud(): void {
+    console.log('uploadToCloud()');
+
+    const dialogRef = this.dialog.open(UploadDialogComponent, {
+      width: '400px',
+      data: { url: 'テスト' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('The dialog was closed: ' + result);
+//        localStorage.setItem(KEY_BASE_URL, result);
+//        this.httpService.setBaseURL(result);
+        //      this.animal = result;
+      } else {
+        console.log('キャンセルされました？');
+      }
+    });
+/*
     const body = {
       user_id: 'michael',
       filename: this.filename,
@@ -630,7 +650,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         duration: 2000,
       });
     });
-  }
+  */
+   }
 /*
     saveMessage2(): void {
     const body = {
@@ -648,7 +669,24 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
   }
 */
   downloadFromCloud(): void {
-    
+      console.log('downloadToCloud()');
+
+    const dialogRef = this.dialog.open(DownloadDialogComponent, {
+      width: '400px',
+      data: { url: 'テスト' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('The dialog was closed: ' + result);
+//        localStorage.setItem(KEY_BASE_URL, result);
+//        this.httpService.setBaseURL(result);
+        //      this.animal = result;
+      } else {
+        console.log('キャンセルされました？');
+      }
+    });
+
   }
 
   saveToFile(): void {
