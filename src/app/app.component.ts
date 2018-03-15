@@ -16,6 +16,8 @@ Cytoscape.use(klay);
 declare var hljs: any;
 
 const KEY_BASE_URL = 'KEY_BASE_URL';
+const KEY_USER_ID = 'KEY_USER_ID';
+const KEY_COMMENT = 'KEY_COMMENT';
 
 @Component({
   selector: 'app-root',
@@ -621,9 +623,9 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
     const dialogRef = this.dialog.open(UploadDialogComponent, {
       width: '400px',
       data: {
-        user_id: 'テスト',
+        user_id: localStorage.getItem(KEY_USER_ID),
         filename: this.filename,
-        comment: 'あー、マイクのテスト中'
+        comment: localStorage.getItem(KEY_COMMENT)
       }
     });
 
@@ -633,9 +635,26 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         console.log('      ' + result.user_id);
         console.log('      ' + result.filename);
         console.log('      ' + result.comment);
-//        localStorage.setItem(KEY_BASE_URL, result);
-//        this.httpService.setBaseURL(result);
-        //      this.animal = result;
+
+        localStorage.setItem(KEY_USER_ID, result.user_id);
+        localStorage.setItem(KEY_COMMENT, result.comment);
+
+        const body = {
+          user_id: result.user_id,
+          filename: result.filename,
+          xml: this.jdf.beautifiedXml,
+          comment: result.comment
+        };
+
+//        console.log('uploadToCloud() : ' + body);
+
+        this.httpService.uploadXml(body, msg => {
+          this.ret_from_post = msg;
+
+          this.snackBar.open('upload', '成功', {
+            duration: 2000,
+          });
+        });
       } else {
         console.log('キャンセルされました？');
       }
