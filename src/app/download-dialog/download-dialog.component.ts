@@ -27,7 +27,7 @@ export class DownloadDialogComponent implements OnInit {
     this.files = [];
 
     console.log('onSearch() start.');
-    this.httpService.getFiles('hira', (files) => {
+    this.httpService.getFiles(this.data.user_id, (files) => {
       this.searching = false;
       console.log('onSearch() finished.');
       console.log('   files.length: ' + files.length);

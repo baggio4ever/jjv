@@ -18,6 +18,7 @@ declare var hljs: any;
 const KEY_BASE_URL = 'KEY_BASE_URL';
 const KEY_USER_ID = 'KEY_USER_ID';
 const KEY_COMMENT = 'KEY_COMMENT';
+const KEY_SEARCH_USER_ID = 'KEY_SEARCH_USER_ID';
 
 @Component({
   selector: 'app-root',
@@ -711,8 +712,11 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
       console.log('downloadToCloud()');
 
     const dialogRef = this.dialog.open(DownloadDialogComponent, {
-      width: '400px',
-      data: { user_id: 'テスト' }
+      width: '580px',
+      height: '400px',
+      data: {
+        user_id: localStorage.getItem(KEY_SEARCH_USER_ID)
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -721,6 +725,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
 //        localStorage.setItem(KEY_BASE_URL, result);
 //        this.httpService.setBaseURL(result);
         //      this.animal = result;
+        localStorage.setItem(KEY_SEARCH_USER_ID,result);
       } else {
         console.log('キャンセルされました？');
       }

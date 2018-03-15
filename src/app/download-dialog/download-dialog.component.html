@@ -3,20 +3,22 @@
   <h1 mat-dialog-title>download from cloud</h1>
 </div>
 <div mat-dialog-content>
-  <div class="example-container">
+  <div class="example-container2">
     <mat-form-field>
       <input matInput placeholder="ユーザー名" [(ngModel)]="data.user_id">
     </mat-form-field>
-  </div>
     <button mat-icon-button color="primary">
       <mat-icon aria-label="search" (click)="onSearch()">search</mat-icon>
     </button>
+  </div>
+  <div class="table-area">
     <div *ngIf="searching; else elseBlock">
       <mat-spinner></mat-spinner>
     </div>
     <ng-template #elseBlock>
       <div *ngFor="let f of files">{{f.filename}}</div>
     </ng-template>
+  </div>
 </div>
 <div mat-dialog-actions>
   <span class="example-spacer"></span><!-- これで右寄せ -->
