@@ -16,7 +16,25 @@
       <mat-spinner></mat-spinner>
     </div>
     <ng-template #elseBlock>
+<!--
       <div *ngFor="let f of files">{{f.filename}}</div>
+-->
+      <table>
+  <thead class="scrollHead">
+    <tr>
+      <th class="f_fn">ファイル名</th>
+      <th class="f_comment">メモ</th>
+      <th class="f_date">作成日</th>
+    </tr>
+  </thead>
+  <tbody class="scrollBody">
+    <tr *ngFor="let f of files" (click)="onSelect(f)">
+      <td class="f_fn">{{f.filename}}</td>
+      <td class="f_comment">{{f.comment}}</td>
+      <td class="f_date">{{f.created_at}}</td>
+    </tr>
+  </tbody>
+</table>
     </ng-template>
   </div>
 </div>

@@ -713,7 +713,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
 
     const dialogRef = this.dialog.open(DownloadDialogComponent, {
       width: '580px',
-      height: '400px',
+      height: '480px',
       data: {
         user_id: localStorage.getItem(KEY_SEARCH_USER_ID)
       }

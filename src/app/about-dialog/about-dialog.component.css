@@ -6,7 +6,13 @@
 .example-container > * {
   width: 100%;
 }
-  
+
 .example-spacer {
   flex: 1 1 auto;
+}
+
+.example-container2 {
+  display: flex;
+  justify-content: center;/* 2 */
+  align-items: center;    /* 3 */
 }

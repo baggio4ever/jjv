@@ -38,6 +38,8 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 [表（table）の作り方と装飾の変え方【HTML＆CSS】](https://saruwakakun.com/html-css/basic/table)
 
+[HTML/CSSヘッダー固定のスクロールテーブル](http://kagan.hatenablog.com/entry/2014/08/08/071726) うーん。なぜかヘッダと内容の幅が一致しない
+
 #### File Drag & Drop
 [File drag and drop](https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API/File_drag_and_drop) ☆☆
 
@@ -65,3 +67,5 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 [Flexboxレイアウトまとめ](https://qiita.com/takanorip/items/a51989312160530d89a1) 理解しておきたい
 
 [【CSS】max-widthとmin-widthの使い方まとめ](https://saruwakakun.com/html-css/basic/max-min-width)
+
+[たった3行で実現できるCSSの上下中央揃え（Flexbox）](https://qiita.com/tonkotsuboy_com/items/a5aaa4a69fecfaf546a3)

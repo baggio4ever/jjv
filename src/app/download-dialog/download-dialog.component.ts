@@ -10,6 +10,7 @@ import { MyHttpService } from '../my-http.service';
 export class DownloadDialogComponent implements OnInit {
   searching = false;
   files = [];
+  selectedItem = null;
 
   constructor( private httpService: MyHttpService, public dialogRef: MatDialogRef<DownloadDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
@@ -20,6 +21,10 @@ export class DownloadDialogComponent implements OnInit {
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  onSelect(f): void {
+    this.selectedItem = f;
   }
 
   onSearch(): void {

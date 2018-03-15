@@ -26,6 +26,29 @@
 
 .table-area {
   width: 100%;
-  height: 200px;
+/*  height: 200px;*/
   background-color: aquamarine;
+}
+
+/*スクロール用*/
+thead.scrollHead,tbody.scrollBody {
+  display:block;
+}
+tbody.scrollBody {
+  overflow-y:scroll;
+  height:200px;
+}
+
+/*幅調整*/
+td,th {
+  table-layout:fixed;
+}
+.f_fn {
+  width:100px;
+}
+.f_comment {
+  width:200px;
+}
+.f_date {
+  width:200px;
 }
