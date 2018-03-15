@@ -30,9 +30,6 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 #### labelにアイコン表示
 [Add sprite icon to a label . Is there a way to set width / height just for the sprite and a second w/h to the label?](https://stackoverflow.com/questions/9497060/add-sprite-icon-to-a-label-is-there-a-way-to-set-width-height-just-for-the-s)
 
-#### HTML Input file
-[[HTML5] input type="file"のデザインをもっと簡単に変更](https://qiita.com/yasumodev/items/c9f8e8f588ded6b179c9)
-
 #### 非同期処理
 [TypeScriptのasync/await (PromiseとかVisual Studio Codeとか…)](https://qiita.com/takao_mofumofu/items/f7063445c2020d6c8af0)
 
@@ -48,8 +45,19 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 [How open select file dialog via js?](https://stackoverflow.com/questions/16215771/how-open-select-file-dialog-via-js) これ試してみたい → イイ感じ！ ☆☆☆
 
+[[HTML5] input type="file"のデザインをもっと簡単に変更](https://qiita.com/yasumodev/items/c9f8e8f588ded6b179c9)
+
+
 #### DOM
 [要素の属性を全部取得する](http://hokaccha.hatenablog.com/entry/20130819/1376895914)
 
 #### カッコいいスクロール
 [スクロールしたらヘッダーの一部だけ固定する](http://chibinowa.net/note/js/fixedheader.html) これかっこいいわぁ。理解したい
+
+#### 生成したデータをファイルとしてダウンロード
+[JavaScriptでファイルダウンロード処理を実現する](https://qiita.com/wadahiro/items/eb50ac6bbe2e18cf8813)
+
+[HTML5 ファイルをダウンロードさせるリンクを作りたい。](http://chaika.hatenablog.com/entry/2016/03/25/073203)
+
+#### CSSで遊ぶ
+[CSSで円を描く方法：文字を中央配置するには？枠線のつけ方は？](https://saruwakakun.com/html-css/basic/circle)
