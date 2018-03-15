@@ -694,6 +694,19 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
     });
   }
 */
+  saveMessage3(): void {
+    console.log('saveMessage3()');
+
+    this.httpService.getFiles('hira', files => {
+  //    this.ret_from_post = files;
+      console.log('files.length: ' + files.length);
+      for (let i = 0; i < files.length; i++) {
+        const f = files[i];
+        console.log('   ' + f.filename);
+      }
+    });
+  }
+
   downloadFromCloud(): void {
       console.log('downloadToCloud()');
 
@@ -750,7 +763,14 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
   }
 }
 
-
+/*
+interface Fi {
+  user_id: string;
+  comment: string;
+  filename: string;
+  xml: string;
+}
+*/
 /*
 @Component({
   selector: 'app-settings-dialog',

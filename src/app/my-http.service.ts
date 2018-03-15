@@ -76,4 +76,15 @@ export class MyHttpService {
         callback(data['message']);
     });
   }
+
+  getFiles( user_id: string, callback: (files: any) => void): void {
+    // Parameters obj-
+    const params: HttpParams = new HttpParams().set('user_id', user_id );
+
+    console.log(params.toString());
+
+    this.http.get( this.base_url + 'files', { params: params }).subscribe(data => {
+        callback(data['files']);
+    });
+  }
 }
