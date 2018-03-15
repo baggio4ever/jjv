@@ -69,4 +69,11 @@ export class MyHttpService {
         callback(data['message']);
     });
   }
+
+  uploadXml( body, callback: (msg: string) => void ): void {
+    // API GatewayとHTTP通信して、取得成功時にコールバックを行う
+    this.http.post( this.base_url + 'upload', body).subscribe(data => {
+        callback(data['message']);
+    });
+  }
 }

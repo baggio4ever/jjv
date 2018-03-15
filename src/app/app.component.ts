@@ -22,9 +22,9 @@ const KEY_BASE_URL = 'KEY_BASE_URL';
 })
 export class AppComponent implements AfterViewInit, AfterViewChecked {
   fileLoaded = false;
-  fileSelected = false;
+//  fileSelected = false;
   filename = '';
-  cy = null;
+  cy = null;  // Cytoscape
   jdf: JDF = null;
   selectedGuid = '';
 
@@ -67,7 +67,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
     this.filename = fileVal.name;
     console.log('onChanged: ' + this.filename);
 
-    this.fileSelected = (this.filename !== '');
+//    this.fileSelected = (this.filename !== '');
 
     this.yes(fileVal);
   }
@@ -614,9 +614,39 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
   }
 
   uploadToCloud(): void {
+    const body = {
+      user_id: 'michael',
+      filename: this.filename,
+      xml: this.jdf.beautifiedXml,
+      comment: 'よいんじゃない？良いよね！？'
+    };
 
+    console.log('uploadToCloud() : ' + body);
+
+    this.httpService.uploadXml(body, msg => {
+      this.ret_from_post = msg;
+
+      this.snackBar.open('upload', '成功', {
+        duration: 2000,
+      });
+    });
   }
+/*
+    saveMessage2(): void {
+    const body = {
+      user_id: 'sato',
+      filename: 'ABC.txt',
+      xml: '春はあけぼの',
+      comment: 'よいんじゃない？'
+    };
 
+    console.log('uploadToCloud() : ' + body);
+
+    this.httpService.uploadXml(body, msg => {
+      this.ret_from_post = msg;
+    });
+  }
+*/
   downloadFromCloud(): void {
     
   }
