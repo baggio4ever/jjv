@@ -712,7 +712,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
 
     const dialogRef = this.dialog.open(DownloadDialogComponent, {
       width: '400px',
-      data: { url: 'テスト' }
+      data: { user_id: 'テスト' }
     });
 
     dialogRef.afterClosed().subscribe(result => {

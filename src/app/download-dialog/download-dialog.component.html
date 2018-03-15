@@ -5,14 +5,23 @@
 <div mat-dialog-content>
   <div class="example-container">
     <mat-form-field>
-      <input matInput placeholder="Base URL of Web API" [(ngModel)]="data.url">
+      <input matInput placeholder="ユーザー名" [(ngModel)]="data.user_id">
     </mat-form-field>
   </div>
+    <button mat-icon-button color="primary">
+      <mat-icon aria-label="search" (click)="onSearch()">search</mat-icon>
+    </button>
+    <div *ngIf="searching; else elseBlock">
+      <mat-spinner></mat-spinner>
+    </div>
+    <ng-template #elseBlock>
+      <div *ngFor="let f of files">{{f.filename}}</div>
+    </ng-template>
 </div>
 <div mat-dialog-actions>
   <span class="example-spacer"></span><!-- これで右寄せ -->
   <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button [mat-dialog-close]="data.url" cdkFocusInitial>OK</button>
+  <button mat-button [mat-dialog-close]="data.user_id" cdkFocusInitial>OK</button>
 </div>
 
 
