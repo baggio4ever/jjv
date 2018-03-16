@@ -57,10 +57,14 @@
     <div id="fmenu">
       <div class="light-frame">
         <div id="cy"></div>
-        <div>
+        <div class="graph-tool">
           <button mat-icon-button (click)="relayout()" matTooltip="再整列" matTooltipPosition="above">
             <mat-icon aria-label="update">refresh</mat-icon>
           </button>
+          <button mat-icon-button (click)="saveGraphAsPNG()" matTooltip="pngとして保存" matTooltipPosition="above">
+            <mat-icon aria-label="save as png">file_download</mat-icon>
+          </button>
+          <a id="save-as-png" href="#" style="display: none;"></a>
         </div>
       </div>
       <div>

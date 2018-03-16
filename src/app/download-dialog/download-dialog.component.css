@@ -27,13 +27,20 @@
 .card-area {
   width: 100%;
   height: 420px;
-  background-color: #eee;
+/*  background-color: #eee;
+*/
   overflow:scroll;
 }
 
 .card-content {
   padding-left: 20px;
   font-size: small;
+}
+
+.card-area-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;  /* なんかコレ効いていない感じ。上下にも中央寄せしたいのに */
 }
 
 .selected {

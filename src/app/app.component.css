@@ -153,3 +153,8 @@ spanじゃ効かない？かといって p とか display:inline-block 試した
     max-width: 300px;
 */
 }
+
+.graph-tool {
+    display: flex;
+    justify-content: flex-end;
+}

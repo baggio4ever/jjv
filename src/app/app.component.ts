@@ -768,6 +768,14 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
       }
     });
   }
+
+  saveGraphAsPNG(): void {
+    const base64uri = this.cy.png({ full: true, scale: 2 });
+
+    document.getElementById('save-as-png').setAttribute('href', base64uri);
+    document.getElementById('save-as-png').setAttribute('download', 'jjv.png');
+    document.getElementById('save-as-png').click();
+  }
 }
 
 /*
