@@ -155,8 +155,11 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
             'label': 'data(tag_id)',
             'shape': 'ellipse',
             'background-color': '#800',
-            'border-width': '1',
+            'border-width': 1,
             'border-color': 'black',
+            'text-halign': 'right',
+            'text-valign': 'center',
+            'text-margin-x': 5
           }
         },
         {
@@ -165,7 +168,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
             'label': 'data(tag_id)',
             'shape': 'ellipse',
             'background-color': '#f00',
-            'border-width': '2',
+            'border-width': 2,
             'border-color': 'black',
           }
         },
@@ -175,8 +178,10 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
             'label': 'data(tag_id)',
             'shape': 'rectangle',
             'background-color': '#888',
-            'border-width': '1',
+            'border-width': 1,
             'border-color': 'black',
+            'text-valign': 'bottom',
+            'text-margin-y': 5
           }
         },
         {
@@ -185,7 +190,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
             'label': 'data(tag_id)',
             'shape': 'rectangle',
             'background-color': '#ffffef',
-            'border-width': '2',
+            'border-width': 2,
             'border-color': 'black',
           }
         },
@@ -195,13 +200,15 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
             'label': 'data(tag_id)',
             'shape': 'tag',
             'background-color': '#850',
-            'border-width': '1',
+            'border-width': 1,
             'border-color': 'black',
 /*            'background-opacity': 0,
             'background-image': '../../assets/images/ic_sd_card_black_24dp_2x.png',
             'background-clip': 'none',
             'background-fit': 'contain'
           */
+            'text-valign': 'bottom',
+            'text-margin-y': 5
           }
         },
         {
@@ -209,7 +216,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
           style: {
             'label': 'data(tag_id)',
             'background-color': '#fb0',
-            'border-width': '2',
+            'border-width': 2,
             'border-color': 'black',
           }
         },
@@ -219,15 +226,17 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
             'label': 'data(tag_id)',
             'shape': 'hexagon',
             'background-color': '#383',
-            'border-width': '1',
+            'border-width': 1,
             'border-color': 'black',
+            'text-valign': 'bottom',
+            'text-margin-y': 5
           }
         },
         {
           selector: ':selected.device',
           style: {
             'background-color': '#3f3',
-            'border-width': '2',
+            'border-width': 2,
             'border-color': 'black',
           }
         },
@@ -253,8 +262,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
 //            'source-arrow-color': '#088',
 //            'source-arrow-shape': 'triangle',
             'source-label': 'data(amount)',
-            'source-text-offset': 15,
-            'source-text-margin-y': -10,
+            'source-text-offset': 20,
+            'source-text-margin-x': 10,
             'font-size': 11
           }
         }
