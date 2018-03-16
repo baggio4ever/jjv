@@ -15,6 +15,9 @@ Cytoscape.use(klay);
 
 declare var hljs: any;
 
+
+const JJV_VERSION = '0.1.0';
+
 const KEY_BASE_URL = 'KEY_BASE_URL';
 const KEY_USER_ID = 'KEY_USER_ID';
 const KEY_COMMENT = 'KEY_COMMENT';
@@ -756,7 +759,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
 
     const dialogRef = this.dialog.open(AboutDialogComponent, {
       width: '400px',
-      data: { url: 'dummy' }
+      data: { jjv_version: JJV_VERSION }
     });
 
     dialogRef.afterClosed().subscribe(result => {
