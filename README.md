@@ -57,7 +57,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 [スクロールしたらヘッダーの一部だけ固定する](http://chibinowa.net/note/js/fixedheader.html) これかっこいいわぁ。理解したい
 
 #### 生成したデータをファイルとしてダウンロード
-[JavaScriptでファイルダウンロード処理を実現する](https://qiita.com/wadahiro/items/eb50ac6bbe2e18cf8813)
+[JavaScriptでファイルダウンロード処理を実現する](https://qiita.com/wadahiro/items/eb50ac6bbe2e18cf8813) ☆☆☆
 
 [HTML5 ファイルをダウンロードさせるリンクを作りたい。](http://chaika.hatenablog.com/entry/2016/03/25/073203)
 

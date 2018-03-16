@@ -11,7 +11,7 @@
       <mat-icon aria-label="search" (click)="onSearch()">search</mat-icon>
     </button>
   </div>
-  <div class="table-area">
+  <div class="card-area">
     <div *ngIf="searching; else elseBlock">
       <mat-spinner></mat-spinner>
     </div>
@@ -19,29 +19,46 @@
 <!--
       <div *ngFor="let f of files">{{f.filename}}</div>
 -->
+      <div *ngFor="let f of files" class="card-around">
+        <mat-card (click)="onCardSelect(f)" [class.selected]="f===selectedItem">
+          <mat-card-header>
+            <mat-card-title>
+              {{f.filename}}
+            </mat-card-title>
+            <mat-card-subtitle>
+              {{f.created_at}}
+            </mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p class="card-content">{{f.comment}}</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+<!--
       <table>
-  <thead class="scrollHead">
-    <tr>
-      <th class="f_fn">ファイル名</th>
-      <th class="f_comment">メモ</th>
-      <th class="f_date">作成日</th>
-    </tr>
-  </thead>
-  <tbody class="scrollBody">
-    <tr *ngFor="let f of files" (click)="onSelect(f)">
-      <td class="f_fn">{{f.filename}}</td>
-      <td class="f_comment">{{f.comment}}</td>
-      <td class="f_date">{{f.created_at}}</td>
-    </tr>
-  </tbody>
-</table>
+        <thead class="scrollHead">
+          <tr>
+            <th class="f_fn">ファイル名</th>
+            <th class="f_comment">メモ</th>
+            <th class="f_date">作成日</th>
+          </tr>
+        </thead>
+        <tbody class="scrollBody">
+          <tr *ngFor="let f of files" (click)="onSelect(f)">
+            <td class="f_fn">{{f.filename}}</td>
+            <td class="f_comment">{{f.comment}}</td>
+            <td class="f_date">{{f.created_at}}</td>
+          </tr>
+        </tbody>
+      </table>
+    -->
     </ng-template>
   </div>
 </div>
 <div mat-dialog-actions>
   <span class="example-spacer"></span><!-- これで右寄せ -->
   <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button [mat-dialog-close]="data.user_id" cdkFocusInitial>OK</button>
+  <button mat-button [mat-dialog-close]="getResult()" cdkFocusInitial>OK</button>
 </div>
 
 

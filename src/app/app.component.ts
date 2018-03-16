@@ -712,8 +712,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
       console.log('downloadToCloud()');
 
     const dialogRef = this.dialog.open(DownloadDialogComponent, {
-      width: '580px',
-      height: '480px',
+      width: '620px',
+//      height: '480px',
       data: {
         user_id: localStorage.getItem(KEY_SEARCH_USER_ID)
       }
@@ -721,11 +721,13 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log('The dialog was closed: ' + result);
+        console.log('The dialog was closed');
+        console.log('    user_id: ' + result.user_id);
+        console.log('    f:       ' + result.f.filename);
 //        localStorage.setItem(KEY_BASE_URL, result);
 //        this.httpService.setBaseURL(result);
         //      this.animal = result;
-        localStorage.setItem(KEY_SEARCH_USER_ID,result);
+        localStorage.setItem(KEY_SEARCH_USER_ID, result.user_id);
       } else {
         console.log('キャンセルされました？');
       }

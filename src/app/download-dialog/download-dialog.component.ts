@@ -27,9 +27,14 @@ export class DownloadDialogComponent implements OnInit {
     this.selectedItem = f;
   }
 
+  onCardSelect(f): void {
+    this.selectedItem = f;
+  }
+
   onSearch(): void {
     this.searching = true;
     this.files = [];
+    this.selectedItem = null;
 
     console.log('onSearch() start.');
     this.httpService.getFiles(this.data.user_id, (files) => {
@@ -40,4 +45,10 @@ export class DownloadDialogComponent implements OnInit {
     });
   }
 
+  getResult() {
+    return {
+      user_id: this.data.user_id,
+      f: this.selectedItem
+    }
+  }
 }
