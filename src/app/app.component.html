@@ -796,8 +796,10 @@
       </div>
   <ng-template #elseBlock>
     <!-- ファイル開いていない時 -->
-    <div id="drop_zone" (drop)="dropHandler($event)" (dragover)="dragOverHandler($event)">
-      <p>JDFファイルをドロップしてけれ</p>
+    <div>
+      <div id="drop_zone" (drop)="dropHandler($event)" (dragover)="dragOverHandler($event)">
+        <p>JDFファイルをドロップしてけれ</p>
+      </div>
     </div>
 
   </ng-template>

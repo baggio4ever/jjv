@@ -15,4 +15,6 @@
   display: flex;
   justify-content: center;/* 2 */
   align-items: center;    /* 3 */
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
