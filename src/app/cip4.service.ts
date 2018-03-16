@@ -284,14 +284,6 @@ export class Cip4Service {
       const j = componentTags[i];
       // ResourcePool 直下か
       if ( j.parentElement === resourcePool ) {
-/*        const id = j.getAttribute('ID');
-        const componentType = j.getAttribute('ComponentType');
-        const klass = j.getAttribute('Class');
-        const dimensions = j.getAttribute('Dimensions');
-        const body = vkbeautify.xml( j.outerHTML.toString() );
-
-        const componentTag = new ComponentTag( id, componentType, klass, dimensions, body );
-*/
         const componentTag = this.createComponentTag(j);
         jdf.pushComponentTag( componentTag );
       } else {
@@ -303,16 +295,6 @@ export class Cip4Service {
     const deviceTags = dom.getElementsByTagName('Device');
     console.log('deviceTags.length: ' + deviceTags.length);
     for (let i = 0; i < deviceTags.length; ++i ) {
-/*
-      const j = deviceTags[i];
-      const id = j.getAttribute('ID');
-      const klass = j.getAttribute('Class');
-      const deviceId = j.getAttribute('DeviceID');
-      const friendlyName = j.getAttribute('FriendlyName');
-      const body = vkbeautify.xml( j.outerHTML.toString() );
-
-      const deviceTag = new DeviceTag( id, klass, deviceId, friendlyName, body );
-*/
       const deviceTag = this.createDeviceTag(deviceTags[i]);
       jdf.pushDeviceTag( deviceTag );
     }
@@ -321,15 +303,6 @@ export class Cip4Service {
     const stitchingParamsTags = dom.getElementsByTagName('StitchingParams');
     console.log('stitchingParamsTags.length: ' + stitchingParamsTags.length);
     for (let i = 0; i < stitchingParamsTags.length; ++i ) {
-/*      const j = stitchingParamsTags[i];
-      const id = j.getAttribute('ID');
-      const klass = j.getAttribute('Class');
-      const numberOfStitches = j.getAttribute('NumberOfStitches');
-      const stapleShape = j.getAttribute('StapleShape');
-      const body = vkbeautify.xml( j.outerHTML.toString() );
-
-      const stitchingParamsTag = new StitchingParamsTag( id, klass, numberOfStitches, stapleShape, body );
-*/
       const stitchingParamsTag = this.createStitchingParamsTag(stitchingParamsTags[i]);
       jdf.pushStitchingParamsTag( stitchingParamsTag );
     }
@@ -338,19 +311,6 @@ export class Cip4Service {
     const trimmingParamsTags = dom.getElementsByTagName('TrimmingParams');
     console.log('trimmingParamsTags.length: ' + trimmingParamsTags.length);
     for (let i = 0; i < trimmingParamsTags.length; ++i ) {
-/*
-      const j = trimmingParamsTags[i];
-      const id = j.getAttribute('ID');
-      const klass = j.getAttribute('Class');
-      const noOp = j.getAttribute('NoOp');
-      const trimmingType = j.getAttribute('TrimmingType');
-      const height = j.getAttribute('Height');
-      const width = j.getAttribute('Width');
-      const trimmingOffset = j.getAttribute('TrimmingOffset');
-      const body = vkbeautify.xml( j.outerHTML.toString() );
-
-      const trimmingParamsTag = new TrimmingParamsTag( id, klass, noOp, trimmingType, width, height, trimmingOffset, body );
-*/
       const trimmingParamsTag = this.createTrimmingParamsTag(trimmingParamsTags[i]);
       jdf.pushTrimmingParamsTag( trimmingParamsTag );
     }
@@ -359,100 +319,33 @@ export class Cip4Service {
     const foldingParamsTags = dom.getElementsByTagName('FoldingParams');
     console.log('foldingParamsTags.length: ' + foldingParamsTags.length);
     for (let i = 0; i < foldingParamsTags.length; ++i ) {
-/*
-      const j = foldingParamsTags[i];
-      const id = j.getAttribute('ID');
-      const klass = j.getAttribute('Class');
-      const descriptionType = j.getAttribute('DescriptionType');
-      const foldCatalog = j.getAttribute('FoldCatalog');
-      const folds: FoldTag[] = [];
-  //          const body = j.outerHTML.toString();
-      const body = vkbeautify.xml( j.outerHTML.toString() );
-
-      const fBlocks = j.getElementsByTagName('Fold');
-      for ( let ff = 0; ff < fBlocks.length; ++ ff ) {
-        const x = fBlocks[ff];
-        const x_to = x.getAttribute('To');
-        const x_from = x.getAttribute('From');
-        const x_travel = x.getAttribute('Travel');
-        const ft = new FoldTag(x_to, x_from, x_travel);
-        folds.push( ft );
-      }
-      const foldingParamsTag = new FoldingParamsTag( id, klass, descriptionType, foldCatalog, folds, body );
-*/
       const foldingParamsTag = this.createFoldingParamsTag(foldingParamsTags[i]);
       jdf.pushFoldingParamsTag( foldingParamsTag );
-/*            this.foldingParamsTags.push( foldingParamsTag );
-          */
     }
 
-          // CuttingParamsタグ
-          const cuttingParamsTags = dom.getElementsByTagName('CuttingParams');
-          console.log('cuttingParamsTags.length: ' + cuttingParamsTags.length);
-          for (let i = 0; i < cuttingParamsTags.length; ++i ) {
-/*
-            const j = cuttingParamsTags[i];
-            const id = j.getAttribute('ID');
-            const klass = j.getAttribute('Class');
-            const cutBlocks: CutBlockTag[] = [];
-            const body = vkbeautify.xml( j.outerHTML.toString() );
+    // CuttingParamsタグ
+    const cuttingParamsTags = dom.getElementsByTagName('CuttingParams');
+    console.log('cuttingParamsTags.length: ' + cuttingParamsTags.length);
+    for (let i = 0; i < cuttingParamsTags.length; ++i) {
+      const cuttingParamsTag = this.createCuttingParamsTag(cuttingParamsTags[i]);
+      jdf.pushCuttingParamsTag(cuttingParamsTag);
+    }
 
-            const cBlocks = j.getElementsByTagName('CutBlock');
-            for ( let cc = 0; cc < cBlocks.length; ++ cc ) {
-              const x = cBlocks[cc];
-              const x_id = x.getAttribute('ID');
-              const x_class = x.getAttribute('Class');
-              const x_blockType = x.getAttribute('BlockType');
-              const x_blockName = x.getAttribute('BlockName');
-              const X_blockSize = x.getAttribute('BlockSize');
-              const x_blockTrf = x.getAttribute('BlockTrf');
-              const cbt = new CutBlockTag(x_id, x_class, x_blockType, x_blockName, X_blockSize, x_blockTrf,
-                   vkbeautify.xml(x.outerHTML.toString()));
-              cutBlocks.push(cbt);
-            }
-
-            const cuttingParamsTag = new CuttingParamsTag( id, klass, cutBlocks, body );
-*/
-            const cuttingParamsTag = this.createCuttingParamsTag(cuttingParamsTags[i]);
-            jdf.pushCuttingParamsTag(cuttingParamsTag);
-/*            this.cuttingParamsTags.push( cuttingParamsTag );
-          */        }
-
-          // CoverApplicationParamsタグ
-          const coverApplicationParamsTags = dom.getElementsByTagName('CoverApplicationParams');
-          console.log('coverApplicationParamsTags.length: ' + coverApplicationParamsTags.length);
-          for (let i = 0; i < coverApplicationParamsTags.length; ++i ) {
-/*
-            const j = coverApplicationParamsTags[i];
-            const id = j.getAttribute('ID');
-            const klass = j.getAttribute('Class');
-            const noOp = j.getAttribute('NoOp');
-            const body = vkbeautify.xml( j.outerHTML.toString() );
-
-            const coverApplicationParamsTag = new CoverApplicationParamsTag( id, klass, noOp, body );
-*/
-            const coverApplicationParamsTag = this.createCoverApplicationParamsTag(coverApplicationParamsTags[i]);
-            jdf.pushCoverApplicationParamsTag(coverApplicationParamsTag);
-/*            this.coverApplicationParamsTags.push( coverApplicationParamsTag );
-          */        }
+    // CoverApplicationParamsタグ
+    const coverApplicationParamsTags = dom.getElementsByTagName('CoverApplicationParams');
+    console.log('coverApplicationParamsTags.length: ' + coverApplicationParamsTags.length);
+    for (let i = 0; i < coverApplicationParamsTags.length; ++i) {
+      const coverApplicationParamsTag = this.createCoverApplicationParamsTag(coverApplicationParamsTags[i]);
+      jdf.pushCoverApplicationParamsTag(coverApplicationParamsTag);
+    }
 
           // SpinePreparationParamsタグ
           const spinePreparationParamsTags = dom.getElementsByTagName('SpinePreparationParams');
           console.log('spinePreparationParamsTags.length: ' + spinePreparationParamsTags.length);
           for (let i = 0; i < spinePreparationParamsTags.length; ++i ) {
-/*
-            const j = spinePreparationParamsTags[i];
-            const id = j.getAttribute('ID');
-            const klass = j.getAttribute('Class');
-            const millingDepth = j.getAttribute('MillingDepth');
-            const body = vkbeautify.xml( j.outerHTML.toString() );
-
-            const spinePreparationParamsTag = new SpinePreparationParamsTag( id, klass, millingDepth, body );
-*/
             const spinePreparationParamsTag = this.createSpinePreparationParamsTag(spinePreparationParamsTags[i]);
             jdf.pushSpinePreparationParamsTag( spinePreparationParamsTag);
-/*            this.spinePreparationParamsTags.push( spinePreparationParamsTag );
-          */        }
+          }
 
           // StackingParamsタグ
           const stackingParamsTags = dom.getElementsByTagName('StackingParams');
@@ -461,128 +354,24 @@ export class Cip4Service {
             const j = stackingParamsTags[i];
             // ResourcePool 直下か
             if ( j.parentElement === resourcePool ) {
-/*
-              const id = j.getAttribute('ID');
-              const klass = j.getAttribute('Class');
-              const standardAmount = j.getAttribute('StandardAmount');
-              const layerAmount = j.getAttribute('LayerAmount');
-              const body = vkbeautify.xml( j.outerHTML.toString() );
-
-              const stackingParamsTag = new StackingParamsTag( id, klass, standardAmount, layerAmount, body );
-*/
               const stackingParamsTag = this.createStackingParamsTag(j);
               jdf.pushStackingParamsTag( stackingParamsTag );
             }
-/*            this.stackingParamsTags.push( stackingParamsTag );
-          */
          }
 
           // JDFタグ  最後が良い、多分。参照したいデータが揃っているはずなので
           const jdfTags = dom.getElementsByTagName('JDF');
           console.log('jdfTags.length: ' + jdfTags.length);
           for (let i = 0; i < jdfTags.length; ++i ) {
-/*
-            const j = jdfTags[i];
-            const id = j.getAttribute('ID');
-            const type = j.getAttribute('Type');
-            const dn = j.getAttribute('DescriptiveName');
-            const jobId = j.getAttribute('JobID');
-            const jobPartId = j.getAttribute('JobPartID');
-            const body = vkbeautify.xml( j.outerHTML.toString() );
-  //          const body = j.outerHTML.toString();
-
-            const inputComponentLinks: ComponentLinkTag[] = [];
-            const outputComponentLinks: ComponentLinkTag[] = [];
-            const paramsLinks: LinkTag[] = [];
-            const deviceLinks: LinkTag[] = [];
-            const linkPools = j.getElementsByTagName('ResourceLinkPool');
-            if ( linkPools.length === 1) {
-              for ( let k = 0; k < linkPools[0].children.length; k++ ) {
-                const comp = linkPools[0].children[k];
-                let usage = '';
-                let rRef = '';
-                let amount = '';
-                switch ( comp.tagName ) {
-                  case 'ComponentLink':
-                    usage = comp.getAttribute('Usage');
-                    rRef = comp.getAttribute('rRef');
-                    amount = comp.getAttribute('Amount');
-                    const cl = new ComponentLinkTag(usage, rRef, amount);
-                    if ( usage.toLowerCase() === 'input' ) {
-                      inputComponentLinks.push(cl);
-                    } else {
-                      outputComponentLinks.push(cl);
-                    }
-                    break;
-                  case 'SpinePreparationParamsLink':
-                    usage = comp.getAttribute('Usage');
-                    rRef = comp.getAttribute('rRef');
-                    amount = comp.getAttribute('Amount');
-                    const sppl = new SpinePrearationParamsLinkTag( usage, rRef, amount );
-                    paramsLinks.push(sppl);
-                    break;
-                  case 'CoverApplicationParamsLink':
-                    usage = comp.getAttribute('Usage');
-                    rRef = comp.getAttribute('rRef');
-                    const capl = new CoverApplicationParamsLinkTag( usage, rRef, amount );
-                    paramsLinks.push(capl);
-                    break;
-                  case 'StitchingParamsLink':
-                    usage = comp.getAttribute('Usage');
-                    rRef = comp.getAttribute('rRef');
-                    const spl = new StitchingParamsLinkTag( usage, rRef, amount );
-                    paramsLinks.push(spl);
-                    break;
-                  case 'TrimmingParamsLink':
-                    usage = comp.getAttribute('Usage');
-                    rRef = comp.getAttribute('rRef');
-                    const tpl = new TrimmingParamsLinkTag( usage, rRef, amount );
-                    paramsLinks.push(tpl);
-                    break;
-                  case 'CuttingParamsLink':
-                    usage = comp.getAttribute('Usage');
-                    rRef = comp.getAttribute('rRef');
-                    const cpl = new CuttingParamsLinkTag( usage, rRef, amount );
-                    paramsLinks.push(cpl);
-                    break;
-                  case 'FoldingParamsLink':
-                    usage = comp.getAttribute('Usage');
-                    rRef = comp.getAttribute('rRef');
-                    const fpl = new FoldingParamsLinkTag( usage, rRef, amount );
-                    paramsLinks.push(fpl);
-                    break;
-                  case 'DeviceLink':
-                    usage = comp.getAttribute('Usage');
-                    rRef = comp.getAttribute('rRef');
-                    const dl = new DeviceLinkTag( usage, rRef, amount );
-                    deviceLinks.push(dl);
-                    break;
-                  case 'StackingParamsLink':
-                    usage = comp.getAttribute('Usage');
-                    rRef = comp.getAttribute('rRef');
-                    const spl2 = new StackingParamsLinkTag( usage, rRef, amount );
-                    paramsLinks.push(spl2);
-                    break;
-                  default:
-                    console.log('default キター: ' + comp.tagName);
-                    break;
-                }
-              }
-            }
-            const jdfTag = new JdfTag( id, type, dn, jobId, jobPartId,
-                inputComponentLinks, outputComponentLinks, paramsLinks, deviceLinks, body );
-*/
             const jdfTag = this.createJdfTag(jdfTags[i]);
 
             if ( jdfTags[i].parentElement === null /* type === 'ProcessGroup'*/ ) {
               jdf.jobTag = jdfTag;
             } else {
               jdf.pushProcessTag(jdfTag);
-/*              this.processTags.push( jdfTag );
-            */          }
+            }
           }
-/*        }*/
-        return jdf;
+    return jdf;
   }
 
   parseJDF(file): Promise<JDF> {

@@ -30,7 +30,6 @@ const KEY_SEARCH_USER_ID = 'KEY_SEARCH_USER_ID';
 })
 export class AppComponent implements AfterViewInit, AfterViewChecked {
   fileLoaded = false;
-//  fileSelected = false;
   filename = '';
   cy = null;  // Cytoscape
   jdf: JDF = null;
@@ -72,22 +71,13 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
   }
 
   onChanged(fileVal) {
-//    this.filename = fileVal.name;
-    console.log('onChanged: ' + fileVal.name /* this.filename*/);
-
-//    this.fileSelected = (this.filename !== '');
+    console.log('onChanged: ' + fileVal.name);
 
     this.yes(fileVal);
   }
 
   yes(fileVal) {
-//    const file = fileVal;
-//    const fileName: string = fileVal.name;
-
-//    console.log('fileName: '+fileName);
-
     this.letsLoad(fileVal);
-//    this.cip4.parseJDF(file);
   }
 
   async letsLoad( f ) {
@@ -99,7 +89,6 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
       this.filename = f.name;
       
       setTimeout(() => { // チョイ待たせてCytoscape
-//        this.doLayout();
         this.initCytoscape();
         this.makeGraph();
         this.doHighlight();
@@ -258,9 +247,6 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
             'arrow-scale': 1,
             'target-arrow-color': '#222',
             'target-arrow-shape': 'triangle',
-//            'target-endpoint': 'outside-to-node',
-//            'source-arrow-color': '#088',
-//            'source-arrow-shape': 'triangle',
             'source-label': 'data(amount)',
             'source-text-offset': 20,
             'source-text-margin-x': 10,
@@ -304,18 +290,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
       const id = target.id();
       console.log('unselect: ' + id);
       this.selectedGuid = '';
+    });
 
-      if (id) {
-//        target.select();
-//        this.scrollTo(tag_id);
-      }
-    });
-/*
-    this.cy.on('tap','.process',(evt) => {
-      const target = evt.target;
-      console.log('tapped: '+target.data('tag_id');
-    });
-*/
     // componentノード作成
     this.jdf.componentTags.forEach( (v, i, a) => {
       this.cy.add([
@@ -661,8 +637,6 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
           comment: result.comment
         };
 
-//        console.log('uploadToCloud() : ' + body);
-
         this.httpService.uploadXml(body, msg => {
           this.ret_from_post = msg;
 
@@ -674,41 +648,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         console.log('キャンセルされました？');
       }
     });
-/*
-    const body = {
-      user_id: 'michael',
-      filename: this.filename,
-      xml: this.jdf.beautifiedXml,
-      comment: 'よいんじゃない？良いよね！？'
-    };
-
-    console.log('uploadToCloud() : ' + body);
-
-    this.httpService.uploadXml(body, msg => {
-      this.ret_from_post = msg;
-
-      this.snackBar.open('upload', '成功', {
-        duration: 2000,
-      });
-    });
-  */
-   }
-/*
-    saveMessage2(): void {
-    const body = {
-      user_id: 'sato',
-      filename: 'ABC.txt',
-      xml: '春はあけぼの',
-      comment: 'よいんじゃない？'
-    };
-
-    console.log('uploadToCloud() : ' + body);
-
-    this.httpService.uploadXml(body, msg => {
-      this.ret_from_post = msg;
-    });
   }
-*/
+
   saveMessage3(): void {
     console.log('saveMessage3()');
 
@@ -738,9 +679,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         console.log('The dialog was closed');
         console.log('    user_id: ' + result.user_id);
         console.log('    f:       ' + result.f.filename);
-//        localStorage.setItem(KEY_BASE_URL, result);
-//        this.httpService.setBaseURL(result);
-        //      this.animal = result;
+
         localStorage.setItem(KEY_SEARCH_USER_ID, result.user_id);
 
         this.jdf = this.cip4.parseJDFfromString(result.f.xml);
@@ -751,7 +690,6 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         console.log('fromstring filename:'+this.filename);
 
         setTimeout(() => { // チョイ待たせてCytoscape
-  //        this.doLayout();
           this.initCytoscape();
           this.makeGraph();
           this.doHighlight();
@@ -765,7 +703,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
   }
 
   saveToFile(): void {
-    const content = this.jdf.beautifiedXml; // '春はあけぼの';
+    const content = this.jdf.beautifiedXml;
     const blob = new Blob([content],{'type':'text/xml'});
 
     if (window.navigator.msSaveBlob) {
@@ -791,7 +729,6 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         console.log('The dialog was closed: ' + result);
-        //      this.animal = result;
       } else {
         console.log('キャンセルされました？');
       }
@@ -813,22 +750,5 @@ interface Fi {
   comment: string;
   filename: string;
   xml: string;
-}
-*/
-/*
-@Component({
-  selector: 'app-settings-dialog',
-  templateUrl: './app-settings-dialog.component.html',
-  styleUrls: ['./app-settings-dialog.component.css']
-})
-export class AppSettingsDialogComponent {
-
-  constructor(
-    public dialogRef: MatDialogRef<AppSettingsDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
 }
 */
