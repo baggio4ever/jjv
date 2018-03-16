@@ -600,6 +600,10 @@ export class Cip4Service {
       reader.readAsText(file);
     });
   }
+
+  parseJDFfromString(s: string): JDF {
+    return this.buildJDF(s);
+  }
 }
 
 export class JDF {

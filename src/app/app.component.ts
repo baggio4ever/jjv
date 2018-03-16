@@ -72,8 +72,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
   }
 
   onChanged(fileVal) {
-    this.filename = fileVal.name;
-    console.log('onChanged: ' + this.filename);
+//    this.filename = fileVal.name;
+    console.log('onChanged: ' + fileVal.name /* this.filename*/);
 
 //    this.fileSelected = (this.filename !== '');
 
@@ -96,6 +96,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
       console.log(this.jdf);
 
       this.fileLoaded = true;
+      this.filename = f.name;
+      
       setTimeout(() => { // チョイ待たせてCytoscape
 //        this.doLayout();
         this.initCytoscape();
@@ -731,6 +733,21 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
 //        this.httpService.setBaseURL(result);
         //      this.animal = result;
         localStorage.setItem(KEY_SEARCH_USER_ID, result.user_id);
+
+        this.jdf = this.cip4.parseJDFfromString(result.f.xml);
+        console.log(this.jdf);
+
+        this.fileLoaded = true;
+        this.filename = result.f.filename;
+        console.log('fromstring filename:'+this.filename);
+
+        setTimeout(() => { // チョイ待たせてCytoscape
+  //        this.doLayout();
+          this.initCytoscape();
+          this.makeGraph();
+          this.doHighlight();
+        }, 0);
+
       } else {
         console.log('キャンセルされました？');
       }
