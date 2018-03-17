@@ -158,8 +158,8 @@
                     <td>
                         <table rules="rows">
                           <tr>
-                            <td></td>
-                            <td>Amount</td>
+                            <th></th>
+                            <th><span class="my-smaller">Amount</span></th>
                           </tr>
                           <tr *ngFor="let l of t.inputComponentLinks">
                             <td><span class="like-link" (click)="scrollTo(l.rRef)">{{l.rRef}}</span></td>
@@ -179,8 +179,8 @@
                     <td>
                         <table rules="rows">
                           <tr>
-                            <td></td>
-                            <td>Amount</td>
+                            <th></th>
+                            <th><span class="my-smaller">Amount</span></th>
                           </tr>
                           <tr *ngFor="let l of t.outputComponentLinks">
                             <td><span class="like-link" (click)="scrollTo(l.rRef)">{{l.rRef}}</span></td>
@@ -251,23 +251,44 @@
                   <tr>
                     <td>Dimensions</td>
                       <td>
+                        <!--
                         <table rules="rows">
+                          <tr>
+                            <td></td>
+                            <td>Amount</td>
+                          </tr>
+                          <tr *ngFor="let l of t.outputComponentLinks">
+                            <td><span class="like-link" (click)="scrollTo(l.rRef)">{{l.rRef}}</span></td>
+                            <td><span *ngIf="l.amount>0">{{l.amount|number}}</span></td>
+                          </tr>
+                        </table>
+                      -->
+                        <table rules="rows">
+                          <tr>
+                            <td></td>
+                            <th><span class="my-smaller">pt</span></th>
+                            <th><span class="my-smaller">mm</span></th>
+                          </tr>
                           <tr>
                             <td>幅</td>
                             <td>{{t.getDimensionsWidth()}}</td>
+                            <td>{{t.getDimensionsWidth_mm()}}</td>
                           </tr>
                           <tr>
                             <td>長さ</td>
                             <td>{{t.getDimensionsLength()}}</td>
+                            <td>{{t.getDimensionsLength_mm()}}</td>
                           </tr>
                           <tr>
                             <td>厚さ</td>
                             <td>{{t.getDimensionsThickness()}}</td>
+                            <td>{{t.getDimensionsThickness_mm()}}</td>
                           </tr>
                         </table>
                       </td>
                   </tr>
-                  <tr>
+<!--
+                    <tr>
                     <td>Dimensions <span class="my-smaller">[mm]</span></td>
                     <td>
                         <table rules="rows">
@@ -286,6 +307,7 @@
                         </table>
                     </td>
                   </tr>
+                -->
                   <tr *ngIf="jdf.getPreviousProcesses(t).length>0">
                     <td>前工程 <span class="my-smaller">（生成元）</span></td>
                     <td>
@@ -439,20 +461,70 @@
                     <td>{{t.trimmingType}}</td>
                   </tr>
                   <tr>
-                    <td>Width <span class="my-smaller">[pt]</span></td>
+                    <td>Width</td>
+<!--
                     <td>{{t.width}}</td>
+-->
+                    <td>
+                        <table rules="rows">
+                          <tr>
+                            <th><span class="my-smaller">pt</span></th>
+                            <th><span class="my-smaller">mm</span></th>
+                          </tr>
+                          <tr>
+                            <td>{{t.width}}</td>
+                            <td>{{t.getWidth_mm()}}</td>
+                          </tr>
+                        </table>
+                    </td>
                   </tr>
+                  <!--
                   <tr>
                     <td>Height <span class="my-smaller">[pt]</span></td>
                     <td>{{t.height}}</td>
                   </tr>
+                -->
+                  <!--
                   <tr>
                     <td>Width <span class="my-smaller">[mm]</span></td>
                     <td>{{t.getWidth_mm()}}</td>
                   </tr>
+                -->
                   <tr>
-                    <td>Height <span class="my-smaller">[mm]</span></td>
+                    <td>Height</td>
+                    <td>
+                        <table rules="rows">
+                          <tr>
+                            <th><span class="my-smaller">pt</span></th>
+                            <th><span class="my-smaller">mm</span></th>
+                          </tr>
+                          <tr>
+                            <td>{{t.height}}</td>
+                            <td>{{t.getHeight_mm()}}</td>
+                          </tr>
+                        </table>
+                    </td>
+                    <!--
                     <td>{{t.getHeight_mm()}}</td>
+                    -->
+                  </tr>
+                  <tr>
+                    <td>TrimmingOffset</td>
+                    <td>
+                        <table rules="rows">
+                          <tr>
+                            <th><span class="my-smaller">pt</span></th>
+                            <th><span class="my-smaller">mm</span></th>
+                          </tr>
+                          <tr>
+                            <td>{{t.trimmingOffset}}</td>
+                            <td>{{t.getTrimmingOffset_mm()}}</td>
+                          </tr>
+                        </table>
+                    </td>
+                    <!--
+                    <td>{{t.getHeight_mm()}}</td>
+                    -->
                   </tr>
                   <tr *ngIf="jdf.getProcessesUsingThisParams(t).length>0">
                     <td>利用工程</td>
@@ -634,12 +706,15 @@
                       <!-- BlockSize Column -->
                       <ng-container matColumnDef="blockSize">
                         <mat-header-cell *matHeaderCellDef> BlockSize<br>幅<br>高さ </mat-header-cell>
+<!--
                         <mat-cell *matCellDef="let element"> {{element.blockSize}} </mat-cell>
+-->
+                        <mat-cell *matCellDef="let element"> {{element.getBlockWidth()}}<br>{{element.getBlockHeight()}} </mat-cell>
                       </ng-container>
     
                       <!-- BlockTrf Column -->
                       <ng-container matColumnDef="blockTrf">
-                        <mat-header-cell *matHeaderCellDef> BlockTrf </mat-header-cell>
+                        <mat-header-cell *matHeaderCellDef> BlockTrf<br>-<br>開始X<br>開始Y </mat-header-cell>
                         <mat-cell *matCellDef="let element"> {{element.blockTrf}} </mat-cell>
                       </ng-container>
     

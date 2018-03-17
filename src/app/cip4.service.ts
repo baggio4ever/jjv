@@ -857,6 +857,10 @@ export class TrimmingParamsTag  extends IdHavingTag {
   getHeight_mm(): number {
     return JDFUtils.pt2mm( JDFUtils.parseNumber(this.height) );
   }
+
+  getTrimmingOffset_mm(): number {
+    return JDFUtils.pt2mm( JDFUtils.parseNumber(this.trimmingOffset) );
+  }
 }
 
 export class FoldingParamsTag  extends IdHavingTag {
@@ -919,6 +923,9 @@ export class CutBlockTag  extends IdHavingTag {
   blockTrf: string;
   body: string;
 
+  block_width: number;
+  block_height: number;
+
   constructor( id: string, klass: string, blockType: string, blockName: string, blockSize: string, blockTrf: string, body: string ) {
     super(id);
 
@@ -929,6 +936,26 @@ export class CutBlockTag  extends IdHavingTag {
     this.blockTrf = blockTrf;
 
     this.body = body;
+
+    const b = blockSize.split(' ');
+    this.block_width = JDFUtils.parseNumber(b[0]);
+    this.block_height = JDFUtils.parseNumber(b[1]);
+  }
+
+  getBlockWidth(): number {
+    return this.block_width;
+  }
+
+  getBlockWidth_mm(): number {
+    return JDFUtils.pt2mm( this.block_width );
+  }
+
+  getBlockHeight(): number {
+    return this.block_height;
+  }
+
+  getBlockHeight_mm(): number {
+    return JDFUtils.pt2mm( this.block_height );
   }
 }
 

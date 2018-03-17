@@ -236,8 +236,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
           selector: 'edge',
           style: {
             'width': 1,
-            'line-color': '#444',
-            'target-arrow-color': '#444',
+            'line-color': '#555',
+            'target-arrow-color': '#777',
             'target-arrow-shape': 'triangle'
           }
         },
@@ -246,9 +246,9 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
           style: {
             'curve-style': 'bezier',
             'width': 2,
-            'line-color': '#222',
+            'line-color': '#777',
             'arrow-scale': 1,
-            'target-arrow-color': '#222',
+            'target-arrow-color': '#777',
             'target-arrow-shape': 'triangle',
             'source-label': 'data(amount)',
             'source-text-offset': 25,
