@@ -91,7 +91,7 @@
     <div id="main">
       <div *ngIf="jdf.jobTag !== null">
         <h3 id="job_top">Job</h3>
-        <div id="{{jdf.jobTag.id}}" class="example-card" (click)="cardClicked(jdf.jobTag.guid)">
+        <div id="{{jdf.jobTag.guid}}" class="example-card" (click)="cardClicked(jdf.jobTag.guid)">
           <mat-card>
             <mat-card-header>
               <mat-card-title>{{jdf.jobTag.id}}</mat-card-title>
@@ -130,7 +130,7 @@
       <div *ngIf="jdf.processTags.length>0">
         <h3 id="process_top">Processes</h3>
         <div>
-          <div *ngFor="let t of jdf.processTags" id="{{t.id}}" [class.selected]="isSelected(t.guid)" class="example-card"  (click)="cardClicked(t.guid)">
+          <div *ngFor="let t of jdf.processTags" id="{{t.guid}}" [class.selected]="isSelected(t.guid)" class="example-card"  (click)="cardClicked(t.guid)">
             <mat-card>
               <mat-card-header>
                 <mat-card-title>{{t.id}}</mat-card-title>
@@ -229,7 +229,7 @@
       <div *ngIf="jdf.componentTags.length>0">
         <h3 id="component_top">Components</h3>
         <div>
-          <div *ngFor="let t of jdf.componentTags" id="{{t.id}}" [class.selected]="isSelected(t.guid)" class="example-card" (click)="cardClicked(t.guid)">
+          <div *ngFor="let t of jdf.componentTags" id="{{t.guid}}" [class.selected]="isSelected(t.guid)" class="example-card" (click)="cardClicked(t.guid)">
             <mat-card>
               <mat-card-header>
                 <mat-card-title>{{t.id}}</mat-card-title>
@@ -341,7 +341,7 @@
       <div *ngIf="jdf.deviceTags.length>0">
         <h3 id="device_top">Devices</h3>
         <div>
-          <div *ngFor="let t of jdf.deviceTags" id="{{t.id}}" [class.selected]="isSelected(t.guid)" class="example-card" (click)="cardClicked(t.guid)">
+          <div *ngFor="let t of jdf.deviceTags" id="{{t.guid}}" [class.selected]="isSelected(t.guid)" class="example-card" (click)="cardClicked(t.guid)">
             <mat-card>
               <mat-card-header>
                 <mat-card-title>{{t.id}}</mat-card-title>
@@ -389,7 +389,7 @@
       <div *ngIf="jdf.stitchingParamsTags.length>0">
         <h3 id="stitchingParams_top">StitchingParams</h3>
         <div>
-          <div *ngFor="let t of jdf.stitchingParamsTags" id="{{t.id}}" [class.selected]="isSelected(t.guid)" class="example-card" (click)="cardClicked(t.guid)">
+          <div *ngFor="let t of jdf.stitchingParamsTags" id="{{t.guid}}" [class.selected]="isSelected(t.guid)" class="example-card" (click)="cardClicked(t.guid)">
             <mat-card>
               <mat-card-header>
                 <mat-card-title>{{t.id}}</mat-card-title>
@@ -437,7 +437,7 @@
       <div *ngIf="jdf.trimmingParamsTags.length>0">
         <h3 id="trimmingParams_top">TrimmingParams</h3>
         <div>
-          <div *ngFor="let t of jdf.trimmingParamsTags" id="{{t.id}}" [class.selected]="isSelected(t.guid)" class="example-card" (click)="cardClicked(t.guid)">
+          <div *ngFor="let t of jdf.trimmingParamsTags" id="{{t.guid}}" [class.selected]="isSelected(t.guid)" class="example-card" (click)="cardClicked(t.guid)">
             <mat-card>
               <mat-card-header>
                 <mat-card-title>{{t.id}}</mat-card-title>
@@ -551,7 +551,7 @@
       <div *ngIf="jdf.foldingParamsTags.length>0">
         <h3 id="foldingParams_top">FoldingParams</h3>
         <div>
-          <div *ngFor="let t of jdf.foldingParamsTags" id="{{t.id}}" [class.selected]="isSelected(t.guid)" class="example-card" (click)="cardClicked(t.guid)">
+          <div *ngFor="let t of jdf.foldingParamsTags" id="{{t.guid}}" [class.selected]="isSelected(t.guid)" class="example-card" (click)="cardClicked(t.guid)">
             <mat-card>
               <mat-card-header>
                 <mat-card-title>{{t.id}}</mat-card-title>
@@ -642,7 +642,7 @@
       <div *ngIf="jdf.cuttingParamsTags.length>0">
         <h3 id="cuttingParams_top">CuttingParams</h3>
         <div>
-          <div *ngFor="let t of jdf.cuttingParamsTags" id="{{t.id}}" [class.selected]="isSelected(t.guid)" class="example-card" (click)="cardClicked(t.guid)">
+          <div *ngFor="let t of jdf.cuttingParamsTags" id="{{t.guid}}" [class.selected]="isSelected(t.guid)" class="example-card" (click)="cardClicked(t.guid)">
             <mat-card>
               <mat-card-header>
                 <mat-card-title>{{t.id}}</mat-card-title>
@@ -755,7 +755,7 @@
       <div *ngIf="jdf.coverApplicationParamsTags.length>0">
         <h3 id="coverApplicationParams_top">CoverApplicationParams</h3>
         <div>
-          <div *ngFor="let t of jdf.coverApplicationParamsTags" id="{{t.id}}" [class.selected]="isSelected(t.guid)" class="example-card" (click)="cardClicked(t.guid)">
+          <div *ngFor="let t of jdf.coverApplicationParamsTags" id="{{t.guid}}" [class.selected]="isSelected(t.guid)" class="example-card" (click)="cardClicked(t.guid)">
             <mat-card>
               <mat-card-header>
                 <mat-card-title>{{t.id}}</mat-card-title>
@@ -799,7 +799,7 @@
       <div *ngIf="jdf.spinePreparationParamsTags.length>0">
         <h3 id="spinePreparationParams_top">SpinePreparationParams</h3>
         <div>
-          <div *ngFor="let t of jdf.spinePreparationParamsTags" id="{{t.id}}" [class.selected]="isSelected(t.guid)" class="example-card" (click)="cardClicked(t.guid)">
+          <div *ngFor="let t of jdf.spinePreparationParamsTags" id="{{t.guid}}" [class.selected]="isSelected(t.guid)" class="example-card" (click)="cardClicked(t.guid)">
             <mat-card>
               <mat-card-header>
                 <mat-card-title>{{t.id}}</mat-card-title>
@@ -843,7 +843,7 @@
       <div *ngIf="jdf.stackingParamsTags.length>0">
         <h3 id="stackingParams_top">StackingParams</h3>
         <div>
-          <div *ngFor="let t of jdf.stackingParamsTags" id="{{t.id}}" [class.selected]="isSelected(t.guid)" class="example-card" (click)="cardClicked(t.guid)">
+          <div *ngFor="let t of jdf.stackingParamsTags" id="{{t.guid}}" [class.selected]="isSelected(t.guid)" class="example-card" (click)="cardClicked(t.guid)">
             <mat-card>
               <mat-card-header>
                 <mat-card-title>{{t.id}}</mat-card-title>
@@ -895,13 +895,13 @@
     <!-- ファイル開いていない時 -->
     <div>
       <div id="drop_zone" (drop)="dropHandler($event)" (dragover)="dragOverHandler($event)">
-        <p>JDFファイルをドロップしてけれ</p>
+        <p>JDFファイルをドロップしてちょうだい</p>
       </div>
     </div>
 
   </ng-template>
 
-  <!-- 共通 -->
+  <!-- 共通 --
   <button (click)="sayHello()">jjv-serverとテスト通信</button><br>
   <strong>message:</strong><br>
   {{ret_from_http}}<br>
@@ -911,8 +911,6 @@
   <br><br>
   <button (click)="saveMessage()">jjv-serverにテスト書き込み</button><br>
   {{ret_from_post}}<br>
-  <!--
-  <button (click)="saveMessage2()">jjv-serverにupload</button><br>
-  -->
   <button (click)="saveMessage3()">jjv-serverからgetFiles</button><br>
+  -->
 </div>

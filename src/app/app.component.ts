@@ -115,10 +115,10 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
     }
   }
 
-  scrollTo( tagName: string ): void {
+  scrollTo( guid: string ): void {
     try {
-      console.log('tagName: ' + tagName);
-      document.getElementById(tagName).scrollIntoView( {behavior: 'smooth', block: 'center', inline: 'center'});
+      console.log('tagName: ' + guid);
+      document.getElementById(guid).scrollIntoView( {behavior: 'smooth', block: 'center', inline: 'center'});
     } catch (e) {
       console.log('error!:' + e);
     }
@@ -143,7 +143,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         {
           selector: '.process',
           style: {
-            'label': 'data(tag_id)',
+            'label': 'data(jdf_id)',
             'shape': 'ellipse',
             'background-color': '#800',
             'border-width': 1,
@@ -157,7 +157,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         {
           selector: ':selected.process',
           style: {
-            'label': 'data(tag_id)',
+            'label': 'data(jdf_id)',
             'shape': 'ellipse',
             'background-color': '#f00',
             'border-width': 2,
@@ -167,7 +167,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         {
           selector: '.component',
           style: {
-            'label': 'data(tag_id)',
+            'label': 'data(jdf_id)',
             'shape': 'rectangle',
             'background-color': '#888',
             'border-width': 1,
@@ -179,7 +179,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         {
           selector: ':selected.component',
           style: {
-            'label': 'data(tag_id)',
+            'label': 'data(jdf_id)',
             'shape': 'rectangle',
             'background-color': '#ffffef',
             'border-width': 2,
@@ -189,7 +189,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         {
           selector: '.params',
           style: {
-            'label': 'data(tag_id)',
+            'label': 'data(jdf_id)',
             'shape': 'tag',
             'background-color': '#850',
             'border-width': 1,
@@ -206,7 +206,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         {
           selector: ':selected.params',
           style: {
-            'label': 'data(tag_id)',
+            'label': 'data(jdf_id)',
             'background-color': '#fb0',
             'border-width': 2,
             'border-color': 'black',
@@ -215,7 +215,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         {
           selector: '.device',
           style: {
-            'label': 'data(tag_id)',
+            'label': 'data(jdf_id)',
             'shape': 'hexagon',
             'background-color': '#383',
             'border-width': 1,
@@ -274,10 +274,10 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
     // イベント
     this.cy.on('tap', 'node', (evt) => {
       const target = evt.target;
-      const tag_id = target.data('tag_id');
-      console.log('tapped: ' + tag_id);
-      if (tag_id) {
-        this.scrollTo(tag_id);
+      const id = target.id();
+      console.log('tapped: ' + id);
+      if (id) {
+        this.scrollTo(id);
       }
     });
     this.cy.on('select', 'node', (evt) => {
@@ -301,7 +301,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         {
           data: {
             id: v.guid,
-            tag_id: v.id
+            jdf_id: v.id
           }
         }
       ]).addClass('component');
@@ -313,7 +313,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         {
           data: {
             id: v.guid,
-            tag_id: v.id
+            jdf_id: v.id
           }
         }
       ]).addClass('process');
@@ -325,7 +325,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         {
           data: {
             id: v.guid,
-            tag_id: v.id
+            jdf_id: v.id
           }
         }
       ]).addClass('device');
@@ -337,7 +337,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         {
           data: {
             id: v.guid,
-            tag_id: v.id
+            jdf_id: v.id
           }
         }
       ]).addClass('params');
@@ -349,7 +349,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         {
           data: {
             id: v.guid,
-            tag_id: v.id
+            jdf_id: v.id
           }
         }
       ]).addClass('params');
@@ -361,7 +361,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         {
           data: {
             id: v.guid,
-            tag_id: v.id
+            jdf_id: v.id
           }
         }
       ]).addClass('params');
@@ -373,7 +373,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         {
           data: {
             id: v.guid,
-            tag_id: v.id
+            jdf_id: v.id
           }
         }
       ]).addClass('params');
@@ -385,7 +385,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         {
           data: {
             id: v.guid,
-            tag_id: v.id
+            jdf_id: v.id
           }
         }
       ]).addClass('params');
@@ -397,7 +397,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         {
           data: {
             id: v.guid,
-            tag_id: v.id
+            jdf_id: v.id
           }
         }
       ]).addClass('params');
@@ -409,7 +409,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         {
           data: {
             id: v.guid,
-            tag_id: v.id
+            jdf_id: v.id
           }
         }
       ]).addClass('params');

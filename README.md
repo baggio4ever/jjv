@@ -72,3 +72,10 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 #### 正規表現
 [JavaScriptの正規表現で文字列を抜き出す「グループ化」](http://www.koikikukan.com/archives/2013/04/02-003300.php)
+
+
+## やりたいこと
+* IDではなく、GUIDでジャンプ 済み！
+* MesssageDialog作る
+* Nodeのlabel表示見直し（JobPartIDとかの方がよいかな）
+* Chart.jsの使い所ないかしら
