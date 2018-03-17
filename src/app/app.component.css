@@ -39,7 +39,7 @@ nav a.active {
 }
 
 .example-card {
-    margin-left: 30px;
+    margin-left: 20px;
     margin-right: 10px;
     margin-bottom: 10px;
 }
@@ -96,7 +96,7 @@ nav a.active {
 
 #main {
 /*    position: absolute;*/ /* うーん。どうすればヘッダーに隠れずに済ませられるのか。ScrollToするとヘッダーの下にジャンプすることがあるのよ */
-    padding-left: 340px;
+    padding-left: 350px;
 }
 
 

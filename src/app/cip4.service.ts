@@ -925,6 +925,9 @@ export class CutBlockTag  extends IdHavingTag {
 
   block_width: number;
   block_height: number;
+  block_x: number;
+  block_y: number;
+  block_zz: string; // なんて呼べば良いんだろう。BlockTrf の残り部分（頭部分）
 
   constructor( id: string, klass: string, blockType: string, blockName: string, blockSize: string, blockTrf: string, body: string ) {
     super(id);
@@ -940,6 +943,27 @@ export class CutBlockTag  extends IdHavingTag {
     const b = blockSize.split(' ');
     this.block_width = JDFUtils.parseNumber(b[0]);
     this.block_height = JDFUtils.parseNumber(b[1]);
+
+    // 正規表現を使って分解
+    // [1]: '1 0 0 1'
+    // [2]: x座標
+    // [3]: y座標
+    const rx = /^(\d+\s+\d+\s+\d+\s+\d+)\s+(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)$/;
+    const result = blockTrf.match(rx);
+
+    if(result) {
+      console.log(' ---- Hit! ---- ');
+      console.log('  length: '+result.length);
+      for(let i=0;i<result.length;i++) {
+        console.log('  ['+i+'] '+result[i]);
+      }
+
+      this.block_zz = result[1];
+      this.block_x = JDFUtils.parseNumber(result[2]);
+      this.block_y = JDFUtils.parseNumber(result[3]);
+    } else {
+      console.log(' ---- FAILED! ---- ');
+    }
   }
 
   getBlockWidth(): number {
@@ -956,6 +980,26 @@ export class CutBlockTag  extends IdHavingTag {
 
   getBlockHeight_mm(): number {
     return JDFUtils.pt2mm( this.block_height );
+  }
+
+  getBlockZz(): string {
+    return this.block_zz;
+  }
+
+  getBlockX(): number {
+    return this.block_x;
+  }
+
+  getBlockX_mm(): number {
+    return JDFUtils.pt2mm( this.block_x );
+  }
+
+  getBlockY(): number {
+    return this.block_y;
+  }
+
+  getBlockY_mm(): number {
+    return JDFUtils.pt2mm( this.block_y );
   }
 }
 

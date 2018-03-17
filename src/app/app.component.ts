@@ -16,7 +16,7 @@ Cytoscape.use(klay);
 declare var hljs: any;
 
 
-const JJV_VERSION = '0.1.2';
+const JJV_VERSION = '0.1.4';
 
 const KEY_BASE_URL = 'KEY_BASE_URL';
 const KEY_USER_ID = 'KEY_USER_ID';

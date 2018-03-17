@@ -705,17 +705,33 @@
     
                       <!-- BlockSize Column -->
                       <ng-container matColumnDef="blockSize">
-                        <mat-header-cell *matHeaderCellDef> BlockSize<br>幅<br>高さ </mat-header-cell>
+                        <mat-header-cell *matHeaderCellDef>
+                          BlockSize<br>
+                          幅<br>
+                          高さ
+                        </mat-header-cell>
 <!--
                         <mat-cell *matCellDef="let element"> {{element.blockSize}} </mat-cell>
 -->
-                        <mat-cell *matCellDef="let element"> {{element.getBlockWidth()}}<br>{{element.getBlockHeight()}} </mat-cell>
+                        <mat-cell *matCellDef="let element">
+                          {{element.getBlockWidth()}}<br>
+                          {{element.getBlockHeight()}}
+                        </mat-cell>
                       </ng-container>
     
                       <!-- BlockTrf Column -->
                       <ng-container matColumnDef="blockTrf">
-                        <mat-header-cell *matHeaderCellDef> BlockTrf<br>-<br>開始X<br>開始Y </mat-header-cell>
-                        <mat-cell *matCellDef="let element"> {{element.blockTrf}} </mat-cell>
+                        <mat-header-cell *matHeaderCellDef>
+                          BlockTrf<br>
+                          変換行列？<br>
+                          開始X<br>
+                          開始Y
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                          {{element.getBlockZz()}}<br>
+                          {{element.getBlockX()}}<br>
+                          {{element.getBlockY()}}
+                        </mat-cell>
                       </ng-container>
     
                       <mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>
