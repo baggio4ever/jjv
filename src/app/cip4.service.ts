@@ -255,21 +255,15 @@ export class Cip4Service {
     const outputComponentLinks: ComponentLinkTag[] = [];
     const paramsLinks: LinkTag[] = [];
     const deviceLinks: LinkTag[] = [];
+
     const linkPools = j.getElementsByTagName('ResourceLinkPool');
+
     if ( linkPools.length === 1) {
       for ( let k = 0; k < linkPools[0].children.length; k++ ) {
         const comp = linkPools[0].children[k];
-//        let usage = '';
-//        let rRef = '';
-//        let amount = '';
+
         switch ( comp.tagName ) {
           case 'ComponentLink':
-/*            
-            usage = comp.getAttribute('Usage');
-            rRef = comp.getAttribute('rRef');
-            amount = comp.getAttribute('Amount');
-            const cl = new ComponentLinkTag(usage, rRef, amount);
-*/
             const cl = this.createComponentLinkTag(comp);
             if ( cl.usage.toLowerCase() === 'input' ) {
               inputComponentLinks.push(cl);
@@ -278,75 +272,34 @@ export class Cip4Service {
             }
             break;
           case 'SpinePreparationParamsLink':
-/*
-            usage = comp.getAttribute('Usage');
-            rRef = comp.getAttribute('rRef');
-            amount = comp.getAttribute('Amount');
-            const sppl = new SpinePrearationParamsLinkTag(usage, rRef, amount);
-*/
             const sppl = this.createSpinePreparationParamsLinkTag(comp);
             paramsLinks.push(sppl);
             break;
           case 'CoverApplicationParamsLink':
-/*
-            usage = comp.getAttribute('Usage');
-            rRef = comp.getAttribute('rRef');
-            const capl = new CoverApplicationParamsLinkTag(usage, rRef, amount);
-*/
             const capl = this.createCoverApplicationParamsLinkTag(comp);
             paramsLinks.push(capl);
             break;
           case 'StitchingParamsLink':
-/*          
-            usage = comp.getAttribute('Usage');
-            rRef = comp.getAttribute('rRef');
-            const spl = new StitchingParamsLinkTag(usage, rRef, amount);
-*/
             const spl = this.createStitchingParamsLinkTag(comp);
             paramsLinks.push(spl);
             break;
           case 'TrimmingParamsLink':
-/*
-            usage = comp.getAttribute('Usage');
-            rRef = comp.getAttribute('rRef');
-            const tpl = new TrimmingParamsLinkTag(usage, rRef, amount);
-*/
             const tpl = this.createTrimmingParamsLinkTag(comp);
             paramsLinks.push(tpl);
             break;
           case 'CuttingParamsLink':
-/*
-            usage = comp.getAttribute('Usage');
-            rRef = comp.getAttribute('rRef');
-            const cpl = new CuttingParamsLinkTag(usage, rRef, amount);
-*/
             const cpl = this.createCuttingParamsLinkTag(comp);
             paramsLinks.push(cpl);
             break;
           case 'FoldingParamsLink':
-/*
-            usage = comp.getAttribute('Usage');
-            rRef = comp.getAttribute('rRef');
-            const fpl = new FoldingParamsLinkTag(usage, rRef, amount);
-*/
             const fpl = this.createFoldingParamsLinkTag(comp);
             paramsLinks.push(fpl);
             break;
           case 'DeviceLink':
-/*
-          usage = comp.getAttribute('Usage');
-            rRef = comp.getAttribute('rRef');
-            const dl = new DeviceLinkTag(usage, rRef, amount);
-*/
             const dl = this.createDeviceLinkTag(comp);
             deviceLinks.push(dl);
             break;
           case 'StackingParamsLink':
-/*
-          usage = comp.getAttribute('Usage');
-            rRef = comp.getAttribute('rRef');
-            const spl2 = new StackingParamsLinkTag(usage, rRef, amount);
-*/
             const spl2 = this.createStackingParamsLinkTag(comp);
             paramsLinks.push(spl2);
             break;
@@ -377,6 +330,7 @@ export class Cip4Service {
 
     // ResourcePool
     const resourcePoolTags = dom.getElementsByTagName('ResourcePool');
+
     if ( resourcePoolTags.length !== 1 ) {
       console.log('げ！ resourcePoolTag.length:' + resourcePoolTags.length);
     }
@@ -385,6 +339,7 @@ export class Cip4Service {
     // Componentタグ
     const componentTags = resourcePool.getElementsByTagName('Component');
     console.log('componentTags.length: ' + componentTags.length);
+
     for (let i = 0; i < componentTags.length; ++i ) {
       const j = componentTags[i];
       // ResourcePool 直下か
@@ -399,6 +354,7 @@ export class Cip4Service {
     // Deviceタグ
     const deviceTags = dom.getElementsByTagName('Device');
     console.log('deviceTags.length: ' + deviceTags.length);
+
     for (let i = 0; i < deviceTags.length; ++i ) {
       const deviceTag = this.createDeviceTag(deviceTags[i]);
       jdf.pushDeviceTag( deviceTag );
@@ -407,6 +363,7 @@ export class Cip4Service {
     // StitchingParamsタグ
     const stitchingParamsTags = dom.getElementsByTagName('StitchingParams');
     console.log('stitchingParamsTags.length: ' + stitchingParamsTags.length);
+
     for (let i = 0; i < stitchingParamsTags.length; ++i ) {
       const stitchingParamsTag = this.createStitchingParamsTag(stitchingParamsTags[i]);
       jdf.pushStitchingParamsTag( stitchingParamsTag );
@@ -415,6 +372,7 @@ export class Cip4Service {
     // TrimmingParamsタグ
     const trimmingParamsTags = dom.getElementsByTagName('TrimmingParams');
     console.log('trimmingParamsTags.length: ' + trimmingParamsTags.length);
+
     for (let i = 0; i < trimmingParamsTags.length; ++i ) {
       const trimmingParamsTag = this.createTrimmingParamsTag(trimmingParamsTags[i]);
       jdf.pushTrimmingParamsTag( trimmingParamsTag );
@@ -423,6 +381,7 @@ export class Cip4Service {
     // FoldingParamsタグ
     const foldingParamsTags = dom.getElementsByTagName('FoldingParams');
     console.log('foldingParamsTags.length: ' + foldingParamsTags.length);
+
     for (let i = 0; i < foldingParamsTags.length; ++i ) {
       const foldingParamsTag = this.createFoldingParamsTag(foldingParamsTags[i]);
       jdf.pushFoldingParamsTag( foldingParamsTag );
@@ -431,6 +390,7 @@ export class Cip4Service {
     // CuttingParamsタグ
     const cuttingParamsTags = dom.getElementsByTagName('CuttingParams');
     console.log('cuttingParamsTags.length: ' + cuttingParamsTags.length);
+
     for (let i = 0; i < cuttingParamsTags.length; ++i) {
       const cuttingParamsTag = this.createCuttingParamsTag(cuttingParamsTags[i]);
       jdf.pushCuttingParamsTag(cuttingParamsTag);
@@ -439,6 +399,7 @@ export class Cip4Service {
     // CoverApplicationParamsタグ
     const coverApplicationParamsTags = dom.getElementsByTagName('CoverApplicationParams');
     console.log('coverApplicationParamsTags.length: ' + coverApplicationParamsTags.length);
+
     for (let i = 0; i < coverApplicationParamsTags.length; ++i) {
       const coverApplicationParamsTag = this.createCoverApplicationParamsTag(coverApplicationParamsTags[i]);
       jdf.pushCoverApplicationParamsTag(coverApplicationParamsTag);
@@ -447,6 +408,7 @@ export class Cip4Service {
     // SpinePreparationParamsタグ
     const spinePreparationParamsTags = dom.getElementsByTagName('SpinePreparationParams');
     console.log('spinePreparationParamsTags.length: ' + spinePreparationParamsTags.length);
+
     for (let i = 0; i < spinePreparationParamsTags.length; ++i) {
       const spinePreparationParamsTag = this.createSpinePreparationParamsTag(spinePreparationParamsTags[i]);
       jdf.pushSpinePreparationParamsTag(spinePreparationParamsTag);
@@ -455,6 +417,7 @@ export class Cip4Service {
     // StackingParamsタグ
     const stackingParamsTags = dom.getElementsByTagName('StackingParams');
     console.log('stackingParamsTags.length: ' + stackingParamsTags.length);
+
     for (let i = 0; i < stackingParamsTags.length; ++i) {
       const j = stackingParamsTags[i];
       // ResourcePool 直下か
@@ -467,6 +430,7 @@ export class Cip4Service {
     // JDFタグ  最後が良い、多分。参照したいデータが揃っているはずなので
     const jdfTags = dom.getElementsByTagName('JDF');
     console.log('jdfTags.length: ' + jdfTags.length);
+
     for (let i = 0; i < jdfTags.length; ++i) {
       const jdfTag = this.createJdfTag(jdfTags[i]);
 
