@@ -16,7 +16,7 @@ Cytoscape.use(klay);
 declare var hljs: any;
 
 
-const JJV_VERSION = '0.1.4';
+const JJV_VERSION = '0.1.5';
 
 const KEY_BASE_URL = 'KEY_BASE_URL';
 const KEY_USER_ID = 'KEY_USER_ID';
@@ -633,12 +633,14 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         localStorage.setItem(KEY_USER_ID, result.user_id);
         localStorage.setItem(KEY_COMMENT, result.comment);
 
+        const now = new Date().toLocaleString();
+
         const body:Fi = {
           user_id: result.user_id,
           filename: result.filename,
           xml: this.jdf.beautifiedXml,
           comment: result.comment,
-          upload_date: ''
+          upload_date: now
         };
 
         this.httpService.uploadXml(body, msg => {

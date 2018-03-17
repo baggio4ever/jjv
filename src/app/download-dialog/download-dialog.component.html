@@ -19,14 +19,14 @@
 <!--
       <div *ngFor="let f of files">{{f.filename}}</div>
 -->
-      <div *ngFor="let f of files" class="card-around">
+      <div *ngFor="let f of files.reverse()" class="card-around">
         <mat-card (click)="onCardSelect(f)" [class.selected]="f===selectedItem">
           <mat-card-header>
             <mat-card-title>
               {{f.filename}}
             </mat-card-title>
             <mat-card-subtitle>
-              {{f.created_at}}
+              upload日時: {{f.upload_date}}
             </mat-card-subtitle>
           </mat-card-header>
           <mat-card-content>
