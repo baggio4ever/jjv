@@ -248,6 +248,7 @@ export class Cip4Service {
     const dn = j.getAttribute('DescriptiveName');
     const jobId = j.getAttribute('JobID');
     const jobPartId = j.getAttribute('JobPartID');
+
     const body = vkbeautify.xml( j.outerHTML.toString() );
 
     const inputComponentLinks: ComponentLinkTag[] = [];
@@ -258,9 +259,9 @@ export class Cip4Service {
     if ( linkPools.length === 1) {
       for ( let k = 0; k < linkPools[0].children.length; k++ ) {
         const comp = linkPools[0].children[k];
-        let usage = '';
-        let rRef = '';
-        let amount = '';
+//        let usage = '';
+//        let rRef = '';
+//        let amount = '';
         switch ( comp.tagName ) {
           case 'ComponentLink':
 /*            
@@ -806,18 +807,6 @@ export class ComponentTag extends IdHavingTag {
             return JDFUtils.pt2mm( v );
           })
           .join(' ');
-/*
-    if (this.dimensions) {
-    return this.dimensions
-      .split(' ')
-      .map( (v,i,a) => {
-        return JDFUtils.pt2mm( JDFUtils.parseNumber(v) );
-      })
-      .join(' ');
-    } else {
-      return '記述なし';
-    }
-*/
   }
 }
 

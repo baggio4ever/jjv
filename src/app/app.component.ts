@@ -5,7 +5,7 @@ import { Cip4Service, JDF, JdfTag } from './cip4.service';
 import * as Cytoscape from 'cytoscape';
 import * as klay from 'cytoscape-klay';
 import { Guid } from 'guid-typescript';
-import { MyHttpService } from './my-http.service';
+import { MyHttpService, Fi } from './my-http.service';
 import { AppSettingsDialogComponent } from './app-settings-dialog.component';
 import { AboutDialogComponent } from './about-dialog/about-dialog.component';
 import { UploadDialogComponent } from './upload-dialog/upload-dialog.component';
@@ -22,6 +22,8 @@ const KEY_BASE_URL = 'KEY_BASE_URL';
 const KEY_USER_ID = 'KEY_USER_ID';
 const KEY_COMMENT = 'KEY_COMMENT';
 const KEY_SEARCH_USER_ID = 'KEY_SEARCH_USER_ID';
+
+
 
 @Component({
   selector: 'app-root',
@@ -232,9 +234,9 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         {
           selector: 'edge',
           style: {
-            'width': 2,
-            'line-color': '#555',
-            'target-arrow-color': '#555',
+            'width': 1,
+            'line-color': '#444',
+            'target-arrow-color': '#444',
             'target-arrow-shape': 'triangle'
           }
         },
@@ -242,7 +244,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
           selector: '.uni-arrow',
           style: {
             'curve-style': 'bezier',
-            'width': 3,
+            'width': 2,
             'line-color': '#222',
             'arrow-scale': 1,
             'target-arrow-color': '#222',
@@ -630,11 +632,12 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         localStorage.setItem(KEY_USER_ID, result.user_id);
         localStorage.setItem(KEY_COMMENT, result.comment);
 
-        const body = {
+        const body:Fi = {
           user_id: result.user_id,
           filename: result.filename,
           xml: this.jdf.beautifiedXml,
-          comment: result.comment
+          comment: result.comment,
+          upload_date: ''
         };
 
         this.httpService.uploadXml(body, msg => {
@@ -744,11 +747,4 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
   }
 }
 
-/*
-interface Fi {
-  user_id: string;
-  comment: string;
-  filename: string;
-  xml: string;
-}
-*/
+

@@ -77,14 +77,22 @@ export class MyHttpService {
     });
   }
 
-  getFiles( user_id: string, callback: (files: any) => void): void {
+  getFiles( user_id: string, callback: (files: Fi[]) => void): void {
     // Parameters obj-
     const params: HttpParams = new HttpParams().set('user_id', user_id );
 
     console.log(params.toString());
 
     this.http.get( this.base_url + 'files', { params: params }).subscribe(data => {
-        callback(data['files']);
+        callback(data['files'] as Fi[]);
     });
   }
+}
+
+export interface Fi {
+  user_id: string;
+  comment: string;
+  filename: string;
+  xml: string;
+  upload_date: string;
 }
