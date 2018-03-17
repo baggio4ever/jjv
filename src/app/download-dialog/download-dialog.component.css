@@ -34,7 +34,6 @@
 
 .card-content {
   padding-left: 20px;
-  font-size: small;
 }
 
 .card-area-spinner {
@@ -53,7 +52,7 @@
   margin-top: 5px;
   margin-bottom: 5px;
 
-  border: 1px solid gray;
+  border: 1px solid lightgray;
 }
 
 /*スクロール用*/

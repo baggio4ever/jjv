@@ -9,7 +9,11 @@
       <input matInput placeholder="ユーザー名" [(ngModel)]="data.user_id">
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="メモ" [(ngModel)]="data.comment">
+    <textarea matInput placeholder="メモ" [(ngModel)]="data.comment" matTextareaAutosize matAutosizeMinRows="1"
+    matAutosizeMaxRows="8"></textarea>
+<!--
+    <input matInput placeholder="メモ" [(ngModel)]="data.comment">
+-->
     </mat-form-field>
 <!--
     <mat-form-field>

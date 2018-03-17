@@ -16,7 +16,7 @@ Cytoscape.use(klay);
 declare var hljs: any;
 
 
-const JJV_VERSION = '0.1.0';
+const JJV_VERSION = '0.1.2';
 
 const KEY_BASE_URL = 'KEY_BASE_URL';
 const KEY_USER_ID = 'KEY_USER_ID';
@@ -150,7 +150,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
             'border-color': 'black',
             'text-halign': 'right',
             'text-valign': 'center',
-            'text-margin-x': 5
+            'text-margin-x': 5,
+            'text-margin-y': 5
           }
         },
         {
@@ -250,8 +251,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
             'target-arrow-color': '#222',
             'target-arrow-shape': 'triangle',
             'source-label': 'data(amount)',
-            'source-text-offset': 20,
-            'source-text-margin-x': 10,
+            'source-text-offset': 25,
+            'source-text-margin-x': 15,
             'font-size': 11
           }
         }
@@ -599,7 +600,6 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         console.log('The dialog was closed: ' + result);
         localStorage.setItem(KEY_BASE_URL, result);
         this.httpService.setBaseURL(result);
-        //      this.animal = result;
       } else {
         console.log('キャンセルされました？');
       }
@@ -624,11 +624,12 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
+/*
         console.log('The dialog was closed: ' + result);
         console.log('      ' + result.user_id);
         console.log('      ' + result.filename);
         console.log('      ' + result.comment);
-
+*/
         localStorage.setItem(KEY_USER_ID, result.user_id);
         localStorage.setItem(KEY_COMMENT, result.comment);
 
@@ -679,10 +680,11 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
+/*
         console.log('The dialog was closed');
         console.log('    user_id: ' + result.user_id);
         console.log('    f:       ' + result.f.filename);
-
+*/
         localStorage.setItem(KEY_SEARCH_USER_ID, result.user_id);
 
         this.jdf = this.cip4.parseJDFfromString(result.f.xml);

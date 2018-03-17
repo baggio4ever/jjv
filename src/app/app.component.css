@@ -68,9 +68,6 @@ nav a.active {
 }
 
 .selected {
-/*    font-weight: bold;*/
-/*    color: red;*/
-
     box-shadow: 0px 0px 15px blue;
 }
 
@@ -79,8 +76,6 @@ nav a.active {
     width: 300px;
     height: 450px;
     display: block;
-/*    background: #ddddff;*/
-/*border:1px solid #000;*/
 }
 
 .light-frame {
@@ -97,13 +92,6 @@ nav a.active {
     position: fixed;
     margin: 8px;
     padding: 8px;
-/*
-    border: lightgray;
-    box-shadow: 2px 2px 6px gray;
-    border-radius: 4px;
-*/
-/*    -webkit-border-radius: 4px;/* for Safari and Chrome 対応*/
-/*    -moz-border-radius: 4px;/* for Firefox 対応*/
 }
 
 #main {
@@ -119,16 +107,6 @@ label.selectFile {
     border-radius: 12px;
 }
 
-/*
-意図した位置に綺麗に表示されない。むむむ
-.iconX {
-    display: inline-block;
-    line-height: 30px;
-    padding-left: 30px;
-    background: url("../assets/ic_folder_open_white_24px.svg") no-repeat scroll 0 0 transparent;
-  }
-*/
-
 table {
     border-color: #dddddd;
 }
@@ -142,12 +120,11 @@ td,th {
     height: 500px;
     border: 1px solid lightgray;
 
-  display: flex;
-  justify-content: center;/* 2 */
-  align-items: center;    /* 3 */
-  padding-top: 20px;
-  padding-bottom: 20px;
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .toolbar-fn {
