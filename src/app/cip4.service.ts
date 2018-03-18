@@ -313,11 +313,11 @@ export class Cip4Service {
             const fpl = this.createFoldingParamsLinkTag(comp);
             paramsLinks.push(fpl);
             break;
-/*          case 'StackingParamsLink':
+          case 'StackingParamsLink':
             const spl2 = this.createStackingParamsLinkTag(comp);
             paramsLinks.push(spl2);
             break;
-*/
+
           default:
             console.log('default キター: ' + comp.tagName);
             const unknown = this.createUnknownResourceLinkTag(comp);
@@ -386,12 +386,11 @@ export class Cip4Service {
             const spinePreparationParamsTag = this.createSpinePreparationParamsTag(r);
             jdf.pushSpinePreparationParamsTag(spinePreparationParamsTag);
             break;
-/* test            
           case 'StackingParams':
             const stackingParamsTag = this.createStackingParamsTag(r);
             jdf.pushStackingParamsTag(stackingParamsTag);
             break;
-*/
+
           default:
             console.log('default キタだすー : '+ r.tagName);
             const unknownResourceTag = this.createUnknownResourceTag(r);
@@ -620,6 +619,7 @@ export class JDF {
   // うーん。イマイチ
   getResourceTagById( id: string ): IdHavingTag {
     let ret = null;
+
     if( ret = this.getComponentTagById(id) ) {
       return ret;
     }
@@ -629,6 +629,7 @@ export class JDF {
     if( ret = this.getParamsTagById(id) ) {
       return ret;
     }
+    
     return null;
   }
 
@@ -1120,19 +1121,16 @@ interface NameValue {
 
 export class UnknownResourceTag  extends IdHavingTag {
   tagName: string;
-//  attributes: {[key:string]:string} = {};
   attributes = new Array<NameValue>();
   body: string;
 
   constructor( tagName: string, attributes: any, body: string ) {
     super('');
 
-//    this.xx.push({key:'aa',value:'bb'});
     this.tagName = tagName;
     this.attributes = [];
 
     for(let i=0;i<attributes.length;i++ ) {
-//      this.attributes[attributes[i].name] = attributes[i].value;
       this.attributes.push( {
         name: attributes[i].name,
         value: attributes[i].value
@@ -1226,16 +1224,13 @@ class StackingParamsLinkTag extends LinkTag {
 
 class UnknownResourceLinkTag extends LinkTag {
   tagName: string;
-//  attributes: {[key:string]:string} = {};
   attributes = new Array<NameValue>();
 
   constructor( tagName: string, attributes: any ) {
     super('','','');
 
     this.tagName = tagName;
-//    this.attributes = {};
     for(let i=0;i<attributes.length;i++ ) {
-//      this.attributes[attributes[i].name] = attributes[i].value;
       this.attributes.push( {
         name: attributes[i].name,
         value: attributes[i].value
@@ -1258,21 +1253,6 @@ class UnknownResourceLinkTag extends LinkTag {
       this.amount = amount.value;
       console.log('  * ' + this.amount);
     }
-/*    
-    console.log(' UnknownResourceLinkTag - ' + this.tagName + ' ------- ' );
-    console.log('  * ' + this.attributes['Usage']);
-    console.log('  * ' + this.attributes['rRef']);
-    console.log('  * ' + this.attributes['Amount']);
-    if( this.attributes['Usage'] ) {
-      this.usage = this.attributes['Usage'];
-    }
-    if( this.attributes['rRef'] ) {
-      this.rRef = this.attributes['rRef'];
-    }
-    if( this.attributes['Amount'] ) {
-      this.amount = this.attributes['Amount'];
-    }
-*/
   }
 }
 
