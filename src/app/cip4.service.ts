@@ -116,10 +116,11 @@ export class Cip4Service {
       const x_class = x.getAttribute('Class');
       const x_blockType = x.getAttribute('BlockType');
       const x_blockName = x.getAttribute('BlockName');
-      const X_blockSize = x.getAttribute('BlockSize');
+      const x_blockSize = x.getAttribute('BlockSize');
       const x_blockTrf = x.getAttribute('BlockTrf');
-      const cbt = new CutBlockTag(x_id, x_class, x_blockType, x_blockName, X_blockSize, x_blockTrf,
-                   vkbeautify.xml(x.outerHTML.toString()));
+      const cbt = new CutBlockTag(x_id, x_class, x_blockType, x_blockName,
+                        x_blockSize, x_blockTrf,
+                        vkbeautify.xml(x.outerHTML.toString()));
       cutBlocks.push(cbt);
     }
 
@@ -241,6 +242,12 @@ export class Cip4Service {
     return linkTag;
   }
 
+  private createUnknownResourceLinkTag(node): UnknownResourceLinkTag {
+    const linkTag = new UnknownResourceLinkTag( node.tagName,node.attributes );
+
+    return linkTag;
+  }
+
   private createJdfTag(node): JdfTag {
     const j = node;
     const id = j.getAttribute('ID');
@@ -271,6 +278,10 @@ export class Cip4Service {
               outputComponentLinks.push(cl);
             }
             break;
+          case 'DeviceLink':
+            const dl = this.createDeviceLinkTag(comp);
+            deviceLinks.push(dl);
+            break;
           case 'SpinePreparationParamsLink':
             const sppl = this.createSpinePreparationParamsLinkTag(comp);
             paramsLinks.push(sppl);
@@ -295,16 +306,15 @@ export class Cip4Service {
             const fpl = this.createFoldingParamsLinkTag(comp);
             paramsLinks.push(fpl);
             break;
-          case 'DeviceLink':
-            const dl = this.createDeviceLinkTag(comp);
-            deviceLinks.push(dl);
-            break;
           case 'StackingParamsLink':
             const spl2 = this.createStackingParamsLinkTag(comp);
             paramsLinks.push(spl2);
             break;
+
           default:
             console.log('default キター: ' + comp.tagName);
+            const unknown = this.createUnknownResourceLinkTag(comp);
+            paramsLinks.push(unknown);
             break;
         }
       }
@@ -320,7 +330,6 @@ export class Cip4Service {
 
     const xml = vkbeautify.xml( c );
 
-/*    if ( true ) {*/
     const parser = new DOMParser();
     const dom = parser.parseFromString( c, 'text/xml');
 
@@ -1082,6 +1091,34 @@ class StackingParamsLinkTag extends LinkTag {
   }
 }
 
+class UnknownResourceLinkTag extends LinkTag {
+  tagName: string;
+  attributes: {[key:string]:string} = {};
+
+  constructor( tagName: string, attributes: any ) {
+    super('','','');
+
+    this.tagName = tagName;
+    this.attributes = {};
+    for(let i=0;i<attributes.length;i++ ) {
+      this.attributes[attributes[i].name] = attributes[i].value;
+    }
+
+    console.log(' UnknownResourceLinkTag - ' + this.tagName + ' ------- ' );
+    console.log('  * ' + this.attributes['Usage']);
+    console.log('  * ' + this.attributes['rRef']);
+    console.log('  * ' + this.attributes['Amount']);
+    if( this.attributes['Usage'] ) {
+      this.usage = this.attributes['Usage'];
+    }
+    if( this.attributes['rRef'] ) {
+      this.rRef = this.attributes['rRef'];
+    }
+    if( this.attributes['Amount'] ) {
+      this.amount = this.attributes['Amount'];
+    }
+  }
+}
 
 
 // JMF
