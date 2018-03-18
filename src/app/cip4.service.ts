@@ -340,6 +340,58 @@ export class Cip4Service {
     // ResourcePool
     const resourcePoolTags = dom.getElementsByTagName('ResourcePool');
 
+    // ResourcePoolに含まれるもの全て走査
+    for( let i=0;i<resourcePoolTags.length;i++ ) {
+      let rp = resourcePoolTags[i];
+      for ( let j = 0; j < rp.children.length; j++ ) {
+        const r = rp.children[j];
+
+        switch ( r.tagName ) {
+          case 'Component':
+            const componentTag = this.createComponentTag(r);
+            jdf.pushComponentTag( componentTag );
+            break;
+          case 'Device':
+            const deviceTag = this.createDeviceTag(r);
+            jdf.pushDeviceTag( deviceTag );
+            break;
+          case 'StitchingParams':
+            const stitchingParamsTag = this.createStitchingParamsTag(r);
+            jdf.pushStitchingParamsTag( stitchingParamsTag );
+            break;
+          case 'TrimmingParams':
+            const trimmingParamsTag = this.createTrimmingParamsTag(r);
+            jdf.pushTrimmingParamsTag( trimmingParamsTag );
+            break;
+          case 'FoldingParams':
+            const foldingParamsTag = this.createFoldingParamsTag(r);
+            jdf.pushFoldingParamsTag( foldingParamsTag );
+            break;
+          case 'CuttingParams':
+            const cuttingParamsTag = this.createCuttingParamsTag(r);
+            jdf.pushCuttingParamsTag(cuttingParamsTag);
+            break;
+          case 'CoverApplicationParams':
+            const coverApplicationParamsTag = this.createCoverApplicationParamsTag(r);
+            jdf.pushCoverApplicationParamsTag(coverApplicationParamsTag);
+            break;
+          case 'SpinePreparationParams':
+            const spinePreparationParamsTag = this.createSpinePreparationParamsTag(r);
+            jdf.pushSpinePreparationParamsTag(spinePreparationParamsTag);
+            break;
+          case 'StackingParams':
+            const stackingParamsTag = this.createStackingParamsTag(r);
+            jdf.pushStackingParamsTag(stackingParamsTag);
+            break;
+          default:
+            console.log('default キタだすー : '+ r.tagName);
+            break;
+        }
+      }
+    }
+
+/*
+    // --- 昔のやり方（ここから） ----
     if ( resourcePoolTags.length !== 1 ) {
       console.log('げ！ resourcePoolTag.length:' + resourcePoolTags.length);
     }
@@ -435,6 +487,8 @@ export class Cip4Service {
         jdf.pushStackingParamsTag(stackingParamsTag);
       }
     }
+    // --- 昔のやり方（ここまで） ----
+*/
 
     // JDFタグ  最後が良い、多分。参照したいデータが揃っているはずなので
     const jdfTags = dom.getElementsByTagName('JDF');
