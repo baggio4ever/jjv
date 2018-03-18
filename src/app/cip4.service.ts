@@ -165,6 +165,13 @@ export class Cip4Service {
     return stackingParamsTag;
   }
 
+  private createUnknownResourceTag(node): UnknownResourceTag {
+    const body = vkbeautify.xml( node.outerHTML.toString() );
+    const unknownResourceTag = new UnknownResourceTag( node.tagName, node.attributes, body );
+
+    return unknownResourceTag;
+  }
+
   private createComponentLinkTag(node): ComponentLinkTag {
     const usage = node.getAttribute('Usage');
     const rRef = node.getAttribute('rRef');
@@ -306,11 +313,11 @@ export class Cip4Service {
             const fpl = this.createFoldingParamsLinkTag(comp);
             paramsLinks.push(fpl);
             break;
-          case 'StackingParamsLink':
+/*          case 'StackingParamsLink':
             const spl2 = this.createStackingParamsLinkTag(comp);
             paramsLinks.push(spl2);
             break;
-
+*/
           default:
             console.log('default キター: ' + comp.tagName);
             const unknown = this.createUnknownResourceLinkTag(comp);
@@ -379,12 +386,16 @@ export class Cip4Service {
             const spinePreparationParamsTag = this.createSpinePreparationParamsTag(r);
             jdf.pushSpinePreparationParamsTag(spinePreparationParamsTag);
             break;
+/* test            
           case 'StackingParams':
             const stackingParamsTag = this.createStackingParamsTag(r);
             jdf.pushStackingParamsTag(stackingParamsTag);
             break;
+*/
           default:
             console.log('default キタだすー : '+ r.tagName);
+            const unknownResourceTag = this.createUnknownResourceTag(r);
+            jdf.pushUnknownResourceTag(unknownResourceTag);
             break;
         }
       }
@@ -540,6 +551,7 @@ export class JDF {
   coverApplicationParamsTags: CoverApplicationParamsTag[] = [];
   spinePreparationParamsTags: SpinePreparationParamsTag[] = [];
   stackingParamsTags: StackingParamsTag[] = [];
+  unknownResourceTags: UnknownResourceTag[] = [];
 
   beautifiedXml = '';
 
@@ -558,6 +570,7 @@ export class JDF {
     this.coverApplicationParamsTags = [];
     this.spinePreparationParamsTags = [];
     this.stackingParamsTags = [];
+    this.unknownResourceTags = [];
   }
 
   pushComponentTag( tag: ComponentTag ) {
@@ -596,8 +609,27 @@ export class JDF {
     this.stackingParamsTags.push( tag );
   }
 
+  pushUnknownResourceTag( tag: UnknownResourceTag ) {
+    this.unknownResourceTags.push( tag );
+  }
+
   pushProcessTag( tag: JdfTag ) {
     this.processTags.push( tag );
+  }
+
+  // うーん。イマイチ
+  getResourceTagById( id: string ): IdHavingTag {
+    let ret = null;
+    if( ret = this.getComponentTagById(id) ) {
+      return ret;
+    }
+    if( ret = this.getDeviceTagById(id) ) {
+      return ret;
+    }
+    if( ret = this.getParamsTagById(id) ) {
+      return ret;
+    }
+    return null;
   }
 
   getComponentTagById( id: string ): ComponentTag {
@@ -653,6 +685,10 @@ export class JDF {
     }
 
     if ( r = this.stackingParamsTags.find((v, i, a) => {return v.id===id;})) {
+      return r;
+    }
+
+    if ( r = this.unknownResourceTags.find((v, i, a) => {return v.id===id;})) {
       return r;
     }
 
@@ -1077,6 +1113,49 @@ export class StackingParamsTag  extends IdHavingTag {
   }
 }
 
+interface NameValue {
+  name:string,
+  value:string
+}
+
+export class UnknownResourceTag  extends IdHavingTag {
+  tagName: string;
+//  attributes: {[key:string]:string} = {};
+  attributes = new Array<NameValue>();
+  body: string;
+
+  constructor( tagName: string, attributes: any, body: string ) {
+    super('');
+
+//    this.xx.push({key:'aa',value:'bb'});
+    this.tagName = tagName;
+    this.attributes = [];
+
+    for(let i=0;i<attributes.length;i++ ) {
+//      this.attributes[attributes[i].name] = attributes[i].value;
+      this.attributes.push( {
+        name: attributes[i].name,
+        value: attributes[i].value
+      });
+    }
+
+    let id = this.attributes.find((v,i,a) => {return (v.name === 'ID');});
+    if(id) {
+      this.id = id.value;
+    }
+
+    this.body = body;
+  }
+
+  getAttributesArray() {
+    let r = [];
+    for( let k in this.attributes) {
+      r.push(k);
+    }
+    return r;
+  }
+}
+
 class LinkTag  extends BaseTag {
   usage: string;
   rRef: string;
@@ -1147,17 +1226,39 @@ class StackingParamsLinkTag extends LinkTag {
 
 class UnknownResourceLinkTag extends LinkTag {
   tagName: string;
-  attributes: {[key:string]:string} = {};
+//  attributes: {[key:string]:string} = {};
+  attributes = new Array<NameValue>();
 
   constructor( tagName: string, attributes: any ) {
     super('','','');
 
     this.tagName = tagName;
-    this.attributes = {};
+//    this.attributes = {};
     for(let i=0;i<attributes.length;i++ ) {
-      this.attributes[attributes[i].name] = attributes[i].value;
+//      this.attributes[attributes[i].name] = attributes[i].value;
+      this.attributes.push( {
+        name: attributes[i].name,
+        value: attributes[i].value
+      });
     }
 
+    console.log(' UnknownResourceLinkTag - ' + this.tagName + ' ------- ' );
+    let usage = this.attributes.find((v,i,a) => {return (v.name === 'Usage');});
+    if(usage) {
+      this.usage = usage.value;
+      console.log('  * ' + this.usage);
+    }
+    let rRef = this.attributes.find((v,i,a) => {return (v.name === 'rRef');});
+    if(rRef) {
+      this.rRef = rRef.value;
+      console.log('  * ' + this.rRef);
+    }
+    let amount = this.attributes.find((v,i,a) => {return (v.name === 'Amount');});
+    if(amount) {
+      this.amount = amount.value;
+      console.log('  * ' + this.amount);
+    }
+/*    
     console.log(' UnknownResourceLinkTag - ' + this.tagName + ' ------- ' );
     console.log('  * ' + this.attributes['Usage']);
     console.log('  * ' + this.attributes['rRef']);
@@ -1171,6 +1272,7 @@ class UnknownResourceLinkTag extends LinkTag {
     if( this.attributes['Amount'] ) {
       this.amount = this.attributes['Amount'];
     }
+*/
   }
 }
 

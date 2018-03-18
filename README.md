@@ -79,3 +79,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 * MesssageDialog作る
 * Nodeのlabel表示見直し（JobPartIDとかの方がよいかな）
 * Chart.jsの使い所ないかしら
+* ジャンプしたらジャンプ先を選択状態にしたい

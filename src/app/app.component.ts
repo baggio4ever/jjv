@@ -191,7 +191,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
           style: {
             'label': 'data(jdf_id)',
             'shape': 'tag',
-            'background-color': '#850',
+            'background-color': '#960',
             'border-width': 1,
             'border-color': 'black',
 /*            'background-opacity': 0,
@@ -228,6 +228,32 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
           selector: ':selected.device',
           style: {
             'background-color': '#3f3',
+            'border-width': 2,
+            'border-color': 'black',
+          }
+        },
+        {
+          selector: '.unknown',
+          style: {
+            'label': 'data(jdf_id)',
+            'shape': 'tag',
+            'background-color': '#005',
+            'border-width': 1,
+            'border-color': 'black',
+/*            'background-opacity': 0,
+            'background-image': '../../assets/images/ic_sd_card_black_24dp_2x.png',
+            'background-clip': 'none',
+            'background-fit': 'contain'
+          */
+            'text-valign': 'bottom',
+            'text-margin-y': 5
+          }
+        },
+        {
+          selector: ':selected.unknown',
+          style: {
+            'label': 'data(jdf_id)',
+            'background-color': '#00a',
             'border-width': 2,
             'border-color': 'black',
           }
@@ -413,6 +439,18 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
           }
         }
       ]).addClass('params');
+    });
+
+    // UnknownResourceノード作成
+    this.jdf.unknownResourceTags.forEach( (v, i, a) => {
+      this.cy.add([
+        {
+          data: {
+            id: v.guid,
+            jdf_id: v.id
+          }
+        }
+      ]).addClass('unknown');
     });
 
     this.jdf.processTags.forEach((v, i, a) => {

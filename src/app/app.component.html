@@ -85,6 +85,7 @@
         <div *ngIf="jdf.spinePreparationParamsTags.length>0" class="like-link" (click)="scrollTo('spinePreparationParams_top')">SpinePreparationParams</div>
         <div *ngIf="jdf.coverApplicationParamsTags.length>0" class="like-link" (click)="scrollTo('coverApplicationParams_top')">CoverApplicationParams</div>
         <div *ngIf="jdf.stackingParamsTags.length>0" class="like-link" (click)="scrollTo('stackingParams_top')">StackingParams</div>
+        <div *ngIf="jdf.unknownResourceTags.length>0" class="like-link" (click)="scrollTo('unknownResources_top')">Unknown Resources</div>
       </div>
     </div>
 
@@ -162,7 +163,7 @@
                             <th><span class="my-smaller">Amount</span></th>
                           </tr>
                           <tr *ngFor="let l of t.inputComponentLinks">
-                            <td><span class="like-link" (click)="scrollTo(l.rRef)">{{l.rRef}}</span></td>
+                            <td><span class="like-link" (click)="scrollTo(jdf.getResourceTagById(l.rRef).guid)">{{l.rRef}}</span></td>
                             <td><span *ngIf="l.amount>0">{{l.amount|number}}</span></td>
                           </tr>
                         </table>
@@ -183,7 +184,7 @@
                             <th><span class="my-smaller">Amount</span></th>
                           </tr>
                           <tr *ngFor="let l of t.outputComponentLinks">
-                            <td><span class="like-link" (click)="scrollTo(l.rRef)">{{l.rRef}}</span></td>
+                            <td><span class="like-link" (click)="scrollTo(jdf.getResourceTagById(l.rRef).guid)">{{l.rRef}}</span></td>
                             <td><span *ngIf="l.amount>0">{{l.amount|number}}</span></td>
                           </tr>
                         </table>
@@ -199,7 +200,7 @@
                     <td>加工情報</td>
                     <td>
                       <div *ngFor="let l of t.paramsLinks">
-                        <span class="like-link" (click)="scrollTo(l.rRef)">{{l.rRef}}</span>
+                        <span class="like-link" (click)="scrollTo(jdf.getResourceTagById(l.rRef).guid)">{{l.rRef}}</span>
                       </div>
                     </td>
                   </tr>
@@ -207,7 +208,7 @@
                     <td>デバイス情報</td>
                     <td>
                       <div *ngFor="let l of t.deviceLinks">
-                        <span class="like-link" (click)="scrollTo(l.rRef)">{{l.rRef}}</span>
+                        <span class="like-link" (click)="scrollTo(jdf.getResourceTagById(l.rRef).guid)">{{l.rRef}}</span>
                       </div>
                     </td>
                   </tr>
@@ -312,7 +313,7 @@
                     <td>前工程 <span class="my-smaller">（生成元）</span></td>
                     <td>
                       <div *ngFor="let l of jdf.getPreviousProcesses(t)">
-                        <span class="like-link" (click)="scrollTo(l.id)">{{l.id}}</span>
+                        <span class="like-link" (click)="scrollTo(l.guid)">{{l.id}}</span>
                       </div>
                     </td>
                   </tr>
@@ -320,7 +321,7 @@
                     <td>次工程</td>
                     <td>
                       <div *ngFor="let l of jdf.getNextProcesses(t)">
-                        <span class="like-link" (click)="scrollTo(l.id)">{{l.id}}</span>
+                        <span class="like-link" (click)="scrollTo(l.guid)">{{l.id}}</span>
                       </div>
                     </td>
                   </tr>
@@ -367,8 +368,8 @@
                   <tr *ngIf="jdf.getProcessesUsingThisDevice(t).length>0">
                     <td>利用工程</td>
                     <td>
-                      <div *ngFor="let l of jdf.getProcessesUsingThisDevice(t)">
-                        <span class="like-link" (click)="scrollTo(l.id)">{{l.id}}</span>
+                      <div *ngFor="let process of jdf.getProcessesUsingThisDevice(t)">
+                        <span class="like-link" (click)="scrollTo(process.guid)">{{process.id}}</span>
                       </div>
                     </td>
                   </tr>
@@ -415,8 +416,8 @@
                   <tr *ngIf="jdf.getProcessesUsingThisParams(t).length>0">
                     <td>利用工程</td>
                     <td>
-                      <div *ngFor="let l of jdf.getProcessesUsingThisParams(t)">
-                        <span class="like-link" (click)="scrollTo(l.id)">{{l.id}}</span>
+                      <div *ngFor="let process of jdf.getProcessesUsingThisParams(t)">
+                        <span class="like-link" (click)="scrollTo(process.guid)">{{process.id}}</span>
                       </div>
                     </td>
                   </tr>
@@ -529,8 +530,8 @@
                   <tr *ngIf="jdf.getProcessesUsingThisParams(t).length>0">
                     <td>利用工程</td>
                     <td>
-                      <div *ngFor="let l of jdf.getProcessesUsingThisParams(t)">
-                        <span class="like-link" (click)="scrollTo(l.id)">{{l.id}}</span>
+                      <div *ngFor="let process of jdf.getProcessesUsingThisParams(t)">
+                        <span class="like-link" (click)="scrollTo(process.guid)">{{process.id}}</span>
                       </div>
                     </td>
                   </tr>
@@ -577,8 +578,8 @@
                   <tr *ngIf="jdf.getProcessesUsingThisParams(t).length>0">
                     <td>利用工程</td>
                     <td>
-                      <div *ngFor="let l of jdf.getProcessesUsingThisParams(t)">
-                        <span class="like-link" (click)="scrollTo(l.id)">{{l.id}}</span>
+                      <div *ngFor="let process of jdf.getProcessesUsingThisParams(t)">
+                        <span class="like-link" (click)="scrollTo(process.guid)">{{process.id}}</span>
                       </div>
                     </td>
                   </tr>
@@ -660,8 +661,8 @@
                   <tr>
                     <td>利用工程</td>
                     <td>
-                      <div *ngFor="let l of jdf.getProcessesUsingThisParams(t)">
-                        <span class="like-link" (click)="scrollTo(l.id)">{{l.id}}</span>
+                      <div *ngFor="let process of jdf.getProcessesUsingThisParams(t)">
+                        <span class="like-link" (click)="scrollTo(process.guid)">{{process.id}}</span>
                       </div>
                     </td>
                   </tr>
@@ -777,8 +778,8 @@
                   <tr *ngIf="jdf.getProcessesUsingThisParams(t).length>0">
                     <td>利用工程</td>
                     <td>
-                      <div *ngFor="let l of jdf.getProcessesUsingThisParams(t)">
-                        <span class="like-link" (click)="scrollTo(l.id)">{{l.id}}</span>
+                      <div *ngFor="let process of jdf.getProcessesUsingThisParams(t)">
+                        <span class="like-link" (click)="scrollTo(process.guid)">{{process.id}}</span>
                       </div>
                     </td>
                   </tr>
@@ -821,8 +822,8 @@
                   <tr *ngIf="jdf.getProcessesUsingThisParams(t).length>0">
                     <td>利用工程</td>
                     <td>
-                      <div *ngFor="let l of jdf.getProcessesUsingThisParams(t)">
-                        <span class="like-link" (click)="scrollTo(l.id)">{{l.id}}</span>
+                      <div *ngFor="let process of jdf.getProcessesUsingThisParams(t)">
+                        <span class="like-link" (click)="scrollTo(process.guid)">{{process.id}}</span>
                       </div>
                     </td>
                   </tr>
@@ -871,8 +872,47 @@
                   <tr *ngIf="jdf.getProcessesUsingThisParams(t).length>0">
                     <td>利用工程</td>
                     <td>
-                      <div *ngFor="let l of jdf.getProcessesUsingThisParams(t)">
-                        <span class="like-link" (click)="scrollTo(l.id)">{{l.id}}</span>
+                      <div *ngFor="let process of jdf.getProcessesUsingThisParams(t)">
+                        <span class="like-link" (click)="scrollTo(process.guid)">{{process.id}}</span>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title></mat-panel-title>
+                    <mat-panel-description>JDF該当部分</mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <pre><code class="html" [textContent]="t.body" appMyHighlight></code></pre>
+                </mat-expansion-panel>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="jdf.unknownResourceTags.length>0">
+        <h3 id="unknownResources_top">Unknown Resources</h3>
+        <div>
+          <div *ngFor="let t of jdf.unknownResourceTags" id="{{t.guid}}" [class.selected]="isSelected(t.guid)" class="example-card" (click)="cardClicked(t.guid)">
+            <mat-card>
+              <mat-card-header>
+                <mat-card-title>{{t.id}}</mat-card-title>
+    <!--            <mat-card-subtitle>{{t.klass}}</mat-card-subtitle>
+    -->
+              </mat-card-header>
+              <mat-card-content>
+                <table rules="rows">
+
+                  <tr *ngFor="let p of t.attributes">
+                    <td>{{p.name}}</td>
+                    <td>{{p.value}}</td>
+                  </tr>
+
+                  <tr *ngIf="jdf.getProcessesUsingThisParams(t).length>0">
+                    <td>利用工程</td>
+                    <td>
+                      <div *ngFor="let process of jdf.getProcessesUsingThisParams(t)">
+                        <span class="like-link" (click)="scrollTo(process.guid)">{{process.id}}</span>
                       </div>
                     </td>
                   </tr>
