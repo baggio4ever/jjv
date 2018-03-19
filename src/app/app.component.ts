@@ -10,6 +10,7 @@ import { AppSettingsDialogComponent } from './app-settings-dialog.component';
 import { AboutDialogComponent } from './about-dialog/about-dialog.component';
 import { UploadDialogComponent } from './upload-dialog/upload-dialog.component';
 import { DownloadDialogComponent } from './download-dialog/download-dialog.component';
+import { MessageDialogComponent } from './message-dialog/message-dialog.component';
 
 Cytoscape.use(klay);
 
@@ -786,6 +787,24 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
     document.getElementById('save-as-png').setAttribute('href', base64uri);
     document.getElementById('save-as-png').setAttribute('download', 'jjv.png');
     document.getElementById('save-as-png').click();
+  }
+
+  test() {
+    const dialogRef = this.dialog.open(MessageDialogComponent, {
+      width: '400px',
+      data: {
+        caption: 'こんちは',
+        message: 'ご機嫌いかが？'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('The dialog was closed: ' + result);
+      } else {
+        console.log('キャンセルされました？');
+      }
+    });
   }
 }
 

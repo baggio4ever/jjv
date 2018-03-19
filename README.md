@@ -80,3 +80,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 * Nodeのlabel表示見直し（JobPartIDとかの方がよいかな）
 * Chart.jsの使い所ないかしら
 * ジャンプしたらジャンプ先を選択状態にしたい
+* メール通知
+* URLパラメータで自動読み出し
+* 削除機能
+* themeのカスタマイズ

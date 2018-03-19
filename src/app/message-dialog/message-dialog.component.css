@@ -1,0 +1,25 @@
+.example-container {
+  display: flex;
+  flex-direction: column;
+}
+  
+.example-container2 {
+  display: flex;
+}
+  
+.example-container > * {
+  width: 100%;
+}
+  
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.dialog-title {
+  display: flex;
+}
+
+.dialog-icon {
+  padding-left: 2px;
+  padding-right: 10px;
+}

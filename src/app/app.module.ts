@@ -26,6 +26,7 @@ import { MyHttpService } from './my-http.service';
 import { AboutDialogComponent } from './about-dialog/about-dialog.component';
 import { UploadDialogComponent } from './upload-dialog/upload-dialog.component';
 import { DownloadDialogComponent } from './download-dialog/download-dialog.component';
+import { MessageDialogComponent } from './message-dialog/message-dialog.component';
 
 @NgModule({
   declarations: [
@@ -33,13 +34,15 @@ import { DownloadDialogComponent } from './download-dialog/download-dialog.compo
     AppSettingsDialogComponent,
     AboutDialogComponent,
     UploadDialogComponent,
-    DownloadDialogComponent
+    DownloadDialogComponent,
+    MessageDialogComponent
   ],
   entryComponents: [
     AppSettingsDialogComponent,
     AboutDialogComponent,
     UploadDialogComponent,
-    DownloadDialogComponent
+    DownloadDialogComponent,
+    MessageDialogComponent
   ],
   imports: [
     BrowserModule,

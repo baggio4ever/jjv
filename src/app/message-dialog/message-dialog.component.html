@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>{{data.caption}}</h1>
+<div mat-dialog-content>
+  <div class="example-container2">
+    <span>{{data.message}}</span>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <span class="example-spacer"></span><!-- これで右寄せ -->
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>OK</button>
+</div>
+
