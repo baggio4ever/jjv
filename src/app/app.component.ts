@@ -789,22 +789,35 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
     document.getElementById('save-as-png').click();
   }
 
-  test() {
+  showMessageDialog(caption: string,message: string,callback:(result:boolean)=>void ): void {
+
     const dialogRef = this.dialog.open(MessageDialogComponent, {
       width: '400px',
       data: {
-        caption: 'こんちは',
-        message: 'ご機嫌いかが？'
+        caption: caption,
+        message: message
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         console.log('The dialog was closed: ' + result);
+        callback(true);
       } else {
         console.log('キャンセルされました？');
+        callback(false);
       }
     });
+  }
+
+  test() {
+   this.showMessageDialog('どうだ','使いやすいかな',(r)=>{
+     if(r) {
+       console.log('trueですよね？');
+     } else {
+       console.log('false だすな');
+     }
+   })
   }
 }
 
