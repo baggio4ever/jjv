@@ -197,7 +197,7 @@ export class Cip4Service {
     const rRef = node.getAttribute('rRef');
 
     const linkTag = new CoverApplicationParamsLinkTag(usage, rRef, '');
-    
+
     return linkTag;
   }
 
@@ -205,7 +205,7 @@ export class Cip4Service {
     const usage = node.getAttribute('Usage');
     const rRef = node.getAttribute('rRef');
     const linkTag = new StitchingParamsLinkTag(usage, rRef, '');
-    
+
     return linkTag;
   }
 
@@ -250,7 +250,7 @@ export class Cip4Service {
   }
 
   private createUnknownResourceLinkTag(node): UnknownResourceLinkTag {
-    const linkTag = new UnknownResourceLinkTag( node.tagName,node.attributes );
+    const linkTag = new UnknownResourceLinkTag( node.tagName, node.attributes );
 
     return linkTag;
   }
@@ -348,8 +348,8 @@ export class Cip4Service {
     const resourcePoolTags = dom.getElementsByTagName('ResourcePool');
 
     // ResourcePoolに含まれるもの全て走査
-    for( let i=0;i<resourcePoolTags.length;i++ ) {
-      let rp = resourcePoolTags[i];
+    for (let i = 0; i < resourcePoolTags.length; i++) {
+      const rp = resourcePoolTags[i];
       for ( let j = 0; j < rp.children.length; j++ ) {
         const r = rp.children[j];
 
@@ -392,7 +392,7 @@ export class Cip4Service {
             break;
 
           default:
-            console.log('default キタだすー : '+ r.tagName);
+            console.log('default キタだすー : ' + r.tagName);
             const unknownResourceTag = this.createUnknownResourceTag(r);
             jdf.pushUnknownResourceTag(unknownResourceTag);
             break;
@@ -620,16 +620,16 @@ export class JDF {
   getResourceTagById( id: string ): IdHavingTag {
     let ret = null;
 
-    if( ret = this.getComponentTagById(id) ) {
+    if ( ret = this.getComponentTagById(id) ) {
       return ret;
     }
-    if( ret = this.getDeviceTagById(id) ) {
+    if ( ret = this.getDeviceTagById(id) ) {
       return ret;
     }
-    if( ret = this.getParamsTagById(id) ) {
+    if ( ret = this.getParamsTagById(id) ) {
       return ret;
     }
-    
+
     return null;
   }
 
@@ -1015,11 +1015,11 @@ export class CutBlockTag  extends IdHavingTag {
     const rx = /^(\d+\s+\d+\s+\d+\s+\d+)\s+(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)$/;
     const result = blockTrf.match(rx);
 
-    if(result) {
+    if (result) {
       console.log(' ---- Hit! ---- ');
-      console.log('  length: '+result.length);
-      for(let i=0;i<result.length;i++) {
-        console.log('  ['+i+'] '+result[i]);
+      console.log('  length: ' + result.length);
+      for (let i = 0; i < result.length; i++) {
+        console.log('  [' + i + '] ' + result[i]);
       }
 
       this.block_zz = result[1];
@@ -1130,21 +1130,21 @@ export class UnknownResourceTag  extends IdHavingTag {
     this.tagName = tagName;
     this.attributes = [];
 
-    for(let i=0;i<attributes.length;i++ ) {
+    for (let i = 0; i < attributes.length; i++ ) {
       this.attributes.push( {
         name: attributes[i].name,
         value: attributes[i].value
       });
     }
 
-    let id = this.attributes.find((v,i,a) => {return (v.name === 'ID');});
-    if(id) {
+    const id = this.attributes.find((v, i, a) => {return (v.name === 'ID');});
+    if (id) {
       this.id = id.value;
     }
 
     this.body = body;
   }
-
+/*
   getAttributesArray() {
     let r = [];
     for( let k in this.attributes) {
@@ -1152,6 +1152,7 @@ export class UnknownResourceTag  extends IdHavingTag {
     }
     return r;
   }
+  */
 }
 
 class LinkTag  extends BaseTag {
@@ -1230,7 +1231,7 @@ class UnknownResourceLinkTag extends LinkTag {
     super('','','');
 
     this.tagName = tagName;
-    for(let i=0;i<attributes.length;i++ ) {
+    for (let i = 0; i < attributes.length; i++) {
       this.attributes.push( {
         name: attributes[i].name,
         value: attributes[i].value
@@ -1238,18 +1239,18 @@ class UnknownResourceLinkTag extends LinkTag {
     }
 
     console.log(' UnknownResourceLinkTag - ' + this.tagName + ' ------- ' );
-    let usage = this.attributes.find((v,i,a) => {return (v.name === 'Usage');});
-    if(usage) {
+    const usage = this.attributes.find((v,i,a) => {return (v.name === 'Usage');});
+    if (usage) {
       this.usage = usage.value;
       console.log('  * ' + this.usage);
     }
-    let rRef = this.attributes.find((v,i,a) => {return (v.name === 'rRef');});
-    if(rRef) {
+    const rRef = this.attributes.find((v,i,a) => {return (v.name === 'rRef');});
+    if (rRef) {
       this.rRef = rRef.value;
       console.log('  * ' + this.rRef);
     }
-    let amount = this.attributes.find((v,i,a) => {return (v.name === 'Amount');});
-    if(amount) {
+    const amount = this.attributes.find((v,i,a) => {return (v.name === 'Amount');});
+    if (amount) {
       this.amount = amount.value;
       console.log('  * ' + this.amount);
     }

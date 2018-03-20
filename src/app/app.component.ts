@@ -90,7 +90,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
 
       this.fileLoaded = true;
       this.filename = f.name;
-      
+
       setTimeout(() => { // チョイ待たせてCytoscape
         this.initCytoscape();
         this.makeGraph();
@@ -674,7 +674,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
 
         const now = new Date().toLocaleString();
 
-        const body:Fi = {
+        const body: Fi = {
           user_id: result.user_id,
           filename: result.filename,
           xml: this.jdf.beautifiedXml,
@@ -733,7 +733,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
 
         this.fileLoaded = true;
         this.filename = result.f.filename;
-        console.log('fromstring filename:'+this.filename);
+        console.log('fromstring filename:' + this.filename);
 
         setTimeout(() => { // チョイ待たせてCytoscape
           this.initCytoscape();
@@ -750,7 +750,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
 
   saveToFile(): void {
     const content = this.jdf.beautifiedXml;
-    const blob = new Blob([content],{'type':'text/xml'});
+    const blob = new Blob([content], {'type': 'text/xml'});
 
     if (window.navigator.msSaveBlob) {
       window.navigator.msSaveBlob(blob, 'test.jdf');
@@ -813,12 +813,12 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
 
   test() {
    this.showMessageDialog('どうだ', '使いやすいかな', MessageDialogButtons.YesNo, (r) => {
-     if(r) {
+     if ( r ) {
        console.log('trueですよね？');
      } else {
        console.log('false だすな');
      }
-   })
+   });
   }
 }
 
