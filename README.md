@@ -80,12 +80,13 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## やりたいこと
 * IDではなく、GUIDでジャンプ 済み！
-* MesssageDialog作る
+* MesssageDialog作る もう少し！
 * Nodeのlabel表示見直し（JobPartIDとかの方がよいかな）
-* Chart.jsの使い所ないかしら
-* ジャンプしたらジャンプ先を選択状態にしたい
+* ジャンプしたらジャンプ先を選択状態にしたい 済み！
 * メール通知
 * URLパラメータで自動読み出し
 * downloadダイアログから選択してEメールでURLを案内する機能とか
 * 削除機能（他人のデータ消せるのはいかがなものか。admin機能!?）
 * themeのカスタマイズ
+* Chart.jsの使い所ないかしら
+* Three.jsの使いどころないかしら
