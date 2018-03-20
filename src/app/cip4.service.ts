@@ -759,10 +759,15 @@ class BaseTag {
 
 class IdHavingTag extends BaseTag {
   id: string;
+
   constructor(id: string) {
     super();
 
     this.id = id;
+  }
+
+  getCaption(): string {
+    return this.id;
   }
 }
 
@@ -795,6 +800,14 @@ export class JdfTag extends IdHavingTag {
 
     this.body = body;
   }
+
+  getCaption(): string {
+    if ( this.jobPartId ) {
+      return this.type + ' (' + this.jobPartId +')';
+    } else {
+      return this.type;
+    }
+  }
 }
 
 export class DeviceTag extends IdHavingTag {
@@ -811,6 +824,22 @@ export class DeviceTag extends IdHavingTag {
     this.friendlyName = friendlyName;
 
     this.body = body;
+  }
+
+  getCaption(): string {
+    if (this.friendlyName) {
+      if ( this.deviceId ) {
+        return this.friendlyName + ' (' + this.deviceId + ')';
+      } else {
+        return this.friendlyName;
+      }
+    } else {
+      if ( this.deviceId ) {
+        return this.deviceId;
+      } else {
+        return super.getCaption();
+      }
+    }
   }
 }
 
@@ -943,6 +972,14 @@ export class FoldingParamsTag  extends IdHavingTag {
     this.folds = folds;
 
     this.body = body;
+  }
+
+  getCaption(): string {
+    if (this.descriptionType) {
+      return this.descriptionType;
+    } else {
+      return super.getCaption();
+    }
   }
 }
 
@@ -1115,8 +1152,8 @@ export class StackingParamsTag  extends IdHavingTag {
 }
 
 interface NameValue {
-  name:string,
-  value:string
+  name: string;
+  value: string;
 }
 
 export class UnknownResourceTag  extends IdHavingTag {
@@ -1153,6 +1190,9 @@ export class UnknownResourceTag  extends IdHavingTag {
     return r;
   }
   */
+  getCaption(): string {
+    return 'Unknown: ' + this.tagName;
+  }
 }
 
 class LinkTag  extends BaseTag {
@@ -1228,7 +1268,7 @@ class UnknownResourceLinkTag extends LinkTag {
   attributes = new Array<NameValue>();
 
   constructor( tagName: string, attributes: any ) {
-    super('','','');
+    super('', '', '');
 
     this.tagName = tagName;
     for (let i = 0; i < attributes.length; i++) {
@@ -1239,17 +1279,17 @@ class UnknownResourceLinkTag extends LinkTag {
     }
 
     console.log(' UnknownResourceLinkTag - ' + this.tagName + ' ------- ' );
-    const usage = this.attributes.find((v,i,a) => {return (v.name === 'Usage');});
+    const usage = this.attributes.find((v, i, a) => {return (v.name === 'Usage');});
     if (usage) {
       this.usage = usage.value;
       console.log('  * ' + this.usage);
     }
-    const rRef = this.attributes.find((v,i,a) => {return (v.name === 'rRef');});
+    const rRef = this.attributes.find((v, i, a) => {return (v.name === 'rRef');});
     if (rRef) {
       this.rRef = rRef.value;
       console.log('  * ' + this.rRef);
     }
-    const amount = this.attributes.find((v,i,a) => {return (v.name === 'Amount');});
+    const amount = this.attributes.find((v, i, a) => {return (v.name === 'Amount');});
     if (amount) {
       this.amount = amount.value;
       console.log('  * ' + this.amount);

@@ -17,7 +17,7 @@ Cytoscape.use(klay);
 declare var hljs: any;
 
 
-const JJV_VERSION = '0.1.5';
+const JJV_VERSION = '0.1.6';
 
 const KEY_BASE_URL = 'KEY_BASE_URL';
 const KEY_USER_ID = 'KEY_USER_ID';
@@ -154,7 +154,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         {
           selector: '.process',
           style: {
-            'label': 'data(jdf_id)',
+            'label': 'data(node_label)',
             'shape': 'ellipse',
             'background-color': '#800',
             'border-width': 1,
@@ -168,7 +168,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         {
           selector: ':selected.process',
           style: {
-            'label': 'data(jdf_id)',
+            'label': 'data(node_label)',
             'shape': 'ellipse',
             'background-color': '#f00',
             'border-width': 2,
@@ -178,7 +178,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         {
           selector: '.component',
           style: {
-            'label': 'data(jdf_id)',
+            'label': 'data(node_label)',
             'shape': 'rectangle',
             'background-color': '#888',
             'border-width': 1,
@@ -190,7 +190,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         {
           selector: ':selected.component',
           style: {
-            'label': 'data(jdf_id)',
+            'label': 'data(node_label)',
             'shape': 'rectangle',
             'background-color': '#ffffef',
             'border-width': 2,
@@ -200,7 +200,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         {
           selector: '.params',
           style: {
-            'label': 'data(jdf_id)',
+            'label': 'data(node_label)',
             'shape': 'tag',
             'background-color': '#960',
             'border-width': 1,
@@ -217,7 +217,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         {
           selector: ':selected.params',
           style: {
-            'label': 'data(jdf_id)',
+            'label': 'data(node_label)',
             'background-color': '#fb0',
             'border-width': 2,
             'border-color': 'black',
@@ -226,7 +226,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         {
           selector: '.device',
           style: {
-            'label': 'data(jdf_id)',
+            'label': 'data(node_label)',
             'shape': 'hexagon',
             'background-color': '#383',
             'border-width': 1,
@@ -246,7 +246,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         {
           selector: '.unknown',
           style: {
-            'label': 'data(jdf_id)',
+            'label': 'data(node_label)',
             'shape': 'tag',
             'background-color': '#005',
             'border-width': 1,
@@ -263,7 +263,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         {
           selector: ':selected.unknown',
           style: {
-            'label': 'data(jdf_id)',
+            'label': 'data(node_label)',
             'background-color': '#00a',
             'border-width': 2,
             'border-color': 'black',
@@ -338,7 +338,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         {
           data: {
             id: v.guid,
-            jdf_id: v.id
+            jdf_id: v.id,
+            node_label: v.getCaption()
           }
         }
       ]).addClass('component');
@@ -350,7 +351,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         {
           data: {
             id: v.guid,
-            jdf_id: v.id
+            jdf_id: v.id,
+            node_label: v.getCaption()
           }
         }
       ]).addClass('process');
@@ -362,7 +364,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         {
           data: {
             id: v.guid,
-            jdf_id: v.id
+            jdf_id: v.id,
+            node_label: v.getCaption()
           }
         }
       ]).addClass('device');
@@ -374,7 +377,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         {
           data: {
             id: v.guid,
-            jdf_id: v.id
+            jdf_id: v.id,
+            node_label: v.getCaption()
           }
         }
       ]).addClass('params');
@@ -386,7 +390,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         {
           data: {
             id: v.guid,
-            jdf_id: v.id
+            jdf_id: v.id,
+            node_label: v.getCaption()
           }
         }
       ]).addClass('params');
@@ -398,7 +403,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         {
           data: {
             id: v.guid,
-            jdf_id: v.id
+            jdf_id: v.id,
+            node_label: v.getCaption()
           }
         }
       ]).addClass('params');
@@ -410,7 +416,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         {
           data: {
             id: v.guid,
-            jdf_id: v.id
+            jdf_id: v.id,
+            node_label: v.getCaption()
           }
         }
       ]).addClass('params');
@@ -422,7 +429,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         {
           data: {
             id: v.guid,
-            jdf_id: v.id
+            jdf_id: v.id,
+            node_label: v.getCaption()
           }
         }
       ]).addClass('params');
@@ -434,7 +442,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         {
           data: {
             id: v.guid,
-            jdf_id: v.id
+            jdf_id: v.id,
+            node_label: v.getCaption()
           }
         }
       ]).addClass('params');
@@ -446,7 +455,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         {
           data: {
             id: v.guid,
-            jdf_id: v.id
+            jdf_id: v.id,
+            node_label: v.getCaption()
           }
         }
       ]).addClass('params');
@@ -458,7 +468,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         {
           data: {
             id: v.guid,
-            jdf_id: v.id
+            jdf_id: v.id,
+            node_label: v.getCaption()
           }
         }
       ]).addClass('unknown');
