@@ -134,7 +134,7 @@
           <div *ngFor="let t of jdf.processTags" id="{{t.guid}}" [class.selected]="isSelected(t.guid)" class="example-card"  (click)="cardClicked(t.guid)">
             <mat-card>
               <mat-card-header>
-                <mat-card-title>{{t.getCaption()}}</mat-card-title>
+                <mat-card-title><h3>{{t.getCaption()}}</h3></mat-card-title>
               </mat-card-header>
               <mat-card-content>
                 <table rules="rows">

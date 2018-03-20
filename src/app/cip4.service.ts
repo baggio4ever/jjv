@@ -870,6 +870,14 @@ export class ComponentTag extends IdHavingTag {
     this.body = body;
   }
 
+  getCaption(): string {
+    if (this.componentType) {
+      return this.componentType;
+    } else {
+      return super.getCaption();
+    }
+  }
+
   getDimensionsWidth(): number {
     return this.dimensions_width;
   }
