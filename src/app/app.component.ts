@@ -10,7 +10,7 @@ import { AppSettingsDialogComponent } from './app-settings-dialog.component';
 import { AboutDialogComponent } from './about-dialog/about-dialog.component';
 import { UploadDialogComponent } from './upload-dialog/upload-dialog.component';
 import { DownloadDialogComponent } from './download-dialog/download-dialog.component';
-import { MessageDialogComponent } from './message-dialog/message-dialog.component';
+import { MessageDialogComponent, MessageDialogButtons } from './message-dialog/message-dialog.component';
 
 Cytoscape.use(klay);
 
@@ -789,13 +789,14 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
     document.getElementById('save-as-png').click();
   }
 
-  showMessageDialog(caption: string,message: string,callback:(result:boolean)=>void ): void {
+  showMessageDialog(caption: string, message: string, buttons: MessageDialogButtons, callback: (result: boolean) => void ): void {
 
     const dialogRef = this.dialog.open(MessageDialogComponent, {
       width: '400px',
       data: {
         caption: caption,
-        message: message
+        message: message,
+        buttons: buttons
       }
     });
 
@@ -811,7 +812,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
   }
 
   test() {
-   this.showMessageDialog('どうだ','使いやすいかな',(r)=>{
+   this.showMessageDialog('どうだ', '使いやすいかな', MessageDialogButtons.YesNo, (r) => {
      if(r) {
        console.log('trueですよね？');
      } else {

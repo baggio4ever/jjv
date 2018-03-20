@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatButtonModule } from '@angular/material';
 
 @Component({
   selector: 'app-message-dialog',
@@ -7,6 +7,9 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
   styleUrls: ['./message-dialog.component.css']
 })
 export class MessageDialogComponent implements OnInit {
+  // store a reference to the enum
+  buttons = MessageDialogButtons;
+
   constructor(
     public dialogRef: MatDialogRef<MessageDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {}
@@ -17,4 +20,11 @@ export class MessageDialogComponent implements OnInit {
 
   ngOnInit() {
   }
+}
+
+export enum MessageDialogButtons {
+  Yes,
+  YesNo,
+  Ok,
+  OkCancel
 }

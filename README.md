@@ -74,6 +74,10 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 [JavaScriptの正規表現で文字列を抜き出す「グループ化」](http://www.koikikukan.com/archives/2013/04/02-003300.php)
 
 
+#### Enum in angular
+[How to use a typescript enum value in an Angular2 ngSwitch statement](https://stackoverflow.com/questions/35835984/how-to-use-a-typescript-enum-value-in-an-angular2-ngswitch-statement)
+
+
 ## やりたいこと
 * IDではなく、GUIDでジャンプ 済み！
 * MesssageDialog作る
