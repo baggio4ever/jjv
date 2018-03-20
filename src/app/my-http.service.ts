@@ -17,10 +17,10 @@ export class MyHttpService {
     return this.base_url;
   }
 
-  getMessage( callback: (msg: string, input: string ) => void ): void {
+  getMessage( callback: (name: string, version: string, input: string ) => void ): void {
     // API GatewayとHTTP通信して、取得成功時にコールバックを行う
-    this.http.get( this.base_url + 'users/create').subscribe(data => {
-        callback(data['message'], data['input']);
+    this.http.get( this.base_url + 'hello').subscribe(data => {
+        callback(data['name'], data['version'], data['input']);
     });
   }
 

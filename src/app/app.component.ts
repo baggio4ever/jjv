@@ -623,11 +623,11 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
   sayHello(): void {
     this.ret_from_http = '';
     this.ret_from_http_input = '';
-    this.httpService.getMessage( (msg, input) => {
-      this.ret_from_http = msg;
+    this.httpService.getMessage( (name, version, input) => {
+      this.ret_from_http = name + ' ' + version;
       this.ret_from_http_input = input;
 
-      this.snackBar.open('sayHello', '成功', {
+      this.snackBar.open('sayHello : ' + name + ' ' + version, '成功', {
         duration: 2000,
       });
     });
