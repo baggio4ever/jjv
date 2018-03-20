@@ -120,9 +120,19 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
     try {
       console.log('tagName: ' + guid);
       document.getElementById(guid).scrollIntoView( {behavior: 'smooth', block: 'center', inline: 'center'});
+//      this.selectedGuid = guid;
     } catch (e) {
       console.log('error!:' + e);
     }
+  }
+
+  scrollAndSelectTo( ev: any, guid: string ): void {
+    ev.stopPropagation();
+
+    console.log('--- in scrollAndSelectTo ' + guid);
+    this.scrollTo(guid);
+    this.cardClicked(guid);
+    console.log('--- out scrollAndSelectTo ' + guid);
   }
 
   initCytoscape(): void {
