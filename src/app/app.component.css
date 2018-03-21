@@ -148,3 +148,8 @@ spanじゃ効かない？かといって p とか display:inline-block 試した
 .card-title {
     font-size: large;
 }
+
+ul {
+    list-style-type: none;
+    font-size: small;
+}

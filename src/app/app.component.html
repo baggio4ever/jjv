@@ -4,11 +4,6 @@
     <span class="example-spacer"></span>
     <nav *ngIf="fileLoaded; else elseBlock2">
       <!-- ファイル開いている時 -->
-<!--
-      <button mat-icon-button matTooltip="関連情報" matTooltipPosition="above">
-        <mat-icon aria-label="more ...">more_vert</mat-icon>
-      </button>
-    -->
       <span class="toolbar-fn">{{filename}}</span>
 
       <button mat-icon-button (click)="clear()" matTooltip="閉じる" matTooltipPosition="above">
@@ -26,8 +21,6 @@
       <!-- ファイル開いていない時 -->
       <nav>
         <div>
-<!--          {{filename}}
--->
 <!--
           <label for="input-file-id" class="selectFile iconX">
             ＋JDFを選択
@@ -41,9 +34,6 @@
           <button mat-icon-button (click)="downloadFromCloud()" matTooltip="クラウドから開く" matTooltipPosition="above">
             <mat-icon aria-label="download">cloud_download</mat-icon>
           </button>
-<!--
-        <button mat-raised-button color="warn" (click)="yes(fileInput.files[0])" [disabled]="!fileSelected">選択したファイルを読みん込んで表示</button>
--->
         </div>
       </nav>
     </ng-template>
@@ -173,12 +163,6 @@
                             <td><span *ngIf="l.amount>0">{{l.amount|number}}</span></td>
                           </tr>
                         </table>
-                        <!--
-                      <div *ngFor="let l of t.inputComponentLinks">
-                        <span class="like-link" (click)="scrollTo(l.rRef)">{{l.rRef}}</span>
-                        <span *ngIf="l.amount>0" class="my-smaller">Amount: {{l.amount}}</span>
-                      </div>
-                    -->
                     </td>
                   </tr>
                   <tr *ngIf="t.outputComponentLinks.length>0">
@@ -194,12 +178,6 @@
                             <td><span *ngIf="l.amount>0">{{l.amount|number}}</span></td>
                           </tr>
                         </table>
-                      <!--
-                      <div *ngFor="let l of t.outputComponentLinks">
-                        <span class="like-link" (click)="scrollTo(l.rRef)">{{l.rRef}}</span>
-                        <span *ngIf="l.amount>0" class="my-smaller">Amount: {{l.amount}}</span>
-                      </div>
-                    -->
                     </td>
                   </tr>
                   <tr *ngIf="t.paramsLinks.length>0">
@@ -260,18 +238,6 @@
                   <tr>
                     <td>Dimensions</td>
                       <td>
-                        <!--
-                        <table rules="rows">
-                          <tr>
-                            <td></td>
-                            <td>Amount</td>
-                          </tr>
-                          <tr *ngFor="let l of t.outputComponentLinks">
-                            <td><span class="like-link" (click)="scrollTo(l.rRef)">{{l.rRef}}</span></td>
-                            <td><span *ngIf="l.amount>0">{{l.amount|number}}</span></td>
-                          </tr>
-                        </table>
-                      -->
                         <table rules="rows">
                           <tr>
                             <td></td>
@@ -296,27 +262,6 @@
                         </table>
                       </td>
                   </tr>
-<!--
-                    <tr>
-                    <td>Dimensions <span class="my-smaller">[mm]</span></td>
-                    <td>
-                        <table rules="rows">
-                          <tr>
-                            <td>幅</td>
-                            <td>{{t.getDimensionsWidth_mm()}}</td>
-                          </tr>
-                          <tr>
-                            <td>長さ</td>
-                            <td>{{t.getDimensionsLength_mm()}}</td>
-                          </tr>
-                          <tr>
-                            <td>厚さ</td>
-                            <td>{{t.getDimensionsThickness_mm()}}</td>
-                          </tr>
-                        </table>
-                    </td>
-                  </tr>
-                -->
                   <tr *ngIf="jdf.getPreviousProcesses(t).length>0">
                     <td>前工程 <span class="my-smaller">（生成元）</span></td>
                     <td>
@@ -477,9 +422,6 @@
                   </tr>
                   <tr>
                     <td>Width</td>
-<!--
-                    <td>{{t.width}}</td>
--->
                     <td>
                         <table rules="rows">
                           <tr>
@@ -493,18 +435,6 @@
                         </table>
                     </td>
                   </tr>
-                  <!--
-                  <tr>
-                    <td>Height <span class="my-smaller">[pt]</span></td>
-                    <td>{{t.height}}</td>
-                  </tr>
-                -->
-                  <!--
-                  <tr>
-                    <td>Width <span class="my-smaller">[mm]</span></td>
-                    <td>{{t.getWidth_mm()}}</td>
-                  </tr>
-                -->
                   <tr>
                     <td>Height</td>
                     <td>
@@ -519,9 +449,6 @@
                           </tr>
                         </table>
                     </td>
-                    <!--
-                    <td>{{t.getHeight_mm()}}</td>
-                    -->
                   </tr>
                   <tr>
                     <td>TrimmingOffset</td>
@@ -537,9 +464,6 @@
                           </tr>
                         </table>
                     </td>
-                    <!--
-                    <td>{{t.getHeight_mm()}}</td>
-                    -->
                   </tr>
                   <tr *ngIf="jdf.getProcessesUsingThisParams(t).length>0">
                     <td>利用工程</td>
