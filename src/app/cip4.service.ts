@@ -911,44 +911,55 @@ export class ComponentTag extends IdHavingTag {
   }
 }
 
-export class StitchingParamsTag extends IdHavingTag  {
+export class ParamsTag extends IdHavingTag {
   klass: string;
-  numberOfStitches: string;
-  stapleShape: string;
   body: string;
 
-  constructor(id: string, klass: string, numberOfStitches: string, stapleShape: string, body: string) {
+  constructor(id: string, klass: string, body: string) {
     super(id);
 
     this.klass = klass;
-    this.numberOfStitches = numberOfStitches;
-    this.stapleShape = stapleShape;
 
     this.body = body;
   }
+
+    getCaption(): string {
+    if (this.klass) {
+      return this.klass;
+    } else {
+      return super.getCaption();
+    }
+  }
 }
 
-export class TrimmingParamsTag  extends IdHavingTag {
-  klass: string;
+export class StitchingParamsTag extends ParamsTag  {
+  numberOfStitches: string;
+  stapleShape: string;
+
+  constructor(id: string, klass: string, numberOfStitches: string, stapleShape: string, body: string) {
+    super(id, klass, body);
+
+    this.numberOfStitches = numberOfStitches;
+    this.stapleShape = stapleShape;
+  }
+}
+
+export class TrimmingParamsTag  extends ParamsTag {
   noOp: string;
   trimmingType: string;
   height: string;
   width: string;
   trimmingOffset: string;
-  body: string;
 
   constructor(id: string, klass: string, noOp: string, trimmingType: string,
        height: string, width: string, trimmingOffset: string, body: string) {
-    super(id);
+    super(id, klass, body);
 
-    this.klass = klass;
     this.noOp = noOp;
     this.trimmingType = trimmingType;
     this.height = height;
     this.width = width;
     this.trimmingOffset = trimmingOffset;
-
-    this.body = body;
   }
 
   getWidth_mm(): number {
@@ -964,22 +975,17 @@ export class TrimmingParamsTag  extends IdHavingTag {
   }
 }
 
-export class FoldingParamsTag  extends IdHavingTag {
-  klass: string;
+export class FoldingParamsTag  extends ParamsTag {
   descriptionType: string;
   foldCatalog: string;
   folds: FoldTag[];
-  body: string;
 
   constructor( id: string, klass: string, descriptionType: string, foldCatalog: string, folds: FoldTag[], body: string ) {
-    super(id);
+    super(id, klass, body);
 
-    this.klass = klass;
     this.descriptionType = descriptionType;
     this.foldCatalog = foldCatalog;
     this.folds = folds;
-
-    this.body = body;
   }
 
   getCaption(): string {
@@ -1009,22 +1015,17 @@ export class FoldTag  extends BaseTag {
   }
 }
 
-export class CuttingParamsTag  extends IdHavingTag {
-  klass: string;
+export class CuttingParamsTag  extends ParamsTag {
   cutBlocks: CutBlockTag[];
-  body: string;
 
   constructor( id: string, klass: string, cutBlocks: CutBlockTag[], body: string ) {
-    super(id);
+    super(id, klass, body);
 
-    this.klass = klass;
     this.cutBlocks = cutBlocks;
-
-    this.body = body;
   }
 }
 
-export class CutBlockTag  extends IdHavingTag {
+export class CutBlockTag  extends IdHavingTag { // うーん。ParamsTagから継承するのは意味的にイマイチか？ParamsTagの名称を変えるべきか
   klass: string;
   blockType: string;
   blockName: string;
@@ -1112,50 +1113,35 @@ export class CutBlockTag  extends IdHavingTag {
   }
 }
 
-export class CoverApplicationParamsTag  extends IdHavingTag {
-  klass: string;
+export class CoverApplicationParamsTag  extends ParamsTag {
   noOp: string;
-  body: string;
 
   constructor( id: string, klass: string, noOp: string, body: string ) {
-    super(id);
+    super(id, klass, body);
 
-    this.klass = klass;
     this.noOp = noOp;
-
-    this.body = body;
   }
 }
 
-export class SpinePreparationParamsTag  extends IdHavingTag {
-  klass: string;
+export class SpinePreparationParamsTag  extends ParamsTag {
   millingDepth: string;
-  body: string;
 
   constructor( id: string, klass: string, millingDepth: string, body: string ) {
-    super(id);
+    super(id, klass, body);
 
-    this.klass = klass;
     this.millingDepth = millingDepth;
-
-    this.body = body;
   }
 }
 
-export class StackingParamsTag  extends IdHavingTag {
-  klass: string;
+export class StackingParamsTag  extends ParamsTag {
   standardAmount: string;
   layerAmount: string;
-  body: string;
 
   constructor( id: string, klass: string, standardAmount: string, layerAmount: string, body: string ) {
-    super(id);
+    super(id, klass, body);
 
-    this.klass = klass;
     this.standardAmount = standardAmount;
     this.layerAmount = layerAmount;
-
-    this.body = body;
   }
 }
 
