@@ -142,3 +142,7 @@ spanじゃ効かない？かといって p とか display:inline-block 試した
     display: flex;
     justify-content: flex-end;
 }
+
+.card-title {
+    font-size: large;
+}

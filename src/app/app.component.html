@@ -95,7 +95,9 @@
         <div id="{{jdf.jobTag.guid}}" class="example-card" (click)="cardClicked(jdf.jobTag.guid)">
           <mat-card>
             <mat-card-header>
-              <mat-card-title>{{jdf.jobTag.getCaption()}}</mat-card-title>
+              <mat-card-title>
+                <span class="card-title">{{jdf.jobTag.getCaption()}}</span>
+              </mat-card-title>
             </mat-card-header>
             <mat-card-content>
               <table rules="rows">
@@ -134,7 +136,9 @@
           <div *ngFor="let t of jdf.processTags" id="{{t.guid}}" [class.selected]="isSelected(t.guid)" class="example-card"  (click)="cardClicked(t.guid)">
             <mat-card>
               <mat-card-header>
-                <mat-card-title><h3>{{t.getCaption()}}</h3></mat-card-title>
+                <mat-card-title>
+                  <span class="card-title">{{t.getCaption()}}</span>
+                </mat-card-title>
               </mat-card-header>
               <mat-card-content>
                 <table rules="rows">
@@ -233,7 +237,9 @@
           <div *ngFor="let t of jdf.componentTags" id="{{t.guid}}" [class.selected]="isSelected(t.guid)" class="example-card" (click)="cardClicked(t.guid)">
             <mat-card>
               <mat-card-header>
-                <mat-card-title>{{t.getCaption()}}</mat-card-title>
+                <mat-card-title>
+                  <span class="card-title">{{t.getCaption()}}</span>
+                </mat-card-title>
               </mat-card-header>
               <mat-card-content>
                 <table rules="rows">
@@ -345,7 +351,9 @@
           <div *ngFor="let t of jdf.deviceTags" id="{{t.guid}}" [class.selected]="isSelected(t.guid)" class="example-card" (click)="cardClicked(t.guid)">
             <mat-card>
               <mat-card-header>
-                <mat-card-title>{{t.getCaption()}}</mat-card-title>
+                <mat-card-title>
+                  <span class="card-title">{{t.getCaption()}}</span>
+                </mat-card-title>
               </mat-card-header>
               <mat-card-content>
                 <table rules="rows">
@@ -393,7 +401,9 @@
           <div *ngFor="let t of jdf.stitchingParamsTags" id="{{t.guid}}" [class.selected]="isSelected(t.guid)" class="example-card" (click)="cardClicked(t.guid)">
             <mat-card>
               <mat-card-header>
-                <mat-card-title>{{t.getCaption()}}</mat-card-title>
+                <mat-card-title>
+                  <span class="card-title">{{t.getCaption()}}</span>
+                </mat-card-title>
               </mat-card-header>
               <mat-card-content>
                 <table rules="rows">
@@ -441,7 +451,9 @@
           <div *ngFor="let t of jdf.trimmingParamsTags" id="{{t.guid}}" [class.selected]="isSelected(t.guid)" class="example-card" (click)="cardClicked(t.guid)">
             <mat-card>
               <mat-card-header>
-                <mat-card-title>{{t.getCaption()}}</mat-card-title>
+                <mat-card-title>
+                  <span class="card-title">{{t.getCaption()}}</span>
+                </mat-card-title>
               </mat-card-header>
               <mat-card-content>
                 <table rules="rows">
@@ -555,7 +567,9 @@
           <div *ngFor="let t of jdf.foldingParamsTags" id="{{t.guid}}" [class.selected]="isSelected(t.guid)" class="example-card" (click)="cardClicked(t.guid)">
             <mat-card>
               <mat-card-header>
-                <mat-card-title>{{t.getCaption()}}</mat-card-title>
+                <mat-card-title>
+                  <span class="card-title">{{t.getCaption()}}</span>
+                </mat-card-title>
               </mat-card-header>
               <mat-card-content>
                 <table rules="rows">
@@ -620,8 +634,8 @@
                         <mat-cell *matCellDef="let element"> {{element.getTravel_mm()}} </mat-cell>
                       </ng-container>
     
-                      <mat-header-row *matHeaderRowDef="displayedColumns3"></mat-header-row>
-                      <mat-row *matRowDef="let row; columns: displayedColumns3;"></mat-row>
+                      <mat-header-row *matHeaderRowDef="displayedColumns_fold"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: displayedColumns_fold;"></mat-row>
                     </mat-table>
                   </div>
                 </mat-expansion-panel>
@@ -646,7 +660,9 @@
           <div *ngFor="let t of jdf.cuttingParamsTags" id="{{t.guid}}" [class.selected]="isSelected(t.guid)" class="example-card" (click)="cardClicked(t.guid)">
             <mat-card>
               <mat-card-header>
-                <mat-card-title>{{t.getCaption()}}</mat-card-title>
+                <mat-card-title>
+                  <span class="card-title">{{t.getCaption()}}</span>
+                </mat-card-title>
               </mat-card-header>
               <mat-card-content>
                 <table rules="rows">
@@ -711,12 +727,22 @@
                           幅<br>
                           高さ
                         </mat-header-cell>
-<!--
-                        <mat-cell *matCellDef="let element"> {{element.blockSize}} </mat-cell>
--->
                         <mat-cell *matCellDef="let element">
                           {{element.getBlockWidth()}}<br>
                           {{element.getBlockHeight()}}
+                        </mat-cell>
+                      </ng-container>
+    
+                      <!-- BlockSize Column [mm] -->
+                      <ng-container matColumnDef="blockSize_mm">
+                        <mat-header-cell *matHeaderCellDef>
+                          BlockSize<br>
+                          幅 [mm]<br>
+                          高さ [mm]
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                          {{element.getBlockWidth_mm()}}<br>
+                          {{element.getBlockHeight_mm()}}
                         </mat-cell>
                       </ng-container>
     
@@ -735,8 +761,23 @@
                         </mat-cell>
                       </ng-container>
     
-                      <mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>
-                      <mat-row *matRowDef="let row; columns: displayedColumns2;"></mat-row>
+                      <!-- BlockTrf Column [mm] -->
+                      <ng-container matColumnDef="blockTrf_mm">
+                        <mat-header-cell *matHeaderCellDef>
+                          BlockTrf<br>
+                          変換行列？<br>
+                          開始X [mm]<br>
+                          開始Y [mm]
+                        </mat-header-cell>
+                        <mat-cell *matCellDef="let element">
+                          {{element.getBlockZz()}}<br>
+                          {{element.getBlockX_mm()}}<br>
+                          {{element.getBlockY_mm()}}
+                        </mat-cell>
+                      </ng-container>
+    
+                      <mat-header-row *matHeaderRowDef="displayedColumns_cut"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: displayedColumns_cut;"></mat-row>
                     </mat-table>
                   </div>
                   </mat-expansion-panel>
@@ -759,7 +800,9 @@
           <div *ngFor="let t of jdf.coverApplicationParamsTags" id="{{t.guid}}" [class.selected]="isSelected(t.guid)" class="example-card" (click)="cardClicked(t.guid)">
             <mat-card>
               <mat-card-header>
-                <mat-card-title>{{t.getCaption()}}</mat-card-title>
+                <mat-card-title>
+                  <span class="card-title">{{t.getCaption()}}</span>
+                </mat-card-title>
               </mat-card-header>
               <mat-card-content>
                 <table rules="rows">
@@ -803,7 +846,9 @@
           <div *ngFor="let t of jdf.spinePreparationParamsTags" id="{{t.guid}}" [class.selected]="isSelected(t.guid)" class="example-card" (click)="cardClicked(t.guid)">
             <mat-card>
               <mat-card-header>
-                <mat-card-title>{{t.getCaption()}}</mat-card-title>
+                <mat-card-title>
+                  <span class="card-title">{{t.getCaption()}}</span>
+                </mat-card-title>
               </mat-card-header>
               <mat-card-content>
                 <table rules="rows">
@@ -847,9 +892,9 @@
           <div *ngFor="let t of jdf.stackingParamsTags" id="{{t.guid}}" [class.selected]="isSelected(t.guid)" class="example-card" (click)="cardClicked(t.guid)">
             <mat-card>
               <mat-card-header>
-                <mat-card-title>{{t.getCaption()}}</mat-card-title>
-    <!--            <mat-card-subtitle>{{t.klass}}</mat-card-subtitle>
-    -->
+                <mat-card-title>
+                  <span class="card-title">{{t.getCaption()}}</span>
+                </mat-card-title>
               </mat-card-header>
               <mat-card-content>
                 <table rules="rows">
@@ -897,9 +942,9 @@
           <div *ngFor="let t of jdf.unknownResourceTags" id="{{t.guid}}" [class.selected]="isSelected(t.guid)" class="example-card" (click)="cardClicked(t.guid)">
             <mat-card>
               <mat-card-header>
-                <mat-card-title>{{t.getCaption()}}</mat-card-title>
-    <!--            <mat-card-subtitle>{{t.klass}}</mat-card-subtitle>
-    -->
+                <mat-card-title>
+                  <span class="card-title">{{t.getCaption()}}</span>
+                </mat-card-title>
               </mat-card-header>
               <mat-card-content>
                 <table rules="rows">

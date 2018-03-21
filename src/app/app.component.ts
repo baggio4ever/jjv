@@ -17,7 +17,10 @@ Cytoscape.use(klay);
 declare var hljs: any;
 
 
-const JJV_VERSION = '0.1.7';
+
+const JJV_VERSION = '0.1.8';
+
+
 
 const KEY_BASE_URL = 'KEY_BASE_URL';
 const KEY_USER_ID = 'KEY_USER_ID';
@@ -38,8 +41,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
   jdf: JDF = null;
   selectedGuid = '';
 
-  displayedColumns2 = ['id', /*'class',*/ 'blockType', 'blockName', 'blockSize', 'blockTrf'];
-  displayedColumns3 = ['to', 'from', 'travel', 'travel_mm'];
+  displayedColumns_cut = ['id', /*'class', 'blockType',*/ 'blockName', 'blockSize', 'blockTrf', 'blockSize_mm', 'blockTrf_mm'];
+  displayedColumns_fold = ['to', 'from', 'travel', 'travel_mm'];
 
   ret_from_http = '';
   ret_from_http_input = '';
