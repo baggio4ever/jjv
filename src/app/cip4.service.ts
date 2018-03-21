@@ -803,7 +803,7 @@ export class JdfTag extends IdHavingTag {
 
   getCaption(): string {
     if ( this.jobPartId ) {
-      return this.type + ' [' + this.jobPartId +']';
+      return this.type + ' [ ' + this.jobPartId +' ]';
     } else {
       return this.type;
     }
@@ -829,7 +829,7 @@ export class DeviceTag extends IdHavingTag {
   getCaption(): string {
     if (this.friendlyName) {
       if ( this.deviceId ) {
-        return this.friendlyName + ' [' + this.deviceId + ']';
+        return this.friendlyName + ' [ ' + this.deviceId + ' ]';
       } else {
         return this.friendlyName;
       }

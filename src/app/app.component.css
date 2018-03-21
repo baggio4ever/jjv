@@ -18,7 +18,7 @@
 }
 
 #content {
-    padding-top: 80px;
+    padding-top: 60px;
 }
 
 nav a {
@@ -90,8 +90,9 @@ nav a.active {
     float: left;
     width: 306px;
     position: fixed;
-    margin: 8px;
+/*    margin: 8px;*/
     padding: 8px;
+/*    border: 1px solid black; */
 }
 
 #main {
@@ -123,8 +124,9 @@ td,th {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    margin-top: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .toolbar-fn {

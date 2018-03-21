@@ -74,18 +74,20 @@
         </div>
       </div>
       <div>
-        <div *ngIf="jdf.jobTag !== null" class="like-link" (click)="scrollTo('job_top')">Job</div>
-        <div *ngIf="jdf.processTags.length>0" class="like-link" (click)="scrollTo('process_top')">Processes</div>
-        <div *ngIf="jdf.componentTags.length>0" class="like-link" (click)="scrollTo('component_top')">Components</div>
-        <div *ngIf="jdf.deviceTags.length>0" class="like-link" (click)="scrollTo('device_top')">Devices</div>
-        <div *ngIf="jdf.stitchingParamsTags.length>0" class="like-link" (click)="scrollTo('stitchingParams_top')">StitchingParams</div>
-        <div *ngIf="jdf.trimmingParamsTags.length>0" class="like-link" (click)="scrollTo('trimmingParams_top')">TrimmingParams</div>
-        <div *ngIf="jdf.cuttingParamsTags.length>0" class="like-link" (click)="scrollTo('cuttingParams_top')">CuttingParams</div>
-        <div *ngIf="jdf.foldingParamsTags.length>0" class="like-link" (click)="scrollTo('foldingParams_top')">FoldingParams</div>
-        <div *ngIf="jdf.spinePreparationParamsTags.length>0" class="like-link" (click)="scrollTo('spinePreparationParams_top')">SpinePreparationParams</div>
-        <div *ngIf="jdf.coverApplicationParamsTags.length>0" class="like-link" (click)="scrollTo('coverApplicationParams_top')">CoverApplicationParams</div>
-        <div *ngIf="jdf.stackingParamsTags.length>0" class="like-link" (click)="scrollTo('stackingParams_top')">StackingParams</div>
-        <div *ngIf="jdf.unknownResourceTags.length>0" class="like-link" (click)="scrollTo('unknownResources_top')">Unknown Resources</div>
+        <ul>
+          <li *ngIf="jdf.jobTag !== null" class="like-link" (click)="scrollTo('job_top')">Job</li>
+          <li *ngIf="jdf.processTags.length>0" class="like-link" (click)="scrollTo('process_top')">Processes</li>
+          <li *ngIf="jdf.componentTags.length>0" class="like-link" (click)="scrollTo('component_top')">Components</li>
+          <li *ngIf="jdf.deviceTags.length>0" class="like-link" (click)="scrollTo('device_top')">Devices</li>
+          <li *ngIf="jdf.stitchingParamsTags.length>0" class="like-link" (click)="scrollTo('stitchingParams_top')">StitchingParams</li>
+          <li *ngIf="jdf.trimmingParamsTags.length>0" class="like-link" (click)="scrollTo('trimmingParams_top')">TrimmingParams</li>
+          <li *ngIf="jdf.cuttingParamsTags.length>0" class="like-link" (click)="scrollTo('cuttingParams_top')">CuttingParams</li>
+          <li *ngIf="jdf.foldingParamsTags.length>0" class="like-link" (click)="scrollTo('foldingParams_top')">FoldingParams</li>
+          <li *ngIf="jdf.spinePreparationParamsTags.length>0" class="like-link" (click)="scrollTo('spinePreparationParams_top')">SpinePreparationParams</li>
+          <li *ngIf="jdf.coverApplicationParamsTags.length>0" class="like-link" (click)="scrollTo('coverApplicationParams_top')">CoverApplicationParams</li>
+          <li *ngIf="jdf.stackingParamsTags.length>0" class="like-link" (click)="scrollTo('stackingParams_top')">StackingParams</li>
+          <li *ngIf="jdf.unknownResourceTags.length>0" class="like-link" (click)="scrollTo('unknownResources_top')">Unknown Resources</li>
+        </ul>
       </div>
     </div>
 
