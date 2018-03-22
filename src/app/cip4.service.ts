@@ -757,7 +757,7 @@ class BaseTag {
   }
 }
 
-class IdHavingTag extends BaseTag {
+export class IdHavingTag extends BaseTag {
   id: string;
 
   constructor(id: string) {
@@ -805,7 +805,11 @@ export class JdfTag extends IdHavingTag {
     if ( this.jobPartId ) {
       return this.type + ' [ ' + this.jobPartId +' ]';
     } else {
-      return this.type;
+      if ( this.jobId ) {
+        return this.type + ' [ ' + this.jobId +' ]';
+      } else {
+        return this.type;
+      }
     }
   }
 }

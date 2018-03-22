@@ -1,7 +1,7 @@
 import { Component, AfterViewInit, AfterViewChecked, Inject } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar} from '@angular/material';
 
-import { Cip4Service, JDF, JdfTag } from './cip4.service';
+import { Cip4Service, JDF, JdfTag, IdHavingTag } from './cip4.service';
 import * as Cytoscape from 'cytoscape';
 import * as klay from 'cytoscape-klay';
 import { Guid } from 'guid-typescript';
@@ -18,7 +18,7 @@ declare var hljs: any;
 
 
 
-const JJV_VERSION = '0.1.8';
+const JJV_VERSION = '0.1.10';
 
 
 
@@ -843,6 +843,10 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
        console.log('false だすな');
      }
    });
+  }
+
+  getCardTitle( aTag:IdHavingTag ):string {
+    return aTag.getCaption() + '  - ' + aTag.id;
   }
 }
 
