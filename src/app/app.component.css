@@ -20,7 +20,7 @@
 #content {
     padding-top: 60px;
 }
-
+/*
 nav a {
     color:#fff;
     text-decoration: none;
@@ -37,6 +37,7 @@ nav a:hover {
 nav a.active {
     background-color: black;
 }
+*/
 
 .example-card {
     margin-left: 20px;

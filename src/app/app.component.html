@@ -2,7 +2,7 @@
   <mat-toolbar-row>
     <span>jjv</span>
     <span class="example-spacer"></span>
-    <nav *ngIf="fileLoaded; else elseBlock2">
+    <div *ngIf="fileLoaded; else elseBlock2">
       <!-- ファイル開いている時 -->
       <span class="toolbar-fn">{{filename}}</span>
 
@@ -14,19 +14,16 @@
       </button>
       <a id="save-to-file" href="#" download="dummy.txt" style="display: none;"></a>
       <button mat-icon-button (click)="saveToFile()" matTooltip="ファイルに保存" matTooltipPosition="above">
-        <mat-icon aria-label="save">save</mat-icon>
+        <mat-icon aria-label="save">file_download</mat-icon>
       </button>
-    </nav>
+    </div>
     <ng-template #elseBlock2>
       <!-- ファイル開いていない時 -->
-      <nav>
         <div>
-<!--
-          <label for="input-file-id" class="selectFile iconX">
-            ＋JDFを選択
-              <input id="input-file-id" type="file" #fileInput (change)="onChanged(fileInput.files[0])" accept=".xml,.jdf" style="display: none;">
-          </label>
-        -->
+        </div>
+    </ng-template>
+
+    <!-- 共通 -->
           <input id="input-file-id" type="file" #fileInput (change)="onChanged(fileInput.files[0])" accept=".xml,.jdf" style="display: none;">
           <button mat-icon-button (click)="openFileDialog()" matTooltip="ファイルを開く" matTooltipPosition="above">
             <mat-icon aria-label="Open file">folder_open</mat-icon>
@@ -34,10 +31,6 @@
           <button mat-icon-button (click)="downloadFromCloud()" matTooltip="クラウドから開く" matTooltipPosition="above">
             <mat-icon aria-label="download">cloud_download</mat-icon>
           </button>
-        </div>
-      </nav>
-    </ng-template>
-    <!-- 共通 -->
     <button mat-icon-button (click)="openSettings()" matTooltip="設定" matTooltipPosition="above">
       <mat-icon aria-label="Settings ...">settings</mat-icon>
     </button>
