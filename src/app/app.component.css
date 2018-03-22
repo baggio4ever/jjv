@@ -17,6 +17,21 @@
     box-shadow: 0px 4px 5px gray;
 }
 
+.headerDivider {
+    border-left:1px solid #38546d; 
+    border-right:1px solid #fff;
+    height:60%;
+/*    margin-right: 4px;
+    margin-left: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+*/
+/*    position:absolute;
+    right:249px;
+    top:10px; 
+*/
+}
+
 #content {
     padding-top: 60px;
 }

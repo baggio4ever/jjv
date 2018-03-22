@@ -70,6 +70,8 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 [たった3行で実現できるCSSの上下中央揃え（Flexbox）](https://qiita.com/tonkotsuboy_com/items/a5aaa4a69fecfaf546a3)
 
+[Vertical divider CSS](https://stackoverflow.com/questions/4675371/vertical-divider-css) 参考になりました！
+
 #### 正規表現
 [JavaScriptの正規表現で文字列を抜き出す「グループ化」](http://www.koikikukan.com/archives/2013/04/02-003300.php)
 
