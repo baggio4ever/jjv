@@ -1283,6 +1283,12 @@ class FoldingParamsLinkTag extends LinkTag {
 class DeviceLinkTag extends LinkTag {
   constructor( usage: string, rRef: string, amount: string, rResource: IdHavingTag ) {
     super( usage, rRef, amount, rResource );
+
+    if( rResource ) {
+      console.log('dev ctr: '+rResource.getCaption());
+    } else {
+      console.log('dev ctr: ????');
+    }
   }
 }
 

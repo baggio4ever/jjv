@@ -251,7 +251,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
           style: {
             'label': 'data(node_label)',
             'shape': 'tag',
-            'background-color': '#005',
+            'background-color': '#df4994',
             'border-width': 1,
             'border-color': 'black',
 /*            'background-opacity': 0,
@@ -267,7 +267,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
           selector: ':selected.unknown',
           style: {
             'label': 'data(node_label)',
-            'background-color': '#00a',
+            'background-color': '#ff69b4',
             'border-width': 2,
             'border-color': 'black',
           }
@@ -846,7 +846,12 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
   }
 
   getCardTitle( aTag:IdHavingTag ):string {
-    return aTag.getCaption() + '  - ' + aTag.id;
+    if( aTag ) {
+      return aTag.getCaption() + '  - ' + aTag.id;
+    } else {
+//      console.log('getCaption() : あちゃー');
+      return 'あちゃー';
+    }
   }
 }
 

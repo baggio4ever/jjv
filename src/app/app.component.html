@@ -45,7 +45,7 @@
   <div *ngIf="fileLoaded; else elseBlock">
     <!-- ファイル開いている時 -->
     <div id="fmenu">
-      <div class="light-frame">
+<!--      <div class="light-frame"> -->
         <div id="cy"></div>
         <div class="graph-tool">
           <button mat-icon-button (click)="relayout()" matTooltip="再整列" matTooltipPosition="above">
@@ -56,7 +56,8 @@
           </button>
           <a id="save-as-png" href="#" style="display: none;"></a>
         </div>
-      </div>
+<!--      </div> -->
+      <mat-divider></mat-divider>
       <div>
         <ul>
           <li *ngIf="jdf.jobTag !== null" class="like-link" (click)="scrollTo('job_top')">Job</li>
