@@ -18,7 +18,7 @@ declare var hljs: any;
 
 
 
-const JJV_VERSION = '0.1.10';
+const JJV_VERSION = '0.1.12';
 
 
 
@@ -635,7 +635,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
       });
     });
   }
-
+/*
   saveMessage(): void {
     const body = {
       user_id: 'jiro',
@@ -649,7 +649,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
       this.ret_from_post = msg;
     });
   }
-
+*/
   openSettings(): void {
     console.log('openSettings()');
 

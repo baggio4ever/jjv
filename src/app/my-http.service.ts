@@ -23,7 +23,7 @@ export class MyHttpService {
         callback(data['name'], data['version'], data['input']);
     });
   }
-
+/*
   getLogsYMD( user_id: string, year: number, month: number, date: number, callback: (msg) => void): void {
     const y0 = ('0000' + year).slice(-4);
     const m0 = ('00' + month).slice(-2);
@@ -69,7 +69,7 @@ export class MyHttpService {
         callback(data['message']);
     });
   }
-
+*/
   uploadXml( body, callback: (msg: string) => void ): void {
     // API GatewayとHTTP通信して、取得成功時にコールバックを行う
     this.http.post( this.base_url + 'upload', body).subscribe(data => {
