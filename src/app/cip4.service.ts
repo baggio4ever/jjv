@@ -172,92 +172,117 @@ export class Cip4Service {
     return unknownResourceTag;
   }
 
-  private createComponentLinkTag(node,jdf:JDF): ComponentLinkTag {
+  private createComponentLinkTag(node, jdf: JDF): ComponentLinkTag {
     const usage = node.getAttribute('Usage');
     const rRef = node.getAttribute('rRef');
     const amount = node.getAttribute('Amount');
 
-    const rResource = jdf.getResourceTagById('rRef');
+    const rResource = jdf.getResourceTagById(rRef);
 
     const linkTag = new ComponentLinkTag(usage, rRef, amount, rResource);
 
     return linkTag;
   }
 
-  private createSpinePreparationParamsLinkTag(node): SpinePrearationParamsLinkTag {
+  private createSpinePreparationParamsLinkTag(node, jdf: JDF): SpinePrearationParamsLinkTag {
     const usage = node.getAttribute('Usage');
     const rRef = node.getAttribute('rRef');
     const amount = node.getAttribute('Amount');
 
-    const linkTag = new SpinePrearationParamsLinkTag(usage, rRef, amount);
+    const rResource = jdf.getResourceTagById(rRef);
+
+    const linkTag = new SpinePrearationParamsLinkTag(usage, rRef, amount, rResource);
 
     return linkTag;
   }
 
-  private createCoverApplicationParamsLinkTag(node): CoverApplicationParamsLinkTag {
+  private createCoverApplicationParamsLinkTag(node, jdf: JDF): CoverApplicationParamsLinkTag {
     const usage = node.getAttribute('Usage');
     const rRef = node.getAttribute('rRef');
 
-    const linkTag = new CoverApplicationParamsLinkTag(usage, rRef, '');
+    const rResource = jdf.getResourceTagById(rRef);
+
+    const linkTag = new CoverApplicationParamsLinkTag(usage, rRef, '', rResource);
 
     return linkTag;
   }
 
-  private createStitchingParamsLinkTag(node): StitchingParamsLinkTag {
+  private createStitchingParamsLinkTag(node, jdf: JDF): StitchingParamsLinkTag {
     const usage = node.getAttribute('Usage');
     const rRef = node.getAttribute('rRef');
-    const linkTag = new StitchingParamsLinkTag(usage, rRef, '');
+
+    const rResource = jdf.getResourceTagById(rRef);
+
+    const linkTag = new StitchingParamsLinkTag(usage, rRef, '', rResource);
 
     return linkTag;
   }
 
-  private createTrimmingParamsLinkTag(node): TrimmingParamsLinkTag {
+  private createTrimmingParamsLinkTag(node, jdf: JDF): TrimmingParamsLinkTag {
     const usage = node.getAttribute('Usage');
     const rRef = node.getAttribute('rRef');
-    const linkTag = new TrimmingParamsLinkTag(usage, rRef, '');
+
+    const rResource = jdf.getResourceTagById(rRef);
+
+    const linkTag = new TrimmingParamsLinkTag(usage, rRef, '', rResource);
 
     return linkTag;
   }
 
-  private createCuttingParamsLinkTag(node): CuttingParamsLinkTag {
+  private createCuttingParamsLinkTag(node, jdf: JDF): CuttingParamsLinkTag {
     const usage = node.getAttribute('Usage');
     const rRef = node.getAttribute('rRef');
-    const linkTag = new CuttingParamsLinkTag(usage, rRef, '');
+
+    const rResource = jdf.getResourceTagById(rRef);
+
+    const linkTag = new CuttingParamsLinkTag(usage, rRef, '', rResource);
 
     return linkTag;
   }
 
-  private createFoldingParamsLinkTag(node): FoldingParamsLinkTag {
+  private createFoldingParamsLinkTag(node, jdf: JDF): FoldingParamsLinkTag {
     const usage = node.getAttribute('Usage');
     const rRef = node.getAttribute('rRef');
-    const linkTag = new FoldingParamsLinkTag(usage, rRef, '');
+
+    const rResource = jdf.getResourceTagById(rRef);
+
+    const linkTag = new FoldingParamsLinkTag(usage, rRef, '', rResource);
 
     return linkTag;
   }
 
-  private createDeviceLinkTag(node): DeviceLinkTag {
+  private createDeviceLinkTag(node, jdf: JDF): DeviceLinkTag {
     const usage = node.getAttribute('Usage');
     const rRef = node.getAttribute('rRef');
-    const linkTag = new DeviceLinkTag(usage, rRef, '');
+
+    const rResource = jdf.getResourceTagById(rRef);
+
+    const linkTag = new DeviceLinkTag(usage, rRef, '', rResource);
 
     return linkTag;
   }
 
-  private createStackingParamsLinkTag(node): StackingParamsLinkTag {
+  private createStackingParamsLinkTag(node, jdf: JDF): StackingParamsLinkTag {
     const usage = node.getAttribute('Usage');
     const rRef = node.getAttribute('rRef');
-    const linkTag = new StackingParamsLinkTag(usage, rRef, '');
+
+    const rResource = jdf.getResourceTagById(rRef);
+
+    const linkTag = new StackingParamsLinkTag(usage, rRef, '', rResource);
 
     return linkTag;
   }
 
-  private createUnknownResourceLinkTag(node): UnknownResourceLinkTag {
-    const linkTag = new UnknownResourceLinkTag( node.tagName, node.attributes );
+  private createUnknownResourceLinkTag(node, jdf: JDF): UnknownResourceLinkTag {
+    const rRef = node.getAttribute('rRef');
+    const rResource = jdf.getResourceTagById(rRef);
+
+    const linkTag = new UnknownResourceLinkTag( node.tagName, node.attributes, rResource);
 
     return linkTag;
   }
 
-  private createJdfTag(node,jdf:JDF): JdfTag {
+  private createJdfTag(node, jdf: JDF): JdfTag {
     const j = node;
     const id = j.getAttribute('ID');
     const type = j.getAttribute('Type');
@@ -280,7 +305,7 @@ export class Cip4Service {
 
         switch ( comp.tagName ) {
           case 'ComponentLink':
-            const cl = this.createComponentLinkTag(comp,jdf);
+            const cl = this.createComponentLinkTag(comp, jdf);
             if ( cl.usage.toLowerCase() === 'input' ) {
               inputComponentLinks.push(cl);
             } else {
@@ -288,41 +313,41 @@ export class Cip4Service {
             }
             break;
           case 'DeviceLink':
-            const dl = this.createDeviceLinkTag(comp);
+            const dl = this.createDeviceLinkTag(comp, jdf);
             deviceLinks.push(dl);
             break;
           case 'SpinePreparationParamsLink':
-            const sppl = this.createSpinePreparationParamsLinkTag(comp);
+            const sppl = this.createSpinePreparationParamsLinkTag(comp, jdf);
             paramsLinks.push(sppl);
             break;
           case 'CoverApplicationParamsLink':
-            const capl = this.createCoverApplicationParamsLinkTag(comp);
+            const capl = this.createCoverApplicationParamsLinkTag(comp, jdf);
             paramsLinks.push(capl);
             break;
           case 'StitchingParamsLink':
-            const spl = this.createStitchingParamsLinkTag(comp);
+            const spl = this.createStitchingParamsLinkTag(comp, jdf);
             paramsLinks.push(spl);
             break;
           case 'TrimmingParamsLink':
-            const tpl = this.createTrimmingParamsLinkTag(comp);
+            const tpl = this.createTrimmingParamsLinkTag(comp, jdf);
             paramsLinks.push(tpl);
             break;
           case 'CuttingParamsLink':
-            const cpl = this.createCuttingParamsLinkTag(comp);
+            const cpl = this.createCuttingParamsLinkTag(comp, jdf);
             paramsLinks.push(cpl);
             break;
           case 'FoldingParamsLink':
-            const fpl = this.createFoldingParamsLinkTag(comp);
+            const fpl = this.createFoldingParamsLinkTag(comp, jdf);
             paramsLinks.push(fpl);
             break;
           case 'StackingParamsLink':
-            const spl2 = this.createStackingParamsLinkTag(comp);
+            const spl2 = this.createStackingParamsLinkTag(comp, jdf);
             paramsLinks.push(spl2);
             break;
 
           default:
             console.log('default キター: ' + comp.tagName);
-            const unknown = this.createUnknownResourceLinkTag(comp);
+            const unknown = this.createUnknownResourceLinkTag(comp, jdf);
             paramsLinks.push(unknown);
             break;
         }
@@ -1214,56 +1239,56 @@ class LinkTag  extends BaseTag {
 }
 
 class ComponentLinkTag extends LinkTag {
-  constructor( usage: string, rRef: string, amount: string, rResource:IdHavingTag ) {
+  constructor( usage: string, rRef: string, amount: string, rResource: IdHavingTag ) {
     super( usage, rRef, amount, rResource );
   }
 }
 
 class CoverApplicationParamsLinkTag extends LinkTag {
-  constructor( usage: string, rRef: string, amount: string ) {
-    super( usage, rRef, amount, null );
+  constructor( usage: string, rRef: string, amount: string, rResource: IdHavingTag ) {
+    super( usage, rRef, amount, rResource );
   }
 }
 
 class SpinePrearationParamsLinkTag extends LinkTag {
-  constructor( usage: string, rRef: string, amount: string ) {
-    super( usage, rRef, amount, null );
+  constructor( usage: string, rRef: string, amount: string, rResource: IdHavingTag ) {
+    super( usage, rRef, amount, rResource );
   }
 }
 
 class StitchingParamsLinkTag extends LinkTag {
-  constructor( usage: string, rRef: string, amount: string ) {
-    super( usage, rRef, amount, null );
+  constructor( usage: string, rRef: string, amount: string, rResource: IdHavingTag ) {
+    super( usage, rRef, amount, rResource );
   }
 }
 
 class TrimmingParamsLinkTag extends LinkTag {
-  constructor( usage: string, rRef: string, amount: string ) {
-    super( usage, rRef, amount, null );
+  constructor( usage: string, rRef: string, amount: string, rResource: IdHavingTag ) {
+    super( usage, rRef, amount, rResource );
   }
 }
 
 class CuttingParamsLinkTag extends LinkTag {
-  constructor( usage: string, rRef: string, amount: string ) {
-    super( usage, rRef, amount, null );
+  constructor( usage: string, rRef: string, amount: string, rResource: IdHavingTag ) {
+    super( usage, rRef, amount, rResource );
   }
 }
 
 class FoldingParamsLinkTag extends LinkTag {
-  constructor( usage: string, rRef: string, amount: string ) {
-    super( usage, rRef, amount, null );
+  constructor( usage: string, rRef: string, amount: string, rResource: IdHavingTag ) {
+    super( usage, rRef, amount, rResource );
   }
 }
 
 class DeviceLinkTag extends LinkTag {
-  constructor( usage: string, rRef: string, amount: string ) {
-    super( usage, rRef, amount, null );
+  constructor( usage: string, rRef: string, amount: string, rResource: IdHavingTag ) {
+    super( usage, rRef, amount, rResource );
   }
 }
 
 class StackingParamsLinkTag extends LinkTag {
-  constructor( usage: string, rRef: string, amount: string ) {
-    super( usage, rRef, amount, null );
+  constructor( usage: string, rRef: string, amount: string, rResource: IdHavingTag ) {
+    super( usage, rRef, amount, rResource );
   }
 }
 
@@ -1271,8 +1296,8 @@ class UnknownResourceLinkTag extends LinkTag {
   tagName: string;
   attributes = new Array<NameValue>();
 
-  constructor( tagName: string, attributes: any ) {
-    super('', '', '', null);
+  constructor( tagName: string, attributes: any, rResource: IdHavingTag ) {
+    super('', '', '', rResource);
 
     this.tagName = tagName;
     for (let i = 0; i < attributes.length; i++) {
