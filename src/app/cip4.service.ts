@@ -256,6 +256,7 @@ export class Cip4Service {
     const rRef = node.getAttribute('rRef');
 
     const rResource = jdf.getResourceTagById(rRef);
+// console.log( '*** ' + rRef + ' -> rResource:' + rResource);
 
     const linkTag = new DeviceLinkTag(usage, rRef, '', rResource);
 
@@ -315,6 +316,7 @@ export class Cip4Service {
           case 'DeviceLink':
             const dl = this.createDeviceLinkTag(comp, jdf);
             deviceLinks.push(dl);
+//            console.log(dl);
             break;
           case 'SpinePreparationParamsLink':
             const sppl = this.createSpinePreparationParamsLinkTag(comp, jdf);
@@ -1283,12 +1285,13 @@ class FoldingParamsLinkTag extends LinkTag {
 class DeviceLinkTag extends LinkTag {
   constructor( usage: string, rRef: string, amount: string, rResource: IdHavingTag ) {
     super( usage, rRef, amount, rResource );
-
-    if( rResource ) {
-      console.log('dev ctr: '+rResource.getCaption());
+/*
+    if ( this.rResource ) {
+      console.log('devLink ctr: ' + this.rResource.getCaption());
     } else {
-      console.log('dev ctr: ????');
+      console.log('devLink ctr: ????');
     }
+  */
   }
 }
 

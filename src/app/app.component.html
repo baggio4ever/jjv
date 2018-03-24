@@ -187,7 +187,7 @@
                     <td>デバイス情報</td>
                     <td>
                       <div *ngFor="let l of t.deviceLinks">
-                        <span class="like-link" (click)="scrollAndSelectTo($event,jdf.getResourceTagById(l.rRef).guid)">{{getCardTitle(l.rResouce)}}</span>
+                        <span class="like-link" (click)="scrollAndSelectTo($event,jdf.getResourceTagById(l.rRef).guid)">{{getCardTitle(l.rResource)}}</span>
                       </div>
                     </td>
                   </tr>

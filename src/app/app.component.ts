@@ -845,8 +845,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
    });
   }
 
-  getCardTitle( aTag:IdHavingTag ):string {
-    if( aTag ) {
+  getCardTitle( aTag: IdHavingTag ): string {
+    if ( aTag ) {
       return aTag.getCaption() + '  - ' + aTag.id;
     } else {
 //      console.log('getCaption() : あちゃー');
