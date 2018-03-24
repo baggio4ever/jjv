@@ -8,6 +8,7 @@ import { ParserError } from '@angular/compiler';
 export class Cip4Service {
 
   parserErrorMessages: Array<string> = [];
+  errorHtml;
 
   constructor() { }
 
@@ -369,10 +370,13 @@ export class Cip4Service {
     const dom = parser.parseFromString( c, 'text/xml');
 
     this.parserErrorMessages = [];
+    this.errorHtml = null;
+
     const parseErrors = dom.getElementsByTagName('parsererror');
     if ( parseErrors.length > 0 ) {
       console.log('!!! parse error !!!');
       console.log( parseErrors );
+      this.errorHtml = parseErrors[0].innerHTML;
       for ( let i = 0; i < parseErrors.length; i++ ) {
         const divs = parseErrors[i].getElementsByTagName('div');
         for ( let j = 0; j < divs.length; j++ ) {

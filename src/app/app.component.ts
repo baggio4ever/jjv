@@ -1,5 +1,6 @@
-import { Component, AfterViewInit, AfterViewChecked, Inject } from '@angular/core';
+import { Component, AfterViewInit, AfterViewChecked, Inject, Sanitizer } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar} from '@angular/material';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 import { Cip4Service, JDF, JdfTag, IdHavingTag } from './cip4.service';
 import * as Cytoscape from 'cytoscape';
@@ -18,7 +19,7 @@ declare var hljs: any;
 
 
 
-const JJV_VERSION = '0.1.12';
+const JJV_VERSION = '0.1.13';
 
 
 
@@ -50,8 +51,11 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
   ret_from_post = '';
 
   parseErrorMessages = [];
+  errorHtml = null;
+  safeErrorHtml = null;
 
-  constructor(private cip4: Cip4Service, private httpService: MyHttpService, public dialog: MatDialog, public snackBar: MatSnackBar) {
+  constructor(private sanitizer: DomSanitizer, private cip4: Cip4Service, private httpService: MyHttpService,
+     public dialog: MatDialog, public snackBar: MatSnackBar) {
   }
 
   ngAfterViewInit() {
@@ -90,6 +94,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
 
   async letsLoad( f ) {
     this.parseErrorMessages = [];
+    this.errorHtml = null;
+    this.safeErrorHtml = null;
 
     if (this.cip4.isJDF(f.name)) {
       if ( this.jdf = await this.cip4.parseJDF(f) ) {
@@ -107,6 +113,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
         console.log('parseJDF() 失敗！');
 //        console.log(this.cip4.parserErrorMessage);
         this.parseErrorMessages = this.cip4.parserErrorMessages;
+        this.errorHtml = this.cip4.errorHtml.replace('\n','<br>');
+        this.safeErrorHtml = this.sanitizer.bypassSecurityTrustHtml(this.errorHtml);
       }
     } else {
       console.log('JDFファイルにしてくださいよ');

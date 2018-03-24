@@ -925,4 +925,13 @@
   <div *ngFor="let m of parseErrorMessages">
   <pre>{{m}}</pre>
   </div>
+  <div>Error HTML</div>
+  <div [innerHTML]="errorHtml">
+  </div>
+  <div> Pre Error HTML</div>
+  <pre>{{errorHtml}}</pre>
+
+  <div>Error HTML2</div>
+  <div [innerHTML]="safeErrorHtml">
+  </div>
 </div>
