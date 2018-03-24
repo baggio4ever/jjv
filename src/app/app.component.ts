@@ -49,6 +49,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
 
   ret_from_post = '';
 
+  parseErrorMessages = [];
+
   constructor(private cip4: Cip4Service, private httpService: MyHttpService, public dialog: MatDialog, public snackBar: MatSnackBar) {
   }
 
@@ -87,18 +89,25 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
   }
 
   async letsLoad( f ) {
+    this.parseErrorMessages = [];
+
     if (this.cip4.isJDF(f.name)) {
-      this.jdf = await this.cip4.parseJDF(f);
-      console.log(this.jdf);
+      if ( this.jdf = await this.cip4.parseJDF(f) ) {
+        console.log(this.jdf);
 
-      this.fileLoaded = true;
-      this.filename = f.name;
+        this.fileLoaded = true;
+        this.filename = f.name;
 
-      setTimeout(() => { // チョイ待たせてCytoscape
-        this.initCytoscape();
-        this.makeGraph();
-        this.doHighlight();
-      }, 0);
+        setTimeout(() => { // チョイ待たせてCytoscape
+          this.initCytoscape();
+          this.makeGraph();
+          this.doHighlight();
+        }, 0);
+      } else {
+        console.log('parseJDF() 失敗！');
+//        console.log(this.cip4.parserErrorMessage);
+        this.parseErrorMessages = this.cip4.parserErrorMessages;
+      }
     } else {
       console.log('JDFファイルにしてくださいよ');
     }

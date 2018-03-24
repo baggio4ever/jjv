@@ -87,7 +87,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## やりたいこと
 * 済み！ IDではなく、GUIDでジャンプ
 * もう少し！ MesssageDialog作る
-* Nodeのlabel表示見直し（JobPartIDとかの方がよいかな）
+* 変更してみた！ Nodeのlabel表示見直し（JobPartIDとかの方がよいかな）
 * 済み！ ジャンプしたらジャンプ先を選択状態にしたい
 * メール通知
 * URLパラメータで自動読み出し

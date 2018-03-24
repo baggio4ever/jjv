@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import * as vkbeautify from 'vkbeautify';
 import { Guid } from 'guid-typescript';
+import { ParserError } from '@angular/compiler';
 
 
 @Injectable()
 export class Cip4Service {
+
+  parserErrorMessages: Array<string> = [];
 
   constructor() { }
 
@@ -362,12 +365,28 @@ export class Cip4Service {
   }
 
   buildJDF( c: string ): JDF {
+    const parser = new DOMParser();
+    const dom = parser.parseFromString( c, 'text/xml');
+
+    this.parserErrorMessages = [];
+    const parseErrors = dom.getElementsByTagName('parsererror');
+    if ( parseErrors.length > 0 ) {
+      console.log('!!! parse error !!!');
+      console.log( parseErrors );
+      for ( let i = 0; i < parseErrors.length; i++ ) {
+        const divs = parseErrors[i].getElementsByTagName('div');
+        for ( let j = 0; j < divs.length; j++ ) {
+          console.log('  ' + divs[j].innerText);
+          this.parserErrorMessages.push( divs[j].innerText );
+        }
+      }
+
+      return null;
+    }
+
     const jdf = new JDF();
 
     const xml = vkbeautify.xml( c );
-
-    const parser = new DOMParser();
-    const dom = parser.parseFromString( c, 'text/xml');
 
     // 初期化
     jdf.clear();
@@ -552,7 +571,7 @@ export class Cip4Service {
       const reader = new FileReader();
 
       console.log(file);
-      console.log( 'typeof(file.name):' + typeof(file.name));
+//      console.log( 'typeof(file.name):' + typeof(file.name));
 
       reader.onload = (e) => {
         const c = reader.result;

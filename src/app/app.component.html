@@ -922,4 +922,7 @@
   {{ret_from_post}}<br>
   <button (click)="saveMessage3()">jjv-serverからgetFiles</button><br>
   -->
+  <div *ngFor="let m of parseErrorMessages">
+  <pre>{{m}}</pre>
+  </div>
 </div>
