@@ -601,6 +601,50 @@ export class JDF {
     this.unknownResourceTags = [];
   }
 
+  getComponentTagCount(): number {
+    return this.componentTags.length;
+  }
+
+  getDeviceTagCount(): number {
+    return this.deviceTags.length;
+  }
+
+  getStitchingParamsTagCount(): number {
+    return this.stitchingParamsTags.length;
+  }
+
+  getTrimmingParamsTagCount(): number {
+    return this.trimmingParamsTags.length;
+  }
+
+  getFoldingParamsTagCount(): number {
+    return this.foldingParamsTags.length;
+  }
+
+  getCuttingParamsTagCount(): number {
+    return this.cuttingParamsTags.length;
+  }
+
+  getCoverApplicationParamsTagCount(): number {
+    return this.coverApplicationParamsTags.length;
+  }
+
+  getSpinePreparationParamsTagCount(): number {
+    return this.spinePreparationParamsTags.length;
+  }
+
+  getStackingParamsTagCount(): number {
+    return this.stackingParamsTags.length;
+  }
+
+  getUnknownResourceTagCount(): number {
+    return this.unknownResourceTags.length;
+  }
+
+  getProcessTagCount(): number {
+    return this.processTags.length;
+  }
+
   pushComponentTag( tag: ComponentTag ) {
     this.componentTags.push( tag );
   }
@@ -796,7 +840,11 @@ export class IdHavingTag extends BaseTag {
   }
 
   getCaption(): string {
-    return this.id;
+    if ( this.id ) {
+      return this.id;
+    } else {
+      return '';
+    }
   }
 }
 
@@ -831,13 +879,15 @@ export class JdfTag extends IdHavingTag {
   }
 
   getCaption(): string {
+    const type = (this.type) ? this.type : '';
+
     if ( this.jobPartId ) {
-      return this.type + ' [ ' + this.jobPartId +' ]';
+      return type + ' [ ' + this.jobPartId + ' ]';
     } else {
       if ( this.jobId ) {
-        return this.type + ' [ ' + this.jobId +' ]';
+        return type + ' [ ' + this.jobId + ' ]';
       } else {
-        return this.type;
+        return type;
       }
     }
   }
