@@ -79,6 +79,10 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 #### Enum in angular
 [How to use a typescript enum value in an Angular2 ngSwitch statement](https://stackoverflow.com/questions/35835984/how-to-use-a-typescript-enum-value-in-an-angular2-ngswitch-statement)
 
+#### XML Schema
+[xml.js](https://github.com/kripken/xml.js) JavaScriptでやるならこのライブラリくらいしかない？
+[Validation with lxml](http://lxml.de/validation.html) Pythonならこれ？
+
 
 ## やりたいこと
 * 済み！ IDではなく、GUIDでジャンプ
@@ -92,3 +96,4 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 * 済み！ themeのカスタマイズ （仕組みは導入できた。色はもう少し考えたい）
 * Chart.jsの使い所ないかしら
 * Three.jsの使いどころないかしら
+* XMLSchemaを使って、間違い表示
