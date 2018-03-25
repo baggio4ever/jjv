@@ -47,7 +47,10 @@
     <div id="fmenu">
 <!--      <div class="light-frame"> -->
         <div id="cy"></div>
-        <div class="graph-tool">
+        
+      <mat-divider></mat-divider>
+
+      <div class="graph-tool">
           <button mat-icon-button (click)="relayout()" matTooltip="再整列" matTooltipPosition="above">
             <mat-icon aria-label="update">refresh</mat-icon>
           </button>
@@ -900,7 +903,13 @@
       </div>
   <ng-template #elseBlock>
     <!-- ファイル開いていない時 -->
-    <div>
+    <div *ngIf="errorHtml" class="parser-error">
+      <h2>DOM Pasrser Error:</h2>
+      <div [innerHTML]="errorHtml">
+      </div>
+    </div>
+
+  <div>
       <div id="drop_zone" (drop)="dropHandler($event)" (dragover)="dragOverHandler($event)" (dblclick)="openFileDialog()">
         <p>JDFファイルをドロップしてちょうだい</p>
       </div>
@@ -922,16 +931,17 @@
   {{ret_from_post}}<br>
   <button (click)="saveMessage3()">jjv-serverからgetFiles</button><br>
   -->
+  <!--
   <div *ngFor="let m of parseErrorMessages">
   <pre>{{m}}</pre>
   </div>
-  <div>Error HTML</div>
-  <div [innerHTML]="errorHtml">
-  </div>
+-->
+
+<!--
   <div> Pre Error HTML</div>
   <pre>{{errorHtml}}</pre>
-
   <div>Error HTML2</div>
   <div [innerHTML]="safeErrorHtml">
   </div>
+-->
 </div>

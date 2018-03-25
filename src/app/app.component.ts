@@ -19,7 +19,7 @@ declare var hljs: any;
 
 
 
-const JJV_VERSION = '0.1.13';
+const JJV_VERSION = '0.1.15';
 
 
 
@@ -50,9 +50,9 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
 
   ret_from_post = '';
 
-  parseErrorMessages = [];
+//  parseErrorMessages = [];
   errorHtml = null;
-  safeErrorHtml = null;
+//  safeErrorHtml = null;
 
   constructor(private sanitizer: DomSanitizer, private cip4: Cip4Service, private httpService: MyHttpService,
      public dialog: MatDialog, public snackBar: MatSnackBar) {
@@ -93,9 +93,10 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
   }
 
   async letsLoad( f ) {
-    this.parseErrorMessages = [];
-    this.errorHtml = null;
-    this.safeErrorHtml = null;
+//    this.parseErrorMessages = [];
+//    this.errorHtml = null;
+//    this.safeErrorHtml = null;
+    this.clear();
 
     if (this.cip4.isJDF(f.name)) {
       if ( this.jdf = await this.cip4.parseJDF(f) ) {
@@ -112,9 +113,10 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
       } else {
         console.log('parseJDF() 失敗！');
 //        console.log(this.cip4.parserErrorMessage);
-        this.parseErrorMessages = this.cip4.parserErrorMessages;
-        this.errorHtml = this.cip4.errorHtml.replace('\n','<br>');
-        this.safeErrorHtml = this.sanitizer.bypassSecurityTrustHtml(this.errorHtml);
+//        this.parseErrorMessages = this.cip4.parserErrorMessages;
+        this.errorHtml = this.cip4.errorHtml;
+        this.errorHtml = this.errorHtml.replace('\n','<br>');
+//        this.safeErrorHtml = this.sanitizer.bypassSecurityTrustHtml(this.errorHtml);
       }
     } else {
       console.log('JDFファイルにしてくださいよ');
@@ -125,6 +127,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
     this.fileLoaded = false;
     this.filename = '';
     this.jdf = null;
+
+    this.errorHtml = null;
   }
 
   doHighlight(): void {

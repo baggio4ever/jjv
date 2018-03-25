@@ -7,7 +7,7 @@ import { ParserError } from '@angular/compiler';
 @Injectable()
 export class Cip4Service {
 
-  parserErrorMessages: Array<string> = [];
+  //parserErrorMessages: Array<string> = [];
   errorHtml;
 
   constructor() { }
@@ -369,7 +369,7 @@ export class Cip4Service {
     const parser = new DOMParser();
     const dom = parser.parseFromString( c, 'text/xml');
 
-    this.parserErrorMessages = [];
+//    this.parserErrorMessages = [];
     this.errorHtml = null;
 
     const parseErrors = dom.getElementsByTagName('parsererror');
@@ -377,13 +377,14 @@ export class Cip4Service {
       console.log('!!! parse error !!!');
       console.log( parseErrors );
       this.errorHtml = parseErrors[0].innerHTML;
-      for ( let i = 0; i < parseErrors.length; i++ ) {
+/*      for ( let i = 0; i < parseErrors.length; i++ ) {
         const divs = parseErrors[i].getElementsByTagName('div');
         for ( let j = 0; j < divs.length; j++ ) {
           console.log('  ' + divs[j].innerText);
           this.parserErrorMessages.push( divs[j].innerText );
         }
       }
+        */
 
       return null;
     }
