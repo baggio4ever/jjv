@@ -153,10 +153,10 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
   scrollAndSelectTo( ev: any, guid: string ): void {
     ev.stopPropagation();
 
-    console.log('--- in scrollAndSelectTo ' + guid);
+//    console.log('--- in scrollAndSelectTo ' + guid);
     this.scrollTo(guid);
     this.cardClicked(guid);
-    console.log('--- out scrollAndSelectTo ' + guid);
+//    console.log('--- out scrollAndSelectTo ' + guid);
   }
 
   initCytoscape(): void {
@@ -644,6 +644,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
     }
   }
 
+  /*
   sayHello(): void {
     this.ret_from_http = '';
     this.ret_from_http_input = '';
@@ -656,6 +657,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
       });
     });
   }
+  */
 /*
   saveMessage(): void {
     const body = {
@@ -739,7 +741,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
       }
     });
   }
-
+/*
   saveMessage3(): void {
     console.log('saveMessage3()');
 
@@ -752,7 +754,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
       }
     });
   }
-
+*/
   downloadFromCloud(): void {
       console.log('downloadToCloud()');
 
@@ -855,7 +857,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
       }
     });
   }
-
+/*
   test() {
    this.showMessageDialog('どうだ', '使いやすいかな', MessageDialogButtons.YesNo, (r) => {
      if ( r ) {
@@ -865,7 +867,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
      }
    });
   }
-
+*/
   getCardTitle( aTag: IdHavingTag ): string {
     if ( aTag ) {
       if (aTag.getCaption() === aTag.id ) {
