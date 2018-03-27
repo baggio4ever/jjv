@@ -91,6 +91,13 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 #### input type=file
 [ファイルコントロールの値をクリアする](https://javascript.programmer-reference.com/js-file-clear/)
 
+#### url parameter
+[AngularのRouter](https://www.sambaiz.net/article/97/)
+
+[How get query params from url in angular2?](https://stackoverflow.com/questions/35688084/how-get-query-params-from-url-in-angular2)
+
+[Angular 2 : Can't resolve all parameters for ActivatedRoute](https://stackoverflow.com/questions/47905063/angular-2-cant-resolve-all-parameters-for-activatedroute)
+
 
 
 ## やりたいこと

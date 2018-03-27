@@ -1,6 +1,7 @@
-import { Component, AfterViewInit, AfterViewChecked, Inject, Sanitizer } from '@angular/core';
+import { Component, OnInit, AfterViewInit, AfterViewChecked, Inject, Sanitizer } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar} from '@angular/material';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import {Router, ActivatedRoute, Params} from '@angular/router';
 
 import { Cip4Service, JDF, JdfTag, IdHavingTag } from './cip4.service';
 import * as Cytoscape from 'cytoscape';
@@ -35,7 +36,7 @@ const KEY_SEARCH_USER_ID = 'KEY_SEARCH_USER_ID';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements AfterViewInit, AfterViewChecked {
+export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
   fileLoaded = false;
   filename = '';
   cy = null;  // Cytoscape
@@ -54,8 +55,17 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
   errorHtml = null;
 //  safeErrorHtml = null;
 
-  constructor(private sanitizer: DomSanitizer, private cip4: Cip4Service, private httpService: MyHttpService,
+  constructor(private activatedRoute: ActivatedRoute, private sanitizer: DomSanitizer, 
+    private cip4: Cip4Service, private httpService: MyHttpService,
      public dialog: MatDialog, public snackBar: MatSnackBar) {
+  }
+
+  ngOnInit() {
+    console.log('ngOnInit()');
+    this.activatedRoute.queryParams.subscribe((params: Params) => {
+        console.log('  a: '+ params['a']);
+        console.log('  b: '+ params['b']);
+    });
   }
 
   ngAfterViewInit() {

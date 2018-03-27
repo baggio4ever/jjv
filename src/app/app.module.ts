@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {Routes, RouterModule, ActivatedRoute, Params} from '@angular/router';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule, MatCheckboxModule} from '@angular/material';
@@ -27,6 +28,14 @@ import { AboutDialogComponent } from './about-dialog/about-dialog.component';
 import { UploadDialogComponent } from './upload-dialog/upload-dialog.component';
 import { DownloadDialogComponent } from './download-dialog/download-dialog.component';
 import { MessageDialogComponent } from './message-dialog/message-dialog.component';
+
+
+const routes: Routes = [
+  {
+    path: '**',
+    component: AppComponent,
+  }
+];
 
 @NgModule({
   declarations: [
@@ -62,12 +71,17 @@ import { MessageDialogComponent } from './message-dialog/message-dialog.componen
     MatSnackBarModule,
     MatTooltipModule,
     MatProgressSpinnerModule,
-    MatDividerModule
+    MatDividerModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [
     Cip4Service,
-    MyHttpService
+    MyHttpService,
+//    ActivatedRoute
   ],
+//  exports: [
+//    RouterModule
+//  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
