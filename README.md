@@ -27,6 +27,8 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
 
+
+
 #### labelにアイコン表示
 [Add sprite icon to a label . Is there a way to set width / height just for the sprite and a second w/h to the label?](https://stackoverflow.com/questions/9497060/add-sprite-icon-to-a-label-is-there-a-way-to-set-width-height-just-for-the-s)
 
@@ -70,7 +72,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 [たった3行で実現できるCSSの上下中央揃え（Flexbox）](https://qiita.com/tonkotsuboy_com/items/a5aaa4a69fecfaf546a3)
 
-[Vertical divider CSS](https://stackoverflow.com/questions/4675371/vertical-divider-css) 参考になりました！
+[Vertical divider CSS](https://stackoverflow.com/questions/4675371/vertical-divider-css)  参考になりました！
 
 #### 正規表現
 [JavaScriptの正規表現で文字列を抜き出す「グループ化」](http://www.koikikukan.com/archives/2013/04/02-003300.php)
@@ -82,6 +84,13 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 #### XML Schema
 [xml.js](https://github.com/kripken/xml.js) JavaScriptでやるならこのライブラリくらいしかない？
 [Validation with lxml](http://lxml.de/validation.html) Pythonならこれ？
+
+#### キャスト
+[Using Casting in TypeScript](http://blogs.microsoft.co.il/gilf/2013/01/18/using-casting-in-typescript/)
+
+#### input type=file
+[ファイルコントロールの値をクリアする](https://javascript.programmer-reference.com/js-file-clear/)
+
 
 
 ## やりたいこと

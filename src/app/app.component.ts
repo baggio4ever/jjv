@@ -19,7 +19,7 @@ declare var hljs: any;
 
 
 
-const JJV_VERSION = '0.1.15';
+const JJV_VERSION = '0.1.16';
 
 
 
@@ -85,12 +85,13 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
   onChanged(fileVal) {
     console.log('onChanged: ' + fileVal.name);
 
-    this.yes(fileVal);
+    this.letsLoad(fileVal);
+//    this.yes(fileVal);
   }
 
-  yes(fileVal) {
-    this.letsLoad(fileVal);
-  }
+//  yes(fileVal) {
+//    this.letsLoad(fileVal);
+//  }
 
   async letsLoad( f ) {
 //    this.parseErrorMessages = [];
@@ -115,8 +116,12 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
 //        console.log(this.cip4.parserErrorMessage);
 //        this.parseErrorMessages = this.cip4.parserErrorMessages;
         this.errorHtml = this.cip4.errorHtml;
-        this.errorHtml = this.errorHtml.replace('\n','<br>');
+        this.errorHtml = this.errorHtml.replace('\n', '<br>');
 //        this.safeErrorHtml = this.sanitizer.bypassSecurityTrustHtml(this.errorHtml);
+
+        // valueをクリアしないと、同一ファイルを選択し直しても onchangeが呼ばれない
+        const el = <HTMLInputElement>document.getElementById('input-file-id');
+        el.value = '';
       }
     } else {
       console.log('JDFファイルにしてくださいよ');
@@ -620,7 +625,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked {
     if (droppedFile) {
       if (this.cip4.isJDF(droppedFile.name)) {
         this.filename = droppedFile.name;
-        this.yes(droppedFile);
+//        this.yes(droppedFile);
+          this.letsLoad(droppedFile);
       }
     }
   }

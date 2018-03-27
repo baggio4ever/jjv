@@ -7,7 +7,7 @@ import { ParserError } from '@angular/compiler';
 @Injectable()
 export class Cip4Service {
 
-  //parserErrorMessages: Array<string> = [];
+  // parserErrorMessages: Array<string> = [];
   errorHtml;
 
   constructor() { }
