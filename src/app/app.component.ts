@@ -51,6 +51,9 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
 
   ret_from_post = '';
 
+  param_user_id = '';
+  param_created_at = '';
+
 //  parseErrorMessages = [];
   errorHtml = null;
 //  safeErrorHtml = null;
@@ -63,8 +66,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
   ngOnInit() {
     console.log('ngOnInit()');
     this.activatedRoute.queryParams.subscribe((params: Params) => {
-        console.log('  a: '+ params['a']);
-        console.log('  b: '+ params['b']);
+        console.log('  a: ' + params['a']);
+        console.log('  b: ' + params['b']);
     });
   }
 
@@ -899,6 +902,15 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
 //      console.log('getCaption() : あちゃー');
       return 'あちゃー';
     }
+  }
+
+  testDownload(): void {
+        this.httpService.downloadXml('hira','masa', msg => {
+          console.log('testDownload(): ' + msg );
+          this.snackBar.open('download', '成功', {
+            duration: 2000,
+          });
+        });
   }
 }
 
