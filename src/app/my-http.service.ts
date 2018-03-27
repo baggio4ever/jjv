@@ -77,14 +77,18 @@ export class MyHttpService {
     });
   }
 
-  downloadXml( user_id: string, created_at: string, callback: (result) => void): void {
+  downloadXml( user_id: string, created_at: string, callback: (result: Fi) => void): void {
     // Parameters obj-
     const params: HttpParams = new HttpParams().set('user_id', user_id ).set('created_at', created_at);
 
     console.log(params.toString());
 
     this.http.get( this.base_url + 'download', { params: params }).subscribe(data => {
+      if(data['found']) {
         callback(data['result']);
+      } else {
+        callback(null);
+      }
     });
   }
 

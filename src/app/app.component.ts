@@ -20,7 +20,7 @@ declare var hljs: any;
 
 
 
-const JJV_VERSION = '0.1.16';
+const JJV_VERSION = '0.1.17';
 
 
 
@@ -65,17 +65,41 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
 
   ngOnInit() {
     console.log('ngOnInit()');
-    this.activatedRoute.queryParams.subscribe((params: Params) => {
-        console.log('  a: ' + params['a']);
-        console.log('  b: ' + params['b']);
-    });
   }
 
   ngAfterViewInit() {
+    console.log('ngViewInit()');
+
     const base_url = localStorage.getItem(KEY_BASE_URL);
     this.httpService.setBaseURL(base_url);
 
-//    console.log('AfterViewInit');
+    this.activatedRoute.queryParams.subscribe((params: Params) => {
+        this.param_user_id = params['user_id'];
+        this.param_created_at = params['created_at'];
+
+        console.log('  user_id: ' + this.param_user_id);
+        console.log('  created_at: ' + this.param_created_at);
+
+        if (this.param_user_id && this.param_created_at) {
+          this.httpService.downloadXml(this.param_user_id, this.param_created_at, result => {
+            if (result) {
+              this.loadJDFfromString(result);
+
+              console.log('testDownload(): ' + result );
+              this.snackBar.open('download', '成功', {
+                duration: 2000,
+              });
+            } else {
+              console.log('testDownload(): ' + result );
+              this.snackBar.open('download', '失敗', {
+                duration: 2000,
+              });
+            }
+          });
+        }
+    });
+
+    //    console.log('AfterViewInit');
 /*
 どうしたらFileドロップ許可領域以外をFileドロップ禁止にできるのか。
     document.addEventListener('ondrop',(ev)=>{
@@ -774,6 +798,21 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
     });
   }
 */
+  loadJDFfromString(s: Fi) {
+        this.jdf = this.cip4.parseJDFfromString(s.xml);
+        console.log(this.jdf);
+
+        this.fileLoaded = true;
+        this.filename = s.filename;
+        console.log('fromstring filename:' + this.filename);
+
+        setTimeout(() => { // チョイ待たせてCytoscape
+          this.initCytoscape();
+          this.makeGraph();
+          this.doHighlight();
+        }, 0);
+  }
+
   downloadFromCloud(): void {
       console.log('downloadToCloud()');
 
@@ -794,6 +833,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
 */
         localStorage.setItem(KEY_SEARCH_USER_ID, result.user_id);
 
+        this.loadJDFfromString(result.f);
+/*
         this.jdf = this.cip4.parseJDFfromString(result.f.xml);
         console.log(this.jdf);
 
@@ -806,7 +847,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
           this.makeGraph();
           this.doHighlight();
         }, 0);
-
+*/
       } else {
         console.log('キャンセルされました？');
       }
@@ -911,6 +952,11 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
             duration: 2000,
           });
         });
+  }
+
+  testGetUrl(): void {
+    console.log('location.href: '+location.href);
+    console.log('location.xxxx: '+location.protocol + '//' + location.host + location.pathname);
   }
 }
 
