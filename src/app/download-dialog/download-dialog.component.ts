@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-import { MyHttpService } from '../my-http.service';
+import { HttpHeaders, HttpParams } from '@angular/common/http';
+import { MyHttpService, Fi } from '../my-http.service';
 
 @Component({
   selector: 'app-download-dialog',
@@ -22,11 +23,11 @@ export class DownloadDialogComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
-
+/*
   onSelect(f): void {
     this.selectedItem = f;
   }
-
+*/
   onCardSelect(f): void {
     this.selectedItem = f;
   }
@@ -50,5 +51,21 @@ export class DownloadDialogComponent implements OnInit {
       user_id: this.data.user_id,
       f: this.selectedItem
     }
+  }
+
+  copyUrl(input): void {
+    input.select();
+    document.execCommand('copy');
+  }
+
+  getSelectedItemUrl(): string {
+    const base_url = location.protocol + '//' + location.host + location.pathname;
+    const params: HttpParams = new HttpParams().set('user_id', this.selectedItem.user_id ).set('created_at', this.selectedItem.created_at);
+
+    const url = base_url + '?' + params.toString();
+
+    console.log(url);
+    
+    return url;
   }
 }

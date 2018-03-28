@@ -98,6 +98,8 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 [Angular 2 : Can't resolve all parameters for ActivatedRoute](https://stackoverflow.com/questions/47905063/angular-2-cant-resolve-all-parameters-for-activatedroute)
 
+#### クリップボード
+[JavaScript でテキストをクリップボードへコピーする方法](https://nj-clucker.com/copy-text-to-clipboard/)
 
 
 ## やりたいこと

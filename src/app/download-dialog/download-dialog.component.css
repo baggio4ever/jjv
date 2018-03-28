@@ -77,3 +77,8 @@ td,th {
 .f_date {
   width:200px;
 }
+
+.url-input {
+  font-size: xx-small;
+  width: 280px;
+}

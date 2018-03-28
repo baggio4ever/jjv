@@ -38,6 +38,14 @@
   </div>
 </div>
 <div mat-dialog-actions>
+  <div *ngIf="selectedItem; then thenBlock"></div>
+  <ng-template #thenBlock>
+    <input matInput placeholder="URL" readonly="true" [value]="getSelectedItemUrl()" class="url-input" #url_input>
+    <button mat-icon-button  matTooltip="URLをクリップボードにコピー" matTooltipPosition="above" (click)="copyUrl(url_input)">
+      <mat-icon aria-label="Example icon-button with a heart icon">place</mat-icon>
+    </button>
+  </ng-template>
+  
   <span class="example-spacer"></span><!-- これで右寄せ -->
   <button mat-button (click)="onNoClick()">Cancel</button>
   <button mat-button color="accent" [mat-dialog-close]="getResult()" cdkFocusInitial>OK</button>
