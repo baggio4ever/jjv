@@ -35,24 +35,6 @@
 #content {
     padding-top: 60px;
 }
-/*
-nav a {
-    color:#fff;
-    text-decoration: none;
-    font-size: 80%;
-    padding: 8px 10px;
-    border-radius: 10px 10px 10px 10px;
-}
-
-nav a:hover {
-    color:#fff;
-    text-decoration: underline;
-}
-
-nav a.active {
-    background-color: black;
-}
-*/
 
 .example-card {
     margin-left: 20px;
@@ -164,9 +146,14 @@ td,th {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+/*    margin-top: 20px;
+*/    margin: 20px auto;
     padding-top: 10px;
     padding-bottom: 10px;
+}
+
+#drop_zone:hover {
+    background-color: lightyellow;
 }
 
 .toolbar-fn {
@@ -187,6 +174,7 @@ spanじゃ効かない？かといって p とか display:inline-block 試した
 
 .card-title {
     font-size: large;
+    font-weight: bold;
 }
 
 ul {
