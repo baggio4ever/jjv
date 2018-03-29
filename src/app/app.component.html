@@ -872,12 +872,12 @@
               </mat-card-header>
               <mat-card-content>
                 <table rules="rows">
-
+<!--
                   <tr *ngFor="let p of t.attributes">
                     <td>{{p.name}}</td>
                     <td>{{p.value}}</td>
                   </tr>
-
+                -->
                   <tr *ngIf="jdf.getProcessesUsingThisParams(t).length>0">
                     <td>利用工程</td>
                     <td>
@@ -887,13 +887,37 @@
                     </td>
                   </tr>
                 </table>
-                <mat-expansion-panel>
-                  <mat-expansion-panel-header>
-                    <mat-panel-title></mat-panel-title>
-                    <mat-panel-description>JDF該当部分</mat-panel-description>
-                  </mat-expansion-panel-header>
-                  <pre><code class="html" [textContent]="t.body" appMyHighlight></code></pre>
-                </mat-expansion-panel>
+                <mat-accordion>
+                  <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title></mat-panel-title>
+                      <mat-panel-description>全属性</mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <table rules="rows">
+                      <tr *ngFor="let p of t.attributes">
+                        <td>{{p.name}}</td>
+                        <td>{{p.value}}</td>
+                      </tr>
+<!--
+                  <tr *ngIf="jdf.getProcessesUsingThisParams(t).length>0">
+                    <td>利用工程</td>
+                    <td>
+                      <div *ngFor="let process of jdf.getProcessesUsingThisParams(t)">
+                        <span class="like-link" (click)="scrollAndSelectTo($event,process.guid)">{{getCardTitle(process)}}</span>
+                      </div>
+                    </td>
+                  </tr>
+                -->
+                    </table>
+                  </mat-expansion-panel>
+                  <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title></mat-panel-title>
+                      <mat-panel-description>JDF該当部分</mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <pre><code class="html" [textContent]="t.body" appMyHighlight></code></pre>
+                  </mat-expansion-panel>
+                </mat-accordion>
               </mat-card-content>
             </mat-card>
           </div>
