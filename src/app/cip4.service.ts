@@ -35,7 +35,7 @@ export class Cip4Service {
     const dimensions = node.getAttribute('Dimensions');
     const body = vkbeautify.xml( node.outerHTML.toString() );
 
-    const componentTag = new ComponentTag( id, componentType, klass, dimensions, body );
+    const componentTag = new ComponentTag( node.attributes, id, componentType, klass, dimensions, body );
 
     return componentTag;
   }
@@ -48,7 +48,7 @@ export class Cip4Service {
       const friendlyName = j.getAttribute('FriendlyName');
       const body = vkbeautify.xml( j.outerHTML.toString() );
 
-      const deviceTag = new DeviceTag( id, klass, deviceId, friendlyName, body );
+      const deviceTag = new DeviceTag( node.attributes, id, klass, deviceId, friendlyName, body );
 
       return deviceTag;
   }
@@ -61,7 +61,7 @@ export class Cip4Service {
       const stapleShape = j.getAttribute('StapleShape');
       const body = vkbeautify.xml( j.outerHTML.toString() );
 
-      const stitchingParamsTag = new StitchingParamsTag( id, klass, numberOfStitches, stapleShape, body );
+      const stitchingParamsTag = new StitchingParamsTag( node.attributes, id, klass, numberOfStitches, stapleShape, body );
 
       return stitchingParamsTag;
   }
@@ -77,7 +77,7 @@ export class Cip4Service {
       const trimmingOffset = j.getAttribute('TrimmingOffset');
       const body = vkbeautify.xml( j.outerHTML.toString() );
 
-      const trimmingParamsTag = new TrimmingParamsTag( id, klass, noOp, trimmingType, width, height, trimmingOffset, body );
+      const trimmingParamsTag = new TrimmingParamsTag( node.attributes, id, klass, noOp, trimmingType, width, height, trimmingOffset, body );
 
       return trimmingParamsTag;
   }
@@ -98,10 +98,10 @@ export class Cip4Service {
         const x_to = x.getAttribute('To');
         const x_from = x.getAttribute('From');
         const x_travel = x.getAttribute('Travel');
-        const ft = new FoldTag(x_to, x_from, x_travel);
+        const ft = new FoldTag(x.attributes, x_to, x_from, x_travel);
         folds.push( ft );
       }
-      const foldingParamsTag = new FoldingParamsTag( id, klass, descriptionType, foldCatalog, folds, body );
+      const foldingParamsTag = new FoldingParamsTag( node.attributes, id, klass, descriptionType, foldCatalog, folds, body );
 
       return foldingParamsTag;
   }
@@ -122,13 +122,13 @@ export class Cip4Service {
       const x_blockName = x.getAttribute('BlockName');
       const x_blockSize = x.getAttribute('BlockSize');
       const x_blockTrf = x.getAttribute('BlockTrf');
-      const cbt = new CutBlockTag(x_id, x_class, x_blockType, x_blockName,
+      const cbt = new CutBlockTag(x.attributes, x_id, x_class, x_blockType, x_blockName,
                         x_blockSize, x_blockTrf,
                         vkbeautify.xml(x.outerHTML.toString()));
       cutBlocks.push(cbt);
     }
 
-    const cuttingParamsTag = new CuttingParamsTag( id, klass, cutBlocks, body );
+    const cuttingParamsTag = new CuttingParamsTag( node.attributes, id, klass, cutBlocks, body );
 
     return cuttingParamsTag;
   }
@@ -140,7 +140,7 @@ export class Cip4Service {
     const noOp = j.getAttribute('NoOp');
     const body = vkbeautify.xml( j.outerHTML.toString() );
 
-    const coverApplicationParamsTag = new CoverApplicationParamsTag( id, klass, noOp, body );
+    const coverApplicationParamsTag = new CoverApplicationParamsTag( node.attributes, id, klass, noOp, body );
 
     return coverApplicationParamsTag;
   }
@@ -152,7 +152,7 @@ export class Cip4Service {
     const millingDepth = j.getAttribute('MillingDepth');
     const body = vkbeautify.xml( j.outerHTML.toString() );
 
-    const spinePreparationParamsTag = new SpinePreparationParamsTag( id, klass, millingDepth, body );
+    const spinePreparationParamsTag = new SpinePreparationParamsTag( node.attributes, id, klass, millingDepth, body );
 
     return spinePreparationParamsTag;
   }
@@ -164,14 +164,14 @@ export class Cip4Service {
     const layerAmount = node.getAttribute('LayerAmount');
     const body = vkbeautify.xml( node.outerHTML.toString() );
 
-    const stackingParamsTag = new StackingParamsTag( id, klass, standardAmount, layerAmount, body );
+    const stackingParamsTag = new StackingParamsTag( node.attributes, id, klass, standardAmount, layerAmount, body );
 
     return stackingParamsTag;
   }
 
   private createUnknownResourceTag(node): UnknownResourceTag {
     const body = vkbeautify.xml( node.outerHTML.toString() );
-    const unknownResourceTag = new UnknownResourceTag( node.tagName, node.attributes, body );
+    const unknownResourceTag = new UnknownResourceTag( node.attributes, node.tagName, body );
 
     return unknownResourceTag;
   }
@@ -183,7 +183,7 @@ export class Cip4Service {
 
     const rResource = jdf.getResourceTagById(rRef);
 
-    const linkTag = new ComponentLinkTag(usage, rRef, amount, rResource);
+    const linkTag = new ComponentLinkTag(node.attributes, usage, rRef, amount, rResource);
 
     return linkTag;
   }
@@ -195,7 +195,7 @@ export class Cip4Service {
 
     const rResource = jdf.getResourceTagById(rRef);
 
-    const linkTag = new SpinePrearationParamsLinkTag(usage, rRef, amount, rResource);
+    const linkTag = new SpinePrearationParamsLinkTag(node.attributes, usage, rRef, amount, rResource);
 
     return linkTag;
   }
@@ -206,7 +206,7 @@ export class Cip4Service {
 
     const rResource = jdf.getResourceTagById(rRef);
 
-    const linkTag = new CoverApplicationParamsLinkTag(usage, rRef, '', rResource);
+    const linkTag = new CoverApplicationParamsLinkTag(node.attributes, usage, rRef, '', rResource);
 
     return linkTag;
   }
@@ -217,7 +217,7 @@ export class Cip4Service {
 
     const rResource = jdf.getResourceTagById(rRef);
 
-    const linkTag = new StitchingParamsLinkTag(usage, rRef, '', rResource);
+    const linkTag = new StitchingParamsLinkTag(node.attributes, usage, rRef, '', rResource);
 
     return linkTag;
   }
@@ -228,7 +228,7 @@ export class Cip4Service {
 
     const rResource = jdf.getResourceTagById(rRef);
 
-    const linkTag = new TrimmingParamsLinkTag(usage, rRef, '', rResource);
+    const linkTag = new TrimmingParamsLinkTag(node.attributes, usage, rRef, '', rResource);
 
     return linkTag;
   }
@@ -239,7 +239,7 @@ export class Cip4Service {
 
     const rResource = jdf.getResourceTagById(rRef);
 
-    const linkTag = new CuttingParamsLinkTag(usage, rRef, '', rResource);
+    const linkTag = new CuttingParamsLinkTag(node.attributes, usage, rRef, '', rResource);
 
     return linkTag;
   }
@@ -250,7 +250,7 @@ export class Cip4Service {
 
     const rResource = jdf.getResourceTagById(rRef);
 
-    const linkTag = new FoldingParamsLinkTag(usage, rRef, '', rResource);
+    const linkTag = new FoldingParamsLinkTag(node.attributes, usage, rRef, '', rResource);
 
     return linkTag;
   }
@@ -262,7 +262,7 @@ export class Cip4Service {
     const rResource = jdf.getResourceTagById(rRef);
 // console.log( '*** ' + rRef + ' -> rResource:' + rResource);
 
-    const linkTag = new DeviceLinkTag(usage, rRef, '', rResource);
+    const linkTag = new DeviceLinkTag(node.attributes, usage, rRef, '', rResource);
 
     return linkTag;
   }
@@ -273,7 +273,7 @@ export class Cip4Service {
 
     const rResource = jdf.getResourceTagById(rRef);
 
-    const linkTag = new StackingParamsLinkTag(usage, rRef, '', rResource);
+    const linkTag = new StackingParamsLinkTag(node.attributes, usage, rRef, '', rResource);
 
     return linkTag;
   }
@@ -282,7 +282,7 @@ export class Cip4Service {
     const rRef = node.getAttribute('rRef');
     const rResource = jdf.getResourceTagById(rRef);
 
-    const linkTag = new UnknownResourceLinkTag( node.tagName, node.attributes, rResource);
+    const linkTag = new UnknownResourceLinkTag( node.attributes, node.tagName, rResource);
 
     return linkTag;
   }
@@ -359,7 +359,7 @@ export class Cip4Service {
         }
       }
     }
-    const jdfTag = new JdfTag(id, type, dn, jobId, jobPartId,
+    const jdfTag = new JdfTag(node.attributes, id, type, dn, jobId, jobPartId,
       inputComponentLinks, outputComponentLinks, paramsLinks, deviceLinks, body);
 
     return jdfTag;
@@ -848,17 +848,26 @@ export class JDF {
 
 class BaseTag {
   guid: string; // Cytoscapeで使えないかしら
+  attributes = new Array<NameValue>();
 
-  constructor() {
+  constructor(attributes:any) {
     this.guid = Guid.create().toString();
+
+    for (let i = 0; i < attributes.length; i++ ) {
+      this.attributes.push( {
+        name: attributes[i].name,
+        value: attributes[i].value
+      });
+    }
   }
 }
 
 export class IdHavingTag extends BaseTag {
   id: string;
+//  attributes = new Array<NameValue>();
 
-  constructor(id: string) {
-    super();
+  constructor(attributes:any, id: string) {
+    super(attributes);
 
     this.id = id;
   }
@@ -883,10 +892,10 @@ export class JdfTag extends IdHavingTag {
   paramsLinks: LinkTag[] = [];
   deviceLinks: LinkTag[] = [];
 
-  constructor(id: string, type: string, descriptiveName: string, jobId: string, jobPartId: string,
+  constructor(attributes: any, id: string, type: string, descriptiveName: string, jobId: string, jobPartId: string,
       inputComponentLinks: ComponentLinkTag[], outputComponentLinks: ComponentLinkTag[], paramsLinks: LinkTag[],
       deviceLinks: LinkTag[], body: string) {
-    super(id);
+    super(attributes,id);
 
     this.type = type;
     this.descriptiveName = descriptiveName;
@@ -923,8 +932,8 @@ export class DeviceTag extends IdHavingTag {
   friendlyName: string;
   body: string;
 
-  constructor(id: string, klass: string, deviceId: string, friendlyName: string, body: string) {
-    super(id);
+  constructor(attributes: any, id: string, klass: string, deviceId: string, friendlyName: string, body: string) {
+    super(attributes, id);
 
     this.klass = klass;
     this.deviceId = deviceId;
@@ -960,8 +969,8 @@ export class ComponentTag extends IdHavingTag {
   dimensions_length: number;
   dimensions_thickness: number;
 
-  constructor(id: string, componentType: string, klass: string, dimensions: string, body: string) {
-    super(id);
+  constructor(attributes: any, id: string, componentType: string, klass: string, dimensions: string, body: string) {
+    super(attributes, id);
 
     this.componentType = componentType;
     this.klass = klass;
@@ -1022,8 +1031,8 @@ export class ParamsTag extends IdHavingTag {
   klass: string;
   body: string;
 
-  constructor(id: string, klass: string, body: string) {
-    super(id);
+  constructor(attributes: any, id: string, klass: string, body: string) {
+    super(attributes, id);
 
     this.klass = klass;
 
@@ -1043,8 +1052,8 @@ export class StitchingParamsTag extends ParamsTag  {
   numberOfStitches: string;
   stapleShape: string;
 
-  constructor(id: string, klass: string, numberOfStitches: string, stapleShape: string, body: string) {
-    super(id, klass, body);
+  constructor(attributes: any, id: string, klass: string, numberOfStitches: string, stapleShape: string, body: string) {
+    super(attributes, id, klass, body);
 
     this.numberOfStitches = numberOfStitches;
     this.stapleShape = stapleShape;
@@ -1058,9 +1067,9 @@ export class TrimmingParamsTag  extends ParamsTag {
   width: string;
   trimmingOffset: string;
 
-  constructor(id: string, klass: string, noOp: string, trimmingType: string,
+  constructor(attributes: any, id: string, klass: string, noOp: string, trimmingType: string,
        height: string, width: string, trimmingOffset: string, body: string) {
-    super(id, klass, body);
+    super(attributes, id, klass, body);
 
     this.noOp = noOp;
     this.trimmingType = trimmingType;
@@ -1087,8 +1096,8 @@ export class FoldingParamsTag  extends ParamsTag {
   foldCatalog: string;
   folds: FoldTag[];
 
-  constructor( id: string, klass: string, descriptionType: string, foldCatalog: string, folds: FoldTag[], body: string ) {
-    super(id, klass, body);
+  constructor( attributes: any, id: string, klass: string, descriptionType: string, foldCatalog: string, folds: FoldTag[], body: string ) {
+    super(attributes, id, klass, body);
 
     this.descriptionType = descriptionType;
     this.foldCatalog = foldCatalog;
@@ -1109,8 +1118,8 @@ export class FoldTag  extends BaseTag {
   from: string;
   travel: string;
 
-  constructor( to: string, from: string, travel: string ) {
-    super();
+  constructor( attributes: any, to: string, from: string, travel: string ) {
+    super(attributes);
 
     this.to = to;
     this.from = from;
@@ -1125,8 +1134,8 @@ export class FoldTag  extends BaseTag {
 export class CuttingParamsTag  extends ParamsTag {
   cutBlocks: CutBlockTag[];
 
-  constructor( id: string, klass: string, cutBlocks: CutBlockTag[], body: string ) {
-    super(id, klass, body);
+  constructor( attributes: any, id: string, klass: string, cutBlocks: CutBlockTag[], body: string ) {
+    super(attributes, id, klass, body);
 
     this.cutBlocks = cutBlocks;
   }
@@ -1146,8 +1155,8 @@ export class CutBlockTag  extends IdHavingTag { // うーん。ParamsTagから�
   block_y: number;
   block_zz: string; // なんて呼べば良いんだろう。BlockTrf の残り部分（頭部分）
 
-  constructor( id: string, klass: string, blockType: string, blockName: string, blockSize: string, blockTrf: string, body: string ) {
-    super(id);
+  constructor( attributes: any, id: string, klass: string, blockType: string, blockName: string, blockSize: string, blockTrf: string, body: string ) {
+    super(attributes, id);
 
     this.klass = klass;
     this.blockType = blockType;
@@ -1223,8 +1232,8 @@ export class CutBlockTag  extends IdHavingTag { // うーん。ParamsTagから�
 export class CoverApplicationParamsTag  extends ParamsTag {
   noOp: string;
 
-  constructor( id: string, klass: string, noOp: string, body: string ) {
-    super(id, klass, body);
+  constructor( attributes: any, id: string, klass: string, noOp: string, body: string ) {
+    super(attributes, id, klass, body);
 
     this.noOp = noOp;
   }
@@ -1233,8 +1242,8 @@ export class CoverApplicationParamsTag  extends ParamsTag {
 export class SpinePreparationParamsTag  extends ParamsTag {
   millingDepth: string;
 
-  constructor( id: string, klass: string, millingDepth: string, body: string ) {
-    super(id, klass, body);
+  constructor( attributes: any, id: string, klass: string, millingDepth: string, body: string ) {
+    super(attributes, id, klass, body);
 
     this.millingDepth = millingDepth;
   }
@@ -1244,8 +1253,8 @@ export class StackingParamsTag  extends ParamsTag {
   standardAmount: string;
   layerAmount: string;
 
-  constructor( id: string, klass: string, standardAmount: string, layerAmount: string, body: string ) {
-    super(id, klass, body);
+  constructor( attributes: any, id: string, klass: string, standardAmount: string, layerAmount: string, body: string ) {
+    super(attributes, id, klass, body);
 
     this.standardAmount = standardAmount;
     this.layerAmount = layerAmount;
@@ -1259,22 +1268,22 @@ interface NameValue {
 
 export class UnknownResourceTag  extends IdHavingTag {
   tagName: string;
-  attributes = new Array<NameValue>();
+//  attributes = new Array<NameValue>();
   body: string;
 
-  constructor( tagName: string, attributes: any, body: string ) {
-    super('');
+  constructor( attributes: any, tagName: string, body: string ) {
+    super(attributes, '');
 
     this.tagName = tagName;
-    this.attributes = [];
-
+//    this.attributes = [];
+/*
     for (let i = 0; i < attributes.length; i++ ) {
       this.attributes.push( {
         name: attributes[i].name,
         value: attributes[i].value
       });
     }
-
+*/
     const id = this.attributes.find((v, i, a) => {return (v.name === 'ID');});
     if (id) {
       this.id = id.value;
@@ -1303,8 +1312,8 @@ class LinkTag  extends BaseTag {
 
   rResource: IdHavingTag; // rRef が指す Resource
 
-  constructor( usage: string, rRef: string, amount: string, rResource: IdHavingTag ) {
-    super();
+  constructor( attributes: any, usage: string, rRef: string, amount: string, rResource: IdHavingTag ) {
+    super(attributes);
 
     this.usage = usage;
     this.rRef = rRef;
@@ -1315,50 +1324,50 @@ class LinkTag  extends BaseTag {
 }
 
 class ComponentLinkTag extends LinkTag {
-  constructor( usage: string, rRef: string, amount: string, rResource: IdHavingTag ) {
-    super( usage, rRef, amount, rResource );
+  constructor( attributes: any, usage: string, rRef: string, amount: string, rResource: IdHavingTag ) {
+    super( attributes, usage, rRef, amount, rResource );
   }
 }
 
 class CoverApplicationParamsLinkTag extends LinkTag {
-  constructor( usage: string, rRef: string, amount: string, rResource: IdHavingTag ) {
-    super( usage, rRef, amount, rResource );
+  constructor( attributes: any, usage: string, rRef: string, amount: string, rResource: IdHavingTag ) {
+    super( attributes, usage, rRef, amount, rResource );
   }
 }
 
 class SpinePrearationParamsLinkTag extends LinkTag {
-  constructor( usage: string, rRef: string, amount: string, rResource: IdHavingTag ) {
-    super( usage, rRef, amount, rResource );
+  constructor( attributes: any, usage: string, rRef: string, amount: string, rResource: IdHavingTag ) {
+    super( attributes, usage, rRef, amount, rResource );
   }
 }
 
 class StitchingParamsLinkTag extends LinkTag {
-  constructor( usage: string, rRef: string, amount: string, rResource: IdHavingTag ) {
-    super( usage, rRef, amount, rResource );
+  constructor( attributes: any, usage: string, rRef: string, amount: string, rResource: IdHavingTag ) {
+    super( attributes, usage, rRef, amount, rResource );
   }
 }
 
 class TrimmingParamsLinkTag extends LinkTag {
-  constructor( usage: string, rRef: string, amount: string, rResource: IdHavingTag ) {
-    super( usage, rRef, amount, rResource );
+  constructor( attributes: any, usage: string, rRef: string, amount: string, rResource: IdHavingTag ) {
+    super( attributes, usage, rRef, amount, rResource );
   }
 }
 
 class CuttingParamsLinkTag extends LinkTag {
-  constructor( usage: string, rRef: string, amount: string, rResource: IdHavingTag ) {
-    super( usage, rRef, amount, rResource );
+  constructor( attributes: any, usage: string, rRef: string, amount: string, rResource: IdHavingTag ) {
+    super( attributes, usage, rRef, amount, rResource );
   }
 }
 
 class FoldingParamsLinkTag extends LinkTag {
-  constructor( usage: string, rRef: string, amount: string, rResource: IdHavingTag ) {
-    super( usage, rRef, amount, rResource );
+  constructor( attributes: any, usage: string, rRef: string, amount: string, rResource: IdHavingTag ) {
+    super( attributes, usage, rRef, amount, rResource );
   }
 }
 
 class DeviceLinkTag extends LinkTag {
-  constructor( usage: string, rRef: string, amount: string, rResource: IdHavingTag ) {
-    super( usage, rRef, amount, rResource );
+  constructor( attributes: any, usage: string, rRef: string, amount: string, rResource: IdHavingTag ) {
+    super( attributes, usage, rRef, amount, rResource );
 /*
     if ( this.rResource ) {
       console.log('devLink ctr: ' + this.rResource.getCaption());
@@ -1370,26 +1379,26 @@ class DeviceLinkTag extends LinkTag {
 }
 
 class StackingParamsLinkTag extends LinkTag {
-  constructor( usage: string, rRef: string, amount: string, rResource: IdHavingTag ) {
-    super( usage, rRef, amount, rResource );
+  constructor( attributes: any, usage: string, rRef: string, amount: string, rResource: IdHavingTag ) {
+    super( attributes, usage, rRef, amount, rResource );
   }
 }
 
 class UnknownResourceLinkTag extends LinkTag {
   tagName: string;
-  attributes = new Array<NameValue>();
+//  attributes = new Array<NameValue>();
 
-  constructor( tagName: string, attributes: any, rResource: IdHavingTag ) {
-    super('', '', '', rResource);
+  constructor( attributes: any, tagName: string, rResource: IdHavingTag ) {
+    super(attributes, '', '', '', rResource);
 
     this.tagName = tagName;
-    for (let i = 0; i < attributes.length; i++) {
+/*    for (let i = 0; i < attributes.length; i++) {
       this.attributes.push( {
         name: attributes[i].name,
         value: attributes[i].value
       });
     }
-
+*/
     console.log(' UnknownResourceLinkTag - ' + this.tagName + ' ------- ' );
     const usage = this.attributes.find((v, i, a) => {return (v.name === 'Usage');});
     if (usage) {
@@ -1432,8 +1441,8 @@ class QueryTag  extends IdHavingTag {
   statusQuParamsTags: StatusQuParamsTag[] = [];
   body: string;
 
-  constructor( id: string, type: string, statusQuParamsTags: StatusQuParamsTag[], body: string ) {
-    super(id);
+  constructor( attributes: any, id: string, type: string, statusQuParamsTags: StatusQuParamsTag[], body: string ) {
+    super(attributes, id);
 
     this.type = type;
     this.statusQuParamsTags = statusQuParamsTags;
@@ -1446,8 +1455,8 @@ class StatusQuParamsTag extends BaseTag {
   deviceDetails: string;
   body: string;
 
-  constructor( deviceDetails: string, body: string ) {
-    super();
+  constructor( attributes: any, deviceDetails: string, body: string ) {
+    super(attributes);
 
     this.deviceDetails = deviceDetails;
 
@@ -1460,8 +1469,8 @@ class SignalTag  extends IdHavingTag {
   deviceInfoTags: DeviceInfoTag[] = [];
   body: string;
 
-  constructor( id: string, type: string, deviceInfoTags: DeviceInfoTag[], body: string ) {
-    super(id);
+  constructor( attributes: any, id: string, type: string, deviceInfoTags: DeviceInfoTag[], body: string ) {
+    super(attributes, id);
 
     this.type = type;
     this.deviceInfoTags = deviceInfoTags;
@@ -1476,8 +1485,8 @@ class DeviceInfoTag extends BaseTag {
   jobPhaseTags: JobPhaseTag[] = [];
   body: string;
 
-  constructor( deviceStatus: string, deviceTag: DeviceTag, jobPhaseTags: JobPhaseTag[], body: string ) {
-    super();
+  constructor( attributes: any, deviceStatus: string, deviceTag: DeviceTag, jobPhaseTags: JobPhaseTag[], body: string ) {
+    super(attributes);
 
     this.deviceStatus = deviceStatus;
     this.deviceTag = deviceTag;
@@ -1504,9 +1513,9 @@ class JobPhaseTag extends BaseTag  {
   waste: string;
   body: string;
 
-  constructor( status: string, jobParId: string, jobId: string, startTime: string,
+  constructor( attributes: any, status: string, jobParId: string, jobId: string, startTime: string,
        totalAmount: string, amount: string, waste: string, body: string ) {
-    super();
+    super(attributes);
 
     this.status = status;
     this.jobPartId = jobParId;
