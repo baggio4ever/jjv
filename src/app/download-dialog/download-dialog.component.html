@@ -19,7 +19,7 @@
 <!--
       <div *ngFor="let f of files">{{f.filename}}</div>
 -->
-      <div *ngFor="let f of files.reverse()" class="card-around">
+      <div *ngFor="let f of files.reverse();let i = index" class="card-around">
         <mat-card (click)="onCardSelect(f)" [class.selected]="f===selectedItem">
           <mat-card-header>
             <mat-card-title>
@@ -32,6 +32,14 @@
           <mat-card-content>
             <pre class="card-content">{{f.comment}}</pre>
           </mat-card-content>
+<!--
+            <mat-card-actions>
+    <input matInput attr.id="url_input_{{i}}" placeholder="URL" readonly="true" [value]="getItemUrl(f)" class="url-input">
+    <button mat-icon-button  matTooltip="URLをクリップボードにコピー" matTooltipPosition="above" (click)="copyItemUrl('url_input_'+i)">
+      <mat-icon aria-label="Copy URL to clipboard">place</mat-icon>
+    </button>
+          </mat-card-actions>
+        -->
         </mat-card>
       </div>
     </ng-template>
@@ -42,7 +50,7 @@
   <ng-template #thenBlock>
     <input matInput placeholder="URL" readonly="true" [value]="getSelectedItemUrl()" class="url-input" #url_input>
     <button mat-icon-button  matTooltip="URLをクリップボードにコピー" matTooltipPosition="above" (click)="copyUrl(url_input)">
-      <mat-icon aria-label="Example icon-button with a heart icon">place</mat-icon>
+      <mat-icon aria-label="Copy URL to clipboard">place</mat-icon>
     </button>
   </ng-template>
   

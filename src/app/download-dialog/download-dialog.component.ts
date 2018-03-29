@@ -58,9 +58,27 @@ export class DownloadDialogComponent implements OnInit {
     document.execCommand('copy');
   }
 
+  copyItemUrl(id: string): void {
+    console.log('copyItemUrl: '+id);
+    const input = <HTMLInputElement>document.getElementById(id);
+    input.select();
+    document.execCommand('copy');
+  }
+
   getSelectedItemUrl(): string {
     const base_url = location.protocol + '//' + location.host + location.pathname;
     const params: HttpParams = new HttpParams().set('user_id', this.selectedItem.user_id ).set('created_at', this.selectedItem.created_at);
+
+    const url = base_url + '?' + params.toString();
+
+    console.log(url);
+    
+    return url;
+  }
+
+  getItemUrl(f): string {
+    const base_url = location.protocol + '//' + location.host + location.pathname;
+    const params: HttpParams = new HttpParams().set('user_id', f.user_id ).set('created_at', f.created_at);
 
     const url = base_url + '?' + params.toString();
 
