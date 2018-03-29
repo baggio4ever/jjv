@@ -1292,7 +1292,7 @@ export class UnknownResourceTag  extends IdHavingTag {
   }
   */
   getCaption(): string {
-    return 'Unknown: ' + this.tagName;
+    return '?: ' + this.tagName;
   }
 }
 

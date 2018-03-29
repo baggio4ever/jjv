@@ -74,7 +74,7 @@
           <li *ngIf="jdf.getSpinePreparationParamsTagCount()>0" class="like-link" (click)="scrollTo('spinePreparationParams_top')">SpinePreparationParams ({{jdf.getSpinePreparationParamsTagCount()}})</li>
           <li *ngIf="jdf.getCoverApplicationParamsTagCount()>0" class="like-link" (click)="scrollTo('coverApplicationParams_top')">CoverApplicationParams ({{jdf.getCoverApplicationParamsTagCount()}})</li>
           <li *ngIf="jdf.getStackingParamsTagCount()>0" class="like-link" (click)="scrollTo('stackingParams_top')">StackingParams ({{jdf.getStackingParamsTagCount()}})</li>
-          <li *ngIf="jdf.getUnknownResourceTagCount()>0" class="like-link" (click)="scrollTo('unknownResources_top')">Unknown Resources ({{jdf.getUnknownResourceTagCount()}})</li>
+          <li *ngIf="jdf.getUnknownResourceTagCount()>0" class="like-link" (click)="scrollTo('unknownResources_top')">? (Unknown Resources) ({{jdf.getUnknownResourceTagCount()}})</li>
         </ul>
       </div>
     </div>
@@ -861,7 +861,7 @@
       </div>
 
       <div *ngIf="jdf.unknownResourceTags.length>0">
-        <h3 id="unknownResources_top">Unknown Resources</h3>
+        <h3 id="unknownResources_top">? (Unknown Resources)</h3>
         <div>
           <div *ngFor="let t of jdf.unknownResourceTags" id="{{t.guid}}" [class.selected]="isSelected(t.guid)" class="example-card" (click)="cardClicked(t.guid)">
             <mat-card>

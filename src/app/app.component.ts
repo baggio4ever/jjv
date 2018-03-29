@@ -917,31 +917,20 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
       }
     });
   }
-/*
-  test() {
-   this.showMessageDialog('どうだ', '使いやすいかな', MessageDialogButtons.YesNo, (r) => {
-     if ( r ) {
-       console.log('trueですよね？');
-     } else {
-       console.log('false だすな');
-     }
-   });
-  }
-*/
+
   getCardTitle( aTag: IdHavingTag ): string {
     if ( aTag ) {
-      if (aTag.getCaption() === aTag.id ) {
-        return aTag.id;
-      } else {
-        if ( aTag.id ) {
-          return aTag.getCaption() + '  - ' + aTag.id;
-        } else {
-          return aTag.getCaption();
-        }
-      }
+        return aTag.getCaption();
     } else {
-//      console.log('getCaption() : あちゃー');
       return 'あちゃー';
+    }
+  }
+
+  getCartSubtitle( aTag: IdHavingTag ): string {
+    if( aTag ) {
+      return aTag.id;    
+    } else {
+      return 'あちゃちゃー';
     }
   }
 
