@@ -45,7 +45,6 @@
   <div *ngIf="fileLoaded; else elseBlock">
     <!-- ファイル開いている時 -->
     <div id="fmenu">
-<!--      <div class="light-frame"> -->
         <div id="cy"></div>
         
       <mat-divider></mat-divider>
@@ -59,7 +58,6 @@
           </button>
           <a id="save-as-png" href="#" style="display: none;"></a>
         </div>
-<!--      </div> -->
       <mat-divider></mat-divider>
       <div>
         <ul>
@@ -120,16 +118,6 @@
                         <td>{{p.name}}</td>
                         <td>{{p.value}}</td>
                       </tr>
-<!--
-                  <tr *ngIf="jdf.getProcessesUsingThisParams(t).length>0">
-                    <td>利用工程</td>
-                    <td>
-                      <div *ngFor="let process of jdf.getProcessesUsingThisParams(t)">
-                        <span class="like-link" (click)="scrollAndSelectTo($event,process.guid)">{{getCardTitle(process)}}</span>
-                      </div>
-                    </td>
-                  </tr>
-                -->
                     </table>
                   </mat-expansion-panel>
               <mat-expansion-panel>

@@ -20,7 +20,7 @@ declare var hljs: any;
 
 
 
-const JJV_VERSION = '0.1.17';
+const JJV_VERSION = '0.1.18';
 
 
 
@@ -46,17 +46,15 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
   displayedColumns_cut = ['id', /*'class', 'blockType',*/ 'blockName', 'blockSize', 'blockTrf', 'blockSize_mm', 'blockTrf_mm'];
   displayedColumns_fold = ['to', 'from', 'travel', 'travel_mm'];
 
-  ret_from_http = '';
-  ret_from_http_input = '';
+//  ret_from_http = '';
+//  ret_from_http_input = '';
 
   ret_from_post = '';
 
   param_user_id = '';
   param_created_at = '';
 
-//  parseErrorMessages = [];
   errorHtml = null;
-//  safeErrorHtml = null;
 
   constructor(private activatedRoute: ActivatedRoute, private sanitizer: DomSanitizer, 
     private cip4: Cip4Service, private httpService: MyHttpService,
@@ -99,7 +97,6 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
         }
     });
 
-    //    console.log('AfterViewInit');
 /*
 どうしたらFileドロップ許可領域以外をFileドロップ禁止にできるのか。
     document.addEventListener('ondrop',(ev)=>{
@@ -753,12 +750,6 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-/*
-        console.log('The dialog was closed: ' + result);
-        console.log('      ' + result.user_id);
-        console.log('      ' + result.filename);
-        console.log('      ' + result.comment);
-*/
         localStorage.setItem(KEY_USER_ID, result.user_id);
         localStorage.setItem(KEY_COMMENT, result.comment);
 
