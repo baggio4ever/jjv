@@ -20,7 +20,7 @@ declare var hljs: any;
 
 
 
-const JJV_VERSION = '0.1.18';
+const JJV_VERSION = '0.1.19';
 
 
 
@@ -55,6 +55,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
   param_created_at = '';
 
   errorHtml = null;
+
+  TITLE_ALL_ATTRIBS = '属性（sorted）';
 
   constructor(private activatedRoute: ActivatedRoute, private sanitizer: DomSanitizer, 
     private cip4: Cip4Service, private httpService: MyHttpService,
@@ -139,6 +141,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
 
         this.fileLoaded = true;
         this.filename = f.name;
+        this.updateTitle();
 
         setTimeout(() => { // チョイ待たせてCytoscape
           this.initCytoscape();
@@ -168,6 +171,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
     this.jdf = null;
 
     this.errorHtml = null;
+
+    this.updateTitle();
   }
 
   doHighlight(): void {
@@ -176,6 +181,14 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
     for ( let i = 0; i < codes.length; i ++ ) {
       const co = codes[i];
       hljs.highlightBlock(co);
+    }
+  }
+
+  updateTitle(): void {
+    if( this.fileLoaded ) {
+      document.title = 'jjv - ' + this.filename;
+    } else {
+      document.title = 'jjv';
     }
   }
 
@@ -311,7 +324,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
           style: {
             'label': 'data(node_label)',
             'shape': 'tag',
-            'background-color': '#df4994',
+            'background-color': '#af1964',
             'border-width': 1,
             'border-color': 'black',
 /*            'background-opacity': 0,
@@ -795,6 +808,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
 
         this.fileLoaded = true;
         this.filename = s.filename;
+        this.updateTitle();
+        
         console.log('fromstring filename:' + this.filename);
 
         setTimeout(() => { // チョイ待たせてCytoscape
@@ -924,7 +939,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
       return 'あちゃちゃー';
     }
   }
-
+/*
   testDownload(): void {
         this.httpService.downloadXml('hira','masa', msg => {
           console.log('testDownload(): ' + msg );
@@ -938,6 +953,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
     console.log('location.href: '+location.href);
     console.log('location.xxxx: '+location.protocol + '//' + location.host + location.pathname);
   }
+  */
 }
 
 

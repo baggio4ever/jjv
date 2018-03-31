@@ -111,7 +111,7 @@
                   <mat-expansion-panel>
                     <mat-expansion-panel-header>
                       <mat-panel-title></mat-panel-title>
-                      <mat-panel-description>全属性</mat-panel-description>
+                      <mat-panel-description>{{TITLE_ALL_ATTRIBS}}</mat-panel-description>
                     </mat-expansion-panel-header>
                     <table rules="rows">
                       <tr *ngFor="let p of jdf.jobTag.attributes">
@@ -213,7 +213,7 @@
                   <mat-expansion-panel>
                     <mat-expansion-panel-header>
                       <mat-panel-title></mat-panel-title>
-                      <mat-panel-description>全属性</mat-panel-description>
+                      <mat-panel-description>{{TITLE_ALL_ATTRIBS}}</mat-panel-description>
                     </mat-expansion-panel-header>
                     <table rules="rows">
                       <tr *ngFor="let p of t.attributes">
@@ -309,7 +309,7 @@
                   <mat-expansion-panel>
                     <mat-expansion-panel-header>
                       <mat-panel-title></mat-panel-title>
-                      <mat-panel-description>全属性</mat-panel-description>
+                      <mat-panel-description>{{TITLE_ALL_ATTRIBS}}</mat-panel-description>
                     </mat-expansion-panel-header>
                     <table rules="rows">
                       <tr *ngFor="let p of t.attributes">
@@ -374,7 +374,7 @@
                   <mat-expansion-panel>
                     <mat-expansion-panel-header>
                       <mat-panel-title></mat-panel-title>
-                      <mat-panel-description>全属性</mat-panel-description>
+                      <mat-panel-description>{{TITLE_ALL_ATTRIBS}}</mat-panel-description>
                     </mat-expansion-panel-header>
                     <table rules="rows">
                       <tr *ngFor="let p of t.attributes">
@@ -439,7 +439,7 @@
                   <mat-expansion-panel>
                     <mat-expansion-panel-header>
                       <mat-panel-title></mat-panel-title>
-                      <mat-panel-description>全属性</mat-panel-description>
+                      <mat-panel-description>{{TITLE_ALL_ATTRIBS}}</mat-panel-description>
                     </mat-expansion-panel-header>
                     <table rules="rows">
                       <tr *ngFor="let p of t.attributes">
@@ -483,12 +483,12 @@
                     <td>{{t.klass}}</td>
                   </tr>
                   <tr>
-                    <td>NoOp</td>
-                    <td>{{t.noOp}}</td>
-                  </tr>
-                  <tr>
                     <td>TrimmingType</td>
                     <td>{{t.trimmingType}}</td>
+                  </tr>
+                  <tr>
+                    <td>NoOp</td>
+                    <td>{{t.noOp}}</td>
                   </tr>
                   <tr>
                     <td>Width</td>
@@ -549,7 +549,7 @@
                   <mat-expansion-panel>
                     <mat-expansion-panel-header>
                       <mat-panel-title></mat-panel-title>
-                      <mat-panel-description>全属性</mat-panel-description>
+                      <mat-panel-description>{{TITLE_ALL_ATTRIBS}}</mat-panel-description>
                     </mat-expansion-panel-header>
                     <table rules="rows">
                       <tr *ngFor="let p of t.attributes">
@@ -655,7 +655,7 @@
                   <mat-expansion-panel>
                     <mat-expansion-panel-header>
                       <mat-panel-title></mat-panel-title>
-                      <mat-panel-description>全属性</mat-panel-description>
+                      <mat-panel-description>{{TITLE_ALL_ATTRIBS}}</mat-panel-description>
                     </mat-expansion-panel-header>
                     <table rules="rows">
                       <tr *ngFor="let p of t.attributes">
@@ -811,7 +811,7 @@
                   <mat-expansion-panel>
                     <mat-expansion-panel-header>
                       <mat-panel-title></mat-panel-title>
-                      <mat-panel-description>全属性</mat-panel-description>
+                      <mat-panel-description>{{TITLE_ALL_ATTRIBS}}</mat-panel-description>
                     </mat-expansion-panel-header>
                     <table rules="rows">
                       <tr *ngFor="let p of t.attributes">
@@ -867,6 +867,19 @@
                     </td>
                   </tr>
                 </table>
+                <mat-accordion>
+                  <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title></mat-panel-title>
+                      <mat-panel-description>{{TITLE_ALL_ATTRIBS}}</mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <table rules="rows">
+                      <tr *ngFor="let p of t.attributes">
+                        <td>{{p.name}}</td>
+                        <td>{{p.value}}</td>
+                      </tr>
+                    </table>
+                  </mat-expansion-panel>
                 <mat-expansion-panel>
                   <mat-expansion-panel-header>
                     <mat-panel-title></mat-panel-title>
@@ -874,6 +887,7 @@
                   </mat-expansion-panel-header>
                   <pre><code class="html" [textContent]="t.body" appMyHighlight></code></pre>
                 </mat-expansion-panel>
+                </mat-accordion>
               </mat-card-content>
             </mat-card>
           </div>
@@ -918,7 +932,7 @@
                   <mat-expansion-panel>
                     <mat-expansion-panel-header>
                       <mat-panel-title></mat-panel-title>
-                      <mat-panel-description>全属性</mat-panel-description>
+                      <mat-panel-description>{{TITLE_ALL_ATTRIBS}}</mat-panel-description>
                     </mat-expansion-panel-header>
                     <table rules="rows">
                       <tr *ngFor="let p of t.attributes">
@@ -983,7 +997,7 @@
                   <mat-expansion-panel>
                     <mat-expansion-panel-header>
                       <mat-panel-title></mat-panel-title>
-                      <mat-panel-description>全属性</mat-panel-description>
+                      <mat-panel-description>{{TITLE_ALL_ATTRIBS}}</mat-panel-description>
                     </mat-expansion-panel-header>
                     <table rules="rows">
                       <tr *ngFor="let p of t.attributes">
@@ -1038,7 +1052,7 @@
                   <mat-expansion-panel>
                     <mat-expansion-panel-header>
                       <mat-panel-title></mat-panel-title>
-                      <mat-panel-description>全属性</mat-panel-description>
+                      <mat-panel-description>{{TITLE_ALL_ATTRIBS}}</mat-panel-description>
                     </mat-expansion-panel-header>
                     <table rules="rows">
                       <tr *ngFor="let p of t.attributes">

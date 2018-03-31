@@ -884,10 +884,11 @@ export class IdHavingTag extends BaseTag {
   id: string;
 //  attributes = new Array<NameValue>();
 
-  constructor(attributes:any, id: string) {
+  constructor(attributes:any /*, id: string*/) {
     super(attributes);
 
-    this.id = id;
+//    this.id = id;
+    this.id = this.find('ID');
   }
 
   getCaption(): string {
@@ -913,7 +914,7 @@ export class JdfTag extends IdHavingTag {
   constructor(attributes: any, id: string,/* type: string, descriptiveName: string, jobId: string, jobPartId: string,*/
       inputComponentLinks: ComponentLinkTag[], outputComponentLinks: ComponentLinkTag[], paramsLinks: LinkTag[],
       deviceLinks: LinkTag[], body: string) {
-    super(attributes,id);
+    super(attributes /*,id*/);
 
 //    this.type = type;
     this.type = this.find('Type');
@@ -956,7 +957,7 @@ export class DeviceTag extends IdHavingTag {
   body: string;
 
   constructor(attributes: any, id: string, /*klass: string, deviceId: string, friendlyName: string,*/ body: string) {
-    super(attributes, id);
+    super(attributes /*, id*/);
 
 //    this.klass = klass;
     this.klass = this.find('Class');
@@ -997,7 +998,7 @@ export class ComponentTag extends IdHavingTag {
   dimensions_thickness: number;
 
   constructor(attributes: any, id: string, /*componentType: string, klass: string, dimensions: string,*/ body: string) {
-    super(attributes, id);
+    super(attributes /*, id*/);
 
 //    this.componentType = componentType;
     this.componentType = this.find('ComponentType');
@@ -1062,7 +1063,7 @@ export class ParamsTag extends IdHavingTag {
   body: string;
 
   constructor(attributes: any, id: string,/*klass: string,*/ body: string) {
-    super(attributes, id);
+    super(attributes /*, id*/);
 
 //    this.klass = klass;
     this.klass = this.find('Class');
@@ -1126,7 +1127,11 @@ export class TrimmingParamsTag  extends ParamsTag {
   }
 
   getTrimmingOffset_mm(): number {
-    return JDFUtils.pt2mm( JDFUtils.parseNumber(this.trimmingOffset) );
+    if( this.trimmingOffset ) {
+      return JDFUtils.pt2mm( JDFUtils.parseNumber(this.trimmingOffset) );
+    } else {
+      return null;
+    }
   }
 }
 
@@ -1172,7 +1177,11 @@ export class FoldTag  extends BaseTag {
   }
 
   getTravel_mm(): number {
-    return JDFUtils.pt2mm( JDFUtils.parseNumber( this.travel ) );
+    if( this.travel ) {
+      return JDFUtils.pt2mm( JDFUtils.parseNumber( this.travel ) );
+    } else {
+      return null;
+    }
   }
 }
 
@@ -1201,7 +1210,7 @@ export class CutBlockTag  extends IdHavingTag { // うーん。ParamsTagから�
   block_zz: string; // なんて呼べば良いんだろう。BlockTrf の残り部分（頭部分）
 
   constructor( attributes: any, id: string, /*klass: string, blockType: string, blockName: string, blockSize: string, blockTrf: string,*/ body: string ) {
-    super(attributes, id);
+    super(attributes /*, id*/);
 
 //    this.klass = klass;
     this.klass = this.find('Class');
@@ -1330,7 +1339,7 @@ export class UnknownResourceTag  extends IdHavingTag {
   body: string;
 
   constructor( attributes: any, tagName: string, body: string ) {
-    super(attributes, '');
+    super(attributes /*, ''*/);
 
     this.tagName = tagName;
 //    this.attributes = [];
@@ -1515,7 +1524,7 @@ class QueryTag  extends IdHavingTag {
   body: string;
 
   constructor( attributes: any, id: string, type: string, statusQuParamsTags: StatusQuParamsTag[], body: string ) {
-    super(attributes, id);
+    super(attributes /*, id*/);
 
     this.type = type;
     this.statusQuParamsTags = statusQuParamsTags;
@@ -1543,7 +1552,7 @@ class SignalTag  extends IdHavingTag {
   body: string;
 
   constructor( attributes: any, id: string, type: string, deviceInfoTags: DeviceInfoTag[], body: string ) {
-    super(attributes, id);
+    super(attributes /*, id*/);
 
     this.type = type;
     this.deviceInfoTags = deviceInfoTags;
