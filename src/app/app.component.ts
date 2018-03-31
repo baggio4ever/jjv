@@ -20,7 +20,7 @@ declare var hljs: any;
 
 
 
-const JJV_VERSION = '0.1.19';
+const JJV_VERSION = '0.1.20';
 
 
 
@@ -28,6 +28,7 @@ const KEY_BASE_URL = 'KEY_BASE_URL';
 const KEY_USER_ID = 'KEY_USER_ID';
 const KEY_COMMENT = 'KEY_COMMENT';
 const KEY_SEARCH_USER_ID = 'KEY_SEARCH_USER_ID';
+const KEY_SMOOTH_SCROLL = 'KEY_SMOOTH_SCROLL';
 
 
 
@@ -56,7 +57,10 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
 
   errorHtml = null;
 
+  smoothScroll = true;
+
   TITLE_ALL_ATTRIBS = '属性（sorted）';
+  TITLE_PART_OF_JDF = 'JDF該当箇所';
 
   constructor(private activatedRoute: ActivatedRoute, private sanitizer: DomSanitizer, 
     private cip4: Cip4Service, private httpService: MyHttpService,
@@ -72,6 +76,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
 
     const base_url = localStorage.getItem(KEY_BASE_URL);
     this.httpService.setBaseURL(base_url);
+
+    this.smoothScroll = (localStorage.getItem(KEY_SMOOTH_SCROLL)==='0')?false:true;
 
     this.activatedRoute.queryParams.subscribe((params: Params) => {
         this.param_user_id = params['user_id'];
@@ -195,7 +201,9 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
   scrollTo( guid: string ): void {
     try {
       console.log('tagName: ' + guid);
-      document.getElementById(guid).scrollIntoView( {behavior: 'smooth', block: 'center', inline: 'center'});
+
+      const option_behavior = this.smoothScroll ? 'smooth' : 'auto';
+      document.getElementById(guid).scrollIntoView( {behavior: option_behavior/*'smooth'*/, block: 'center', inline: 'center'});
 //      this.selectedGuid = guid;
     } catch (e) {
       console.log('error!:' + e);
@@ -731,15 +739,23 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
     console.log('openSettings()');
 
     const dialogRef = this.dialog.open(AppSettingsDialogComponent, {
-      width: '400px',
-      data: { url: this.httpService.getBaseURL() }
+      width: '480px',
+      data: { 
+        url: this.httpService.getBaseURL(),
+        smoothScroll: this.smoothScroll
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log('The dialog was closed: ' + result);
-        localStorage.setItem(KEY_BASE_URL, result);
-        this.httpService.setBaseURL(result);
+        console.log('The dialog was closed: ');
+        console.log('    ' + result.url);
+        localStorage.setItem(KEY_BASE_URL, result.url);
+        this.httpService.setBaseURL(result.url);
+
+        console.log('    ' + result.smoothScroll);
+        this.smoothScroll = result.smoothScroll;
+        localStorage.setItem(KEY_SMOOTH_SCROLL, this.smoothScroll?'1':'0');
       } else {
         console.log('キャンセルされました？');
       }

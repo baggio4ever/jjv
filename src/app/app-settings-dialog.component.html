@@ -2,15 +2,18 @@
   <mat-icon class="dialog-icon">settings</mat-icon>
   <h1 mat-dialog-title>settings</h1>
 </div>
+
 <div mat-dialog-content>
   <div class="example-container">
     <mat-form-field>
       <input matInput placeholder="Base URL of Web API" [(ngModel)]="data.url">
     </mat-form-field>
+    <mat-checkbox [(ngModel)]="data.smoothScroll">Smooth Scroll</mat-checkbox>
   </div>
 </div>
+
 <div mat-dialog-actions>
   <span class="example-spacer"></span><!-- これで右寄せ -->
   <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button [mat-dialog-close]="data.url" cdkFocusInitial>OK</button>
+  <button mat-button [mat-dialog-close]="getResult()" cdkFocusInitial>OK</button>
 </div>

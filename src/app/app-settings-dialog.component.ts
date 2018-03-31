@@ -16,4 +16,8 @@ export class AppSettingsDialogComponent {
   onNoClick(): void {
     this.dialogRef.close();
   }
+
+  getResult():any {
+    return this.data;
+  }
 }
