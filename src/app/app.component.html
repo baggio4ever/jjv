@@ -25,10 +25,10 @@
 
     <!-- 共通 -->
     <input id="input-file-id" type="file" #fileInput (change)="onChanged(fileInput.files[0])" accept=".xml,.jdf" style="display: none;">
-    <button mat-icon-button (click)="openFileDialog()" matTooltip="ファイルを開く" matTooltipPosition="above">
+    <button mat-icon-button (click)="openFileDialog()" matTooltip="ローカルにあるJDFファイルを開く" matTooltipPosition="above">
       <mat-icon aria-label="Open file">folder_open</mat-icon>
     </button>
-    <button mat-icon-button (click)="downloadFromCloud()" matTooltip="クラウドから開く" matTooltipPosition="above">
+    <button mat-icon-button (click)="downloadFromCloud()" matTooltip="クラウドにあるJDFファイルを開く" matTooltipPosition="above">
       <mat-icon aria-label="download">cloud_download</mat-icon>
     </button>
     <span class="headerDivider"></span>

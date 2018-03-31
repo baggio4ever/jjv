@@ -7,7 +7,7 @@
     <mat-form-field>
       <input matInput placeholder="ユーザー名" [(ngModel)]="data.user_id">
     </mat-form-field>
-    <button mat-icon-button color="primary">
+    <button mat-icon-button color="primary" matTooltip="検索" matTooltipPosition="above">
       <mat-icon aria-label="search" (click)="onSearch()">search</mat-icon>
     </button>
   </div>
