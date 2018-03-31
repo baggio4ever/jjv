@@ -1237,7 +1237,8 @@ export class CutBlockTag  extends IdHavingTag { // うーん。ParamsTagから�
     // [1]: '1 0 0 1'
     // [2]: x座標
     // [3]: y座標
-    const rx = /^(\d+\s+\d+\s+\d+\s+\d+)\s+(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)$/;
+//    const rx = /^(\d+\s+\d+\s+\d+\s+\d+)\s+(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)$/;
+    const rx = /^([+-]?\d+\s+[+-]?\d+\s+[+-]?\d+\s+[+-]?\d+)\s+(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)$/;
     const result = this.blockTrf.match(rx);
 
     if (result) {
