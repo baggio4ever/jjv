@@ -597,7 +597,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
         if ( params ) {
           this.cy.add([
             { // edge
-              data: { id: aGuid, source: v.guid, target: params.guid  }
+//              data: { id: aGuid, source: v.guid, target: params.guid  }
+              data: { id: aGuid, source: params.guid, target: v.guid  }
             },
           ]);
         } else {
@@ -809,7 +810,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
         this.fileLoaded = true;
         this.filename = s.filename;
         this.updateTitle();
-        
+
         console.log('fromstring filename:' + this.filename);
 
         setTimeout(() => { // チョイ待たせてCytoscape
