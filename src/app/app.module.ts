@@ -18,6 +18,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatSliderModule} from '@angular/material/slider';
 
 import { AppComponent } from './app.component';
 import { AppSettingsDialogComponent } from './app-settings-dialog.component';
@@ -72,6 +73,7 @@ const routes: Routes = [
     MatTooltipModule,
     MatProgressSpinnerModule,
     MatDividerModule,
+    MatSliderModule,
     RouterModule.forRoot(routes)
   ],
   providers: [

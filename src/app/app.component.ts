@@ -20,7 +20,7 @@ declare var hljs: any;
 
 
 
-const JJV_VERSION = '0.1.21';
+const JJV_VERSION = '0.1.22';
 
 
 
@@ -29,7 +29,7 @@ const KEY_USER_ID = 'KEY_USER_ID';
 const KEY_COMMENT = 'KEY_COMMENT';
 const KEY_SEARCH_USER_ID = 'KEY_SEARCH_USER_ID';
 const KEY_SMOOTH_SCROLL = 'KEY_SMOOTH_SCROLL';
-
+const KEY_WHEEL_SENSITIVITY = 'KEY_WHEEL_SENSITIVITY';
 
 
 @Component({
@@ -58,6 +58,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
   errorHtml = null;
 
   smoothScroll = true;
+  wheelSensitivity = 5; // 1 - 10
 
   TITLE_ALL_ATTRIBS = '属性（sorted）';
   TITLE_PART_OF_JDF = 'JDF該当箇所';
@@ -78,6 +79,9 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
     this.httpService.setBaseURL(base_url);
 
     this.smoothScroll = (localStorage.getItem(KEY_SMOOTH_SCROLL)==='0')?false:true;
+
+    const sens = localStorage.getItem(KEY_WHEEL_SENSITIVITY);
+    this.wheelSensitivity = (sens)?(parseInt(sens)):5;
 
     this.activatedRoute.queryParams.subscribe((params: Params) => {
         this.param_user_id = params['user_id'];
@@ -383,7 +387,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
         name: 'grid',
         rows: 1
       },
-      wheelSensitivity: 0.2,
+      wheelSensitivity: this.wheelSensitivity * 0.1 //0.2,
     });
 
   }
@@ -742,7 +746,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
       width: '480px',
       data: { 
         url: this.httpService.getBaseURL(),
-        smoothScroll: this.smoothScroll
+        smoothScroll: this.smoothScroll,
+        wheelSensitivity: this.wheelSensitivity
       }
     });
 
@@ -756,6 +761,10 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
         console.log('    ' + result.smoothScroll);
         this.smoothScroll = result.smoothScroll;
         localStorage.setItem(KEY_SMOOTH_SCROLL, this.smoothScroll?'1':'0');
+
+        console.log('    ' + result.wheelSensitivity);
+        this.wheelSensitivity = result.wheelSensitivity;
+        localStorage.setItem(KEY_WHEEL_SENSITIVITY, this.wheelSensitivity.toString());
       } else {
         console.log('キャンセルされました？');
       }
