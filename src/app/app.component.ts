@@ -132,17 +132,10 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
     console.log('onChanged: ' + fileVal.name);
 
     this.letsLoad(fileVal);
-//    this.yes(fileVal);
   }
 
-//  yes(fileVal) {
-//    this.letsLoad(fileVal);
-//  }
-
   async letsLoad( f ) {
-//    this.parseErrorMessages = [];
-//    this.errorHtml = null;
-//    this.safeErrorHtml = null;
+
     this.clear();
 
     if (this.cip4.isJDF(f.name)) {
@@ -160,11 +153,9 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
         }, 0);
       } else {
         console.log('parseJDF() 失敗！');
-//        console.log(this.cip4.parserErrorMessage);
-//        this.parseErrorMessages = this.cip4.parserErrorMessages;
+
         this.errorHtml = this.cip4.errorHtml;
         this.errorHtml = this.errorHtml.replace('\n', '<br>');
-//        this.safeErrorHtml = this.sanitizer.bypassSecurityTrustHtml(this.errorHtml);
 
         // valueをクリアしないと、同一ファイルを選択し直しても onchangeが呼ばれない
         const el = <HTMLInputElement>document.getElementById('input-file-id');
@@ -207,8 +198,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
       console.log('tagName: ' + guid);
 
       const option_behavior = this.smoothScroll ? 'smooth' : 'auto';
-      document.getElementById(guid).scrollIntoView( {behavior: option_behavior/*'smooth'*/, block: 'center', inline: 'center'});
-//      this.selectedGuid = guid;
+      document.getElementById(guid).scrollIntoView( {behavior: option_behavior, block: 'center', inline: 'center'});
     } catch (e) {
       console.log('error!:' + e);
     }
@@ -609,7 +599,6 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
         if ( params ) {
           this.cy.add([
             { // edge
-//              data: { id: aGuid, source: v.guid, target: params.guid  }
               data: { id: aGuid, source: params.guid, target: v.guid  }
             },
           ]);
@@ -685,8 +674,7 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
     if (droppedFile) {
       if (this.cip4.isJDF(droppedFile.name)) {
         this.filename = droppedFile.name;
-//        this.yes(droppedFile);
-          this.letsLoad(droppedFile);
+        this.letsLoad(droppedFile);
       }
     }
   }
