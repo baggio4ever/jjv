@@ -20,7 +20,7 @@ declare var hljs: any;
 
 
 
-const JJV_VERSION = '0.1.20';
+const JJV_VERSION = '0.1.21';
 
 
 
@@ -382,8 +382,8 @@ export class AppComponent implements AfterViewInit, AfterViewChecked, OnInit {
       layout: {
         name: 'grid',
         rows: 1
-      }
-
+      },
+      wheelSensitivity: 0.2,
     });
 
   }
